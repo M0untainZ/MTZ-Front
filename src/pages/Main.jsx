@@ -1,7 +1,10 @@
 import React from "react";
+import Weather from "../components/main/Weather";
 
 const Main = () => {
-     return <h1>메인페이지</h1>;
+     return (
+          <Weather />
+     );
 };
 
 export default Main;

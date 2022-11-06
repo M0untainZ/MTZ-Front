@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __addUsers } from "../redux/modules/userSlice";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const initialState = {
+    email: "",
+    nickName: "",
+    password: "",
+    passwordConfirm: "",
+    region: "",
+  };
+  const [user, setUser] = useState(initialState);
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+    console.log(user);
+  };
+
+  const onSubmit = () => {
+    dispatch(
+      __addUsers({
+        email: user.email,
+        nickName: user.nickName,
+        password: user.password,
+        passwordConfirm: user.passwordConfirm,
+        region: user.region,
+      })
+    );
+    setUser(initialState);
+    // navigate("/login")
+  };
+
   return (
     <StLoginContainer>
       <div>
@@ -12,16 +48,40 @@ const SignUp = () => {
       <StLoginBox>
         <StInputBox>
           <div className="emailInputBox">
-            <input className="emailInput" type="text" placeholder="이메일" />
+            <input
+              onChange={onChangeHandler}
+              name="email"
+              value={user.email}
+              className="emailInput"
+              type="text"
+              placeholder="이메일"
+            />
           </div>
           <div className="nickNameInputBox">
-            <input className="nickNameInput" type="text" placeholder="닉네임" />
+            <input
+              onChange={onChangeHandler}
+              name="nickName"
+              value={user.nickName}
+              className="nickNameInput"
+              type="text"
+              placeholder="닉네임"
+            />
           </div>
           <div className="pwInputBox">
-            <input className="pwInput" type="password" placeholder="비밀번호" />
+            <input
+              onChange={onChangeHandler}
+              name="password"
+              value={user.password}
+              className="pwInput"
+              type="password"
+              placeholder="비밀번호"
+            />
           </div>
           <div className="pwCheckBox">
             <input
+              onChange={onChangeHandler}
+              name="passwordConfirm"
+              value={user.passwordConfirm}
               className="pwCheck"
               type="password"
               placeholder="비밀번호 확인"
@@ -32,15 +92,23 @@ const SignUp = () => {
               <span>지역선택 :</span>
             </div>
             <div className="selectBox">
-              <select>
-                <option>부산</option>
+              <select
+                onChange={onChangeHandler}
+                name="region"
+                value={user.region}
+              >
+                <option>경기도</option>
+                <option>강원도</option>
+                <option>전라도</option>
+                <option>서울</option>
+                <option>경상도</option>
               </select>
             </div>
           </StSelectBox>
         </StInputBox>
 
         <StKakaOButton>
-          <button className="kakaO" onClick={() => navigate("/login")}>
+          <button className="kakaO" onClick={onSubmit}>
             가입하기
           </button>
         </StKakaOButton>

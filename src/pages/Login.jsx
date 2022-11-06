@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  //   const dispatch = useDispatch();
+
+  const initialState = {
+    email: "",
+    password: "",
+  };
+
+  const [loginUser, setLoginUser] = useState(initialState);
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setLoginUser({
+      ...loginUser,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = () => {
+    // dispatch();
+  };
+
   return (
     <StLoginContainer>
       <div>
@@ -12,15 +33,32 @@ const Login = () => {
       <StLoginBox>
         <StInputBox>
           <div className="emailInputBox">
-            <input className="emailInput" type="text" placeholder="이메일" />
+            <input
+              onChange={onChangeHandler}
+              name="email"
+              value={loginUser.email}
+              className="emailInput"
+              type="text"
+              placeholder="이메일"
+            />
           </div>
           <div className="pwInputBox">
-            <input className="pwInput" type="password" placeholder="비밀번호" />
+            <input
+              onChange={onChangeHandler}
+              name="password"
+              value={loginUser.password}
+              autoComplete="off"
+              className="pwInput"
+              type="password"
+              placeholder="비밀번호"
+            />
           </div>
         </StInputBox>
         <StButtonBox>
           <div className="loginBox">
-            <button className="login">로그인</button>
+            <button className="login" onClick={onSubmit}>
+              로그인
+            </button>
           </div>
           <div className="signUpBox">
             <button className="signUp" onClick={() => navigate("/SignUp")}>

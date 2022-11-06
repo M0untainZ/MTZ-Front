@@ -16,9 +16,11 @@ const STLayoutContainer = styled.div`
      max-width: 100%;
 `;
 
+
 const STLayout = styled.div`
      width: 1400px;
-     height: 90vh;
+     height: 100%;
+     min-height: 90vh;
      background-color: var(--color-point);
      display: flex;
      flex-direction: column;

@@ -1,20 +1,21 @@
 import styled from "styled-components";
 
 const Layout = ({ children }) => {
-     return (
-          <STLayoutContainer>
-               <STLayout>{children}</STLayout>
-          </STLayoutContainer>
-     );
+  return (
+    <STLayoutContainer>
+      <STLayout>{children}</STLayout>
+    </STLayoutContainer>
+  );
 };
 
 export default Layout;
 
 const STLayoutContainer = styled.div`
-     display: flex;
-     justify-content: center;
-     max-width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
 `;
+
 
 const STLayout = styled.div`
      width: 1400px;

@@ -1,7 +1,20 @@
-import React from "react";
+
+import React, {useState} from "react";
 import styled from "styled-components";
+// import Modal from "../common/modal/Modal";
 
 const MyPage = () => {
+// const [modalOn, setModalOn] = useState(false);
+    // const onModalOpen = () => {
+    //     setModalOn(true)
+    // }
+    
+    // <StWrap>
+      //     <button onClick={onModalOpen}>모달열기</button>
+      //     {modalOn && (<Modal open={modalOn} onClose={() => {setModalOn(false)}}>
+
+      //     </Modal>)}
+      // </StWrap>
      return (
           <STMypageContainer>
                <STProfile>

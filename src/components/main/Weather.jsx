@@ -2,8 +2,13 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components"
 import axios from "axios";
 import {useCurrentLocation, positionOptions} from "./Geolocation"
+import Modal from "../../common/modal/Modal";
 
 const Weather = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onClick = () => {
+      setIsOpen(true);
+    }
     const { location, error } = useCurrentLocation(positionOptions);
     const [city, setCity] = useState("");
     const [weather, setWeather] = useState("");
@@ -22,7 +27,7 @@ const Weather = () => {
           // user key는 직접 받아와서 사용하십시오.
           const weatherData = async () => {
               await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_KEY}&units=metric`
+                `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_KEY}&units=metric&lang=kr`
               )
               // 위도, 경도, userKey를 넣어서 get 요청을하면 각종 정보를 보내준다.
               .then((response) => {
@@ -42,7 +47,7 @@ const Weather = () => {
         }
       }, [location]);
       // 단 한 번만 실행되며 location이 변경될 때만 재실행
-
+      console.log(typeof(weather))
     return (
         <StWeatherContainer>
             <StWeatherInfo>
@@ -50,10 +55,10 @@ const Weather = () => {
                 <p className="weather-info">{city} {temp}</p>
             </StWeatherInfo>
             <StMension>
-                {
-                    (weather === "01n" || "02n" || "03n" || "04n" ) ? 
-                    <p>야간 산행은 위험해요 !</p> : <p>등산가기 좋은날이에요</p>
-                }
+                <button onClick={onClick}>버튼</button>
+                { isOpen && (<Modal open={isOpen} onClose={() => {setIsOpen(false)}}>
+                  다른내용~~~
+                </Modal>)}
             </StMension>
         </StWeatherContainer>
     );

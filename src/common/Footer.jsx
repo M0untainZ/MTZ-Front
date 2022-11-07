@@ -32,7 +32,7 @@ const STFooter = styled.div`
      display: flex;
      justify-content: space-between;
      align-items: center;
-     gap: 400px;
+     gap: 20%;
      padding: 0 50px;
      div {
           display: flex;

@@ -7,7 +7,7 @@ html{
         --color-point:#aceca1;
         --color-midtone:#96be8c;
         --color-background: #434a40;
-        /* --color-darktone : #629460; */
+        --color-darktone : #629460;
         --color-bright: #c9f2c7;
 
     }

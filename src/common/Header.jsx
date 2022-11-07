@@ -32,14 +32,15 @@ const STHeader = styled.div`
      display: flex;
      justify-content: space-between;
      align-items: center;
-     gap: 400px;
+     gap: 20%;
      padding: 0 50px;
+
      div {
           display: flex;
           justify-content: center;
           align-items: center;
           gap: 20px;
-          width: 500px;
+          width: 20%;
           button {
                border: none;
                background-color: transparent;

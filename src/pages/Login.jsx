@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginState,
+  logoutState,
+  __loginUser,
+} from "../redux/modules/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { isLogin } = useSelector((state) => state.user);
 
   const initialState = {
     email: "",
@@ -21,8 +27,19 @@ const Login = () => {
     });
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+      dispatch(loginState());
+    } else {
+      navigate("/login");
+      dispatch(logoutState());
+    }
+    // eslint-disable-next-line
+  }, [isLogin]);
+
   const onSubmit = () => {
-    // dispatch();
+    dispatch(__loginUser(loginUser));
   };
 
   return (

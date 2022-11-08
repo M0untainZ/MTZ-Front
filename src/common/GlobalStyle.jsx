@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Source+Sans+Pro:wght@300&display=swap');
 
 html{
-        --color-point:#aceca1;
+        --color-point:#e2e2e2;
         --color-midtone:#96be8c;
         --color-background: #434a40;
         --color-darktone : #629460;

@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const RecommendCourse = () => {
+
     const [recommendList, setRecommendList] = useState(false);
     const onListToggle = () => {
         setRecommendList(!recommendList);
@@ -28,51 +29,51 @@ const RecommendCourse = () => {
     );
 }
 
+
 export default RecommendCourse;
 
 const StRecommendWrap = styled.div`
-    width: 70%;
-    height: 15%;
-    margin: 50px auto;
+     width: 70%;
+     height: 15%;
+     margin: 50px auto;
 `;
 
 const StRecommendHeader = styled.div`
-    width: 100%;
-    height: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    span {
-        cursor: pointer;
-    }
+     width: 100%;
+     height: 20px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     span {
+          cursor: pointer;
+     }
 `;
 
 const StRecommend = styled.div`
-    width: 100%;
-    div{
-        width: 100%;
-        height: 150px;
-        margin: 10px 0px;
-        position: relative;
-    }
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 40%;
-        height: 15px;
-        position: absolute;
-        bottom: 15px;
-        left: 20px;
-        border: 1px solid black;
-        border-radius: 15px;
-        padding: 5px 15px;
-        background-color: #fff;
-    }
+     width: 100%;
+     div {
+          width: 100%;
+          height: 150px;
+          margin: 10px 0px;
+          position: relative;
+     }
+     img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+     }
+     span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 40%;
+          height: 15px;
+          position: absolute;
+          bottom: 15px;
+          left: 20px;
+          border: 1px solid black;
+          border-radius: 15px;
+          padding: 5px 15px;
+          background-color: #fff;
+     }
 `;
-

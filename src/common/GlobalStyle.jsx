@@ -4,11 +4,11 @@ const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Source+Sans+Pro:wght@300&display=swap');
 
 html{
-        --color-point:#e2e2e2;
+        --color-point:#F5F5F5;
         --color-midtone:#96be8c;
         --color-background: #434a40;
         --color-darktone : #629460;
-        --color-bright: #c9f2c7;
+        --color-bright: #edffec;
 
     }
 
@@ -32,6 +32,7 @@ html{
         font-size: 100%;
         font: inherit;
         vertical-align: baseline;
+        text-decoration:none;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 

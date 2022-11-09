@@ -34,7 +34,7 @@ const Weather = () => {
                 setTemp((Math.floor(weather_res.main.temp)))
               }))
               .catch(() => {
-                alert("지역정보를 불러오는데 실패했습니다.");
+                alert("요청 에러");
               });
           } 
           weatherData();

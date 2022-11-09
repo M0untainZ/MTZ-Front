@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {useCurrentLocation, positionOptions} from "./Geolocation"
 
 const Weather = () => {
+    const navigate = useNavigate();
     const { location, error } = useCurrentLocation(positionOptions);
     const [city, setCity] = useState("");
     const [weather, setWeather] = useState("");
     const [temp, setTemp] = useState("");
-    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API;
+    const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
+    const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
 
     useEffect(() => {
         if (error) {
@@ -16,39 +19,51 @@ const Weather = () => {
         }
 
         if (location) {
-          const weather_KEY = `${WEATHER_API_KEY}`;
-          const weatherData = async () => {
-              await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_KEY}&units=metric&lang=kr`
-              )
-              .then((response) => {
-                console.log(response)
-                setCity(response.data.name);
-                setWeather(response.data.weather[0].icon);
-                setTemp((Math.floor(response.data.main.temp)));
-              })
+          const geo_key = `${GEOCODING_KEY}`;
+          const weather_key = `${WEATHER_KEY}`;
+          const weatherData = () => {
+              axios.all([
+                axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${geo_key}`),
+                axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_key}&units=metric`)
+              ])
+              .then(axios.spread((res1, res2) => {
+                const geo_res = res1.data;
+                const weather_res = res2.data;
+                setCity(geo_res.plus_code.compound_code.substring(13));
+                setWeather(weather_res.weather[0].icon)
+                setTemp((Math.floor(weather_res.main.temp)))
+              }))
               .catch(() => {
-                alert("Local navigation failed.");
+                alert("요청 에러");
               });
           } 
           weatherData();
         }
-      }, []);
+      }, [location]);
 
     return (
       <>
         <StMainImageBanner>
-          <img src="/icons/img.jpg" />
+          <img alt="" src="/icons/img.jpg" />
           <StWeatherContainer>
-            <StWeatherInfo>
+            <StWeatherInfoWrap>
               <StWeatherIcon>
-                <img src={(weather === "01d" && "/icons/01d.png") || (weather === "01n" && "/icons/01n.png")} />
+                <img alt="" src={
+                  (weather === "01d" && "/icons/01d.png") || (weather === "02d" && "/icons/02d.png")
+                  || ((weather === "03d" || "04d" || "03n" || "04n") && "/icons/03d.png")
+                  || ((weather === "09d" || "09n" || "10d" || "10n") && "/icons/09d.png")
+                  || ((weather === "11d" || "11n") && "/icons/11d.png")
+                  || ((weather === "13d" || "13n") && "/icons/13d.png")
+                  || ((weather === "50d" || "50n") && "/icons/50d.png")
+                  } />
               </StWeatherIcon>
-              <p className="weather-info">{`${temp}˚C`} {city}</p>
-            </StWeatherInfo>
-            <StMension>
-                
-            </StMension>
+              <StWeatherInfo>
+                <span className="temp">{`${temp}˚C`} ㅣ</span>
+                <span className="city-name">{city}</span>
+                <p>오늘은 어디로 떠나볼까요?</p>
+              </StWeatherInfo>
+              <span className="shortcut" onClick={() => navigate("/detail")}>바로가기</span>
+            </StWeatherInfoWrap>
           </StWeatherContainer>
         </StMainImageBanner>
       </>
@@ -56,7 +71,6 @@ const Weather = () => {
 }
 
 export default Weather;
-
 
 const StMainImageBanner = styled.div`
   width: 100%;
@@ -72,7 +86,7 @@ const StMainImageBanner = styled.div`
 `;
 
 const StWeatherContainer = styled.div`
-    width: 20%;
+    width: 25%;
     height: 5vh;
     border: 1px solid gray;
     position: absolute;
@@ -82,8 +96,23 @@ const StWeatherContainer = styled.div`
     background-color: #E1E5E4;
 `;
 
-const StWeatherInfo = styled.div`
+const StWeatherInfoWrap = styled.div`
     display: flex;
+    position: relative;
+    .shortcut {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 20px;
+      border: 1px solid black;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.1);
+      position: absolute;
+      bottom: 3px;
+      right: 10px;
+      cursor: pointer;
+    }
 `;
 
 const StWeatherIcon = styled.div`
@@ -97,6 +126,8 @@ const StWeatherIcon = styled.div`
       }
 `;
 
-const StMension = styled.div`
-
+const StWeatherInfo = styled.div`
+  .temp {
+    font-weight: bolder;
+  }
 `;

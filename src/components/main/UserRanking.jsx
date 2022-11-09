@@ -2,40 +2,35 @@ import React from "react";
 import styled from "styled-components";
 
 const UserRanking = () => {
-     return (
-          <>
-               <StRankingWrap>
-                    <p>최고의 MTZ 프렌즈를 만나보세요 !</p>
-                    <StUserRank>
-                         <StUserInfo>
-                              <span className="rank">1</span>
-                              <img src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
-                         <StUserInfo>
-                              <span className="rank">2</span>
-                              <img src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
-                         <StUserInfo>
-                              <span className="rank">3</span>
-                              <img src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
-                    </StUserRank>
-               </StRankingWrap>
-          </>
-     );
-};
+    return (
+        <>
+            <StRankingWrap>
+                <p>최고의 MTZ 프렌즈를 만나보세요 !</p>
+                <StUserRank>
+                    <StUserInfo>
+                        <span className="rank">1</span>
+                        <img alt="" src="logo192.png" />
+                        <p className="user-name">나는야셰르파</p>
+                        <span className="badge-cnt">모은 뱃지 갯수 50개</span>
+                    </StUserInfo>
+                    <StUserInfo>
+                        <span className="rank">2</span>
+                        <img alt="" src="logo192.png" />
+                        <p className="user-name">나는야셰르파</p>
+                        <span className="badge-cnt">모은 뱃지 갯수 50개</span>
+                    </StUserInfo>
+                    <StUserInfo>
+                        <span className="rank">3</span>
+                        <img alt="" src="logo192.png" />
+                        <p className="user-name">나는야셰르파</p>
+                        <span className="badge-cnt">모은 뱃지 갯수 50개</span>
+                    </StUserInfo>
+                </StUserRank>         
+            </StRankingWrap>
+        </>
+    );
+}
+
 
 export default UserRanking;
 

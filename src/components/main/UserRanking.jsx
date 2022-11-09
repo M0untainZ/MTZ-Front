@@ -9,19 +9,19 @@ const UserRanking = () => {
                 <StUserRank>
                     <StUserInfo>
                         <span className="rank">1</span>
-                        <img src="logo192.png" />
+                        <img alt="" src="logo192.png" />
                         <p className="user-name">나는야셰르파</p>
                         <span className="badge-cnt">모은 뱃지 갯수 50개</span>
                     </StUserInfo>
                     <StUserInfo>
                         <span className="rank">2</span>
-                        <img src="logo192.png" />
+                        <img alt="" src="logo192.png" />
                         <p className="user-name">나는야셰르파</p>
                         <span className="badge-cnt">모은 뱃지 갯수 50개</span>
                     </StUserInfo>
                     <StUserInfo>
                         <span className="rank">3</span>
-                        <img src="logo192.png" />
+                        <img alt="" src="logo192.png" />
                         <p className="user-name">나는야셰르파</p>
                         <span className="badge-cnt">모은 뱃지 갯수 50개</span>
                     </StUserInfo>

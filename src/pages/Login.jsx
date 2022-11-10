@@ -95,6 +95,7 @@ export default Login;
 
 const StLoginContainer = styled.div`
   height: 100%;
+  width: 100%;
   .logo {
     padding-top: 10%;
     font-size: xx-large;

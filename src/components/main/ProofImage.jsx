@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { getData } from "../../api/index";
+import { getData } from "../../shared/api";
 import { useQuery } from "react-query";
 
 const ProofImage = () => {

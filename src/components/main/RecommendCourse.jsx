@@ -15,15 +15,35 @@ const RecommendCourse = () => {
                     { recommendList === false ?  <span onClick={onListToggle}>더보기</span> : <span onClick={onListToggle}>접기</span>}
                 </StRecommendHeader>
                 <StRecommend>
-                    <div>
-                        <span># 초심자도 무리없는 낮은 산행 코스 모음</span>
-                        <img alt="" src="/icons/img.jpg" />
-                    </div>
-                    <div>
-                        <span># 2022년 마지막 단풍놀이, 이곳에서 즐겨요!</span>
-                        <img alt="" src="/icons/picture.jpg" />
-                    </div>
+                        <div>
+                            <span># 등산초보 산린이를 위한 산행 코스 추천</span>
+                            <img alt="" src="/icons/등산초보 산린이를 위한 산행 코스 추천.png" />
+                        </div>
+                        <div>
+                            <span># 2022 마지막 단풍놀이, 이곳에서 즐겨요!</span>
+                            <img alt="" src="/icons/2022 마지막 단풍놀이, 이곳에서 즐겨요!.png" />
+                        </div>
                 </StRecommend>
+                { recommendList === false ? null :
+                    <StRecommend>
+                        <div>
+                            <span># 가족과 함께 가볍게 즐기기 좋은 짧은 산행 코스</span>
+                            <img alt="" src="/icons/가족과 함께 가볍게 즐기기 좋은 짧은 산행 코스.png" />
+                        </div>
+                        <div>
+                            <span># 서울 도심에서 즐기는 등산 코스</span>
+                            <img alt="" src="/icons/서울 도심에서 즐기는 등산 코스.png" />
+                        </div>
+                        <div>
+                            <span># 이번 주말 데이트로 추천하는 가벼운 등산 코스</span>
+                            <img alt="" src="/icons/이번 주말 데이트로 추천하는 가벼운 등산 코스.png" />
+                        </div>
+                        <div>
+                            <span># 한걸음 더 나아가, 중급 등산러를 위한 추천 리스트</span>
+                            <img alt="" src="/icons/한걸음 더 나아가, 중급 등산러를 위한 추천 리스트.png" />
+                        </div>
+                    </StRecommend>
+                 }
             </StRecommendWrap>
         </>
     );

@@ -12,7 +12,7 @@ const Header = () => {
 
      return (
           <>
-               <STHeader>
+               <StHeader>
                     <div>
                          <Link to="/" className="header-title">
                               MTZ
@@ -49,14 +49,14 @@ const Header = () => {
                               </button>
                          )}
                     </div>
-               </STHeader>
+               </StHeader>
           </>
      );
 };
 
 export default Header;
 
-const STHeader = styled.div`
+const StHeader = styled.div`
      box-sizing: border-box;
      width: 100%;
      height: 6vh;

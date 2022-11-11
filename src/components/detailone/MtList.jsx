@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const MtList = () => {
      return (
-          <STMTList>
+          <StMTList>
                <div className="mountain-element-style">
                     <span className="mountain-element-name-style">이름</span>
                     <div className="mountain-element-info-style">
@@ -47,7 +47,7 @@ const MtList = () => {
                          </span>
                     </div>
                </div>
-          </STMTList>
+          </StMTList>
      );
 };
 export default MtList;
@@ -73,7 +73,7 @@ export default MtList;
 //      }
 // `;
 
-const STMTList = styled.div`
+const StMTList = styled.div`
      padding: 20px 0;
      width: 100%;
      height: 100%;

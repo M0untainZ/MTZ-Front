@@ -10,7 +10,7 @@ const FilterMt = () => {
           { id: 6, query: "season", test: "겨울" },
      ];
      return (
-          <STFilterMT>
+          <StFilterMT>
                <select name="region">
                     <option value="none" hidden>
                          지역
@@ -37,13 +37,13 @@ const FilterMt = () => {
                     <option>산행시간</option>
                </select> */}
                <button className="filter-btn-style">검색</button>
-          </STFilterMT>
+          </StFilterMT>
      );
 };
 
 export default FilterMt;
 
-const STFilterMT = styled.div`
+const StFilterMT = styled.div`
      padding: 20px 0;
      width: 100%;
      height: 5vh;

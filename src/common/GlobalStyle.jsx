@@ -3,6 +3,52 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Source+Sans+Pro:wght@300&display=swap');
 
+//글꼴
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 800;
+	font-display: swap;
+	src: local('Pretendard ExtraBold'), url('./font/Pretendard-ExtraBold.woff2') format('woff2')
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url('./font/Pretendard-Bold.woff2') format('woff2')
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 600;
+	font-display: swap;
+	src: local('Pretendard SemiBold'), url('./font/Pretendard-SemiBold.woff2') format('woff2')
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url('./font/Pretendard-Medium.woff2') format('woff2')
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 400;
+	font-display: swap;
+	src: local('Pretendard Regular'), url('./font/Pretendard-Regular.woff2') format('woff2')
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 300;
+	font-display: swap;
+	src: local('Pretendard Light'), url('./font/Pretendard-Light.woff2') format('woff2')
+}
+
+
+//color pick
 html{
         --color-point:#F5F5F5;
         --color-midtone:#96be8c;
@@ -58,11 +104,11 @@ html{
         border-spacing: 0;
     }
     body {
-        font-family: 'Source Sans Pro', sans-serif;
+font-family:  'Pretendard';
         max-width: 100%;
     }
     * {
-    font-family: 'Source Sans Pro', sans-serif;;
+font-family:  'Pretendard';
     }
    
 `;

@@ -96,7 +96,7 @@ export const userSlice = createSlice({
      extraReducers: {
           //로그인
           [__loginUser.fulfilled]: (state, action) => {
-               console.log("==", action.payload);
+               console.log("data", action);
                if (action.payload.data.success) {
                     state.isLogin = true;
                     sessionStorage.setItem(
@@ -107,9 +107,15 @@ export const userSlice = createSlice({
                          "Refresh_Token",
                          action.payload.headers.refresh_token
                     );
-                    console.log(action.payload.data);
-                    sessionStorage.setItem("name", action.payload.data.data);
-                    alert(`${action.payload.data.data}님 환영합니다.`);
+                    sessionStorage.setItem(
+                         "name",
+                         action.payload.data.data.nickName
+                    );
+                    sessionStorage.setItem(
+                         "badge",
+                         action.payload.data.data.badgeName
+                    );
+                    alert(`${action.payload.data.data.nickName}님 환영합니다.`);
                }
           },
           [__loginUser.rejected]: (state, action) => {

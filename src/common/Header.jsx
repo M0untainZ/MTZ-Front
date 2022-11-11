@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
      const navigate = useNavigate();
-     const userinfo = sessionStorage.getItem("name");
+     const name = sessionStorage.getItem("name");
+     const badge = sessionStorage.getItem("badge");
 
-     const username = userinfo ? userinfo : "";
-     // const info = useSelector((state) => state.user);
-     // console.log(info);
+     const username = name ? name : "";
+     //뱃지 null일 때 기본 값 이름
+     const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
 
      return (
           <>
@@ -31,8 +31,8 @@ const Header = () => {
                          </Link>
                     </div>
                     <div>
-                         <img src="" alt="badge" />
-                         <span>{`엄홍길의 후예, ${username}`}</span>
+                         {/* <img src="" alt="badge" /> */}
+                         <span>{`${userbadge} ${username}`}</span>
                          {username ? (
                               <button
                                    onClick={() => navigate("/mypage")}
@@ -72,7 +72,7 @@ const STHeader = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 20px;
+          gap: 10px;
           width: fit-content;
           a,
           button {
@@ -91,7 +91,7 @@ const STHeader = styled.div`
                font-size: 4vh;
                font-weight: bold;
                color: #000;
-               padding: 0 15px;
+               padding: 0 1vh;
           }
           span {
                font-size: 1.6vh;

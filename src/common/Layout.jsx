@@ -18,11 +18,12 @@ const STLayoutContainer = styled.div`
 `;
 
 const STLayout = styled.div`
-     width: 1400px;
+     width: 100%;
      height: 100%;
      min-height: 90vh;
      background-color: var(--color-point);
      display: flex;
      flex-direction: column;
      box-sizing: border-box;
+     align-items: center;
 `;

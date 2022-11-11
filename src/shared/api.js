@@ -21,3 +21,13 @@
 // );
 
 // export default api;
+
+import axios from "axios";
+
+export const axiosIns = axios.create({
+    baseURL: `${process.env.REACT_APP_AXIOS_API}`,
+});
+
+export const getData = async () => {
+    return await axiosIns.get("/api/main").then(res => res.data);
+}

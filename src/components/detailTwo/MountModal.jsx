@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../../common/modal/Modal";
+import DetailTwoModal from "./modal/detailTwoModal";
 
 const MountModal = () => {
   const [modal, setModal] = useState(false);
@@ -10,10 +10,10 @@ const MountModal = () => {
 
   return (
     <>
-      <div>
+      <StDiv>
         <StButton onClick={ModalSwitch}>등산 인증하기</StButton>
         {modal && (
-          <Modal
+          <DetailTwoModal
             open={modal}
             onClose={() => {
               setModal(false);
@@ -29,9 +29,12 @@ const MountModal = () => {
                   [인증하기] 버튼을 눌러 업로드하면 인증 완료!
                 </div>
               </div>
-              <div className="imgBox">
-                <input type="file" />
-                <img></img>
+              <div className="fileBox">
+                <label className="uploadBox" for="file">
+                  <div className="btn-upload"></div>
+                  <div className="logo">사진 등록하기</div>
+                </label>
+                <input type="file" className="file" id="file" />
               </div>
 
               <div className="buttonBox">
@@ -46,20 +49,25 @@ const MountModal = () => {
                 </button>
               </div>
             </StModalBox>
-          </Modal>
+          </DetailTwoModal>
         )}
-      </div>
+      </StDiv>
     </>
   );
 };
 
 export default MountModal;
 
+const StDiv = styled.div`
+  .modalBox {
+  }
+`;
+
 const StButton = styled.button`
   border: 1px solid white;
   border-radius: 5px;
   height: 30px;
-  margin-right: 4%;
+  margin-right: 6%;
   padding-left: 10px;
   padding-right: 10px;
   color: white;
@@ -77,9 +85,30 @@ const StModalBox = styled.div`
       font-size: x-small;
     }
   }
-  .imgBox {
+  .fileBox {
     height: 30vh;
-    border: 1px solid;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    .uploadBox {
+      height: 12%;
+      margin: auto;
+    }
+    .btn-upload {
+      width: 40px;
+      height: 40px;
+      background-image: url("/icons/selectPicture.png");
+      cursor: pointer;
+      margin: auto;
+    }
+    .logo {
+      font-size: small;
+      cursor: pointer;
+      margin-top: 10%;
+    }
+    .file {
+      display: none;
+    }
   }
 
   .buttonBox {

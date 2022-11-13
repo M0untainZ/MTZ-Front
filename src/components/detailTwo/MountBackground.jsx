@@ -42,11 +42,11 @@ const StContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   img {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
   .titleBox {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.4);
     margin-right: 27vh;
     width: 35vh;
     height: 20%;
@@ -60,6 +60,7 @@ const StContainer = styled.div`
       padding: 10px;
     }
     .information {
+      font-size: 14px;
       padding-left: 10px;
       padding-top: 5px;
       display: flex;

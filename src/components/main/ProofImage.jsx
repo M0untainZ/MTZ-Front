@@ -43,7 +43,6 @@ const StImageList = styled.div`
      width: 100%;
      height: 100%;
      display: flex;
-     justify-content: space-between;
      gap: 14px;
      align-items: center;
      overflow: hidden;

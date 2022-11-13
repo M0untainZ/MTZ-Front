@@ -44,7 +44,7 @@ const Weather = () => {
     return (
       <>
         <StMainImageBanner>
-          <img alt="" src="/icons/img.jpg" />
+          <img alt="" src="/icons/mainbanner.png" />
           <StWeatherContainer>
             <StWeatherInfoWrap>
               <StWeatherIcon>

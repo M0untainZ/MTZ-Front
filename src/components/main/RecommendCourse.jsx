@@ -23,9 +23,8 @@ const RecommendCourse = () => {
                             <span># 2022 마지막 단풍놀이, 이곳에서 즐겨요!</span>
                             <img alt="" src="/icons/2022 마지막 단풍놀이, 이곳에서 즐겨요!.png" />
                         </div>
-                </StRecommend>
-                { recommendList === false ? null :
-                    <StRecommend>
+                    { recommendList === false ? null :
+                    <>
                         <div>
                             <span># 가족과 함께 가볍게 즐기기 좋은 짧은 산행 코스</span>
                             <img alt="" src="/icons/가족과 함께 가볍게 즐기기 좋은 짧은 산행 코스.png" />
@@ -42,8 +41,9 @@ const RecommendCourse = () => {
                             <span># 한걸음 더 나아가, 중급 등산러를 위한 추천 리스트</span>
                             <img alt="" src="/icons/한걸음 더 나아가, 중급 등산러를 위한 추천 리스트.png" />
                         </div>
-                    </StRecommend>
-                 }
+                    </>
+                    }
+                </StRecommend>
             </StRecommendWrap>
         </>
     );
@@ -70,19 +70,19 @@ const StRecommendHeader = styled.div`
 `;
 
 const StRecommend = styled.div`
-     width: 100%;
-     div {
+    width: 100%;
+    div {
           width: 100%;
           height: 150px;
           margin: 10px 0px;
           position: relative;
-     }
-     img {
+    }
+    img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-     }
-     span {
+    }
+    span {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -95,5 +95,5 @@ const StRecommend = styled.div`
           border-radius: 15px;
           padding: 5px 15px;
           background-color: #fff;
-     }
+    }
 `;

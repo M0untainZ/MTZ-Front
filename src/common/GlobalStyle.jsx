@@ -56,6 +56,8 @@ html{
         --color-darktone : #629460;
         --color-bright: #edffec;
 
+        --color-border:#757575;
+
     }
 
 

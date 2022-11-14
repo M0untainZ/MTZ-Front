@@ -1,15 +1,11 @@
 import React from "react";
 import BtnUpside from "../components/detailone/BtnUpside";
-import FilterMt from "../components/detailone/FilterMt";
-import MtList from "../components/detailone/MtList";
-import SearchMt from "../components/detailone/SearchMt";
+import DetailList from "../components/detailone/DetailList";
 
 const DetailOne = () => {
      return (
           <>
-               <SearchMt />
-               <FilterMt />
-               <MtList />
+               <DetailList />
                <BtnUpside />
           </>
      );

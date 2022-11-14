@@ -7,10 +7,10 @@ const BtnUpside = () => {
 export default BtnUpside;
 
 const StBtn = styled.button`
-     position: absolute;
+     position: fixed;
      width: 50px;
      height: 20px;
      bottom: 5%;
      right: 100px;
-     background-color: red;
+     background-color: var(--color-light);
 `;

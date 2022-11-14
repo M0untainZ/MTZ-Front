@@ -37,7 +37,7 @@ const StOverlay = styled.div`
 `;
 
 const StModalWrap = styled.div`
-     width: 40vh;
+     width: 25%;
      height: 50%;
      border-radius: 15px;
      background-color: #fff;

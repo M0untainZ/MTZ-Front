@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../../common/modal/Modal";
+import DetailTwoModal from "./modal/detailTwoModal";
 
 const MountModal = () => {
   const [modal, setModal] = useState(false);
+  const [selectImg, setSelectImg] = useState(false);
+  const [imgSave, setImgSave] = useState("");
+
+  const saveFileImage = (e) => {
+    setImgSave(URL.createObjectURL(e.target.files[0]));
+    setSelectImg(!selectImg);
+  };
+
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(imgSave);
+    setSelectImg("");
+  };
+
   const ModalSwitch = () => {
     setModal(!modal);
   };
 
   return (
     <>
-      <div>
-        <button onClick={ModalSwitch}>인증하기</button>
+      <StDiv>
+        <StButton onClick={ModalSwitch}>등산 인증하기</StButton>
         {modal && (
-          <Modal
+          <DetailTwoModal
             open={modal}
             onClose={() => {
               setModal(false);
@@ -21,65 +34,144 @@ const MountModal = () => {
           >
             <StModalBox>
               <div className="titleBox">
-                <div>등산 갔음???</div>
+                <div>당신의 등산을 인증해주세요</div>
+                <div className="logo">
+                  하단의 [사진 등록하기]를 눌러 사진을 고른 뒤,
+                </div>
+                <div className="logo">
+                  [인증하기] 버튼을 눌러 업로드하면 인증 완료!
+                </div>
               </div>
-              <div className="imgBox">
-                인증 사진
-                <img></img>
-              </div>
-              <div className="addBox">
-                <button>사진 추가하기</button>
-              </div>
+              {selectImg ? (
+                <div className="fileBox">
+                  <div
+                    className="deleteImg"
+                    onClick={() => deleteFileImage()}
+                  ></div>
+                  <img
+                    className="prev-img"
+                    alt=""
+                    src={imgSave ? imgSave : "image/no_img.png"}
+                  />
+                </div>
+              ) : (
+                <div className="fileBox">
+                  <label className="uploadBox" for="file">
+                    <div className="btn-upload"></div>
+                    <div className="logo">사진 등록하기</div>
+                  </label>
+                  <input
+                    type="file"
+                    className="file"
+                    id="file"
+                    accept="image/*"
+                    onChange={saveFileImage}
+                  />
+                </div>
+              )}
+
               <div className="buttonBox">
+                <button className="addButton">인증하기</button>
                 <button
                   className="cancelButton"
                   onClick={() => {
                     setModal(false);
                   }}
                 >
-                  취소
+                  취소하기
                 </button>
-                <button className="addButton">등록</button>
               </div>
             </StModalBox>
-          </Modal>
+          </DetailTwoModal>
         )}
-      </div>
+      </StDiv>
     </>
   );
 };
 
 export default MountModal;
 
+const StDiv = styled.div`
+  .modalBox {
+  }
+`;
+
+const StButton = styled.button`
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 30px;
+  margin-right: 6%;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+`;
+
 const StModalBox = styled.div`
   text-align: center;
   padding-top: 3%;
+  font-weight: bold;
   .titleBox {
-    margin-bottom: 5%;
-    font-size: xx-large;
-  }
-  .imgBox {
-    height: 25vh;
-    border: 1px solid;
-  }
-  .addBox {
-    button {
-      width: 100%;
-      margin-top: 5%;
-      border: 0.5px solid;
+    margin-bottom: 10%;
+    font-size: large;
+    .logo {
+      font-size: x-small;
     }
   }
+  .fileBox {
+    height: 30vh;
+    width: 40vh;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    .deleteImg {
+      background-image: url("/icons/icon_cancel.png");
+      background-color: rgba(0, 0, 0, 0);
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      position: absolute;
+      margin-left: 83%;
+    }
+    .prev-img {
+      object-fit: cover;
+      overflow: hidden;
+      height: 30vh;
+    }
+    .uploadBox {
+      height: 12%;
+      margin: auto;
+    }
+    .btn-upload {
+      width: 40px;
+      height: 40px;
+      background-image: url("/icons/selectPicture.png");
+      cursor: pointer;
+      margin: auto;
+    }
+    .logo {
+      font-size: small;
+      cursor: pointer;
+      margin-top: 10%;
+    }
+    .file {
+      display: none;
+    }
+  }
+
   .buttonBox {
-    width: 40%;
-    margin-left: 60%;
-    margin-top: 10%;
+    width: 80%;
+    margin-left: 25%;
+    margin-top: 5%;
     .cancelButton {
       width: 40%;
+      border-radius: 7px;
       border: 0.5px solid;
+      margin-left: 5%;
     }
     .addButton {
-      margin-left: 15%;
       width: 40%;
+      border-radius: 7px;
       border: 0.5px solid;
     }
   }

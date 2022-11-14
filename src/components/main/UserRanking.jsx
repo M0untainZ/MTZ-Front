@@ -42,7 +42,7 @@ export default UserRanking;
 const StRankingWrap = styled.div`
      width: 70%;
      height: 25vh;
-     margin: 30px auto 30px;
+     margin: 100px auto 50px;
      p {
           font-weight: bold;
      }
@@ -77,7 +77,8 @@ const StUserInfo = styled.div`
           justify-content: center;
           align-items: center;
           position: absolute;
-          margin: 30px 70px 0px 0px;
+          top: 18%;
+          left: 40%;
           width: 20px;
           height: 20px;
           border: 1px solid black;

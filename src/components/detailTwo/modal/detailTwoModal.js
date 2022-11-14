@@ -13,7 +13,9 @@ const DetailTwoModal = ({ onClose, children }) => {
     <DetailTwoPortal>
       <StOverlay>
         <StModalWrap ref={modalRef}>
-          <button onClick={onCloseHandler}>❌</button>
+          <button onClick={onCloseHandler}>
+            <img alt="" src="/icons/icon_cancel.png" />
+          </button>
           <StContent>{children}</StContent>
         </StModalWrap>
       </StOverlay>
@@ -48,9 +50,6 @@ const StModalWrap = styled.div`
     border: none;
     background-color: #fff;
     cursor: pointer;
-    &:hover {
-      box-shadow: 0 0 5px black;
-    }
   }
 `;
 

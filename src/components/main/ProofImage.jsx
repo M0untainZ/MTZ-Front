@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { getData } from "../../shared/api";
+import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
 
 const ProofImage = () => {
-     const {data} = useQuery(["main"], getData)
+     // const data = useQuery(["main"], getMain)
      return (
           <>
                <StProofWrap>
@@ -17,9 +17,9 @@ const ProofImage = () => {
                          <button className="img-btn next">
                               <IoIosArrowForward />
                          </button>
-                         {data?.data.certificationPhoto.map((el) => 
+                         {/* {data?.data.certificationPhoto.map((el) => 
                               <img src={`${el.photo}`} alt="" key={data} />
-                         )}
+                         )} */}
                     </StImageList>
                </StProofWrap>
           </>
@@ -31,7 +31,7 @@ export default ProofImage;
 const StProofWrap = styled.div`
      width: 70%;
      height: 20%;
-     margin: 20px auto;
+     margin: 30px auto;
      box-sizing: border-box;
      position: relative;
      p {

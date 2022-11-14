@@ -74,24 +74,24 @@ export default Weather;
 
 const StMainImageBanner = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 55vh;
   position: relative;
   display: flex;
   img {
     object-position: center center;
     object-fit: cover;
     width: 100%;
-    height: 30vh;
+    height: 520px;
   }
 `;
 
 const StWeatherContainer = styled.div`
-    width: 25%;
+    width: 20%;
     height: 5vh;
     border: 1px solid gray;
     position: absolute;
-    right: 15%;
-    bottom: 5%;
+    right: 13%;
+    bottom: 10%;
     padding: 10px;
     background-color: #E1E5E4;
 `;

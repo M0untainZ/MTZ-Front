@@ -48,67 +48,59 @@ const Weather = () => {
     }
   }, [location]);
 
-  return (
-    <>
-      <StMainImageBanner>
-        <img alt="" src="/icons/img.jpg" />
-        <StWeatherContainer>
-          <StWeatherInfoWrap>
-            <StWeatherIcon>
-              <img
-                alt=""
-                src={
-                  (weather === "01d" && "/icons/01d.png") ||
-                  (weather === "02d" && "/icons/02d.png") ||
-                  ((weather === "03d" || "04d" || "03n" || "04n") &&
-                    "/icons/03d.png") ||
-                  ((weather === "09d" || "09n" || "10d" || "10n") &&
-                    "/icons/09d.png") ||
-                  ((weather === "11d" || "11n") && "/icons/11d.png") ||
-                  ((weather === "13d" || "13n") && "/icons/13d.png") ||
-                  ((weather === "50d" || "50n") && "/icons/50d.png")
-                }
-              />
-            </StWeatherIcon>
-            <StWeatherInfo>
-              <span className="temp">{`${temp}˚C`} ㅣ</span>
-              <span className="city-name">{city}</span>
-              <p>오늘은 어디로 떠나볼까요?</p>
-            </StWeatherInfo>
-            <span className="shortcut" onClick={() => navigate("/detail")}>
-              바로가기
-            </span>
-          </StWeatherInfoWrap>
-        </StWeatherContainer>
-      </StMainImageBanner>
-    </>
-  );
-};
+    return (
+      <>
+        <StMainImageBanner>
+          <img alt="" src="/icons/mainbanner.png" />
+          <StWeatherContainer>
+            <StWeatherInfoWrap>
+              <StWeatherIcon>
+                <img alt="" src={
+                  (weather === "01d" && "/icons/01d.png") || (weather === "02d" && "/icons/02d.png")
+                  || ((weather === "03d" || "04d" || "03n" || "04n") && "/icons/03d.png")
+                  || ((weather === "09d" || "09n" || "10d" || "10n") && "/icons/09d.png")
+                  || ((weather === "11d" || "11n") && "/icons/11d.png")
+                  || ((weather === "13d" || "13n") && "/icons/13d.png")
+                  || ((weather === "50d" || "50n") && "/icons/50d.png")
+                  } />
+              </StWeatherIcon>
+              <StWeatherInfo>
+                <span className="temp">{`${temp}˚C`} ㅣ</span>
+                <span className="city-name">{city}</span>
+                <p>오늘은 어디로 떠나볼까요?</p>
+              </StWeatherInfo>
+              <span className="shortcut" onClick={() => navigate("/detail")}>바로가기</span>
+            </StWeatherInfoWrap>
+          </StWeatherContainer>
+        </StMainImageBanner>
+      </>
+    );
+}
 
 export default Weather;
 
 const StMainImageBanner = styled.div`
   width: 100%;
-  height: 30vh;
+  height: 55vh;
   position: relative;
   display: flex;
   img {
     object-position: center center;
     object-fit: cover;
     width: 100%;
-    height: 30vh;
+    height: 520px;
   }
 `;
 
 const StWeatherContainer = styled.div`
-  width: 25%;
-  height: 5vh;
-  border: 1px solid gray;
-  position: absolute;
-  right: 15%;
-  bottom: 5%;
-  padding: 10px;
-  background-color: #e1e5e4;
+    width: 20%;
+    height: 5vh;
+    border: 1px solid gray;
+    position: absolute;
+    right: 13%;
+    bottom: 10%;
+    padding: 10px;
+    background-color: #E1E5E4;
 `;
 
 const StWeatherInfoWrap = styled.div`

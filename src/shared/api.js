@@ -21,3 +21,19 @@
 // );
 
 // export default api;
+
+import axios from "axios";
+
+export const axiosIns = axios.create({
+    baseURL: `${process.env.REACT_APP_AXIOS_API}`,
+});
+
+export const getMain = async () => {
+    const {data} = await axiosIns.get("/main");
+    return data;
+}
+
+export const getProof = async () => {
+    const {data} = await axiosIns.get("/photos");
+    return data;
+}

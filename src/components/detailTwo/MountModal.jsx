@@ -4,6 +4,19 @@ import DetailTwoModal from "./modal/detailTwoModal";
 
 const MountModal = () => {
   const [modal, setModal] = useState(false);
+  const [selectImg, setSelectImg] = useState(false);
+  const [imgSave, setImgSave] = useState("");
+
+  const saveFileImage = (e) => {
+    setImgSave(URL.createObjectURL(e.target.files[0]));
+    setSelectImg(!selectImg);
+  };
+
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(imgSave);
+    setSelectImg("");
+  };
+
   const ModalSwitch = () => {
     setModal(!modal);
   };
@@ -29,13 +42,33 @@ const MountModal = () => {
                   [인증하기] 버튼을 눌러 업로드하면 인증 완료!
                 </div>
               </div>
-              <div className="fileBox">
-                <label className="uploadBox" for="file">
-                  <div className="btn-upload"></div>
-                  <div className="logo">사진 등록하기</div>
-                </label>
-                <input type="file" className="file" id="file" />
-              </div>
+              {selectImg ? (
+                <div className="fileBox">
+                  <div
+                    className="deleteImg"
+                    onClick={() => deleteFileImage()}
+                  ></div>
+                  <img
+                    className="prev-img"
+                    alt=""
+                    src={imgSave ? imgSave : "image/no_img.png"}
+                  />
+                </div>
+              ) : (
+                <div className="fileBox">
+                  <label className="uploadBox" for="file">
+                    <div className="btn-upload"></div>
+                    <div className="logo">사진 등록하기</div>
+                  </label>
+                  <input
+                    type="file"
+                    className="file"
+                    id="file"
+                    accept="image/*"
+                    onChange={saveFileImage}
+                  />
+                </div>
+              )}
 
               <div className="buttonBox">
                 <button className="addButton">인증하기</button>
@@ -87,9 +120,24 @@ const StModalBox = styled.div`
   }
   .fileBox {
     height: 30vh;
+    width: 40vh;
     background-color: #d9d9d9;
     display: flex;
     justify-content: center;
+    .deleteImg {
+      background-image: url("/icons/icon_cancel.png");
+      background-color: rgba(0, 0, 0, 0);
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      position: absolute;
+      margin-left: 83%;
+    }
+    .prev-img {
+      object-fit: cover;
+      overflow: hidden;
+      height: 30vh;
+    }
     .uploadBox {
       height: 12%;
       margin: auto;

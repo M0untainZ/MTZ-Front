@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
+import { useNavigate } from "react-router-dom";
 const MountPhoto = () => {
+  const navigate = useNavigate();
   return (
     <>
       <StContainer>
@@ -14,7 +15,7 @@ const MountPhoto = () => {
           <button className="img-btn next">
             <IoIosArrowForward />
           </button>
-          <img src="/icons/picture.jpg" alt="" />
+          <img src="/icons/picture.jpg" alt="" onClick={() => navigate()} />
           <img src="/icons/pic.PNG" alt="" />
           <img src="/icons/img.jpg" alt="" />
           <img src="/icons/img1.jpg" alt="" />

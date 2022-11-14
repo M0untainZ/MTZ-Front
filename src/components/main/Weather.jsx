@@ -1,45 +1,52 @@
-import React, {useState, useEffect} from "react";
-import styled from "styled-components"
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {useCurrentLocation, positionOptions} from "./Geolocation"
+import { useCurrentLocation, positionOptions } from "./Geolocation";
 
 const Weather = () => {
-    const navigate = useNavigate();
-    const { location, error } = useCurrentLocation(positionOptions);
-    const [city, setCity] = useState("");
-    const [weather, setWeather] = useState("");
-    const [temp, setTemp] = useState("");
-    const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
-    const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
+  const navigate = useNavigate();
+  const { location, error } = useCurrentLocation(positionOptions);
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState("");
+  const [temp, setTemp] = useState("");
+  const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
+  const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
 
-    useEffect(() => {
-        if (error) {
-          return console.log("error");
-        }
+  useEffect(() => {
+    if (error) {
+      return console.log("error");
+    }
 
-        if (location) {
-          const geo_key = `${GEOCODING_KEY}`;
-          const weather_key = `${WEATHER_KEY}`;
-          const weatherData = () => {
-              axios.all([
-                axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${geo_key}`),
-                axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_key}&units=metric`)
-              ])
-              .then(axios.spread((res1, res2) => {
-                const geo_res = res1.data;
-                const weather_res = res2.data;
-                setCity(geo_res.plus_code.compound_code.substring(13));
-                setWeather(weather_res.weather[0].icon)
-                setTemp((Math.floor(weather_res.main.temp)))
-              }))
-              .catch(() => {
-                alert("요청 에러");
-              });
-          } 
-          weatherData();
-        }
-      }, [location]);
+    if (location) {
+      const geo_key = `${GEOCODING_KEY}`;
+      const weather_key = `${WEATHER_KEY}`;
+      const weatherData = () => {
+        axios
+          .all([
+            axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${geo_key}`
+            ),
+            axios.get(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_key}&units=metric`
+            ),
+          ])
+          .then(
+            axios.spread((res1, res2) => {
+              const geo_res = res1.data;
+              const weather_res = res2.data;
+              setCity(geo_res.plus_code.compound_code.substring(13));
+              setWeather(weather_res.weather[0].icon);
+              setTemp(Math.floor(weather_res.main.temp));
+            })
+          )
+          .catch(() => {
+            alert("요청 에러");
+          });
+      };
+      weatherData();
+    }
+  }, [location]);
 
     return (
       <>
@@ -97,22 +104,22 @@ const StWeatherContainer = styled.div`
 `;
 
 const StWeatherInfoWrap = styled.div`
+  display: flex;
+  position: relative;
+  .shortcut {
     display: flex;
-    position: relative;
-    .shortcut {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80px;
-      height: 20px;
-      border: 1px solid black;
-      border-radius: 15px;
-      background-color: rgba(0, 0, 0, 0.1);
-      position: absolute;
-      bottom: 3px;
-      right: 10px;
-      cursor: pointer;
-    }
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+    cursor: pointer;
+  }
 `;
 
 const StWeatherIcon = styled.div`
@@ -121,9 +128,9 @@ const StWeatherIcon = styled.div`
   width: 50px;
   height: 50px;
   img {
-      width: 40px;
-      height: 40px;
-      }
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const StWeatherInfo = styled.div`

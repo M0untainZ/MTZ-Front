@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import useSideClick from "../../hooks/useSideClick";
-import Portal from "./Portal";
-
-const Modal = ({ onClose, children }) => {
+import useSideClick from "../../../hooks/useSideClick";
+import DetailTwoPortal from "./detailTwoPortal";
+const DetailTwoModal = ({ onClose, children }) => {
   const modalRef = useRef(null);
   const onCloseHandler = () => {
     onClose?.();
@@ -11,18 +10,20 @@ const Modal = ({ onClose, children }) => {
 
   useSideClick(modalRef, onCloseHandler);
   return (
-    <Portal>
+    <DetailTwoPortal>
       <StOverlay>
         <StModalWrap ref={modalRef}>
-          <button onClick={onCloseHandler}>❌</button>
+          <button onClick={onCloseHandler}>
+            <img alt="" src="/icons/icon_cancel.png" />
+          </button>
           <StContent>{children}</StContent>
         </StModalWrap>
       </StOverlay>
-    </Portal>
+    </DetailTwoPortal>
   );
 };
 
-export default Modal;
+export default DetailTwoModal;
 
 const StOverlay = styled.div`
   position: fixed;
@@ -32,14 +33,13 @@ const StOverlay = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 100;
 `;
 
 const StModalWrap = styled.div`
-  width: 25%;
-  height: 50%;
-  border-radius: 15px;
+  width: 375px;
+  height: 490px;
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -50,9 +50,6 @@ const StModalWrap = styled.div`
     border: none;
     background-color: #fff;
     cursor: pointer;
-    &:hover {
-      box-shadow: 0 0 5px black;
-    }
   }
 `;
 

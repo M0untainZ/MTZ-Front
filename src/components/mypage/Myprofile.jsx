@@ -1,28 +1,67 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { logoutState } from "../../redux/modules/userSlice";
 import Modal from "../../common/modal/Modal";
+import { useNavigate } from "react-router-dom";
 
 const Myprofile = () => {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
+     const name = sessionStorage.getItem("name");
+     const badge = sessionStorage.getItem("badge");
+
+     const username = name ? name : "";
+     //뱃지 null일 때 기본 값 이름
+     const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
+
+     const onLogout = () => {
+          sessionStorage.removeItem(
+               "Access_Token",
+               "Refresh_Token",
+               "name",
+               "badge"
+          );
+          dispatch(logoutState());
+          alert("로그아웃되셨습니다.");
+          navigate("/");
+     };
+
      const [modalOn, setModalOn] = useState(false);
      const onModalOpen = () => {
           setModalOn(true);
      };
 
-     // <StWrap>
-     //     <button onClick={onModalOpen}>모달열기</button>
-     //     {modalOn && (<Modal open={modalOn} onClose={() => {setModalOn(false)}}>
-
-     //     </Modal>)}
-     // </StWrap>
      return (
           <STProfile>
                <div className="profile-badge-style">이미지</div>
                <div className="profile-info-style">
-                    <p>닉네임</p>
+                    <p>{username}</p>
                     <p>지역</p>
                     <div className="profile-edit-style">
                          <button onClick={onModalOpen}>프로필 수정</button>
-                         <button>로그아웃</button>
+                         {modalOn && (
+                              <Modal
+                                   open={modalOn}
+                                   onClose={() => {
+                                        setModalOn(false);
+                                   }}
+                              >
+                                   <StModalMypage>
+                                        <div className="modal-mypage-img">
+                                             이미지
+                                        </div>
+                                        <input type="file" />
+                                        <input type="text" />
+                                        <div className="modal-mypage-box">
+                                             <button className="modal-mypage-btn">
+                                                  입력
+                                             </button>
+                                        </div>
+                                   </StModalMypage>
+                              </Modal>
+                         )}
+                         <button onClick={onLogout}>로그아웃</button>
                     </div>
                </div>
           </STProfile>
@@ -74,6 +113,34 @@ const STProfile = styled.div`
                     margin-top: 10px;
                     font-size: 18px;
                }
+          }
+     }
+`;
+
+const StModalMypage = styled.div`
+     width: 100%;
+     height: 90%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 20px;
+     background-color: wheat;
+     padding: 10px;
+     box-sizing: border-box;
+     .modal-mypage-img {
+          width: 30vh;
+          height: 30vh;
+          background-color: cadetblue;
+     }
+     .modal-mypage-box {
+          display: flex;
+          width: 100%;
+          height: fit-content;
+          justify-content: flex-end;
+          .modal-mypage-btn {
+               width: 15%;
+               height: fit-content;
           }
      }
 `;

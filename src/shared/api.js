@@ -28,6 +28,12 @@ export const axiosIns = axios.create({
     baseURL: `${process.env.REACT_APP_AXIOS_API}`,
 });
 
-export const getData = async () => {
-    return await axiosIns.get("/api/main").then(res => res.data);
+export const getMain = async () => {
+    const {data} = await axiosIns.get("/main");
+    return data;
+}
+
+export const getProof = async () => {
+    const {data} = await axiosIns.get("/photos");
+    return data;
 }

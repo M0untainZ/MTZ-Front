@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import SwiperCore, { Navigation } from "swiper/core";
 import {FaLongArrowAltLeft, FaLongArrowAltRight} from "react-icons/fa"
 const ProofImage = () => {
-     // const data = useQuery(["main"], getMain)
+     const {data} = useQuery(["main"], getMain)
      SwiperCore.use([Navigation]);
      const prevRef = useRef(null);
      const nextRef = useRef(null);
@@ -45,41 +45,16 @@ const ProofImage = () => {
                          </PrevBtn>
                          {swiperOptions && (
                               <Swiper {...swiperOptions} className="swiper">
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/detailTwo.png" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/img.jpg" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/img1.jpg" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mt.jpg" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mt2.jpg" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mt3.jpg" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/pic.PNG" alt="" />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/picture.jpg" alt="" />
-                                   </SwiperSlide>
+                                   {data?.data.certificationPhoto.map((el) => 
+                                        <SwiperSlide className="swiper-slide">
+                                             <img src={`${el.photo}`} alt="" key={data} />
+                                        </SwiperSlide>
+                                   )}
                               </Swiper>
                          )}
                          <NextBtn ref={nextRef} className="disabled">
                               <FaLongArrowAltRight />
                          </NextBtn>
-                         {/* {data?.data.certificationPhoto.map((el) => 
-                              <img src={`${el.photo}`} alt="" key={data} />
-                         )} */}
                     </StImageList>
                </StProofWrap>
           </>

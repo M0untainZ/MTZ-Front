@@ -79,7 +79,7 @@ const StMTList = styled.div`
      align-items: flex-end;
      gap: 5%;
      .mountain-element-style {
-          background-image: url(/icons/img.jpg);
+          background-image: url(/icons/mainbanner.png);
           background-position: center;
           background-size: cover;
           height: 240px;

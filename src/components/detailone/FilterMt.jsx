@@ -10,31 +10,32 @@ const FilterMt = () => {
           season: "",
           level: "",
      };
-
+     //필터 - 소요시간
      const [val1, setVal1] = useState([0, 8]);
 
-     console.log(val1);
-
+     // console.log(val1);
+     //리스트 체크박스
      const regionList = [
-          { id: 1, name: "region", region: "서울" },
-          { id: 2, name: "region", region: "경상" },
-          { id: 3, name: "region", region: "경기" },
-          { id: 4, name: "region", region: "충청" },
-          { id: 5, name: "region", region: "전라" },
-          { id: 6, name: "region", region: "강원" },
-          { id: 7, name: "region", region: "제주" },
+          { id: 0, name: "region", region: "서울" },
+          { id: 1, name: "region", region: "경상" },
+          { id: 2, name: "region", region: "경기" },
+          { id: 3, name: "region", region: "충청" },
+          { id: 4, name: "region", region: "전라" },
+          { id: 5, name: "region", region: "강원" },
+          { id: 6, name: "region", region: "제주" },
      ];
      const seasonList = [
-          { id: 1, name: "season", region: "봄" },
-          { id: 2, name: "season", region: "가을" },
-          { id: 3, name: "season", region: "여름" },
-          { id: 4, name: "season", region: "겨울" },
+          { id: 0, name: "season", season: "봄" },
+          { id: 1, name: "season", season: "가을" },
+          { id: 2, name: "season", season: "여름" },
+          { id: 3, name: "season", season: "겨울" },
      ];
      const levelList = [
-          { id: 1, name: "level", region: "초급" },
-          { id: 2, name: "level", region: "중급" },
-          { id: 3, name: "level", region: "고급" },
+          { id: 0, name: "level", level: "초급" },
+          { id: 1, name: "level", level: "중급" },
+          { id: 2, name: "level", level: "고급" },
      ];
+
      return (
           <StFilterMT>
                <div className="checkbox-list-style">
@@ -69,7 +70,7 @@ const FilterMt = () => {
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.region}
                                         />
@@ -84,11 +85,11 @@ const FilterMt = () => {
                               {seasonList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
-                                             value={item.region}
+                                             value={item.season}
                                         />
-                                        {item.region}
+                                        {item.season}
                                    </label>
                               ))}
                          </div>
@@ -99,11 +100,11 @@ const FilterMt = () => {
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
-                                             value={item.region}
+                                             value={item.level}
                                         />
-                                        {item.region}
+                                        {item.level}
                                    </label>
                               ))}
                          </div>

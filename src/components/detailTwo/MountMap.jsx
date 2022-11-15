@@ -46,7 +46,7 @@ const MountMap = () => {
 export default MountMap;
 
 const StMap = styled.div`
-  width: 35vh;
+  width: 40vh;
   height: 300px;
   margin-top: 3%;
   margin-bottom: 3%;

@@ -11,12 +11,16 @@ const MountBackground = () => {
           <div className="titleBox">
             <div className="mountainName">
               수락산
-              <img alt="" src="/icons/icon_heart.png" />
+              <img alt="" className="heartImg" src="/icons/icon_heart.png" />
             </div>
             <p className="information">
+              <img alt="" className="routeImg" src="/icons/icon_route.png" />{" "}
               상급 등산코스∙정상까지 평균 22시간 22분 소요
             </p>
-            <p className="information">여름 산행에 추천합니다</p>
+            <p className="information">
+              <img alt="" className="starImg" src="/icons/icon_star.png" />
+              여름 산행에 추천합니다
+            </p>
           </div>
 
           <div>
@@ -48,7 +52,7 @@ const StContainer = styled.div`
   .titleBox {
     background-color: rgba(255, 255, 255, 0.4);
     margin-right: 27vh;
-    width: 35vh;
+    width: 40vh;
     height: 20%;
     margin-top: 10vh;
     font-size: smaller;
@@ -58,12 +62,25 @@ const StContainer = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 10px;
+      .heartImg {
+        width: 22px;
+        height: 22px;
+      }
     }
     .information {
       font-size: 14px;
       padding-left: 10px;
       padding-top: 5px;
       display: flex;
+      align-items: center;
+      .routeImg {
+        width: 15px;
+        height: 15px;
+      }
+      .starImg {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
 `;

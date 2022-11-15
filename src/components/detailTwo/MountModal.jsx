@@ -7,15 +7,33 @@ const MountModal = () => {
   const [selectImg, setSelectImg] = useState(false);
   const [imgSave, setImgSave] = useState("");
 
+  //이미지 파일 한장 업로드
   const saveFileImage = (e) => {
     setImgSave(URL.createObjectURL(e.target.files[0]));
     setSelectImg(!selectImg);
   };
-
+  //이미지 파일 삭제
   const deleteFileImage = () => {
     URL.revokeObjectURL(imgSave);
     setSelectImg("");
   };
+
+  //다중 이미지 업로드
+  // const saveFileImage = (event) => {
+  //   const imageLists = event.target.files;
+  //   let imageUrlLists = [...imgSave];
+
+  //   for (let i = 0; i < imageLists.length; i++) {
+  //     const currentImageUrl = URL.createObjectURL(imageLists[i]);
+  //     imageUrlLists.push(currentImageUrl);
+  //   }
+
+  //   if (imageUrlLists.length > 5) {
+  //     imageUrlLists = imageUrlLists.slice(0, 5);
+  //   }
+
+  //   setImgSave(imageUrlLists);
+  // };
 
   const ModalSwitch = () => {
     setModal(!modal);
@@ -62,6 +80,7 @@ const MountModal = () => {
                   </label>
                   <input
                     type="file"
+                    multiple
                     className="file"
                     id="file"
                     accept="image/*"
@@ -100,7 +119,6 @@ const StButton = styled.button`
   border: 1px solid white;
   border-radius: 5px;
   height: 30px;
-  margin-right: 6%;
   padding-left: 10px;
   padding-right: 10px;
   color: white;

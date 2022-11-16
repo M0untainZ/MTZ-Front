@@ -29,11 +29,11 @@ export const axiosIns = axios.create({
 });
 
 export const getMain = async () => {
-    const {data} = await axiosIns.get("/main");
+    const {data} = await axiosIns.get("/api/main");
     return data;
 }
 
 export const getProof = async () => {
-    const {data} = await axiosIns.get("/photos");
+    const {data} = await axiosIns.get("/api/photos");
     return data;
 }

@@ -1,48 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __getMountains } from "../../redux/modules/mountainsSlice";
-import SearchMt from "./SearchMt";
-import Mountain from "./Mountain";
 
-const MtList = () => {
-     const dispatch = useDispatch();
-
-     const { mountains } = useSelector((state) => state.mountains);
-
-     console.log(mountains.data);
-
-     useEffect(() => {
-          dispatch(__getMountains());
-     }, [dispatch]);
-
+const Mountain = ({ mountain }) => {
      return (
-          <StMTList>
-               <SearchMt />
-
-               <div>
-                    {mountains.data &&
-                         mountains.data.map((mountain, index) => {
-                              return (
-                                   <div key={index}>
-                                        <Mountain mountain={mountain} />
-                                   </div>
-                              );
-                         })}
+          <StMountainWrap>
+               <div className="mountain-element-style">
+                    <img src={mountain.img} alt="mountain" />
+                    <div className="mountain-element-info-style">
+                         <span className="mountain-element-name-style">
+                              {mountain.name}
+                         </span>
+                         <span className="mountain-element-like-total-style">
+                              ❤<span>+{mountain.mountainLikeTotal}</span>
+                         </span>
+                    </div>
+                    <div className="mountain-element-quiz-style">
+                         <button className="mountain-element-quiz-btn-style">
+                              Q
+                         </button>
+                    </div>
                </div>
-          </StMTList>
+          </StMountainWrap>
      );
 };
-export default MtList;
 
-const StMTList = styled.div`
+export default Mountain;
+
+const StMountainWrap = styled.div`
      padding: 20px 0;
      width: 1046px;
      height: 100%;
-     display: flex;
-     flex-direction: column;
-     align-items: flex-end;
-     gap: 5%;
      .mountain-element-style {
           background-position: center;
           background-size: cover;
@@ -53,7 +39,16 @@ const StMTList = styled.div`
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          position: relative;
+          img {
+               position: absolute;
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+               z-index: 0;
+          }
           .mountain-element-info-style {
+               z-index: 1;
                box-sizing: border-box;
                height: 76px;
                display: flex;
@@ -62,6 +57,7 @@ const StMTList = styled.div`
                background-color: rgba(255, 255, 255, 0.7);
                padding: 0 20px;
                font-size: 30px;
+
                .mountain-element-name-style {
                     font-weight: bold;
                }
@@ -70,6 +66,7 @@ const StMTList = styled.div`
                }
           }
           .mountain-element-quiz-style {
+               z-index: 1;
                display: flex;
                justify-content: flex-end;
                padding: 20px;

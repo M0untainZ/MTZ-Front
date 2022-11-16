@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import "rc-slider/assets/index.css";
+import "./index.css";
 import Slider from "rc-slider";
 
 const FilterMt = () => {
@@ -11,9 +11,20 @@ const FilterMt = () => {
           level: "",
      };
      //필터 - 소요시간
-     const [val1, setVal1] = useState([0, 8]);
+     const [val1, setVal1] = useState([0, 6]);
 
-     // console.log(val1);
+     console.log(val1);
+
+     const markers = {
+          0: "0",
+          1: "1시간",
+          2: "2시간",
+          3: "3시간",
+          4: "4시간",
+          5: "5시간",
+          6: "6시간 이상",
+     };
+
      //리스트 체크박스
      const regionList = [
           { id: 0, name: "region", region: "서울" },
@@ -55,11 +66,12 @@ const FilterMt = () => {
                               <Slider
                                    range
                                    min={0}
-                                   max={8}
+                                   max={6}
                                    value={val1}
                                    step={1}
                                    dots={true}
                                    name="time"
+                                   marks={markers}
                                    onChange={setVal1}
                               />
                          </StFilterSlide>
@@ -70,7 +82,7 @@ const FilterMt = () => {
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.region}
                                         />
@@ -85,7 +97,7 @@ const FilterMt = () => {
                               {seasonList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.season}
                                         />
@@ -100,7 +112,7 @@ const FilterMt = () => {
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.level}
                                         />

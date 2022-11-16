@@ -16,12 +16,10 @@ const Myprofile = () => {
      const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
 
      const onLogout = () => {
-          sessionStorage.removeItem(
-               "Access_Token",
-               "Refresh_Token",
-               "name",
-               "badge"
-          );
+          sessionStorage.removeItem("Access_Token");
+          sessionStorage.removeItem("Refresh_Token");
+          sessionStorage.removeItem("name");
+          sessionStorage.removeItem("badge");
           dispatch(logoutState());
           alert("로그아웃되셨습니다.");
           navigate("/");

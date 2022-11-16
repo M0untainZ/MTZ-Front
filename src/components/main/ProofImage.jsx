@@ -47,9 +47,27 @@ const ProofImage = () => {
                               <Swiper {...swiperOptions} className="swiper">
                                    {data?.data.certificationPhoto.map((el) => 
                                         <SwiperSlide className="swiper-slide">
-                                             <img src={`${el.photo}`} alt="" key={data} />
+                                             <img src={`${el.photo}`} alt="" />
                                         </SwiperSlide>
                                    )}
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
+                                   <SwiperSlide className="swiper-slide">
+                                        <img src="/icons/mainbanner.png" alt="" />
+                                   </SwiperSlide>
                               </Swiper>
                          )}
                          <NextBtn ref={nextRef} className="disabled">

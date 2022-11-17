@@ -5,11 +5,10 @@ import { getProof } from "../../shared/api";
 
 const Proof = () => {
     const {data} = useQuery(["proof"], getProof);
-    console.log(data)
     return (
         <StImgContainer>
-            {data?.data.map((el) =>
-                <div key={el.data}>
+            {data?.data.reverse().map((el, idx) =>
+                <div key={idx}>
                     <p>{el.nickName}</p>
                     <img src={el.photo} alt="" />
                 </div>

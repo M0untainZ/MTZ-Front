@@ -16,6 +16,6 @@ export default DetailList;
 const StDetailList = styled.div`
      display: flex;
      justify-content: space-between;
-     width: 1400px;
+     width: 74%;
      height: 100%;
 `;

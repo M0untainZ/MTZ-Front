@@ -1,14 +1,29 @@
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
+import { useState } from "react";
 
 const SearchMt = () => {
+     const [searchMt, setSearchMT] = useState("");
+
+     const onChangeSearch = (e) => {
+          setSearchMT(e.target.value);
+          console.log("검색첸지", searchMt);
+     };
+     const onSearchEnter = (e) => {
+          if (e.key === "Enter") {
+               console.log("ok", searchMt);
+          }
+     };
      return (
           <StSearchMT>
                <div>
                     <input
                          className="search-input-style"
+                         name="search"
                          type="text"
                          placeholder="궁금하신 산을 검색해주세요"
+                         onChange={onChangeSearch}
+                         onKeyPress={onSearchEnter}
                     />
                     <span className="search-btn-style">
                          <BiSearch />
@@ -22,7 +37,7 @@ export default SearchMt;
 
 const StSearchMT = styled.div`
      padding: 20px 0;
-     width: 1046px;
+     width: 50%;
      height: 5.4vh;
      display: flex;
      justify-content: flex-start;

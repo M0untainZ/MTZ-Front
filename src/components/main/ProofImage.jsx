@@ -35,7 +35,6 @@ const ProofImage = () => {
                setSwiperOptions(options);
           }
      }, [swiperOptions]);
-     // console.log(data?.data.certificationPhoto)
 
      return (
           <>
@@ -51,7 +50,7 @@ const ProofImage = () => {
                                         <SwiperSlide className="swiper-slide" key={idx}>
                                              <img src={`${el.photo}`} alt="" />
                                         </SwiperSlide>
-                                   )}
+                                        )}
                               </Swiper>
                          )}
                          <NextBtn ref={nextRef} className="disabled">
@@ -136,4 +135,10 @@ const NextBtn = styled.button`
      &:hover {
           box-shadow: 0 0 5px black;
      }
+`;
+
+const StLastImage = styled.div`
+     width: 100%;
+     height: 100%;
+     position: relative;
 `;

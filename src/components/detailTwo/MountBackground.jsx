@@ -2,7 +2,11 @@ import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
-import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
+import {
+  __likePost,
+  __getMountain,
+  likeState,
+} from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,23 +15,20 @@ const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
   const id = Number(mountId.id);
+  const { isLike } = useSelector((state) => state.twoSlice);
 
   const lovePost = () => {
     dispatch(__likePost(id));
+    dispatch(likeState());
   };
   useEffect(() => {
     dispatch(__getMountain(id));
     // eslint-disable-next-line
   }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(__likePost(id));
-  //   // eslint-disable-next-line
-  // }, [dispatch]);
 
+  const likeList = useSelector((state) => state.twoSlice);
   const mountList = useSelector((state) => state.twoSlice.mountain.data);
-  console.log("불러오기", mountList);
-  const like = useSelector((state) => state.twoSlice.correctLike);
-  console.log("좋아요", like);
+  console.log("불러오기", likeList);
 
   return (
     <>
@@ -39,19 +40,43 @@ const MountBackground = () => {
               <div className="mountainName">
                 {mountList.name}
                 <button className="likeBtn" onClick={lovePost}>
-                  {like.countLike}
-                  {like.correctLike ? (
-                    <img
-                      alt=""
-                      className="heartImg"
-                      src="/icons/icon_redheart.png"
-                    />
+                  {isLike === false ? (
+                    <>{mountList.countLike}</>
                   ) : (
-                    <img
-                      alt=""
-                      className="heartImg"
-                      src="/icons/icon_heart.png"
-                    />
+                    <> {likeList.countLike}</>
+                  )}
+                  {isLike === false ? (
+                    <>
+                      {mountList.correctLike ? (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_redheart.png"
+                        />
+                      ) : (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_heart.png"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {likeList.correctLike ? (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_redheart.png"
+                        />
+                      ) : (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_heart.png"
+                        />
+                      )}
+                    </>
                   )}
                 </button>
               </div>

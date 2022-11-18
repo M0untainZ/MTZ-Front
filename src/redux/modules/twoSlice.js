@@ -6,13 +6,9 @@ export const __getMountain = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`,
-        {
-          headers: {
-            Authorization: `${sessionStorage.getItem("Access_Token")}`,
-          },
-        }
+        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`
       );
+      console.log(data, "data");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -23,14 +19,13 @@ export const __getMountain = createAsyncThunk(
 export const __imgPost = createAsyncThunk(
   "__imgPost",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload.id}/certification`,
-        { photo: payload.imgSave },
+        payload.formData,
         {
           headers: {
-            Authorization: `${sessionStorage.getItem("Access_Token")}`,
+            Authorization: sessionStorage.getItem("Access_Token"),
             "Content-Type": "multipart/form-data",
           },
         }
@@ -55,6 +50,7 @@ export const __likePost = createAsyncThunk(
           },
         }
       );
+      console.log(data, "data2");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -65,25 +61,35 @@ export const __likePost = createAsyncThunk(
 const initialState = {
   mountain: {},
   correctLike: {},
+  isLike: false,
 };
 export const twoSlice = createSlice({
   name: "two",
   initialState,
-  reducers: {},
+  reducers: {
+    likeState: (state) => {
+      state.isLike = true;
+    },
+  },
   extraReducers: {
+    //상세페이지 2 정보 불러오기
     [__getMountain.fulfilled]: (state, action) => {
       state.mountain = action.payload;
     },
     [__getMountain.rejected]: (state, action) => {},
+    //좋아요
     [__likePost.fulfilled]: (state, action) => {
-      state.correctLike = action.payload.data;
+      state.correctLike = action.payload.data.correctLike;
+      state.countLike = action.payload.data.countLike;
+      state.isLogin = true;
     },
     [__likePost.rejected]: (state, action) => {
       alert("로그인이 필요한 기능입니다.");
     },
+    [__imgPost.fulfilled]: (state, action) => {},
+    [__imgPost.rejected]: (state, action) => {},
   },
 });
 
-//   export const {  } =
-//   twoSlice.actions;
+export const { likeState } = twoSlice.actions;
 export default twoSlice.reducer;

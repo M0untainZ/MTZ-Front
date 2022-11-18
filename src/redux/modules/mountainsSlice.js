@@ -26,29 +26,7 @@ export const __postFilterMountains = createAsyncThunk(
                     `${process.env.REACT_APP_AXIOS_API}/api/mountains/filter`,
                     payload
                );
-
-               // const result1 = data.data.filter((item) => {
-               //      return (
-               //           item.region.includes(payload.mountainRegion) &&
-               //           item.ses.includes(payload.mountainRegion) &&
-               //           item.region.includes(payload.mountainRegion)
-               //      );
-               // });
-
-               const result = data.data.filter((item) => {
-                    return (
-                         item.region.includes(payload.mountainRegion) &&
-                         item.season.includes(payload.mountainSeason) &&
-                         item.level.includes(payload.mountainLevel)
-                    );
-               });
-
-               // console.log("result", result);
-
-               // console.log("ㅜㅜ", payload);
-               // console.log("data", data);
-
-               return thunkAPI.fulfillWithValue({ result });
+               return thunkAPI.fulfillWithValue(data);
           } catch (error) {
                return thunkAPI.rejectWithValue(error);
           }
@@ -60,7 +38,8 @@ export const __postSearchMountains = createAsyncThunk(
      async (payload, thunkAPI) => {
           try {
                const { data } = await axios.post(
-                    `${process.env.REACT_APP_AXIOS_API}/api/mountains/search`
+                    `${process.env.REACT_APP_AXIOS_API}/api/mountains/search`,
+                    payload
                );
                return thunkAPI.fulfillWithValue(data);
           } catch (error) {
@@ -95,6 +74,12 @@ export const mountainsSlice = createSlice({
                state.mountains = action.payload;
           },
           [__postFilterMountains.rejected]: (state, action) => {},
+          [__postSearchMountains.fulfilled]: (state, action) => {
+               console.log("filter", action.payload);
+
+               state.mountains = action.payload;
+          },
+          [__postSearchMountains.rejected]: (state, action) => {},
      },
 });
 

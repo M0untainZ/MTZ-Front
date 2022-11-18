@@ -1,18 +1,44 @@
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { __postSearchMountains } from "../../redux/modules/mountainsSlice";
 
 const SearchMt = () => {
+     const dispatch = useDispatch();
+     const [keyword, setKeyword] = useState("");
+
+     const onChangeSearch = (e) => {
+          const { name, value } = e.target;
+          setKeyword({ ...keyword, [name]: value });
+          console.log("검색첸지", keyword);
+     };
+     const onClickSearch = () => {
+          dispatch(__postSearchMountains(keyword));
+          console.log("ok", keyword);
+     };
+     const onSearchEnter = (e) => {
+          if (e.key === "Enter") {
+               onClickSearch();
+          }
+     };
      return (
           <StSearchMT>
                <div>
                     <input
                          className="search-input-style"
+                         name="keyword"
                          type="text"
                          placeholder="궁금하신 산을 검색해주세요"
+                         onChange={onChangeSearch}
+                         onKeyPress={onSearchEnter}
                     />
-                    <span className="search-btn-style">
+                    <button
+                         className="search-btn-style"
+                         onClick={onClickSearch}
+                    >
                          <BiSearch />
-                    </span>
+                    </button>
                </div>
           </StSearchMT>
      );
@@ -22,7 +48,7 @@ export default SearchMt;
 
 const StSearchMT = styled.div`
      padding: 20px 0;
-     width: 1046px;
+     width: 50%;
      height: 5.4vh;
      display: flex;
      justify-content: flex-start;

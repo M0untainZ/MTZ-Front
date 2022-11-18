@@ -29,28 +29,28 @@ const MountMap = () => {
       //인포윈도우 표시 위치
       iwPosition = new kakao.maps.LatLng(lat, lng);
 
-    // 인포윈도우를 생성
-    let infowindow = new kakao.maps.InfoWindow({
-      position: iwPosition,
-      content: iwContent,
-    });
+          // 인포윈도우를 생성
+          let infowindow = new kakao.maps.InfoWindow({
+               position: iwPosition,
+               content: iwContent,
+          });
 
-    // 마커 위에 인포윈도우를 표시
-    infowindow.open(map, marker);
-  }, []);
+          // 마커 위에 인포윈도우를 표시
+          infowindow.open(map, marker);
+     }, []);
 
-  return (
-    <>
-      <StMap id="map"></StMap>
-    </>
-  );
+     return (
+          <>
+               <StMap id="map"></StMap>
+          </>
+     );
 };
 
 export default MountMap;
 
 const StMap = styled.div`
-  width: 40vh;
-  height: 300px;
-  margin-top: 3%;
-  margin-bottom: 3%;
+     width: 40vh;
+     height: 300px;
+     margin-top: 3%;
+     margin-bottom: 3%;
 `;

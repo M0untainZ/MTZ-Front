@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import user from "../redux/modules/userSlice";
+import mountains from "../redux/modules/mountainsSlice";
 import twoSlice from "./modules/twoSlice";
 const reducer = combineReducers({
-  user,
-  twoSlice,
+     user,
+     mountains,
+     twoSlice,
 });
 
 export default configureStore({
-  reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+     reducer,
+     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

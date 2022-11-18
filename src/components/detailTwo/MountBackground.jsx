@@ -1,4 +1,3 @@
-import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
@@ -7,6 +6,7 @@ import {
   __getMountain,
   likeState,
 } from "../../redux/modules/twoSlice";
+import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

@@ -109,6 +109,7 @@ export const userSlice = createSlice({
         );
         sessionStorage.setItem("name", action.payload.data.data.nickName);
         sessionStorage.setItem("badge", action.payload.data.data.badgeName);
+        // sessionStorage.setItem("email", action.payload.data.data.email);
         alert(`${action.payload.data.data.nickName}님 환영합니다.`);
       } else {
         alert("아이디와 비밀번호를 확인해주세요.");

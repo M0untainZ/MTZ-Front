@@ -11,45 +11,68 @@ const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
   const id = Number(mountId.id);
+
   const lovePost = () => {
     dispatch(__likePost(id));
   };
-  const mountList = useSelector((state) => state.twoSlice.mountain);
-  console.log(mountList);
   useEffect(() => {
     dispatch(__getMountain(id));
     // eslint-disable-next-line
   }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(__likePost(id));
+  //   // eslint-disable-next-line
+  // }, [dispatch]);
+
+  const mountList = useSelector((state) => state.twoSlice.mountain.data);
+  console.log("불러오기", mountList);
+  const like = useSelector((state) => state.twoSlice.correctLike);
+  console.log("좋아요", like);
 
   return (
     <>
       <StContainer>
         {/* <img className="backgroundImg" alt="" src={`${mountList.img}`} /> */}
-        <div>
-          <div className="titleBox">
-            <div className="mountainName">
-              {/* {mountList.data?.name} */}
-              <button className="likeBtn" onClick={lovePost}>
-                <img alt="" className="heartImg" src="/icons/icon_heart.png" />
-              </button>
+        {mountList && (
+          <div>
+            <div className="titleBox">
+              <div className="mountainName">
+                {mountList.name}
+                <button className="likeBtn" onClick={lovePost}>
+                  {like.countLike}
+                  {like.correctLike ? (
+                    <img
+                      alt=""
+                      className="heartImg"
+                      src="/icons/icon_redheart.png"
+                    />
+                  ) : (
+                    <img
+                      alt=""
+                      className="heartImg"
+                      src="/icons/icon_heart.png"
+                    />
+                  )}
+                </button>
+              </div>
+              <p className="information">
+                <img alt="" className="routeImg" src="/icons/icon_route.png" />
+                {mountList.level} 등산코스∙정상까지 평균 {mountList.time} 소요
+              </p>
+              <p className="information">
+                <img alt="" className="starImg" src="/icons/icon_star.png" />
+                {mountList.season} 산행에 추천합니다
+              </p>
             </div>
-            <p className="information">
-              <img alt="" className="routeImg" src="/icons/icon_route.png" />
-              {/* {mountList?.level} 등산코스∙정상까지 평균 {mountList?.time} 소요 */}
-            </p>
-            <p className="information">
-              <img alt="" className="starImg" src="/icons/icon_star.png" />
-              {/* {mountList?.season} 산행에 추천합니다 */}
-            </p>
-          </div>
 
-          <div>
-            <MountMap />
+            <div>
+              <MountMap />
+            </div>
+            <div>
+              <MountModal />
+            </div>
           </div>
-          <div>
-            <MountModal />
-          </div>
-        </div>
+        )}
       </StContainer>
       <MountPhoto />
     </>

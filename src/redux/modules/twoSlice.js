@@ -1,57 +1,95 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
-
+//상세페이지 2 불러오기
 export const __getMountain = createAsyncThunk(
-     "getMountain",
-     async (payload, thunkAPI) => {
-          try {
-               const { data } = await axios.get(
-                    `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`
-               );
-               return thunkAPI.fulfillWithValue(data);
-          } catch (error) {
-               return thunkAPI.rejectWithValue(error);
-          }
-     }
+  "getMountain",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`
+      );
+      console.log(data, "data");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
 );
-
-export const __likePost = createAsyncThunk(
-     "LIKE_POST",
-     async (payload, thunkAPI) => {
-          try {
-               console.log("like", payload);
-
-               const result = await axios.post(
-                    `${process.env.REACT_APP_AXIOS_API}/api/${payload}/like`,
-                    "",
-                    {
-                         headers: {
-                              Authorization: `${sessionStorage.getItem(
-                                   "Access_Token"
-                              )}`,
-                         },
-                    }
-               );
-               return thunkAPI.fulfillWithValue(result);
-          } catch (error) {
-               return thunkAPI.rejectWithValue(error);
-          }
-     }
-);
-
-const initialState = {};
-export const twoSlice = createSlice({
-     name: "two",
-     initialState,
-     reducers: {},
-     extraReducers: {
-          [__getMountain.fulfilled]: (state, action) => {
-               state.mountain = action.payload;
+//상세2 인증샷 전송
+export const __imgPost = createAsyncThunk(
+  "__imgPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(
+        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload.id}/certification`,
+        payload.formData,
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("Access_Token"),
+            "Content-Type": "multipart/form-data",
           },
-          [__getMountain.rejected]: (state, action) => {},
-     },
+        }
+      );
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+//좋아요
+export const __likePost = createAsyncThunk(
+  "LIKE_POST",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}/like`,
+        "",
+        {
+          headers: {
+            Authorization: `${sessionStorage.getItem("Access_Token")}`,
+          },
+        }
+      );
+      console.log(data, "data2");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+const initialState = {
+  mountain: {},
+  correctLike: {},
+  isLike: false,
+};
+export const twoSlice = createSlice({
+  name: "two",
+  initialState,
+  reducers: {
+    likeState: (state) => {
+      state.isLike = true;
+    },
+  },
+  extraReducers: {
+    //상세페이지 2 정보 불러오기
+    [__getMountain.fulfilled]: (state, action) => {
+      state.mountain = action.payload;
+    },
+    [__getMountain.rejected]: (state, action) => {},
+    //좋아요
+    [__likePost.fulfilled]: (state, action) => {
+      state.correctLike = action.payload.data.correctLike;
+      state.countLike = action.payload.data.countLike;
+      state.isLogin = true;
+    },
+    [__likePost.rejected]: (state, action) => {
+      alert("로그인이 필요한 기능입니다.");
+    },
+    [__imgPost.fulfilled]: (state, action) => {},
+    [__imgPost.rejected]: (state, action) => {},
+  },
 });
 
-//   export const {  } =
-//   twoSlice.actions;
+export const { likeState } = twoSlice.actions;
 export default twoSlice.reducer;

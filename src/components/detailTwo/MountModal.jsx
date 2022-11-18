@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { __imgPost } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
-
+import imageCompression from "browser-image-compression";
 const MountModal = () => {
+  const dispatch = useDispatch();
+  const mountId = useParams();
+  const id = Number(mountId.id);
   const [modal, setModal] = useState(false);
   const [selectImg, setSelectImg] = useState(false);
   const [imgSave, setImgSave] = useState("");
-
+  const [post_Img, setPost_Img] = useState("");
   //이미지 파일 한장 업로드
   const saveFileImage = (e) => {
     setImgSave(URL.createObjectURL(e.target.files[0]));
+    setPost_Img(e.target.files[0]);
     setSelectImg(!selectImg);
   };
   //이미지 파일 삭제
@@ -18,21 +25,19 @@ const MountModal = () => {
     setSelectImg("");
   };
 
-  //다중 이미지 업로드
-  // const saveFileImage = (event) => {
-  //   const imageLists = event.target.files;
-  //   let imageUrlLists = [...imgSave];
+  const postImg = () => {
+    const formData = new FormData();
+    formData.append("photo", post_Img);
+    console.log(post_Img, "사진");
+    dispatch(__imgPost({ formData, id: id }));
+  };
 
-  //   for (let i = 0; i < imageLists.length; i++) {
-  //     const currentImageUrl = URL.createObjectURL(imageLists[i]);
-  //     imageUrlLists.push(currentImageUrl);
-  //   }
-
-  //   if (imageUrlLists.length > 5) {
-  //     imageUrlLists = imageUrlLists.slice(0, 5);
-  //   }
-
-  //   setImgSave(imageUrlLists);
+  // const postImg = () => {
+  //   const image = document.getElementById("file");
+  //   console.log(image, "imag");
+  //   let formData = new FormData();
+  //   formData.append("file", image.files[0]);
+  //   dispatch(__imgPost(formData));
   // };
 
   const ModalSwitch = () => {
@@ -90,7 +95,9 @@ const MountModal = () => {
               )}
 
               <div className="buttonBox">
-                <button className="addButton">인증하기</button>
+                <button className="addButton" onClick={postImg}>
+                  인증하기
+                </button>
                 <button
                   className="cancelButton"
                   onClick={() => {

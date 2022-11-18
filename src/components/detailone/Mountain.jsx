@@ -27,7 +27,7 @@ export default Mountain;
 
 const StMountainWrap = styled.div`
      padding: 20px 0;
-     width: 1046px;
+     width: 100%;
      height: 100%;
      .mountain-element-style {
           background-position: center;

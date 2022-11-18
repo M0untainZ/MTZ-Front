@@ -6,21 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 const FilterMt = () => {
      const dispatch = useDispatch();
-     const initialState = {
-          mountainTime: "",
-          mountainRegion: "",
-          mountainSeason: "",
-          mountainLevel: "",
-     };
+
      //필터 - 소요시간
+     const [filter, setFilter] = useState("");
 
-     //console.log(val1);
+     //const { mountains } = useSelector((state) => state.mountains);
 
-     const [filter, setFilter] = useState(initialState);
-
-     const { mountains } = useSelector((state) => state.mountains);
-
-     console.log("필터중", mountains);
+     //console.log("필터중", mountains);
 
      const markers = {
           0: "0",
@@ -34,24 +26,24 @@ const FilterMt = () => {
 
      //리스트 체크박스
      const regionList = [
-          { id: 0, name: "mountainRegion", region: "서울" },
-          { id: 1, name: "mountainRegion", region: "경상" },
-          { id: 2, name: "mountainRegion", region: "경기" },
-          { id: 3, name: "mountainRegion", region: "충청" },
-          { id: 4, name: "mountainRegion", region: "전라" },
-          { id: 5, name: "mountainRegion", region: "강원" },
-          { id: 6, name: "mountainRegion", region: "제주" },
+          { id: 0, name: "region", region: "서울" },
+          { id: 1, name: "region", region: "경상" },
+          { id: 2, name: "region", region: "경기" },
+          { id: 3, name: "region", region: "충청" },
+          { id: 4, name: "region", region: "전라" },
+          { id: 5, name: "region", region: "강원" },
+          { id: 6, name: "region", region: "제주" },
      ];
      const seasonList = [
-          { id: 0, name: "mountainSeason", season: "봄" },
-          { id: 1, name: "mountainSeason", season: "가을" },
-          { id: 2, name: "mountainSeason", season: "여름" },
-          { id: 3, name: "mountainSeason", season: "겨울" },
+          { id: 0, name: "season", season: "봄" },
+          { id: 1, name: "season", season: "가을" },
+          { id: 2, name: "season", season: "여름" },
+          { id: 3, name: "season", season: "겨울" },
      ];
      const levelList = [
-          { id: 0, name: "mountainLevel", level: "초급" },
-          { id: 1, name: "mountainLevel", level: "중급" },
-          { id: 2, name: "mountainLevel", level: "고급" },
+          { id: 0, name: "level", level: "초급" },
+          { id: 1, name: "level", level: "중급" },
+          { id: 2, name: "level", level: "고급" },
      ];
 
      const onFilterChange = (e) => {
@@ -99,7 +91,7 @@ const FilterMt = () => {
                                    max="6"
                                    step="1"
                                    list="markers"
-                                   name="mountainTime"
+                                   name="time"
                                    onClick={onFilterChange}
                               />
                          </StFilterSlide>

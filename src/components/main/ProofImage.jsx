@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
@@ -6,9 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import SwiperCore, { Navigation } from "swiper/core";
-import {FaLongArrowAltLeft, FaLongArrowAltRight} from "react-icons/fa"
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 const ProofImage = () => {
-     const {data} = useQuery(["main"], getMain)
+     const { data } = useQuery(["main"], getMain);
      SwiperCore.use([Navigation]);
      const prevRef = useRef(null);
      const nextRef = useRef(null);
@@ -22,7 +22,7 @@ const ProofImage = () => {
                     spaceBetween: 30,
                     navigation: {
                          prevEl: prevRef.current,
-                         nextEl: nextRef.current
+                         nextEl: nextRef.current,
                     },
                     slidesPerView: 4,
                     onBeforeInit: (swiper) => {
@@ -45,28 +45,46 @@ const ProofImage = () => {
                          </PrevBtn>
                          {swiperOptions && (
                               <Swiper {...swiperOptions} className="swiper">
-                                   {data?.data.certificationPhoto.map((el) => 
+                                   {data?.data.certificationPhoto.map((el) => (
                                         <SwiperSlide className="swiper-slide">
                                              <img src={`${el.photo}`} alt="" />
                                         </SwiperSlide>
-                                   )}
+                                   ))}
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                                    <SwiperSlide className="swiper-slide">
-                                        <img src="/icons/mainbanner.png" alt="" />
+                                        <img
+                                             src="/icons/mainbanner.png"
+                                             alt=""
+                                        />
                                    </SwiperSlide>
                               </Swiper>
                          )}

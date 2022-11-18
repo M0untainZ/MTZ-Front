@@ -20,21 +20,13 @@ const MtList = () => {
           <StMTList>
                <SearchMt />
 
-               {mountains.result
-                    ? mountains.result?.map((mountain, index) => {
-                           return (
-                                <div key={index}>
-                                     <Mountain mountain={mountain} />
-                                </div>
-                           );
-                      })
-                    : mountains.data?.map((mountain, index) => {
-                           return (
-                                <div key={index}>
-                                     <Mountain mountain={mountain} />
-                                </div>
-                           );
-                      })}
+               {mountains.data?.map((mountain, index) => {
+                    return (
+                         <div key={index}>
+                              <Mountain mountain={mountain} />
+                         </div>
+                    );
+               })}
           </StMTList>
      );
 };

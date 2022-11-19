@@ -28,6 +28,16 @@ export const axiosIns = axios.create({
     baseURL: `${process.env.REACT_APP_AXIOS_API}`,
 });
 
+axiosIns.interceptors.request.use(
+    (config) => {
+      const accessToken = sessionStorage.getItem("Access_Token");
+      if (accessToken) {
+        config.headers["Authorization"] = accessToken;
+      }
+      return config;
+    }
+)
+
 export const getMain = async () => {
     const {data} = await axiosIns.get("/api/main");
     return data;
@@ -37,3 +47,13 @@ export const getProof = async () => {
     const {data} = await axiosIns.get("/api/photos");
     return data;
 }
+
+// export const postFilter = async (dataFilter) => {
+//     const {data} = await axiosIns.post("/api/photos/filter", dataFilter);
+//     return data;
+// }
+
+// export const deleteProof = async () => {
+//     const {data} = await axiosIns.delete("/photos/sakje");
+//     return data;
+// }

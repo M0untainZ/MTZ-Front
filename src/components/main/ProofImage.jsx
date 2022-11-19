@@ -4,11 +4,14 @@ import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
 import SwiperCore, { Navigation } from "swiper/core";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+
 const ProofImage = () => {
-     const { data } = useQuery(["main"], getMain);
+     const [mainProof, setMainProof] = useState([]);
+     const {data} = useQuery(["main"], getMain, {
+          onSuccess: (config) => setMainProof(config.data.certificationPhoto.reverse().slice(0, 10))})
+
      SwiperCore.use([Navigation]);
      const prevRef = useRef(null);
      const nextRef = useRef(null);
@@ -24,7 +27,7 @@ const ProofImage = () => {
                          prevEl: prevRef.current,
                          nextEl: nextRef.current,
                     },
-                    slidesPerView: 4,
+                    slidesPerView: 7,
                     onBeforeInit: (swiper) => {
                          swiper.params.navigation.prevEl = prevRef.current;
                          swiper.params.navigation.nextEl = nextRef.current;
@@ -43,49 +46,13 @@ const ProofImage = () => {
                          <PrevBtn ref={prevRef} className="disabled">
                               <FaLongArrowAltLeft />
                          </PrevBtn>
-                         {swiperOptions && (
+                         {swiperOptions &&  (
                               <Swiper {...swiperOptions} className="swiper">
-                                   {data?.data.certificationPhoto.map((el) => (
-                                        <SwiperSlide className="swiper-slide">
+                                   {mainProof.map((el, idx) =>
+                                        <SwiperSlide className="swiper-slide" key={idx}>
                                              <img src={`${el.photo}`} alt="" />
                                         </SwiperSlide>
-                                   ))}
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
-                                   <SwiperSlide className="swiper-slide">
-                                        <img
-                                             src="/icons/mainbanner.png"
-                                             alt=""
-                                        />
-                                   </SwiperSlide>
+                                        )}
                               </Swiper>
                          )}
                          <NextBtn ref={nextRef} className="disabled">
@@ -115,10 +82,10 @@ const StImageList = styled.div`
      height: 100%;
      display: flex;
      align-items: center;
-     overflow: hidden;
      .swiper {
           width: 100%;
-          height: 30vh;
+          height: 15vh;
+          overflow: hidden;
           &-button-disabled {
                visibility: hidden;
           }

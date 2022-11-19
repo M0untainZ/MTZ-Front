@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __imgPost } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
-
+import imageCompression from "browser-image-compression";
 const MountModal = () => {
      const dispatch = useDispatch();
      const mountId = useParams();
@@ -12,10 +12,11 @@ const MountModal = () => {
      const [modal, setModal] = useState(false);
      const [selectImg, setSelectImg] = useState(false);
      const [imgSave, setImgSave] = useState("");
-
+     const [post_Img, setPost_Img] = useState("");
      //이미지 파일 한장 업로드
      const saveFileImage = (e) => {
           setImgSave(URL.createObjectURL(e.target.files[0]));
+          setPost_Img(e.target.files[0]);
           setSelectImg(!selectImg);
      };
      //이미지 파일 삭제
@@ -23,10 +24,12 @@ const MountModal = () => {
           URL.revokeObjectURL(imgSave);
           setSelectImg("");
      };
+
      const postImg = () => {
           const formData = new FormData();
-          formData.append("photo", imgSave);
-          dispatch(__imgPost({ imgSave: imgSave, id: id }));
+          formData.append("photo", post_Img);
+          console.log(post_Img, "사진");
+          dispatch(__imgPost({ formData, id: id }));
      };
 
      // const postImg = () => {

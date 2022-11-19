@@ -5,6 +5,7 @@ import { getProof } from "../../shared/api";
 
 const Proof = () => {
     const {data} = useQuery(["proof"], getProof);
+
     return (
         <StImgContainer>
             {data?.data.reverse().map((el, idx) =>

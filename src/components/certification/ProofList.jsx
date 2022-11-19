@@ -20,4 +20,5 @@ const StProof = styled.div`
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
+    position: relative;
 `;

@@ -1,3 +1,4 @@
+import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
@@ -9,59 +10,81 @@ import { useEffect } from "react";
 const MountBackground = () => {
      const mountId = useParams();
      const dispatch = useDispatch();
-     const id = mountId.id;
-
-     console.log(id);
+     const id = Number(mountId.id);
 
      const lovePost = () => {
           dispatch(__likePost(id));
      };
-     const mountList = useSelector((state) => state.twoSlice.mountain?.data);
-     //const mountList = useSelector((state) => state.twoSlice.mountain);
-     console.log(mountList);
      useEffect(() => {
           dispatch(__getMountain(id));
           // eslint-disable-next-line
-     }, [dispatch, id]);
+     }, [dispatch]);
+     // useEffect(() => {
+     //   dispatch(__likePost(id));
+     //   // eslint-disable-next-line
+     // }, [dispatch]);
+
+     const mountList = useSelector((state) => state.twoSlice.mountain.data);
+     console.log("불러오기", mountList);
+     const like = useSelector((state) => state.twoSlice.correctLike);
+     console.log("좋아요", like);
 
      return (
           <>
                <StContainer>
-                    <div>
-                         <div className="titleBox">
-                              <div className="mountainName">
-                                   {mountList?.name}
-                                   <img
-                                        alt=""
-                                        className="heartImg"
-                                        src="/icons/icon_heart.png"
-                                   />
-                              </div>
-                              <p className="information">
-                                   <img
-                                        alt=""
-                                        className="routeImg"
-                                        src="/icons/icon_route.png"
-                                   />{" "}
-                                   상급 등산코스∙정상까지 평균 22시간 22분 소요
-                              </p>
-                              <p className="information">
-                                   <img
-                                        alt=""
-                                        className="starImg"
-                                        src="/icons/icon_star.png"
-                                   />
-                                   여름 산행에 추천합니다
-                              </p>
-                         </div>
-
-                         {/* <div>
-                              <MountMap />
-                         </div> */}
+                    {/* <img className="backgroundImg" alt="" src={`${mountList.img}`} /> */}
+                    {mountList && (
                          <div>
-                              <MountModal />
+                              <div className="titleBox">
+                                   <div className="mountainName">
+                                        {mountList.name}
+                                        <button
+                                             className="likeBtn"
+                                             onClick={lovePost}
+                                        >
+                                             {like.countLike}
+                                             {like.correctLike ? (
+                                                  <img
+                                                       alt=""
+                                                       className="heartImg"
+                                                       src="/icons/icon_redheart.png"
+                                                  />
+                                             ) : (
+                                                  <img
+                                                       alt=""
+                                                       className="heartImg"
+                                                       src="/icons/icon_heart.png"
+                                                  />
+                                             )}
+                                        </button>
+                                   </div>
+                                   <p className="information">
+                                        <img
+                                             alt=""
+                                             className="routeImg"
+                                             src="/icons/icon_route.png"
+                                        />
+                                        {mountList.level} 등산코스∙정상까지 평균{" "}
+                                        {mountList.time} 소요
+                                   </p>
+                                   <p className="information">
+                                        <img
+                                             alt=""
+                                             className="starImg"
+                                             src="/icons/icon_star.png"
+                                        />
+                                        {mountList.season} 산행에 추천합니다
+                                   </p>
+                              </div>
+
+                              <div>
+                                   <MountMap />
+                              </div>
+                              <div>
+                                   <MountModal />
+                              </div>
                          </div>
-                    </div>
+                    )}
                </StContainer>
                <MountPhoto />
           </>
@@ -77,9 +100,12 @@ const StContainer = styled.div`
      width: 100%;
      display: flex;
      justify-content: flex-end;
-     img {
-          width: 24px;
-          height: 24px;
+     .backgroundImg {
+     }
+     .likeBtn {
+          background-color: rgba(0, 0, 0, 0);
+          border: 0px;
+          cursor: pointer;
      }
      .titleBox {
           background-color: rgba(255, 255, 255, 0.4);

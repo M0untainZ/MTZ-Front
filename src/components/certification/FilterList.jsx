@@ -1,18 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useMutation } from "react-query";
-import { postFilter } from "../../shared/api";
 
 const FilterList = () => {
+    // 산 리스트 저장 
     const [checkValue, setCheckValue] = useState([]);
     const regionList = [
-        { id: 0, value: "서울" },
-        { id: 1, value: "강원도" },
-        { id: 2, value: "경기도" },
-        { id: 3, value: "충청도" },
-        { id: 4, value: "경상도" },
-        { id: 5, value: "전라도" },
-        { id: 6, value: "제주도" }
+        { id: 0, name: "region", value: "서울" },
+        { id: 1, name: "region", value: "강원도" },
+        { id: 2, name: "region", value: "경기도" },
+        { id: 3, name: "region", value: "충청도" },
+        { id: 4, name: "region", value: "경상도" },
+        { id: 5, name: "region", value: "전라도" },
+        { id: 6, name: "region", value: "제주도" }
     ];
 
     const onChangeMTList = (e) => {
@@ -38,24 +37,15 @@ const FilterList = () => {
             setCheckValue(jeolla);
         } else if (e.target.value === "제주도") {
             setCheckValue(jeju);
-        } 
-    }
-
-    // 선택된 항목들 초기화
-    const onResetHandler = () => {
-        const checkFilter = document.getElementsByName("region");
-        checkFilter.forEach((ch) => {
-            ch.checked = false;
-        })
-        setCheckValue([]);
-    }
+        }
+    };
 
     return (
         <StFilterContainer>
             <div className="filter-box">
                 <p>상세조건</p>
                 <div className="filter-btn">
-                    <button onClick={onResetHandler}>초기화</button>
+                    <button>초기화</button>
                     <button>적용</button>
                 </div>
             </div>
@@ -65,7 +55,7 @@ const FilterList = () => {
                     <label key={el.id}>
                         <StyledInput 
                             type="radio" 
-                            name="region" 
+                            name={el.name} 
                             className="region"
                             value={el.value}
                             onChange={onChangeMTList}
@@ -76,10 +66,10 @@ const FilterList = () => {
             </div>
             <div className="mt-list">
                 <p>산 필터링</p>
-                <select name="mt" >
+                <select onChange={onChangeMTList}>
                     <option select="seleted">전체보기</option>
                     {checkValue.map((mountain, idx) => (
-                        <option key={idx}>{mountain}</option>
+                        <option key={idx} name="mt" value={mountain}>{mountain}</option>
                     ))}
                 </select>
             </div>

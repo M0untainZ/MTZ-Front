@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const MountPhoto = () => {
   const navigate = useNavigate();
+  const photoList = useSelector(
+    (state) => state.twoSlice.mountain.data?.certificatedMountainList
+  );
+
   return (
     <>
       <StContainer>
@@ -15,8 +20,10 @@ const MountPhoto = () => {
           <button className="img-btn next">
             <IoIosArrowForward />
           </button>
+          {photoList?.map((photoList) => (
+            <img src={`${photoList.photo}`} alt="" onClick={() => navigate()} />
+          ))}
           <img src="/icons/picture.jpg" alt="" onClick={() => navigate()} />
-          <img src="/icons/pic.PNG" alt="" />
           <img src="/icons/img.jpg" alt="" />
           <img src="/icons/img1.jpg" alt="" />
           <img src="/icons/mt.jpg" alt="" />

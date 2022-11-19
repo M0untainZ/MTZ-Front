@@ -1,15 +1,17 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperCore, { Navigation } from "swiper/core";
-import {FaLongArrowAltLeft, FaLongArrowAltRight} from "react-icons/fa"
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+
 const ProofImage = () => {
      const [mainProof, setMainProof] = useState([]);
      const {data} = useQuery(["main"], getMain, {
           onSuccess: (config) => setMainProof(config.data.certificationPhoto.reverse().slice(0, 10))})
+
      SwiperCore.use([Navigation]);
      const prevRef = useRef(null);
      const nextRef = useRef(null);
@@ -23,7 +25,7 @@ const ProofImage = () => {
                     spaceBetween: 30,
                     navigation: {
                          prevEl: prevRef.current,
-                         nextEl: nextRef.current
+                         nextEl: nextRef.current,
                     },
                     slidesPerView: 7,
                     onBeforeInit: (swiper) => {
@@ -135,10 +137,4 @@ const NextBtn = styled.button`
      &:hover {
           box-shadow: 0 0 5px black;
      }
-`;
-
-const StLastImage = styled.div`
-     width: 100%;
-     height: 100%;
-     position: relative;
 `;

@@ -1,19 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 import "./index.css";
-import Slider from "rc-slider";
+import { __postFilterMountains } from "../../redux/modules/mountainsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const FilterMt = () => {
-     const initialState = {
-          time: "",
-          region: "",
-          season: "",
-          level: "",
-     };
-     //필터 - 소요시간
-     const [val1, setVal1] = useState([0, 6]);
+     const dispatch = useDispatch();
 
-     console.log(val1);
+     //필터 - 소요시간
+     const [filter, setFilter] = useState("");
+
+     //const { mountains } = useSelector((state) => state.mountains);
+
+     //console.log("필터중", mountains);
 
      const markers = {
           0: "0",
@@ -47,6 +46,16 @@ const FilterMt = () => {
           { id: 2, name: "level", level: "고급" },
      ];
 
+     const onFilterChange = (e) => {
+          const { name, value } = e.target;
+          setFilter({ ...filter, [name]: value });
+          console.log(filter);
+     };
+
+     const onFilterList = () => {
+          dispatch(__postFilterMountains(filter));
+     };
+
      return (
           <StFilterMT>
                <div className="checkbox-list-style">
@@ -54,25 +63,36 @@ const FilterMt = () => {
                          <p>상세조건</p>
                          <div className="filter-btn-style">
                               <button>초기화</button>
-                              <button>적용</button>
+                              <button
+                                   type="button"
+                                   onClick={() => {
+                                        onFilterList();
+                                   }}
+                              >
+                                   적용
+                              </button>
                          </div>
                     </div>
                     <div>
                          <p>소요시간</p>
                          <StFilterSlide>
-                              <p>
-                                   {val1[0]}~{val1[1]}시간
-                              </p>
-                              <Slider
-                                   range
-                                   min={0}
-                                   max={6}
-                                   value={val1}
-                                   step={1}
-                                   dots={true}
+                              <div className="marker">
+                                   <span>0</span>
+                                   <span>1</span>
+                                   <span>2</span>
+                                   <span>3</span>
+                                   <span>4</span>
+                                   <span>5</span>
+                                   <span>6</span>
+                              </div>
+                              <input
+                                   type="range"
+                                   min="0"
+                                   max="6"
+                                   step="1"
+                                   list="markers"
                                    name="time"
-                                   marks={markers}
-                                   onChange={setVal1}
+                                   onClick={onFilterChange}
                               />
                          </StFilterSlide>
                     </div>
@@ -82,9 +102,10 @@ const FilterMt = () => {
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.region}
+                                             onClick={onFilterChange}
                                         />
                                         {item.region}
                                    </label>
@@ -97,9 +118,10 @@ const FilterMt = () => {
                               {seasonList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.season}
+                                             onClick={onFilterChange}
                                         />
                                         {item.season}
                                    </label>
@@ -112,9 +134,10 @@ const FilterMt = () => {
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.level}
+                                             onClick={onFilterChange}
                                         />
                                         {item.level}
                                    </label>
@@ -130,7 +153,7 @@ export default FilterMt;
 
 const StFilterMT = styled.div`
      padding: 40px 0;
-     width: 260px;
+     width: 18%;
      height: 973px;
      display: flex;
      flex-direction: column;
@@ -138,11 +161,11 @@ const StFilterMT = styled.div`
      box-sizing: border-box;
      .filter-btn-style {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
+          gap: 5px;
           button {
-               width: 128px;
-               height: 46px;
-               font-size: 24px;
+               width: 30%;
+               font-size: 20px;
           }
      }
      .checkbox-list-style {
@@ -150,7 +173,7 @@ const StFilterMT = styled.div`
           flex-direction: column;
           justify-content: flex-start;
           gap: 30px;
-          font-size: 24px;
+          font-size: 20px;
           p {
                margin-bottom: 15px;
           }
@@ -173,4 +196,16 @@ const StFilterSlide = styled.div`
      justify-content: flex-start;
      align-items: center;
      position: relative;
+     .marker {
+          width: 80%;
+          margin-bottom: 0;
+          display: flex;
+          justify-content: space-between;
+          span {
+               font-size: 13px;
+          }
+     }
+     input {
+          width: 85%;
+     }
 `;

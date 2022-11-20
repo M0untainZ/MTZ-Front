@@ -10,16 +10,12 @@ const Myprofile = () => {
      const navigate = useNavigate();
      const name = sessionStorage.getItem("name");
      const badge = sessionStorage.getItem("badge");
+     const region = sessionStorage.getItem("region");
 
-     const username = name ? name : "";
-     //뱃지 null일 때 기본 값 이름
      const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
 
      const onLogout = () => {
-          sessionStorage.removeItem("Access_Token");
-          sessionStorage.removeItem("Refresh_Token");
-          sessionStorage.removeItem("name");
-          sessionStorage.removeItem("badge");
+          sessionStorage.clear();
           dispatch(logoutState());
           alert("로그아웃되셨습니다.");
           navigate("/");
@@ -32,36 +28,46 @@ const Myprofile = () => {
 
      return (
           <STProfile>
-               <div className="profile-badge-style">이미지</div>
-               <div className="profile-info-style">
-                    <p>{username}</p>
-                    <p>지역</p>
-                    <div className="profile-edit-style">
-                         <button onClick={onModalOpen}>프로필 수정</button>
-                         {modalOn && (
-                              <Modal
-                                   open={modalOn}
-                                   onClose={() => {
-                                        setModalOn(false);
-                                   }}
-                              >
-                                   <StModalMypage>
-                                        <div className="modal-mypage-img">
-                                             이미지
-                                        </div>
-                                        <input type="file" />
-                                        <input type="text" />
-                                        <div className="modal-mypage-box">
-                                             <button className="modal-mypage-btn">
-                                                  입력
-                                             </button>
-                                        </div>
-                                   </StModalMypage>
-                              </Modal>
-                         )}
-                         <button onClick={onLogout}>로그아웃</button>
-                    </div>
+               <div className="profile-badge-style">
+                    <img
+                         className="profile-badge-view-style"
+                         src="/icons/badge/profile.png"
+                         alt="profile"
+                    />
+                    <button
+                         className="profile-setting-btn-style"
+                         onClick={onModalOpen}
+                    >
+                         <img src="/icons/profile_setting.png" alt="setting" />
+                    </button>
                </div>
+               <div className="profile-user-info-style">
+                    <p>{region}</p>
+                    <p>{name}</p>
+               </div>
+               <button className="profile-logout-btn-style" onClick={onLogout}>
+                    로그아웃
+               </button>
+
+               {modalOn && (
+                    <Modal
+                         open={modalOn}
+                         onClose={() => {
+                              setModalOn(false);
+                         }}
+                    >
+                         <StModalMypage>
+                              <div className="modal-mypage-img">이미지</div>
+                              <input type="file" />
+                              <input type="text" />
+                              <div className="modal-mypage-box">
+                                   <button className="modal-mypage-btn">
+                                        입력
+                                   </button>
+                              </div>
+                         </StModalMypage>
+                    </Modal>
+               )}
           </STProfile>
      );
 };
@@ -69,49 +75,57 @@ const Myprofile = () => {
 export default Myprofile;
 
 const STProfile = styled.div`
-     width: 95vh;
-     height: 20vh;
+     width: 220px;
+     height: 450px;
+     border: none;
+     font-size: 18px;
      display: flex;
-     justify-content: center;
-     padding: 20px;
-     gap: 5%;
-     font-size: 22px;
+     flex-direction: column;
+     align-items: center;
+     gap: 2vh;
+     padding: 80px 0;
      .profile-badge-style {
-          width: 20vh;
-          height: 20vh;
-          padding: 12px;
+          position: relative;
+          width: 100%;
           display: flex;
           justify-content: center;
-          align-items: center;
-          box-sizing: border-box;
-          background-color: var(--color-midtone);
-     }
-     .profile-info-style {
-          width: 60%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          gap: 5%;
-          p {
-               background-color: var(--color-midtone);
+          .profile-badge-view-style {
+               width: 100%;
+               height: fit-content;
+          }
+          .profile-setting-btn-style {
+               position: absolute;
+               bottom: 0;
+               right: 10%;
                display: flex;
                align-items: center;
-               box-sizing: border-box;
-               padding: 12px 20px;
-               width: 100%;
-               height: 5vh;
-          }
-          .profile-edit-style {
-               width: 100%;
-               height: 7vh;
-               display: flex;
-               justify-content: space-between;
-               align-items: flex-start;
-               button:first-child {
-                    margin-top: 10px;
-                    font-size: 18px;
+               justify-content: center;
+               background-color: white;
+               width: 46px;
+               height: 46px;
+               border: none;
+               border-radius: 50%;
+               img {
+                    width: 26px;
                }
           }
+     }
+     .profile-user-info-style {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 20px;
+          font-weight: 500;
+          p:last-child {
+               font-size: 24px;
+          }
+     }
+     .profile-logout-btn-style {
+          text-decoration: underline;
+          margin-top: 3vh;
+          color: #a3a3a3;
+          background-color: transparent;
+          border: none;
      }
 `;
 
@@ -127,9 +141,9 @@ const StModalMypage = styled.div`
      padding: 10px;
      box-sizing: border-box;
      .modal-mypage-img {
-          width: 30vh;
-          height: 30vh;
-          background-color: cadetblue;
+          width: 220px;
+          height: 220px;
+          position: relative;
      }
      .modal-mypage-box {
           display: flex;

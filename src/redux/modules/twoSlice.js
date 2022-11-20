@@ -6,7 +6,12 @@ export const __getMountain = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`
+        `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload}`,
+        {
+          headers: {
+            Authorization: `${sessionStorage.getItem("Access_Token")}`,
+          },
+        }
       );
       console.log(data, "data");
       return thunkAPI.fulfillWithValue(data);
@@ -20,7 +25,7 @@ export const __imgPost = createAsyncThunk(
   "__imgPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_AXIOS_API}/api/mountain/${payload.id}/certification`,
         payload.formData,
         {
@@ -50,7 +55,6 @@ export const __likePost = createAsyncThunk(
           },
         }
       );
-      console.log(data, "data2");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -68,7 +72,7 @@ export const twoSlice = createSlice({
   initialState,
   reducers: {
     likeState: (state) => {
-      state.isLike = true;
+      state.isLike = false;
     },
   },
   extraReducers: {
@@ -81,9 +85,10 @@ export const twoSlice = createSlice({
     [__likePost.fulfilled]: (state, action) => {
       state.correctLike = action.payload.data.correctLike;
       state.countLike = action.payload.data.countLike;
-      state.isLogin = true;
+      state.isLike = true;
     },
     [__likePost.rejected]: (state, action) => {
+      state.isLike = false;
       alert("로그인이 필요한 기능입니다.");
     },
     [__imgPost.fulfilled]: (state, action) => {},

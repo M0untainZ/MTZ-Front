@@ -1,3 +1,4 @@
+import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
@@ -5,8 +6,8 @@ import {
   __likePost,
   __getMountain,
   likeState,
+  __imgPost,
 } from "../../redux/modules/twoSlice";
-import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -17,10 +18,13 @@ const MountBackground = () => {
   const id = Number(mountId.id);
   const { isLike } = useSelector((state) => state.twoSlice);
 
+  //좋아요 버튼
   const lovePost = () => {
     dispatch(__likePost(id));
     dispatch(likeState());
   };
+
+  //상세 2 정보 불러오기
   useEffect(() => {
     dispatch(__getMountain(id));
     // eslint-disable-next-line
@@ -28,8 +32,6 @@ const MountBackground = () => {
 
   const likeList = useSelector((state) => state.twoSlice);
   const mountList = useSelector((state) => state.twoSlice.mountain.data);
-  console.log("불러오기", likeList);
-
   return (
     <>
       <StContainer>

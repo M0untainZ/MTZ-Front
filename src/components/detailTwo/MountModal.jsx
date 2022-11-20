@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ const MountModal = () => {
   const dispatch = useDispatch();
   const mountId = useParams();
   const id = Number(mountId.id);
+  const token = sessionStorage.getItem("Access_Token");
   const [modal, setModal] = useState(false);
   const [selectImg, setSelectImg] = useState(false);
   const [imgSave, setImgSave] = useState("");
@@ -25,23 +26,47 @@ const MountModal = () => {
     setSelectImg("");
   };
 
-  const postImg = () => {
-    const formData = new FormData();
-    formData.append("photo", post_Img);
-    console.log(post_Img, "사진");
-    dispatch(__imgPost({ formData, id: id }));
+  const postImg = async (fileSrc) => {
+    const options = {
+      maxSizeMB: 1, // 허용하는 최대 사이즈 지정
+      maxWidthOrHeight: 1920, // 허용하는 최대 width, height 값 지정
+      useWebWorker: true, // webworker 사용 여부
+    };
+    try {
+      const reader = new FileReader();
+      const imgFile = await imageCompression(post_Img, options);
+      reader.readAsDataURL(imgFile);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        setPost_Img(base64data);
+        handlingDataForm(base64data);
+      };
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // const postImg = () => {
-  //   const image = document.getElementById("file");
-  //   console.log(image, "imag");
-  //   let formData = new FormData();
-  //   formData.append("file", image.files[0]);
-  //   dispatch(__imgPost(formData));
-  // };
-
+  const handlingDataForm = async (dataURI) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    const formData = new FormData();
+    formData.append("photo", file);
+    dispatch(__imgPost({ formData, id: id }));
+  };
   const ModalSwitch = () => {
-    setModal(!modal);
+    if (token) {
+      setModal(!modal);
+    } else {
+      alert("로그인이 필요한 기능입니다.");
+    }
   };
 
   return (
@@ -79,7 +104,7 @@ const MountModal = () => {
                 </div>
               ) : (
                 <div className="fileBox">
-                  <label className="uploadBox" for="file">
+                  <label className="uploadBox" htmlFor="file">
                     <div className="btn-upload"></div>
                     <div className="logo">사진 등록하기</div>
                   </label>

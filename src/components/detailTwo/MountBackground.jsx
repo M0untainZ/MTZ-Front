@@ -7,7 +7,6 @@ import {
      __getMountain,
      likeState,
 } from "../../redux/modules/twoSlice";
-import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -18,91 +17,79 @@ const MountBackground = () => {
      const id = Number(mountId.id);
      const { isLike } = useSelector((state) => state.twoSlice);
 
-     const lovePost = () => {
-          dispatch(__likePost(id));
-          dispatch(likeState());
-     };
-     useEffect(() => {
-          dispatch(__getMountain(id));
-          // eslint-disable-next-line
-     }, [dispatch]);
+  //좋아요 버튼
+  const lovePost = () => {
+    dispatch(__likePost(id));
+    dispatch(likeState());
+  };
 
-     const likeList = useSelector((state) => state.twoSlice);
-     const mountList = useSelector((state) => state.twoSlice.mountain.data);
-     console.log("불러오기", likeList);
+  //상세 2 정보 불러오기
+  useEffect(() => {
+    dispatch(__getMountain(id));
+    // eslint-disable-next-line
+  }, [dispatch]);
 
-     return (
-          <>
-               <StContainer>
-                    {/* <img className="backgroundImg" alt="" src={`${mountList.img}`} /> */}
-                    {mountList && (
-                         <div>
-                              <div className="titleBox">
-                                   <div className="mountainName">
-                                        {mountList.name}
-                                        <button
-                                             className="likeBtn"
-                                             onClick={lovePost}
-                                        >
-                                             {isLike === false ? (
-                                                  <>{mountList.countLike}</>
-                                             ) : (
-                                                  <> {likeList.countLike}</>
-                                             )}
-                                             {isLike === false ? (
-                                                  <>
-                                                       {mountList.correctLike ? (
-                                                            <img
-                                                                 alt=""
-                                                                 className="heartImg"
-                                                                 src="/icons/icon_redheart.png"
-                                                            />
-                                                       ) : (
-                                                            <img
-                                                                 alt=""
-                                                                 className="heartImg"
-                                                                 src="/icons/icon_heart.png"
-                                                            />
-                                                       )}
-                                                  </>
-                                             ) : (
-                                                  <>
-                                                       {likeList.correctLike ? (
-                                                            <img
-                                                                 alt=""
-                                                                 className="heartImg"
-                                                                 src="/icons/icon_redheart.png"
-                                                            />
-                                                       ) : (
-                                                            <img
-                                                                 alt=""
-                                                                 className="heartImg"
-                                                                 src="/icons/icon_heart.png"
-                                                            />
-                                                       )}
-                                                  </>
-                                             )}
-                                        </button>
-                                   </div>
-                                   <p className="information">
-                                        <img
-                                             alt=""
-                                             className="routeImg"
-                                             src="/icons/icon_route.png"
-                                        />
-                                        {mountList.level} 등산코스∙정상까지 평균{" "}
-                                        {mountList.time} 소요
-                                   </p>
-                                   <p className="information">
-                                        <img
-                                             alt=""
-                                             className="starImg"
-                                             src="/icons/icon_star.png"
-                                        />
-                                        {mountList.season} 산행에 추천합니다
-                                   </p>
-                              </div>
-
+  const likeList = useSelector((state) => state.twoSlice);
+  const mountList = useSelector((state) => state.twoSlice.mountain.data);
+  return (
+    <>
+      <StContainer>
+        {/* <img className="backgroundImg" alt="" src={`${mountList.img}`} /> */}
+        {mountList && (
+          <div>
+            <div className="titleBox">
+              <div className="mountainName">
+                {mountList.name}
+                <button className="likeBtn" onClick={lovePost}>
+                  {isLike === false ? (
+                    <>{mountList.countLike}</>
+                  ) : (
+                    <> {likeList.countLike}</>
+                  )}
+                  {isLike === false ? (
+                    <>
+                      {mountList.correctLike ? (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_redheart.png"
+                        />
+                      ) : (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_heart.png"
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {likeList.correctLike ? (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_redheart.png"
+                        />
+                      ) : (
+                        <img
+                          alt=""
+                          className="heartImg"
+                          src="/icons/icon_heart.png"
+                        />
+                      )}
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="information">
+                <img alt="" className="routeImg" src="/icons/icon_route.png" />
+                {mountList.level} 등산코스∙정상까지 평균 {mountList.time} 소요
+              </p>
+              <p className="information">
+                <img alt="" className="starImg" src="/icons/icon_star.png" />
+                {mountList.season} 산행에 추천합니다
+              </p>
+            </div>
                               <div>
                                    <MountMap />
                               </div>

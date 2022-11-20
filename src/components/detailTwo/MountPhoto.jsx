@@ -20,15 +20,14 @@ const MountPhoto = () => {
           <button className="img-btn next">
             <IoIosArrowForward />
           </button>
-          {photoList?.map((photoList) => (
-            <img src={`${photoList.photo}`} alt="" onClick={() => navigate()} />
+          {photoList?.map((photoList, index) => (
+            <img
+              key={index}
+              src={`${photoList.photo}`}
+              alt=""
+              onClick={() => navigate()}
+            />
           ))}
-          <img src="/icons/picture.jpg" alt="" onClick={() => navigate()} />
-          <img src="/icons/img.jpg" alt="" />
-          <img src="/icons/img1.jpg" alt="" />
-          <img src="/icons/mt.jpg" alt="" />
-          <img src="/icons/mt2.jpg" alt="" />
-          <img src="/icons/mt3.jpg" alt="" />
         </StImageList>
       </StContainer>
     </>

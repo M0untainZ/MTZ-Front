@@ -63,9 +63,9 @@ export const __likePost = createAsyncThunk(
 );
 
 const initialState = {
-  mountain: {},
-  correctLike: {},
-  isLike: false,
+     mountain: {},
+     correctLike: {},
+     isLike: false,
 };
 export const twoSlice = createSlice({
   name: "two",

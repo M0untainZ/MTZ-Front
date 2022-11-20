@@ -115,6 +115,10 @@ export const userSlice = createSlice({
                          "badge",
                          action.payload.data.data.badgeName
                     );
+                    sessionStorage.setItem(
+                         "region",
+                         action.payload.data.data.region
+                    );
                     // sessionStorage.setItem("email", action.payload.data.data.email);
                     alert(`${action.payload.data.data.nickName}님 환영합니다.`);
                } else {

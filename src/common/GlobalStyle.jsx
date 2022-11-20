@@ -55,7 +55,6 @@ html{
         --color-background: #434a40;
         --color-darktone : #629460;
         --color-bright: #edffec;
-
         --color-border:#757575;
 
     }

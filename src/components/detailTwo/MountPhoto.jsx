@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ImgModal from "./imgModal/imgModal";
 const MountPhoto = () => {
-  const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
+  const ModalSwitch = () => {
+    setModal(!modal);
+  };
+
   const photoList = useSelector(
     (state) => state.twoSlice.mountain.data?.certificatedMountainList
   );
@@ -25,10 +29,24 @@ const MountPhoto = () => {
               key={index}
               src={`${photoList.photo}`}
               alt=""
-              onClick={() => navigate()}
+              onClick={ModalSwitch}
             />
           ))}
         </StImageList>
+        {modal && (
+          <ImgModal
+            open={modal}
+            onClose={() => {
+              setModal(false);
+            }}
+          >
+            <StModalBox>
+              {photoList.map((photoList, index) => (
+                <img key={index} src={`${photoList.photo}`} alt="" />
+              ))}
+            </StModalBox>
+          </ImgModal>
+        )}
       </StContainer>
     </>
   );
@@ -58,8 +76,8 @@ const StImageList = styled.div`
   overflow: hidden;
   /* border: 1px solid black; */
   img {
-    width: 17vh;
-    height: 17vh;
+    width: 15vh;
+    height: 15vh;
     object-fit: cover;
   }
   .img-btn {
@@ -80,5 +98,24 @@ const StImageList = styled.div`
   .next {
     right: -5%;
     position: absolute;
+  }
+`;
+
+const StModalBox = styled.div`
+  padding-left: 10%;
+  margin-top: -25px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  img {
+    object-fit: cover;
+    width: 35vh;
+    height: 35vh;
+    margin-right: 20px;
+    :hover {
+      width: 45vh;
+      height: 45vh;
+    }
   }
 `;

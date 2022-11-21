@@ -1,19 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { logoutState } from "../../redux/modules/userSlice";
 import Modal from "../../common/modal/Modal";
 import { useNavigate } from "react-router-dom";
+import ModalMypage from "./ModalMypage";
+import { logoutState } from "../../redux/modules/userSlice";
+import { __getMyinfo } from "../../redux/modules/mypageSlice";
 
 const Myprofile = () => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     const name = sessionStorage.getItem("name");
-     const badge = sessionStorage.getItem("badge");
-     const region = sessionStorage.getItem("region");
 
-     const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
+     const userinfo = useSelector((state) => state.mypage.mypage?.data);
+     //마이페이지 개인정보 불러오기
+     useEffect(() => {
+          dispatch(__getMyinfo());
+     }, [dispatch]);
 
+     //로그아웃
      const onLogout = () => {
           sessionStorage.clear();
           dispatch(logoutState());
@@ -21,6 +25,7 @@ const Myprofile = () => {
           navigate("/");
      };
 
+     //모달관리
      const [modalOn, setModalOn] = useState(false);
      const onModalOpen = () => {
           setModalOn(true);
@@ -42,8 +47,8 @@ const Myprofile = () => {
                     </button>
                </div>
                <div className="profile-user-info-style">
-                    <p>{region}</p>
-                    <p>{name}</p>
+                    <p>{userinfo?.region}</p>
+                    <p>{userinfo?.nickName}</p>
                </div>
                <button className="profile-logout-btn-style" onClick={onLogout}>
                     로그아웃
@@ -56,16 +61,7 @@ const Myprofile = () => {
                               setModalOn(false);
                          }}
                     >
-                         <StModalMypage>
-                              <div className="modal-mypage-img">이미지</div>
-                              <input type="file" />
-                              <input type="text" />
-                              <div className="modal-mypage-box">
-                                   <button className="modal-mypage-btn">
-                                        입력
-                                   </button>
-                              </div>
-                         </StModalMypage>
+                         <ModalMypage />
                     </Modal>
                )}
           </STProfile>
@@ -105,6 +101,7 @@ const STProfile = styled.div`
                height: 46px;
                border: none;
                border-radius: 50%;
+               cursor: pointer;
                img {
                     width: 26px;
                }
@@ -126,33 +123,5 @@ const STProfile = styled.div`
           color: #a3a3a3;
           background-color: transparent;
           border: none;
-     }
-`;
-
-const StModalMypage = styled.div`
-     width: 100%;
-     height: 90%;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     gap: 20px;
-     background-color: wheat;
-     padding: 10px;
-     box-sizing: border-box;
-     .modal-mypage-img {
-          width: 220px;
-          height: 220px;
-          position: relative;
-     }
-     .modal-mypage-box {
-          display: flex;
-          width: 100%;
-          height: fit-content;
-          justify-content: flex-end;
-          .modal-mypage-btn {
-               width: 15%;
-               height: fit-content;
-          }
      }
 `;

@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 const Header = () => {
      const navigate = useNavigate();
-     const name = sessionStorage.getItem("name");
-     const badge = sessionStorage.getItem("badge");
-
-     const username = name ? name : "";
+     //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
+     const userinfoSto = JSON.parse(sessionStorage.getItem("userinfos"));
+     const userinfo = userinfoSto ? userinfoSto : "";
      //뱃지 null일 때 기본 값 이름
-     const userbadge = badge ? (badge == null ? badge : "등산 비기너 ,") : "";
+     const userbadge = userinfoSto?.badgeName
+          ? userinfoSto?.badgeName == null
+               ? "등산 비기너, "
+               : `${userinfoSto?.badgeName}, `
+          : "";
 
      return (
           <>
@@ -32,14 +35,17 @@ const Header = () => {
                     </div>
                     <div>
                          {/* <img src="" alt="badge" /> */}
-                         <span>{`${userbadge} ${username}`}</span>
-                         {username ? (
-                              <button
-                                   onClick={() => navigate("/mypage")}
-                                   className="header-mypage-btn"
-                              >
-                                   마이페이지
-                              </button>
+
+                         {userinfo ? (
+                              <div>
+                                   <span>{`${userbadge} ${userinfoSto?.nickName}`}</span>
+                                   <button
+                                        onClick={() => navigate("/mypage")}
+                                        className="header-mypage-btn"
+                                   >
+                                        마이페이지
+                                   </button>
+                              </div>
                          ) : (
                               <button
                                    onClick={() => navigate("/login")}

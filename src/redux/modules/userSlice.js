@@ -107,17 +107,21 @@ export const userSlice = createSlice({
                          "Refresh_Token",
                          action.payload.headers.refresh_token
                     );
+                    // sessionStorage.setItem(
+                    //      "name",
+                    //      action.payload.data.data.nickName
+                    // );
+                    // sessionStorage.setItem(
+                    //      "badge",
+                    //      action.payload.data.data.badgeName
+                    // );
+                    // sessionStorage.setItem(
+                    //      "region",
+                    //      action.payload.data.data.region
+                    // );
                     sessionStorage.setItem(
-                         "name",
-                         action.payload.data.data.nickName
-                    );
-                    sessionStorage.setItem(
-                         "badge",
-                         action.payload.data.data.badgeName
-                    );
-                    sessionStorage.setItem(
-                         "region",
-                         action.payload.data.data.region
+                         "userinfos",
+                         JSON.stringify(action.payload.data.data)
                     );
                     // sessionStorage.setItem("email", action.payload.data.data.email);
                     alert(`${action.payload.data.data.nickName}님 환영합니다.`);

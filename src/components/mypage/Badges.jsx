@@ -1,6 +1,18 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { __getMyinfo } from "../../redux/modules/mypageSlice";
 
 const Badges = () => {
+     const dispatch = useDispatch();
+
+     const userinfo = useSelector((state) => state.mypage.mypage?.data);
+
+     //뱃지리스트 불러오기
+     useEffect(() => {
+          dispatch(__getMyinfo());
+     }, [dispatch]);
+
      return (
           <STBadgeContainer>
                <p className="badges-title-style">🎖 활동 뱃지</p>
@@ -195,9 +207,9 @@ const STBadgeContainer = styled.div`
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    font-size: 22px;
+                    font-size: 20px;
                     .badges-day {
-                         font-size: 20px;
+                         font-size: 18px;
                          color: var(--color-border);
                     }
                }

@@ -77,47 +77,56 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-  name: "users",
-  initialState,
-  reducers: {
-    overlapEmailCheck: (state) => {
-      state.overlapEmail = false;
-    },
-    overlapNameCheck: (state) => {
-      state.overlapName = false;
-    },
-    loginState: (state) => {
-      state.isLogin = true;
-    },
-    logoutState: (state) => {
-      state.isLogin = false;
-    },
-  },
-  extraReducers: {
-    //로그인
-    [__loginUser.fulfilled]: (state, action) => {
-      console.log("data", action);
-      if (action.payload.data.success) {
-        state.isLogin = true;
-        sessionStorage.setItem(
-          "Access_Token",
-          action.payload.headers.authorization
-        );
-        sessionStorage.setItem(
-          "Refresh_Token",
-          action.payload.headers.refresh_token
-        );
-        sessionStorage.setItem("name", action.payload.data.data.nickName);
-        sessionStorage.setItem("badge", action.payload.data.data.badgeName);
-        sessionStorage.setItem("authority", action.payload.data.data.authority);
-        // sessionStorage.setItem("email", action.payload.data.data.email);
-        alert(`${action.payload.data.data.nickName}님 환영합니다.`);
-      } else {
-        alert("아이디와 비밀번호를 확인해주세요.");
-      }
-    },
-    [__loginUser.rejected]: (state, action) => {},
-
+     name: "users",
+     initialState,
+     reducers: {
+          overlapEmailCheck: (state) => {
+               state.overlapEmail = false;
+          },
+          overlapNameCheck: (state) => {
+               state.overlapName = false;
+          },
+          loginState: (state) => {
+               state.isLogin = true;
+          },
+          logoutState: (state) => {
+               state.isLogin = false;
+          },
+     },
+     extraReducers: {
+          //로그인
+          [__loginUser.fulfilled]: (state, action) => {
+               console.log("data", action);
+               if (action.payload.data.success) {
+                    state.isLogin = true;
+                    sessionStorage.setItem(
+                         "Access_Token",
+                         action.payload.headers.authorization
+                    );
+                    sessionStorage.setItem(
+                         "Refresh_Token",
+                         action.payload.headers.refresh_token
+                    );
+                    sessionStorage.setItem(
+                         "name",
+                         action.payload.data.data.nickName
+                    );
+                    sessionStorage.setItem(
+                         "badge",
+                         action.payload.data.data.badgeName
+                    );
+                    sessionStorage.setItem(
+                         "region",
+                         action.payload.data.data.region
+                    );
+                    sessionStorage.setItem("authority", action.payload.data.data.authority);
+                    // sessionStorage.setItem("email", action.payload.data.data.email);
+                    alert(`${action.payload.data.data.nickName}님 환영합니다.`);
+               } else {
+                    alert("아이디와 비밀번호를 확인해주세요.");
+               }
+          },
+          [__loginUser.rejected]: (state, action) => {},
           //회원가입
           [__addUsers.fulfilled]: (state, action) => {},
           [__addUsers.rejected]: (state, action) => {

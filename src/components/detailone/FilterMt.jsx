@@ -1,28 +1,20 @@
 import { useState } from "react";
 import styled from "styled-components";
 import "./index.css";
-import { __postFilterMountains } from "../../redux/modules/mountainsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {
+     __getMountains,
+     __postFilterMountains,
+     isSeasonFalse,
+     isRegionFalse,
+     isLevelFalse,
+     isTimeFalse,
+} from "../../redux/modules/mountainsSlice";
+import { useDispatch } from "react-redux";
 
 const FilterMt = () => {
      const dispatch = useDispatch();
 
-     //필터 - 소요시간
-     const [filter, setFilter] = useState("");
-
-     //const { mountains } = useSelector((state) => state.mountains);
-
-     //console.log("필터중", mountains);
-
-     const markers = {
-          0: "0",
-          1: "1시간",
-          2: "2시간",
-          3: "3시간",
-          4: "4시간",
-          5: "5시간",
-          6: "6시간 이상",
-     };
+     const [filter, setFilter] = useState();
 
      //리스트 체크박스
      const regionList = [
@@ -46,23 +38,40 @@ const FilterMt = () => {
           { id: 2, name: "level", level: "고급" },
      ];
 
+     //필터 선택 onChange
      const onFilterChange = (e) => {
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
-          console.log(filter);
+          console.log("확인", filter);
      };
-
+     //필터에 따른 산 리스트 불러오기
      const onFilterList = () => {
           dispatch(__postFilterMountains(filter));
+     };
+     //필터 초기화 시 -> 전체 산 리스트 불러오기
+     //++(전역에 저장된 값도 초기화 필요)
+     const onFilterListnope = () => {
+          dispatch(__getMountains());
+          dispatch(isSeasonFalse());
+          dispatch(isRegionFalse());
+          dispatch(isLevelFalse());
+          dispatch(isTimeFalse());
      };
 
      return (
           <StFilterMT>
-               <div className="checkbox-list-style">
+               <form className="checkbox-list-style">
                     <div>
                          <p>상세조건</p>
                          <div className="filter-btn-style">
-                              <button>초기화</button>
+                              <button
+                                   type="reset"
+                                   onClick={() => {
+                                        onFilterListnope();
+                                   }}
+                              >
+                                   초기화
+                              </button>
                               <button
                                    type="button"
                                    onClick={() => {
@@ -92,6 +101,7 @@ const FilterMt = () => {
                                    step="1"
                                    list="markers"
                                    name="time"
+                                   defaultValue="0"
                                    onClick={onFilterChange}
                               />
                          </StFilterSlide>
@@ -102,7 +112,7 @@ const FilterMt = () => {
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.region}
                                              onClick={onFilterChange}
@@ -118,7 +128,7 @@ const FilterMt = () => {
                               {seasonList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.season}
                                              onClick={onFilterChange}
@@ -134,7 +144,7 @@ const FilterMt = () => {
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="radio"
+                                             type="checkbox"
                                              name={item.name}
                                              value={item.level}
                                              onClick={onFilterChange}
@@ -144,7 +154,7 @@ const FilterMt = () => {
                               ))}
                          </div>
                     </div>
-               </div>
+               </form>
           </StFilterMT>
      );
 };

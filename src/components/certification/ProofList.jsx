@@ -18,7 +18,7 @@ const StProof = styled.div`
     width: 1400px;
     height: 100%;
     display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
+    justify-content: space-around;
     position: relative;
+    margin-top: 20px;
 `;

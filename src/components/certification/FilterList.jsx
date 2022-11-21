@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { __getProof, __proofFilter } from "../../redux/modules/proofSlice";
 
 const FilterList = () => {
     // 산 리스트 저장 
-    const [checkValue, setCheckValue] = useState([]);
+    const [checkRegion, setCheckRegion] = useState([]);
+    // 클릭된 지역 필터 정보 저장
+    const [checkFilter, setCheckFilter] = useState("");
+    // 선택된 옵션 필터 정보 저장(산이름)
+    const [selectOption, setSelectOption] = useState("");
+    const dispatch = useDispatch();
     const regionList = [
         { id: 0, name: "region", value: "서울" },
         { id: 1, name: "region", value: "강원도" },
@@ -24,20 +31,38 @@ const FilterList = () => {
         const jeju = ["한라산"];
         
         if (e.target.value === "서울") {
-            setCheckValue(seoul);
+            setCheckRegion(seoul);
         } else if (e.target.value === "강원도") {
-            setCheckValue(gangwon);
+            setCheckRegion(gangwon);
         } else if (e.target.value === "경기도") {
-            setCheckValue(gyeonggi);
+            setCheckRegion(gyeonggi);
         } else if (e.target.value === "충청도") {
-            setCheckValue(chungchung);
+            setCheckRegion(chungchung);
         } else if (e.target.value === "경상도") {
-            setCheckValue(gyeongsang);
+            setCheckRegion(gyeongsang);
         } else if (e.target.value === "전라도") {
-            setCheckValue(jeolla);
+            setCheckRegion(jeolla);
         } else if (e.target.value === "제주도") {
-            setCheckValue(jeju);
+            setCheckRegion(jeju);
         }
+        const {name, value} = e.target;
+        setCheckFilter({ ...checkFilter, [name]: value });
+        setSelectOption("");
+    };   
+    // 선택된 항목들 초기화
+    const onResetHandler = () => {
+        const checkFilter = document.getElementsByName("region");
+        checkFilter.forEach((ch) => {
+            ch.checked = false;
+        })
+        setCheckRegion([]);
+        setCheckFilter("");
+        setSelectOption("");
+        dispatch(__getProof());
+    }
+
+    const onFilterApply = () => {
+        dispatch(__proofFilter(checkFilter));
     };
 
     return (
@@ -45,8 +70,8 @@ const FilterList = () => {
             <div className="filter-box">
                 <p>상세조건</p>
                 <div className="filter-btn">
-                    <button>초기화</button>
-                    <button>적용</button>
+                    <button onClick={onResetHandler}>초기화</button>
+                    <button type="button" onClick={() => {onFilterApply()}}>적용</button>
                 </div>
             </div>
             <p>지역선택</p>
@@ -66,10 +91,10 @@ const FilterList = () => {
             </div>
             <div className="mt-list">
                 <p>산 필터링</p>
-                <select onChange={onChangeMTList}>
-                    <option select="seleted">전체보기</option>
-                    {checkValue.map((mountain, idx) => (
-                        <option key={idx} name="mt" value={mountain}>{mountain}</option>
+                <select name="name" onChange={onChangeMTList}>
+                    <option defaultValue>=====</option>
+                    {checkRegion.map((mountain, idx) => (
+                        <option key={idx} value={mountain}>{mountain}</option>
                     ))}
                 </select>
             </div>
@@ -82,7 +107,6 @@ export default FilterList;
 const StFilterContainer = styled.div`
     width: 260px;
     height: 550px;
-    border: 1px solid black;
     font-size: 18px;
     .filter-btn {
         display: flex;

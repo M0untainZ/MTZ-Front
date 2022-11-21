@@ -123,6 +123,7 @@ export const userSlice = createSlice({
                          "userinfos",
                          JSON.stringify(action.payload.data.data)
                     );
+                    sessionStorage.setItem("authority", action.payload.data.data.authority);
                     // sessionStorage.setItem("email", action.payload.data.data.email);
                     alert(`${action.payload.data.data.nickName}님 환영합니다.`);
                } else {
@@ -130,7 +131,6 @@ export const userSlice = createSlice({
                }
           },
           [__loginUser.rejected]: (state, action) => {},
-
           //회원가입
           [__addUsers.fulfilled]: (state, action) => {},
           [__addUsers.rejected]: (state, action) => {

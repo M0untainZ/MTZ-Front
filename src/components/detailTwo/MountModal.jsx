@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -6,107 +6,119 @@ import { __imgPost } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
 import imageCompression from "browser-image-compression";
 const MountModal = () => {
-     const dispatch = useDispatch();
-     const mountId = useParams();
-     const id = Number(mountId.id);
-     const [modal, setModal] = useState(false);
-     const [selectImg, setSelectImg] = useState(false);
-     const [imgSave, setImgSave] = useState("");
-     const [post_Img, setPost_Img] = useState("");
-     //이미지 파일 한장 업로드
-     const saveFileImage = (e) => {
-          setImgSave(URL.createObjectURL(e.target.files[0]));
-          setPost_Img(e.target.files[0]);
-          setSelectImg(!selectImg);
-     };
-     //이미지 파일 삭제
-     const deleteFileImage = () => {
-          URL.revokeObjectURL(imgSave);
-          setSelectImg("");
-     };
+  const dispatch = useDispatch();
+  const mountId = useParams();
+  const id = Number(mountId.id);
+  const token = sessionStorage.getItem("Access_Token");
+  const [modal, setModal] = useState(false);
+  const [selectImg, setSelectImg] = useState(false);
+  const [imgSave, setImgSave] = useState("");
+  const [post_Img, setPost_Img] = useState("");
+  //이미지 파일 한장 업로드
+  const saveFileImage = (e) => {
+    setImgSave(URL.createObjectURL(e.target.files[0]));
+    setPost_Img(e.target.files[0]);
+    setSelectImg(!selectImg);
+  };
+  //이미지 파일 삭제
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(imgSave);
+    setSelectImg("");
+  };
 
-     const postImg = () => {
-          const formData = new FormData();
-          formData.append("photo", post_Img);
-          console.log(post_Img, "사진");
-          dispatch(__imgPost({ formData, id: id }));
-     };
+  const postImg = async (fileSrc) => {
+    const options = {
+      maxSizeMB: 1, // 허용하는 최대 사이즈 지정
+      maxWidthOrHeight: 1920, // 허용하는 최대 width, height 값 지정
+      useWebWorker: true, // webworker 사용 여부
+    };
+    try {
+      const reader = new FileReader();
+      const imgFile = await imageCompression(post_Img, options);
+      reader.readAsDataURL(imgFile);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        setPost_Img(base64data);
+        handlingDataForm(base64data);
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-     // const postImg = () => {
-     //   const image = document.getElementById("file");
-     //   console.log(image, "imag");
-     //   let formData = new FormData();
-     //   formData.append("file", image.files[0]);
-     //   dispatch(__imgPost(formData));
-     // };
+  const handlingDataForm = async (dataURI) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    const formData = new FormData();
+    formData.append("photo", file);
+    dispatch(__imgPost({ formData, id: id }));
+  };
+  const ModalSwitch = () => {
+    if (token) {
+      setModal(!modal);
+    } else {
+      alert("로그인이 필요한 기능입니다.");
+    }
+  };
 
-     const ModalSwitch = () => {
-          setModal(!modal);
-     };
-
-     return (
-          <>
-               <StDiv>
-                    <StButton onClick={ModalSwitch}>등산 인증하기</StButton>
-                    {modal && (
-                         <DetailTwoModal
-                              open={modal}
-                              onClose={() => {
-                                   setModal(false);
-                              }}
-                         >
-                              <StModalBox>
-                                   <div className="titleBox">
-                                        <div>당신의 등산을 인증해주세요</div>
-                                        <div className="logo">
-                                             하단의 [사진 등록하기]를 눌러
-                                             사진을 고른 뒤,
-                                        </div>
-                                        <div className="logo">
-                                             [인증하기] 버튼을 눌러 업로드하면
-                                             인증 완료!
-                                        </div>
-                                   </div>
-                                   {selectImg ? (
-                                        <div className="fileBox">
-                                             <div
-                                                  className="deleteImg"
-                                                  onClick={() =>
-                                                       deleteFileImage()
-                                                  }
-                                             ></div>
-                                             <img
-                                                  className="prev-img"
-                                                  alt=""
-                                                  src={
-                                                       imgSave
-                                                            ? imgSave
-                                                            : "image/no_img.png"
-                                                  }
-                                             />
-                                        </div>
-                                   ) : (
-                                        <div className="fileBox">
-                                             <label
-                                                  className="uploadBox"
-                                                  for="file"
-                                             >
-                                                  <div className="btn-upload"></div>
-                                                  <div className="logo">
-                                                       사진 등록하기
-                                                  </div>
-                                             </label>
-                                             <input
-                                                  type="file"
-                                                  multiple
-                                                  className="file"
-                                                  id="file"
-                                                  accept="image/*"
-                                                  onChange={saveFileImage}
-                                             />
-                                        </div>
-                                   )}
-
+  return (
+    <>
+      <StDiv>
+        <StButton onClick={ModalSwitch}>등산 인증하기</StButton>
+        {modal && (
+          <DetailTwoModal
+            open={modal}
+            onClose={() => {
+              setModal(false);
+            }}
+          >
+            <StModalBox>
+              <div className="titleBox">
+                <div>당신의 등산을 인증해주세요</div>
+                <div className="logo">
+                  하단의 [사진 등록하기]를 눌러 사진을 고른 뒤,
+                </div>
+                <div className="logo">
+                  [인증하기] 버튼을 눌러 업로드하면 인증 완료!
+                </div>
+              </div>
+              {selectImg ? (
+                <div className="fileBox">
+                  <div
+                    className="deleteImg"
+                    onClick={() => deleteFileImage()}
+                  ></div>
+                  <img
+                    className="prev-img"
+                    alt=""
+                    src={imgSave ? imgSave : "image/no_img.png"}
+                  />
+                </div>
+              ) : (
+                <div className="fileBox">
+                  <label className="uploadBox" htmlFor="file">
+                    <div className="btn-upload"></div>
+                    <div className="logo">사진 등록하기</div>
+                  </label>
+                  <input
+                    type="file"
+                    multiple
+                    className="file"
+                    id="file"
+                    accept="image/*"
+                    onChange={saveFileImage}
+                  />
+                </div>
+              )}
+              
                                    <div className="buttonBox">
                                         <button
                                              className="addButton"

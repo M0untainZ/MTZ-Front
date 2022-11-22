@@ -7,6 +7,7 @@ import {
      logoutState,
      __loginUser,
 } from "../redux/modules/userSlice";
+import OAuth from "../components/kakao/OAuth";
 
 const Login = () => {
      const navigate = useNavigate();
@@ -87,9 +88,7 @@ const Login = () => {
                          </div>
                     </StButtonBox>
                     <StKakaOButton>
-                         <button className="kakaO">
-                              카카오로 회원가입하기
-                         </button>
+                         <OAuth />
                     </StKakaOButton>
                </StLoginBox>
           </StLoginContainer>

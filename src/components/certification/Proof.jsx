@@ -4,23 +4,21 @@ import styled from "styled-components";
 // import { getProof } from "../../shared/api";
 import { useDispatch, useSelector } from "react-redux";
 import { __getProof, __proofDelete } from "../../redux/modules/proofSlice";
+import { useNavigate } from "react-router-dom";
 
 const Proof = () => {
     // const {data} = useQuery(["proof"], getProof);
     const nickName = sessionStorage.getItem("name");
-    const authority = sessionStorage.getItem("authority")
+    const authority = sessionStorage.getItem("authority");
     const dispatch = useDispatch();
-    const proofs = useSelector((state) => state.proofs.proofs)
-    const onDeleteProof = () => {
-        if (sessionStorage.getItem("name") === proofs.data.nickName) {
-          dispatch(__proofDelete(proofs.data.photo))
-          alert("게시글이 삭제되었습니다.")
-          window.location.replace("/certification")
-        } else {
-          return alert("에러");
+    const {proofs} = useSelector((state) => state.proofs)
+
+    const onDeleteProof = (id, photo) => {
+        if (sessionStorage.getItem("Access_Token") !== null ) {
+        dispatch(__proofDelete({certificationId:id, photo:photo}))
+        window.location.replace("/certification");
         }
     }
-
     useEffect(() => {
         dispatch(__getProof());
     }, [dispatch]);
@@ -41,10 +39,11 @@ const Proof = () => {
                             </div>
                             { (nickName === el.nickName) || (authority === "ROLE_ADMIN") ? 
                                 <div className="del-btn">
-                                    <img src="/icons/icon_trash-can.png" alt="" onClick={onDeleteProof} />
-                                </div> :
+                                    <img src="/icons/icon_trash-can.png" alt="" onClick={() => {onDeleteProof(el.certificationId, el.photo)}}/>
+                                </div> 
+                                :
                                 null
-                            }
+                            } 
                         </StProofInfo>
                     </StProofBox>      
                 )})
@@ -73,6 +72,7 @@ const StProofBox = styled.div`
     img {
         width: 100%;
         height: 300px;
+        object-fit: cover;
     }
 `;
 
@@ -110,6 +110,7 @@ const StProofInfo = styled.div`
         margin-left: 15px;
         width: 24px;
         height: 24px;
+        
         img {
             object-fit: cover;
             width: 100%;

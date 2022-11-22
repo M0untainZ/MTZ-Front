@@ -11,6 +11,7 @@ import Test from "../pages/Test";
 import Header from "../common/Header";
 import Layout from "../common/Layout";
 import Footer from "../common/Footer";
+import Kakao from "../components/kakao/Kakao";
 
 const Router = () => {
   return (
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="/detail/:id" element={<DetailTwo />} />
           <Route path="/certification" element={<Certification />} />
           <Route path="/Test" element={<Test />} />
+          <Route path="/oauth/callback/kakao" element={<Kakao />} />
         </Routes>
       </Layout>
       <Footer />

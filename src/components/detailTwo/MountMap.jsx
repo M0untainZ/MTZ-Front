@@ -4,39 +4,42 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 const MountMap = () => {
   const mountList = useSelector((state) => state.twoSlice.mountain.data);
-  const lat = mountList.latitude;
-  const lng = mountList.longitude;
-
   useEffect(() => {
-    let mapContainer = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
-    let mapOption = {
-      //지도를 생성할 때 필요한 기본 옵션
-      center: new kakao.maps.LatLng(lat, lng), //지도의 중심좌표.
-      level: 8, //지도의 레벨(확대, 축소 정도)
-    };
-    //지도 생성 및 객체 리턴
-    let map = new kakao.maps.Map(mapContainer, mapOption);
-    // 마커가 표시될 위치
-    let markerPosition = new kakao.maps.LatLng(lat, lng);
-    // 마커를 생성
-    let marker = new kakao.maps.Marker({
-      position: markerPosition,
-    });
-    // 마커가 지도 위에 표시되도록 설정
-    marker.setMap(map);
-    // 인포윈도우에 표출될 내용, HTML 문자열이나 document element가 가능
-    let iwContent = `<div style= "font-size:small, padding:5px;">${mountList.name} <br> <a href="https://map.kakao.com/link/to/${mountList.name},${lat}, ${lng}" style="color:blue" target="_blank">가는 길</a></div>`,
-      //인포윈도우 표시 위치
-      iwPosition = new kakao.maps.LatLng(lat, lng);
+    var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+      mapOption = {
+        center: new kakao.maps.LatLng(0, 0), // 지도의 중심좌표
+        level: 9, // 지도의 확대 레벨
+      };
 
-    // 인포윈도우를 생성
-    let infowindow = new kakao.maps.InfoWindow({
-      position: iwPosition,
-      content: iwContent,
-    });
+    // 지도를 생성
+    var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    // 마커 위에 인포윈도우를 표시
-    infowindow.open(map, marker);
+    // 주소-좌표 변환 객체를 생성
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 검색
+    geocoder.addressSearch(`${mountList.juso}`, function (result, status) {
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: coords,
+        });
+        //  인포윈도우에 표출될 내용
+        let infowindow = new kakao.maps.InfoWindow({
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${mountList.name},<a href="https://map.kakao.com/link/to/${mountList.name},${result[0].y}, ${result[0].x}" style="color:blue" target="_blank">가는 길</a></div>`,
+          position: new kakao.maps.LatLng(result[0].y, result[0].x),
+        });
+        // 인포윈도우 생성
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동
+        map.setCenter(coords);
+      }
+    });
   }, []);
 
   return (

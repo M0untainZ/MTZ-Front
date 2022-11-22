@@ -3,19 +3,19 @@ import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
 import {
-     __likePost,
-     __getMountain,
-     likeState,
+  __likePost,
+  __getMountain,
+  likeState,
 } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const MountBackground = () => {
-     const mountId = useParams();
-     const dispatch = useDispatch();
-     const id = Number(mountId.id);
-     const { isLike } = useSelector((state) => state.twoSlice);
+  const mountId = useParams();
+  const dispatch = useDispatch();
+  const id = Number(mountId.id);
+  const { isLike } = useSelector((state) => state.twoSlice);
 
   //좋아요 버튼
   const lovePost = () => {
@@ -34,9 +34,9 @@ const MountBackground = () => {
   return (
     <>
       <StContainer>
-        {/* <img className="backgroundImg" alt="" src={`${mountList.img}`} /> */}
+        <img className="backgroundImg" alt="" src={`${mountList?.img}`} />
         {mountList && (
-          <div>
+          <div className="mountainInfo">
             <div className="titleBox">
               <div className="mountainName">
                 {mountList.name}
@@ -90,68 +90,80 @@ const MountBackground = () => {
                 {mountList.season} 산행에 추천합니다
               </p>
             </div>
-                              <div>
-                                   <MountMap />
-                              </div>
-                              <div>
-                                   <MountModal />
-                              </div>
-                         </div>
-                    )}
-               </StContainer>
-               <MountPhoto />
-          </>
-     );
+            <div>
+              <MountMap />
+            </div>
+            <div>
+              <MountModal />
+            </div>
+          </div>
+        )}
+      </StContainer>
+      <MountPhoto />
+    </>
+  );
 };
 
 export default MountBackground;
 
 const StContainer = styled.div`
-     background-image: url("/icons/detailTwo.png");
-     background-size: 1920px;
-     height: 65vh;
-     width: 100%;
-     display: flex;
-     justify-content: flex-end;
-     .backgroundImg {
-     }
-     .likeBtn {
-          background-color: rgba(0, 0, 0, 0);
-          border: 0px;
-          cursor: pointer;
-     }
-     .titleBox {
-          background-color: rgba(255, 255, 255, 0.4);
-          margin-right: 27vh;
-          width: 40vh;
-          height: 20%;
-          margin-top: 10vh;
-          font-size: smaller;
-          .mountainName {
-               font-size: large;
-               font-weight: bold;
-               display: flex;
-               justify-content: space-between;
-               padding: 10px;
-               .heartImg {
-                    width: 22px;
-                    height: 22px;
-               }
-          }
-          .information {
-               font-size: 14px;
-               padding-left: 10px;
-               padding-top: 5px;
-               display: flex;
-               align-items: center;
-               .routeImg {
-                    width: 15px;
-                    height: 15px;
-               }
-               .starImg {
-                    width: 15px;
-                    height: 15px;
-               }
-          }
-     }
+  background-size: 1920px;
+  height: 65vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  .mountainInfo {
+    z-index: 5;
+    margin-bottom: 5%;
+  }
+  .backgroundImg {
+    background-size: 1920px;
+    height: 65vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .likeBtn {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    cursor: pointer;
+  }
+  .titleBox {
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-right: 27vh;
+    width: 40vh;
+    height: 25%;
+    margin-top: 8%;
+    font-size: smaller;
+    .mountainName {
+      font-size: large;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      .heartImg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    .information {
+      font-size: 14px;
+      padding-left: 10px;
+      padding-top: 5px;
+      display: flex;
+      align-items: center;
+      .routeImg {
+        width: 15px;
+        height: 15px;
+      }
+      .starImg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
 `;

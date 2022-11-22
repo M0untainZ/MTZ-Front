@@ -10,7 +10,7 @@ const reducer = combineReducers({
      user,
      mountains,
      twoSlice,
-     proofs
+     proofs,
      mypage,
 });
 

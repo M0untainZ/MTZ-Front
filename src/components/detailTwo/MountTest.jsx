@@ -23,111 +23,84 @@ const MountTest = () => {
                <StDiv>
                     <StButton onClick={ModalSwitch}>등산 인증하기</StButton>
                     {modal && (
-                         <DetailTwoModal
-                              open={modal}
-                              onClose={() => {
-                                   setModal(false);
-                              }}
-                         >
-                              <StModalBox>
-                                   <div className="fileBox">
-                                        <>
-                                             <ImageUploading
-                                                  multiple
-                                                  value={images}
-                                                  onChange={onChange}
-                                                  maxNumber={maxNumber}
-                                                  dataURLKey="data_url"
-                                             >
-                                                  {({
-                                                       imageList,
-                                                       onImageUpload,
-                                                       onImageRemove,
-                                                       isDragging,
-                                                       dragProps,
-                                                  }) => (
-                                                       // write your building UI
-                                                       <StAddButtonBox className="upload__image-wrapper">
-                                                            <StAddButton
-                                                                 style={
-                                                                      isDragging
-                                                                           ? {
-                                                                                  color: "red",
-                                                                             }
-                                                                           : undefined
-                                                                 }
-                                                                 onClick={
-                                                                      onImageUpload
-                                                                 }
-                                                                 {...dragProps}
-                                                            >
-                                                                 <label
-                                                                      className="uploadBox"
-                                                                      for="file"
-                                                                 >
-                                                                      <div className="btn-upload"></div>
-                                                                      <div className="logo">
-                                                                           사진
-                                                                           등록하기
-                                                                      </div>
-                                                                 </label>
-                                                            </StAddButton>
-                                                            &nbsp;
-                                                            {/* <button onClick={onImageRemoveAll}>Remove all images</button> */}
-                                                            <StImgListBox>
-                                                                 {imageList.map(
-                                                                      (
-                                                                           image,
-                                                                           index
-                                                                      ) => (
-                                                                           <div
-                                                                                key={
-                                                                                     index
-                                                                                }
-                                                                                className="image-item"
-                                                                           >
-                                                                                <img
-                                                                                     src={
-                                                                                          image[
-                                                                                               "data_url"
-                                                                                          ]
-                                                                                     }
-                                                                                     alt=""
-                                                                                     className="prev-img"
-                                                                                />
-                                                                                <button
-                                                                                     onClick={() =>
-                                                                                          onImageRemove(
-                                                                                               index
-                                                                                          )
-                                                                                     }
-                                                                                     className="deleteImg"
-                                                                                ></button>
-                                                                           </div>
-                                                                      )
-                                                                 )}
-                                                            </StImgListBox>
-                                                       </StAddButtonBox>
-                                                  )}
-                                             </ImageUploading>
-                                        </>
-                                   </div>
-
-                                   <div className="buttonBox">
-                                        <button className="addButton">
-                                             인증하기
-                                        </button>
-                                        <button
-                                             className="cancelButton"
-                                             onClick={() => {
-                                                  setModal(false);
-                                             }}
+                    <DetailTwoModal
+                         open={modal}
+                         onClose={() => {setModal(false)}}
+                    >
+                         <StModalBox>
+                              <div className="fileBox">
+                                   <>
+                                        <ImageUploading
+                                             multiple
+                                             value={images}
+                                             onChange={onChange}
+                                             maxNumber={maxNumber}
+                                             dataURLKey="data_url"
                                         >
-                                             취소하기
-                                        </button>
-                                   </div>
-                              </StModalBox>
-                         </DetailTwoModal>
+                                             {({
+                                                  imageList,
+                                                  onImageUpload,
+                                                  onImageRemove,
+                                                  isDragging,
+                                                  dragProps,
+                                             }) => (
+                                                  // write your building UI
+                                                  <StAddButtonBox className="upload__image-wrapper">
+                                                       <StAddButton
+                                                            style={isDragging ? {color: "red",} : undefined}
+                                                            onClick={onImageUpload}
+                                                            {...dragProps}
+                                                       >
+                                                            <label
+                                                                 className="uploadBox"
+                                                                 for="file"
+                                                            >
+                                                                 <div className="btn-upload"></div>
+                                                                 <div className="logo">
+                                                                      사진
+                                                                      등록하기
+                                                                 </div>
+                                                            </label>
+                                                       </StAddButton>
+                                                       &nbsp;
+                                                       {/* <button onClick={onImageRemoveAll}>Remove all images</button> */}
+                                                       <StImgListBox>
+                                                            {imageList.map((image, index) => (
+                                                                 <div key={index} className="image-item">
+                                                                      <img src={image["data_url"]} alt="" className="prev-img" />
+                                                                           <button
+                                                                                onClick={() =>
+                                                                                     onImageRemove(
+                                                                                          index
+                                                                                     )
+                                                                                }
+                                                                                className="deleteImg"
+                                                                           ></button>
+                                                                      </div>
+                                                                 )
+                                                            )}
+                                                       </StImgListBox>
+                                                  </StAddButtonBox>
+                                             )}
+                                        </ImageUploading>
+                                   </>
+                              </div>
+
+                              <div className="buttonBox">
+                                   <button className="addButton">
+                                        인증하기
+                                   </button>
+                                   <button
+                                        className="cancelButton"
+                                        onClick={() => {
+                                             setModal(false);
+                                        }}
+                                   >
+                                        취소하기
+                                   </button>
+                              </div>
+                         </StModalBox>
+                    </DetailTwoModal>
                     )}
                </StDiv>
           </>

@@ -6,18 +6,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperCore, { Navigation } from "swiper/core";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ProofImage = () => {
+     const navigate = useNavigate();
      const [mainProof, setMainProof] = useState([]);
      const {data} = useQuery(["main"], getMain, {
           onSuccess: (config) => setMainProof(config.data.certificationPhoto.reverse().slice(0, 10))})
-
      SwiperCore.use([Navigation]);
      const prevRef = useRef(null);
      const nextRef = useRef(null);
-
+     console.log(mainProof)
      const [swiperOptions, setSwiperOptions] = useState(null);
-
      useEffect(() => {
           if (!swiperOptions) {
                // swiper 컴포넌트에 옵션을 직접 넣으면 코드가 길어지기 때문에 따로 빼서 사용
@@ -48,11 +48,22 @@ const ProofImage = () => {
                          </PrevBtn>
                          {swiperOptions &&  (
                               <Swiper {...swiperOptions} className="swiper">
-                                   {mainProof.map((el, idx) =>
-                                        <SwiperSlide className="swiper-slide" key={idx}>
-                                             <img src={`${el.photo}`} alt="" />
-                                        </SwiperSlide>
-                                        )}
+                                   {mainProof.map((el, idx) => {
+                                        if(idx === 9) {
+                                             return (
+                                                  <SwiperSlide className="swiper-slide" key={idx}>
+                                                       <div onClick={() => navigate("/certification")}>더보기</div>
+                                                       <img src={`${el.photo}`} alt="" />
+                                                  </SwiperSlide>
+                                             )
+                                        } else {
+                                             return (
+                                                  <SwiperSlide className="swiper-slide" key={idx}>
+                                                       <img src={`${el.photo}`} alt="" />
+                                                  </SwiperSlide>
+                                             )
+                                        }
+                                   })}
                               </Swiper>
                          )}
                          <NextBtn ref={nextRef} className="disabled">
@@ -93,6 +104,19 @@ const StImageList = styled.div`
      .swiper-slide {
           width: 300px;
           height: 100%;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          div {
+               width: 100px;
+               height: 50px;
+               border: 5px solid blue;
+               z-index: 5;
+               position: absolute;
+               color: white;
+               font-size: 30px;
+          }
           img {
                width: 100%;
                height: 100%;

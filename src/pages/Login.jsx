@@ -7,6 +7,7 @@ import {
   logoutState,
   __loginUser,
 } from "../redux/modules/userSlice";
+import OAuth from "../components/kakao/OAuth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,59 +45,56 @@ const Login = () => {
     }
   };
 
-  const onSubmit = () => {
-    dispatch(__loginUser(loginUser));
-  };
-
-  return (
-    <StLoginContainer>
-      <div>
-        <div className="logo">로그인</div>
-      </div>
-      <StLoginBox>
-        <StInputBox>
-          <div className="emailInputBox">
-            <input
-              onChange={onChangeHandler}
-              onKeyPress={onSearchEnter}
-              name="email"
-              value={loginUser.email}
-              className="emailInput"
-              type="text"
-              placeholder="이메일"
-            />
-          </div>
-          <div className="pwInputBox">
-            <input
-              onChange={onChangeHandler}
-              onKeyPress={onSearchEnter}
-              name="password"
-              value={loginUser.password}
-              autoComplete="off"
-              className="pwInput"
-              type="password"
-              placeholder="비밀번호"
-            />
-          </div>
-        </StInputBox>
-        <StButtonBox>
-          <div className="loginBox">
-            <button className="login" onClick={onSubmit}>
-              로그인
-            </button>
-          </div>
-          <div className="signUpBox">
-            <button className="signUp" onClick={() => navigate("/SignUp")}>
-              회원가입
-            </button>
-          </div>
-        </StButtonBox>
-        <StKakaOButton>
-          <button className="kakaO">카카오로 회원가입하기</button>
-        </StKakaOButton>
-      </StLoginBox>
-    </StLoginContainer>
-  );
+     return (
+          <StLoginContainer>
+               <div>
+                    <div className="logo">로그인</div>
+               </div>
+               <StLoginBox>
+                    <StInputBox>
+                         <div className="emailInputBox">
+                              <input
+                                   onChange={onChangeHandler}
+                                   name="email"
+                                   value={loginUser.email}
+                                   className="emailInput"
+                                   type="text"
+                                   placeholder="이메일"
+                              />
+                         </div>
+                         <div className="pwInputBox">
+                              <input
+                                   onChange={onChangeHandler}
+                                   name="password"
+                                   value={loginUser.password}
+                                   autoComplete="off"
+                                   className="pwInput"
+                                   type="password"
+                                   placeholder="비밀번호"
+                              />
+                         </div>
+                    </StInputBox>
+                    <StButtonBox>
+                         <div className="loginBox">
+                              <button className="login" onClick={onSubmit}>
+                                   로그인
+                              </button>
+                         </div>
+                         <div className="signUpBox">
+                              <button
+                                   className="signUp"
+                                   onClick={() => navigate("/SignUp")}
+                              >
+                                   회원가입
+                              </button>
+                         </div>
+                    </StButtonBox>
+                    <StKakaOButton>
+                         <OAuth />
+                    </StKakaOButton>
+               </StLoginBox>
+          </StLoginContainer>
+     );
 };
 
 export default Login;

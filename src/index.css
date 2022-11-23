@@ -1,13 +1,63 @@
+/* 글꼴 */
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 800;
+     font-display: swap;
+     src: local("Pretendard ExtraBold"),
+          url("./common/font/Pretendard-ExtraBold.woff2") format("font-woff2");
+}
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 700;
+     font-display: swap;
+     src: local("Pretendard Bold"),
+          url("./common/font/Pretendard-Bold.woff2") format("font-woff2");
+}
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 600;
+     font-display: swap;
+     src: local("Pretendard SemiBold"),
+          url("./common/font/Pretendard-SemiBold.woff2") format("font-woff2");
+}
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 500;
+     font-display: swap;
+     src: local("Pretendard Medium"),
+          url("./common/font/Pretendard-Medium.woff2") format("font-woff2");
+}
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 400;
+     font-display: swap;
+     src: local("Pretendard Regular"),
+          url("./common/font/Pretendard-Regular.woff2") format("font-woff2");
+}
+
+@font-face {
+     font-family: "Pretendard";
+     font-weight: 300;
+     font-display: swap;
+     src: local("Pretendard Light"),
+          url("./common/font/Pretendard-Light.woff2") format("woff2");
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+     margin: 0;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
 }

@@ -3,18 +3,18 @@ import styled from "styled-components";
 const Mountain = ({ mountain }) => {
      return (
           <StMountainWrap>
-               <div className="mountain-element-style">
+               <div className="mountain-element">
                     <img src={mountain.img} alt="mountain" />
-                    <div className="mountain-element-info-style">
-                         <span className="mountain-element-name-style">
+                    <div className="mountain-element-info">
+                         <span className="mountain-element-name">
                               {mountain.name}
                          </span>
-                         <span className="mountain-element-like-total-style">
+                         <span className="mountain-element-like-total">
                               ❤<span>+{mountain.mountainLikeTotal}</span>
                          </span>
                     </div>
-                    <div className="mountain-element-quiz-style">
-                         <button className="mountain-element-quiz-btn-style">
+                    <div className="mountain-element-quiz">
+                         <button className="mountain-element-quiz-btn">
                               Q
                          </button>
                     </div>
@@ -29,10 +29,10 @@ const StMountainWrap = styled.div`
      padding: 20px 0;
      width: 100%;
      height: 100%;
-     .mountain-element-style {
+     .mountain-element {
           background-position: center;
           background-size: cover;
-          height: 240px;
+          height: 300px;
           width: 100%;
           margin-bottom: 3%;
           box-sizing: border-box;
@@ -43,11 +43,12 @@ const StMountainWrap = styled.div`
           img {
                position: absolute;
                width: 100%;
-               height: 100%;
-               object-fit: cover;
+               /* height: fit-content;
+               object-fit: cover; */
                z-index: 0;
+               bottom: 30%;
           }
-          .mountain-element-info-style {
+          .mountain-element-info {
                z-index: 1;
                box-sizing: border-box;
                height: 76px;
@@ -58,19 +59,19 @@ const StMountainWrap = styled.div`
                padding: 0 20px;
                font-size: 30px;
 
-               .mountain-element-name-style {
+               .mountain-element-name {
                     font-weight: bold;
                }
-               .mountain-element-like-total-style {
+               .mountain-element-like-total {
                     font-size: 24px;
                }
           }
-          .mountain-element-quiz-style {
+          .mountain-element-quiz {
                z-index: 1;
                display: flex;
                justify-content: flex-end;
                padding: 20px;
-               .mountain-element-quiz-btn-style {
+               .mountain-element-quiz-btn {
                     width: 60px;
                     height: 60px;
                     font-size: 24px;

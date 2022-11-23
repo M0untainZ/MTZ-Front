@@ -133,7 +133,7 @@ const StContainer = styled.div`
     cursor: pointer;
   }
   .titleBox {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     margin-right: 27vh;
     width: 40vh;
     height: 25%;

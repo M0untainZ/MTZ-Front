@@ -7,11 +7,11 @@ import proofs from "./modules/proofSlice";
 import mypage from "./modules/mypageSlice";
 
 const reducer = combineReducers({
-  user,
-  mountains,
-  twoSlice,
-  proofs,
-  mypage,
+     user,
+     mountains,
+     twoSlice,
+     proofs,
+     mypage,
 });
 
 export default configureStore({

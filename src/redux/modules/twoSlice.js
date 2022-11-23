@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //상세페이지 2 불러오기
 export const __getMountain = createAsyncThunk(
@@ -13,7 +13,6 @@ export const __getMountain = createAsyncThunk(
           },
         }
       );
-      console.log(data, "data");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -63,9 +62,9 @@ export const __likePost = createAsyncThunk(
 );
 
 const initialState = {
-     mountain: {},
-     correctLike: {},
-     isLike: false,
+  mountain: {},
+  correctLike: {},
+  isLike: false,
 };
 export const twoSlice = createSlice({
   name: "two",
@@ -91,7 +90,10 @@ export const twoSlice = createSlice({
       state.isLike = false;
       alert("로그인이 필요한 기능입니다.");
     },
-    [__imgPost.fulfilled]: (state, action) => {},
+    //인증샷
+    [__imgPost.fulfilled]: (state, action) => {
+      state.mountain = action.payload;
+    },
     [__imgPost.rejected]: (state, action) => {},
   },
 });

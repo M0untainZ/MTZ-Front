@@ -1,5 +1,4 @@
 import React from "react";
-import kakao_login from "../../assets/img/kakao_login.svg"
 
 const OAuth = () => {
     const KAKAO_CLIENT_ID = "cc12618ddc81cd5d765c74e98974c11b";
@@ -8,7 +7,7 @@ const OAuth = () => {
 
     return (
         <a href={KAKAO_AUTH_URL}>
-            <img src={kakao_login} alt="" />
+            <img src="/icons/kakao_login.png" alt="" />
         </a>
     );
 }

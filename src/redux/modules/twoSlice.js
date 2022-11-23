@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //상세페이지 2 불러오기
 export const __getMountain = createAsyncThunk(

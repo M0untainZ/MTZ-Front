@@ -39,62 +39,64 @@ const Login = () => {
     // eslint-disable-next-line
   }, [isLogin]);
 
+  const onSubmit = () => {
+    dispatch(__loginUser(loginUser));
+  };
+
   const onSearchEnter = (e) => {
     if (e.key === "Enter") {
       onSubmit();
     }
   };
 
-     return (
-          <StLoginContainer>
-               <div>
-                    <div className="logo">로그인</div>
-               </div>
-               <StLoginBox>
-                    <StInputBox>
-                         <div className="emailInputBox">
-                              <input
-                                   onChange={onChangeHandler}
-                                   name="email"
-                                   value={loginUser.email}
-                                   className="emailInput"
-                                   type="text"
-                                   placeholder="이메일"
-                              />
-                         </div>
-                         <div className="pwInputBox">
-                              <input
-                                   onChange={onChangeHandler}
-                                   name="password"
-                                   value={loginUser.password}
-                                   autoComplete="off"
-                                   className="pwInput"
-                                   type="password"
-                                   placeholder="비밀번호"
-                              />
-                         </div>
-                    </StInputBox>
-                    <StButtonBox>
-                         <div className="loginBox">
-                              <button className="login" onClick={onSubmit}>
-                                   로그인
-                              </button>
-                         </div>
-                         <div className="signUpBox">
-                              <button
-                                   className="signUp"
-                                   onClick={() => navigate("/SignUp")}
-                              >
-                                   회원가입
-                              </button>
-                         </div>
-                    </StButtonBox>
-                    <StKakaOButton>
-                         <OAuth />
-                    </StKakaOButton>
-               </StLoginBox>
-          </StLoginContainer>
-     );
+  return (
+    <StLoginContainer>
+      <div>
+        <div className="logo">로그인</div>
+      </div>
+      <StLoginBox>
+        <StInputBox>
+          <div className="emailInputBox">
+            <input
+              onChange={onChangeHandler}
+              onKeyPress={onSearchEnter}
+              name="email"
+              value={loginUser.email}
+              className="emailInput"
+              type="text"
+              placeholder="이메일"
+            />
+          </div>
+          <div className="pwInputBox">
+            <input
+              onChange={onChangeHandler}
+              name="password"
+              value={loginUser.password}
+              autoComplete="off"
+              className="pwInput"
+              type="password"
+              placeholder="비밀번호"
+            />
+          </div>
+        </StInputBox>
+        <StButtonBox>
+          <div className="loginBox">
+            <button className="login" onClick={onSubmit}>
+              로그인
+            </button>
+          </div>
+          <div className="signUpBox">
+            <button className="signUp" onClick={() => navigate("/SignUp")}>
+              회원가입
+            </button>
+          </div>
+        </StButtonBox>
+        <StKakaOButton>
+          <OAuth />
+        </StKakaOButton>
+      </StLoginBox>
+    </StLoginContainer>
+  );
 };
 
 export default Login;

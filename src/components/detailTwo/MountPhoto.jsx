@@ -159,21 +159,3 @@ const NextBtn = styled.button`
     box-shadow: 0 0 5px black;
   }
 `;
-const StModalBox = styled.div`
-  padding-left: 10%;
-  margin-top: -25px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  img {
-    object-fit: cover;
-    width: 35vh;
-    height: 35vh;
-    margin-right: 20px;
-    :hover {
-      width: 45vh;
-      height: 45vh;
-    }
-  }
-`;

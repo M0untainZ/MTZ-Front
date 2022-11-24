@@ -99,20 +99,17 @@ const Login = () => {
                 </div>
               </button>
             </div>
-            {/* <div className="signUpBox">
-              <button className="signUp" onClick={() => navigate("/SignUp")}>
-                회원가입
-              </button>
-            </div> */}
           </StButtonBox>
           <StButtonBox>
             <StKakaOButton>
               <OAuth />
             </StKakaOButton>
           </StButtonBox>
-          <div>
+          <div className="sign-up">
             <span>아직 계정이 없으신가요?</span>
-            <span>회원가입하기</span>
+            <span onClick={() => navigate("/SignUp")} className="signUpTag">
+              회원가입하기
+            </span>
           </div>
         </StLoginBox>
       </StParentsBox>
@@ -143,7 +140,7 @@ const StParentsBox = styled.div`
   margin-left: 10%;
 
   .helloLogo {
-    margin-top: 20%;
+    margin-top: 30%;
     font-weight: normal;
     font-size: large;
   }
@@ -158,11 +155,23 @@ const StParentsBox = styled.div`
 const StLoginBox = styled.div`
   height: 70%;
   text-align: center;
+  .sign-up {
+    margin-top: 15%;
+    font-size: small;
+    .signUpTag {
+      color: #185b6e;
+      text-decoration: underline;
+      :hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
 `;
 
 const StInputBox = styled.div`
   text-align: left;
-  margin-top: 20%;
+  margin-top: 10%;
   .emailInputBox {
     width: 100%;
     height: 40%;
@@ -187,11 +196,12 @@ const StInputBox = styled.div`
 const StButtonBox = styled.div`
   width: 100%;
   height: 7%;
-  margin-top: 10%;
+  margin-top: 20%;
   .loginBox {
     width: 92%;
     height: 48px;
     .login {
+      cursor: pointer;
       background-color: #185b6e;
       border: 0px;
       width: 100%;
@@ -204,30 +214,16 @@ const StButtonBox = styled.div`
         color: white;
         height: 100%;
         width: 90%;
+        font-weight: bold;
         .loginButtonLogo {
           margin-top: 5%;
         }
       }
     }
   }
-  .signUpBox {
-    width: 46%;
-    margin-left: 9%;
-    background-color: black;
-    .signUp {
-      width: 100%;
-      height: 100%;
-    }
-  }
 `;
 
 const StKakaOButton = styled.div`
-  background-color: red;
   width: 100%;
-  margin-top: 20px;
   height: 100%;
-  .kakaO {
-    width: 100%;
-    height: 100%;
-  }
 `;

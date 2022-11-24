@@ -209,7 +209,7 @@ const SignUp = () => {
                   name="region"
                   value={user.region}
                 >
-                  <option>--지역을 선택해주세요.--</option>
+                  <option hidden>--지역을 선택해주세요.--</option>
                   <option>서울</option>
                   <option>경기도</option>
                   <option>경상도</option>

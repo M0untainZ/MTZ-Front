@@ -13,12 +13,12 @@ const FilterList = () => {
      const dispatch = useDispatch();
      const regionList = [
           { id: 0, name: "region", value: "서울" },
-          { id: 1, name: "region", value: "강원도" },
-          { id: 2, name: "region", value: "경기도" },
-          { id: 3, name: "region", value: "충청도" },
-          { id: 4, name: "region", value: "경상도" },
-          { id: 5, name: "region", value: "전라도" },
-          { id: 6, name: "region", value: "제주도" },
+          { id: 1, name: "region", value: "강원" },
+          { id: 2, name: "region", value: "경기" },
+          { id: 3, name: "region", value: "충청" },
+          { id: 4, name: "region", value: "경상" },
+          { id: 5, name: "region", value: "전라" },
+          { id: 6, name: "region", value: "제주" },
      ];
 
      const onChangeMTList = (e) => {
@@ -53,17 +53,17 @@ const FilterList = () => {
 
           if (e.target.value === "서울") {
                setCheckRegion(seoul);
-          } else if (e.target.value === "강원도") {
+          } else if (e.target.value === "강원") {
                setCheckRegion(gangwon);
-          } else if (e.target.value === "경기도") {
+          } else if (e.target.value === "경기") {
                setCheckRegion(gyeonggi);
-          } else if (e.target.value === "충청도") {
+          } else if (e.target.value === "충청") {
                setCheckRegion(chungchung);
-          } else if (e.target.value === "경상도") {
+          } else if (e.target.value === "경상") {
                setCheckRegion(gyeongsang);
-          } else if (e.target.value === "전라도") {
+          } else if (e.target.value === "전라") {
                setCheckRegion(jeolla);
-          } else if (e.target.value === "제주도") {
+          } else if (e.target.value === "제주") {
                setCheckRegion(jeju);
           }
           const { name, value } = e.target;

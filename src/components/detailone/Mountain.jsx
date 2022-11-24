@@ -4,14 +4,24 @@ const Mountain = ({ mountain }) => {
      return (
           <StMountainWrap>
                <div className="mountain-element">
-                    <img src={mountain.img} alt="mountain" />
+                    <img
+                         src={mountain.img}
+                         className="mountain-img"
+                         alt="mountain"
+                    />
                     <div className="mountain-element-info">
                          <span className="mountain-element-name">
                               {mountain.name}
                          </span>
-                         <span className="mountain-element-like-total">
-                              ❤<span>+{mountain.mountainLikeTotal}</span>
-                         </span>
+                         <p className="mountain-element-like-total">
+                              <img
+                                   alt=""
+                                   className="heartImg"
+                                   src="/icons/icon_redheart.png"
+                              />
+                              &nbsp;
+                              <span> {mountain.mountainLikeTotal}+</span>
+                         </p>
                     </div>
                     <div className="mountain-element-quiz">
                          <button className="mountain-element-quiz-btn">
@@ -26,27 +36,26 @@ const Mountain = ({ mountain }) => {
 export default Mountain;
 
 const StMountainWrap = styled.div`
-     padding: 20px 0;
+     margin-top: 40px;
+     padding: 10px 0;
      width: 100%;
      height: 100%;
      .mountain-element {
-          background-position: center;
-          background-size: cover;
-          height: 300px;
+          height: 240px;
           width: 100%;
-          margin-bottom: 3%;
+          margin-bottom: 1%;
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           position: relative;
-          img {
+          .mountain-img {
                position: absolute;
                width: 100%;
-               /* height: fit-content;
-               object-fit: cover; */
+               height: 100%;
+               object-fit: cover;
+               object-position: 30% center;
                z-index: 0;
-               bottom: 30%;
           }
           .mountain-element-info {
                z-index: 1;
@@ -63,14 +72,22 @@ const StMountainWrap = styled.div`
                     font-weight: bold;
                }
                .mountain-element-like-total {
+                    display: flex;
+                    align-items: center;
                     font-size: 24px;
+                    .heartImg {
+                         width: 24px;
+                         height: 24px;
+                    }
                }
           }
           .mountain-element-quiz {
                z-index: 1;
                display: flex;
                justify-content: flex-end;
+               align-items: flex-end;
                padding: 20px;
+               box-sizing: border-box;
                .mountain-element-quiz-btn {
                     width: 60px;
                     height: 60px;

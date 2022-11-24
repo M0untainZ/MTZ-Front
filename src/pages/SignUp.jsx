@@ -115,7 +115,7 @@ const SignUp = () => {
               <div>
                 {user.email.trim() === "" ? null : emailState ? (
                   overlapEmail ? (
-                    <div style={{ color: "blue" }}>
+                    <div className="checkLogo" style={{ color: "blue" }}>
                       사용 가능한 이메일입니다.
                     </div>
                   ) : (
@@ -308,6 +308,7 @@ const StInputBox = styled.div`
       font-size: medium;
     }
   }
+
   .inputName {
     margin-top: 5%;
   }
@@ -406,6 +407,8 @@ const StSelectBox = styled.div`
 `;
 
 const StErrorMassage = styled.div`
+  width: fit-content;
+  background-color: white;
   color: red;
   margin-top: 5px;
 `;

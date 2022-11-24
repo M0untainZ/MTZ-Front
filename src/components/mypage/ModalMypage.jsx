@@ -25,7 +25,6 @@ const ModalMypage = () => {
      }, [dispatch]);
 
      const regionList = [
-          "경상",
           "서울",
           "경상",
           "경기",
@@ -105,7 +104,11 @@ const ModalMypage = () => {
                     <button className="modal-mypage-btn" onClick={onSubmitInfo}>
                          입력
                     </button>
-                    <button className="modal-mypage-btn">취소</button>
+                    {/* <button
+                         className="modal-mypage-btn"
+                    >
+                         취소
+                    </button> */}
                </div>
           </StModalMypage>
      );
@@ -121,7 +124,6 @@ const StModalMypage = styled.div`
      align-items: center;
      justify-content: center;
      gap: 20px;
-     background-color: wheat;
      padding: 10px;
      box-sizing: border-box;
      .pick-badges-style {
@@ -137,7 +139,6 @@ const StModalMypage = styled.div`
                text-align: center;
                width: 20%;
                height: 30%;
-               background-color: var(--color-darktone);
                cursor: point;
           }
      }

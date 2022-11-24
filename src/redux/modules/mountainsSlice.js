@@ -3,7 +3,7 @@ import axios from "axios";
 
 //전체 산리스트 불러오기
 export const __getMountains = createAsyncThunk(
-     "getMountains",
+     "GETMOUNTAINS",
      async (payload, thunkAPI) => {
           try {
                const { data } = await axios.get(
@@ -17,7 +17,7 @@ export const __getMountains = createAsyncThunk(
 );
 //필터에 따라 상세 1 산 리스트 불러오기
 export const __postFilterMountains = createAsyncThunk(
-     "postMountains",
+     "POSTMOUNTAINS",
 
      async (payload, thunkAPI) => {
           try {
@@ -33,7 +33,7 @@ export const __postFilterMountains = createAsyncThunk(
 );
 //상세 1 검색하기
 export const __postSearchMountains = createAsyncThunk(
-     "getSearchMountains",
+     "GETSEARCHMOUNTAINS",
      async (payload, thunkAPI) => {
           try {
                const { data } = await axios.post(

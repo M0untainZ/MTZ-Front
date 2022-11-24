@@ -6,6 +6,7 @@ import App from "./App";
 import GlobalStyle from "./common/GlobalStyle";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
+import "./index.css";
 
 const queryClient = new QueryClient();
 

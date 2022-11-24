@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  __addUsers,
-  overlapEmailCheck,
-  __nameCheck,
-  __emailCheck,
+     __addUsers,
+     overlapEmailCheck,
+     __nameCheck,
+     __emailCheck,
 } from "../redux/modules/userSlice";
-
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -255,9 +254,7 @@ const SignUp = () => {
     </StLoginContainer>
   );
 };
-
 export default SignUp;
-
 const StLoginContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -289,12 +286,10 @@ const StParentsBox = styled.div`
     text-align: center;
   }
 `;
-
 const StLoginBox = styled.div`
   height: 60%;
   text-align: left;
 `;
-
 const StInputBox = styled.div`
   height: 30%;
   margin-top: 3%;
@@ -392,6 +387,84 @@ const StButtonBox = styled.div`
   }
 `;
 
+               font-size: medium;
+          }
+     }
+     .inputName {
+          margin-top: 1%;
+     }
+     .nickNameInputBox {
+          width: 100%;
+          .nickNameInput {
+               margin-top: 1%;
+               width: 90%;
+               font-size: medium;
+          }
+     }
+     .pwInputBox {
+          width: 100%;
+          .pwInput {
+               margin-top: 1%;
+               width: 90%;
+               font-size: medium;
+          }
+     }
+     .pwCheckBox {
+          width: 100%;
+          .pwCheck {
+               margin-top: 1%;
+               width: 90%;
+               font-size: medium;
+          }
+     }
+`;
+const StButtonBox = styled.div`
+     width: 100%;
+     height: 7%;
+     .signUpBox {
+          width: 100%;
+          height: 48px;
+          .signUpDisabled {
+               background-color: #dddfe4;
+               border: 0px;
+               width: 92%;
+               height: 100%;
+               display: flex;
+               .signUpButtonImg {
+                    margin: auto;
+               }
+               .signUpButtonDiv {
+                    color: white;
+                    height: 100%;
+                    width: 90%;
+                    font-weight: bold;
+                    .signUpButtonLogo {
+                         margin-top: 5%;
+                    }
+               }
+          }
+          .signUp {
+               cursor: pointer;
+               background-color: #185b6e;
+               border: 0px;
+               width: 92%;
+               height: 100%;
+               display: flex;
+               .signUpButtonImg {
+                    margin: auto;
+               }
+               .signUpButtonDiv {
+                    color: white;
+                    height: 100%;
+                    width: 90%;
+                    font-weight: bold;
+                    .signUpButtonLogo {
+                         margin-top: 5%;
+                    }
+               }
+          }
+     }
+`;
 const StSelectBox = styled.div`
   width: 100%;
   height: 30%;
@@ -405,7 +478,6 @@ const StSelectBox = styled.div`
     }
   }
 `;
-
 const StErrorMassage = styled.div`
   width: fit-content;
   background-color: white;
@@ -413,6 +485,6 @@ const StErrorMassage = styled.div`
   margin-top: 5px;
 `;
 const StDangerImg = styled.img`
-  width: 14px;
-  margin-right: 5px;
+     width: 14px;
+     margin-right: 5px;
 `;

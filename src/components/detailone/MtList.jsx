@@ -8,7 +8,7 @@ import Mountain from "./Mountain";
 const MtList = () => {
      const dispatch = useDispatch();
 
-     const mountains = useSelector((state) => state.mountains.mountains);
+     const { mountains } = useSelector((state) => state.mountains);
 
      console.log("test", mountains);
 
@@ -19,7 +19,6 @@ const MtList = () => {
      return (
           <StMTList>
                <SearchMt />
-
                {mountains.data?.map((mountain, index) => {
                     return (
                          <div key={index}>
@@ -40,7 +39,9 @@ const StMTList = styled.div`
      flex-direction: column;
      align-items: flex-end;
      gap: 5%;
+     box-sizing: border-box;
      div {
           width: 100%;
+          height: 100%;
      }
 `;

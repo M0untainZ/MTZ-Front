@@ -7,11 +7,10 @@ const Header = () => {
      const userinfoSto = JSON.parse(sessionStorage.getItem("userinfos"));
      const userinfo = userinfoSto ? userinfoSto : "";
      //뱃지 null일 때 기본 값 이름
-     const userbadge = userinfoSto?.badgeName
-          ? userinfoSto?.badgeName == null
+     const userbadge =
+          userinfoSto?.badgeName == null
                ? "등산 비기너, "
-               : `${userinfoSto?.badgeName}, `
-          : "";
+               : `${userinfoSto?.badgeName}, `;
 
      return (
           <>
@@ -33,7 +32,7 @@ const Header = () => {
                               인증샷페이지
                          </Link>
                     </div>
-                    <div>
+                    <div className="header-info-my-btn">
                          {/* <img src="" alt="badge" /> */}
 
                          {userinfo ? (
@@ -51,7 +50,7 @@ const Header = () => {
                                    onClick={() => navigate("/login")}
                                    className="header-login-btn"
                               >
-                                   로그인
+                                   로그인 / 가입
                               </button>
                          )}
                     </div>
@@ -101,6 +100,11 @@ const StHeader = styled.div`
           }
           span {
                font-size: 1.6vh;
+          }
+          .header-mypage-btn,
+          .header-login-btn {
+               padding: 5px 15px;
+               margin-left: 20px;
           }
      }
 `;

@@ -8,6 +8,7 @@ import {
      isLevelFalse,
      isTimeFalse,
 } from "../../redux/modules/mountainsSlice";
+import { HiOutlineXMark } from "react-icons/hi2";
 
 const FilterResult = () => {
      const dispatch = useDispatch();
@@ -15,6 +16,9 @@ const FilterResult = () => {
      //필터 팁 관련 전역 관리
      const filters = useSelector((state) => state.mountains.filter);
      const isfilters = useSelector((state) => state.mountains);
+
+     console.log(filters);
+
      //필터 팁 x 눌렀을 때 팁 사라짐 효과
      const onSeasonDelBtn = () => {
           dispatch(isSeasonFalse());
@@ -34,34 +38,40 @@ const FilterResult = () => {
                <div>
                     {isfilters.isregion ? (
                          <div>
-                              {filters.region}
                               <button value="region" onClick={onRegionDelBtn}>
-                                   x
+                                   <HiOutlineXMark />
                               </button>
+                              {filters.region}
                          </div>
                     ) : null}
                </div>
                <div>
                     {isfilters.isseason ? (
                          <div>
+                              <button onClick={onSeasonDelBtn}>
+                                   <HiOutlineXMark />
+                              </button>
                               {filters.season}
-                              <button onClick={onSeasonDelBtn}>x</button>
                          </div>
                     ) : null}
                </div>
                <div>
                     {isfilters.istime ? (
                          <div>
-                              {filters.time}
-                              <button onClick={onLevelDelBtn}>x</button>
+                              <button onClick={onLevelDelBtn}>
+                                   <HiOutlineXMark />
+                              </button>
+                              {filters.time}시간
                          </div>
                     ) : null}
                </div>
                <div>
                     {isfilters.islevel ? (
                          <div>
+                              <button onClick={onTimeDelBtn}>
+                                   <HiOutlineXMark />
+                              </button>
                               {filters.level}
-                              <button onClick={onTimeDelBtn}>x</button>
                          </div>
                     ) : null}
                </div>
@@ -76,5 +86,34 @@ const StFilterResult = styled.div`
      height: auto;
      display: flex;
      justify-content: flex-start;
-     position: relative;
+     gap: 10px;
+     margin-top: 10px;
+     div {
+          width: 100%;
+          height: 100%;
+          width: fit-content;
+          div {
+               width: 100%;
+               height: 100%;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               gap: 5px;
+               color: var(--color-border);
+               border: 1px solid var(--color-border);
+               border-radius: 15px;
+               padding: 0 10px 0 5px;
+               button {
+                    width: 14px;
+                    height: 14px;
+                    background-color: transparent;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0;
+                    font-size: 20px;
+               }
+          }
+     }
 `;

@@ -152,17 +152,16 @@ const FilterMt = () => {
                          <p>소요시간</p>
                          <StFilterSlide>
                               <div className="marker">
-                                   <span>0</span>
-                                   <span>1</span>
-                                   <span>2</span>
-                                   <span>3</span>
-                                   <span>4</span>
-                                   <span>5</span>
-                                   <span>6</span>
+                                   <span>~1시간</span>
+                                   <span></span>
+                                   <span></span>
+                                   <span></span>
+                                   <span></span>
+                                   <span>6시간 이상</span>
                               </div>
                               <input
                                    type="range"
-                                   min="0"
+                                   min="1"
                                    max="6"
                                    step="1"
                                    list="markers"
@@ -174,7 +173,7 @@ const FilterMt = () => {
                     </div>
                     <div>
                          <p>지역선택</p>
-                         <div className="list regionlist-style">
+                         <div className="list region-style">
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
@@ -206,7 +205,7 @@ const FilterMt = () => {
                     </div>
                     <div>
                          <p>난이도 설정</p>
-                         <div className="list levellist-style">
+                         <div className="list level-style">
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
@@ -229,19 +228,24 @@ export default FilterMt;
 
 const StFilterMT = styled.div`
      padding: 40px 0;
-     width: 18%;
-     height: 973px;
+     width: 14%;
+     height: 100%;
      display: flex;
      flex-direction: column;
      justify-content: flex-start;
      box-sizing: border-box;
      .filter-btn-style {
           display: flex;
-          justify-content: center;
-          gap: 5px;
+          justify-content: space-between;
           button {
-               width: 30%;
-               font-size: 20px;
+               width: 47%;
+               padding: 5px 0;
+               font-size: 18px;
+               font-weight: 500;
+               border: 1px solid black;
+               :nth-child(2) {
+                    background-color: #d9d9d9;
+               }
           }
      }
      .checkbox-list-style {
@@ -251,15 +255,25 @@ const StFilterMT = styled.div`
           gap: 30px;
           font-size: 20px;
           p {
-               margin-bottom: 15px;
+               margin-bottom: 10px;
           }
           .list {
                display: flex;
+               flex-direction: column;
                flex-wrap: wrap;
-               gap: 10px;
+               align-content: space-between;
+               gap: 5%;
+               height: 15.2vh;
+               padding: 5px;
                label {
-                    width: 40%;
+                    width: fit-content;
+                    input[type="checkbox"] {
+                         accent-color: var(--color-border);
+                    }
                }
+          }
+          .season-style {
+               height: 6.9vh;
           }
      }
 `;
@@ -273,7 +287,7 @@ const StFilterSlide = styled.div`
      align-items: center;
      position: relative;
      .marker {
-          width: 80%;
+          width: 98%;
           margin-bottom: 0;
           display: flex;
           justify-content: space-between;
@@ -282,6 +296,11 @@ const StFilterSlide = styled.div`
           }
      }
      input {
-          width: 85%;
+          width: 90%;
      }
+     /* input[type="range"] {
+          width: 85%;
+          -webkit-appearance: none;
+          background: transparent;
+     } */
 `;

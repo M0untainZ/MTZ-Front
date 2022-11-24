@@ -39,7 +39,9 @@ const StMTList = styled.div`
      flex-direction: column;
      align-items: flex-end;
      gap: 5%;
+     box-sizing: border-box;
      div {
           width: 100%;
+          height: 100%;
      }
 `;

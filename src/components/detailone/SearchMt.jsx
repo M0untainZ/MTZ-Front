@@ -68,8 +68,8 @@ const StSearchMT = styled.div`
           display: flex;
           align-items: center;
           .search-input-style {
-               width: 100%;
-               height: 100%;
+               width: 525px;
+               height: 50px;
                padding: 0 25px 0 40px;
                box-sizing: border-box;
                border: 1px solid var(--color-border);

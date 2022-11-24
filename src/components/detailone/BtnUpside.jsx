@@ -1,16 +1,25 @@
 import styled from "styled-components";
+import { HiChevronUp } from "react-icons/hi2";
 
 const BtnUpside = () => {
-     return <StBtn className="gotoup-btn">상단</StBtn>;
+     return (
+          <StBtn className="gotoup-btn">
+               <HiChevronUp />
+          </StBtn>
+     );
 };
 
 export default BtnUpside;
 
 const StBtn = styled.button`
      position: fixed;
-     width: 50px;
-     height: 20px;
+     width: 56px;
+     height: 56px;
      bottom: 5%;
      right: 100px;
-     background-color: var(--color-light);
+     font-size: 24px;
+     font-weight: 600;
+     border: none;
+     border-radius: 50%;
+     background-color: white;
 `;

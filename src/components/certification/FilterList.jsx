@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __getProof, __proofFilter } from "../../redux/modules/proofSlice";
@@ -23,19 +23,17 @@ const FilterList = () => {
 
      const onChangeMTList = (e) => {
           const seoul = [
-               "관악산",
-               "북한산",
-               "아차산",
                "도봉산",
                "수락산",
                "인왕산",
                "북악산",
                "남산",
           ];
-          const gangwon = ["설악산", "치악산", "태백산", "오대산"];
+          const gangwon = ["명성산", "설악산", "치악산", "태백산", "오대산"];
           const gyeonggi = [
-               "명성산",
-               "백운산",
+               "관악산",
+               "북한산",
+               "아차산",
                "마니산",
                "감악산",
                "소요산",
@@ -47,8 +45,8 @@ const FilterList = () => {
                "용문산",
           ];
           const chungchung = ["속리산", "월악산", "소백산", "계룡산"];
-          const gyeongsang = ["팔공산", "대야산", "비슬산", "덕유산", "금정산"];
-          const jeolla = ["지리산", "대둔산", "조계산"];
+          const gyeongsang = ["지리산", "팔공산", "대야산", "비슬산", "금정산"];
+          const jeolla = ["백운산", "대둔산", "덕유산", "조계산"];
           const jeju = ["한라산"];
 
           if (e.target.value === "서울") {
@@ -66,9 +64,14 @@ const FilterList = () => {
           } else if (e.target.value === "제주") {
                setCheckRegion(jeju);
           }
+          const checkbox = document.getElementsByName("region");
+          for (let i = 0; i < checkbox.length; i++) {
+               if (checkbox[i] !== e.target) {
+                    checkbox[i].checked = false;
+               }
+          }
           const { name, value } = e.target;
           setCheckFilter({ ...checkFilter, [name]: value });
-          setSelectOption("");
      };
      // 선택된 항목들 초기화
      const onResetHandler = () => {
@@ -104,10 +107,24 @@ const FilterList = () => {
                </div>
                <p>지역선택</p>
                <div className="region-list">
-                    {regionList.map((el) => (
+                    {/* <input id="seoul" type="checkbox" name="region" value="서울" onChange={onChangeMTList} />
+                    <label htmlFor="seoul">서울</label>
+                    <input id="gangwon" type="checkbox" name="region" value="강원" onChange={onChangeMTList} />
+                    <label htmlFor="gangwon">강원</label>
+                    <input id="gyeonggi" type="checkbox" name="region" value="경기" onChange={onChangeMTList} />
+                    <label htmlFor="gyeonggi">경기</label>
+                    <input id="chungchung" type="checkbox" name="region" value="충청" onChange={onChangeMTList} />
+                    <label htmlFor="chungchung">충청</label>
+                    <input id="gyeongsang" type="checkbox" name="region" value="경상" onChange={onChangeMTList} />
+                    <label htmlFor="gyeongsang">경상</label>
+                    <input id="jeolla" type="checkbox" name="region" value="전라" onChange={onChangeMTList} />
+                    <label htmlFor="jeolla">전라</label>
+                    <input id="jeju" type="checkbox" name="region" value="제주" onChange={onChangeMTList} />
+                    <label htmlFor="jeju">제주</label> */}
+                    {regionList.map((el, idx) => (
                          <label key={el.id}>
-                              <StyledInput
-                                   type="radio"
+                              <input
+                                   type="checkbox"
                                    name={el.name}
                                    className="region"
                                    value={el.value}
@@ -117,16 +134,14 @@ const FilterList = () => {
                          </label>
                     ))}
                </div>
+               <p>산 필터링</p>
                <div className="mt-list">
-                    <p>산 필터링</p>
-                    <select name="name" onChange={onChangeMTList}>
-                         <option defaultValue>=====</option>
-                         {checkRegion.map((mountain, idx) => (
-                              <option key={idx} value={mountain}>
-                                   {mountain}
-                              </option>
-                         ))}
-                    </select>
+               {checkRegion.map((mountain, idx) => (
+                    <label key={idx}>
+                         <input type="checkbox" name="name" value={mountain} onChange={onChangeMTList} />
+                         {mountain}
+                    </label>
+               ))}
                </div>
           </StFilterContainer>
      );
@@ -149,12 +164,37 @@ const StFilterContainer = styled.div`
      .region-list {
           display: flex;
           flex-wrap: wrap;
+          gap: 10%;
           label {
-               margin: 0 20px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               width: 40%;
+               box-sizing: border-box;
+               border: 1px solid black;
+               border-radius: 20px;
+               cursor: pointer;
+               input {
+               display: none;
+          }
           }
      }
-`;
-
-const StyledInput = styled.input`
-     margin: 0 5px;
+     .mt-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10%;
+          label {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               width: 40%;
+               box-sizing: border-box;
+               border: 1px solid black;
+               border-radius: 20px;
+               cursor: pointer;
+          }
+          input {
+               display: none;
+          }
+     }
 `;

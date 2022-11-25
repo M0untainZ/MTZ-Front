@@ -101,9 +101,7 @@ const Login = () => {
             </div>
           </StButtonBox>
           <StButtonBox>
-            <StKakaOButton>
-              <OAuth />
-            </StKakaOButton>
+            <OAuth />
           </StButtonBox>
           <div className="sign-up">
             <span>아직 계정이 없으신가요?</span>
@@ -221,9 +219,4 @@ const StButtonBox = styled.div`
       }
     }
   }
-`;
-
-const StKakaOButton = styled.div`
-  width: 100%;
-  height: 100%;
 `;

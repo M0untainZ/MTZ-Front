@@ -34,6 +34,7 @@ const MountModal = () => {
     try {
       const reader = new FileReader();
       const imgFile = await imageCompression(post_Img, options);
+      console.log(imgFile, "imgFile");
       reader.readAsDataURL(imgFile);
       reader.onloadend = () => {
         const base64data = reader.result;

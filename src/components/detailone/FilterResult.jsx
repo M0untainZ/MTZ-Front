@@ -1,75 +1,70 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
      __postSearchMountains,
-     isSeasonFalse,
-     isRegionFalse,
-     isLevelFalse,
-     isTimeFalse,
+     __postFilterMountains,
 } from "../../redux/modules/mountainsSlice";
-import { HiOutlineXMark } from "react-icons/hi2";
+import { HiOutlineX } from "react-icons/hi";
 
 const FilterResult = () => {
      const dispatch = useDispatch();
 
      //필터 팁 관련 전역 관리
      const filters = useSelector((state) => state.mountains.filter);
-     const isfilters = useSelector((state) => state.mountains);
+     //const isfilters = useSelector((state) => state.mountains);
 
-     console.log(filters);
+     // console.log("이전", isfilters);
 
      //필터 팁 x 눌렀을 때 팁 사라짐 효과
-     const onSeasonDelBtn = () => {
-          dispatch(isSeasonFalse());
+     const onSeasonDelBtn = (e) => {
+          const filt = { ...filters, season: null };
+          dispatch(__postFilterMountains(filt));
+          //console.log("결과", filt);
      };
      const onRegionDelBtn = () => {
-          dispatch(isRegionFalse());
+          const filt = { ...filters, region: null };
+          dispatch(__postFilterMountains(filt));
      };
      const onLevelDelBtn = () => {
-          dispatch(isLevelFalse());
+          const filt = { ...filters, level: null };
+          dispatch(__postFilterMountains(filt));
      };
      const onTimeDelBtn = () => {
-          dispatch(isTimeFalse());
+          const filt = { ...filters, time: null };
+          dispatch(__postFilterMountains(filt));
      };
 
      return (
           <StFilterResult>
                <div>
-                    {isfilters.isregion ? (
-                         <div>
+                    {filters.region ? (
+                         <div className="filter-chips">
                               <button value="region" onClick={onRegionDelBtn}>
-                                   <HiOutlineXMark />
+                                   <HiOutlineX />
                               </button>
                               {filters.region}
                          </div>
                     ) : null}
-               </div>
-               <div>
-                    {isfilters.isseason ? (
-                         <div>
-                              <button onClick={onSeasonDelBtn}>
-                                   <HiOutlineXMark />
+                    {filters.season ? (
+                         <div className="filter-chips">
+                              <button name="season" onClick={onSeasonDelBtn}>
+                                   <HiOutlineX />
                               </button>
                               {filters.season}
                          </div>
                     ) : null}
-               </div>
-               <div>
-                    {isfilters.istime ? (
-                         <div>
-                              <button onClick={onLevelDelBtn}>
-                                   <HiOutlineXMark />
+                    {filters.time ? (
+                         <div className="filter-chips">
+                              <button onClick={onTimeDelBtn}>
+                                   <HiOutlineX />
                               </button>
                               {filters.time}시간
                          </div>
                     ) : null}
-               </div>
-               <div>
-                    {isfilters.islevel ? (
-                         <div>
-                              <button onClick={onTimeDelBtn}>
-                                   <HiOutlineXMark />
+                    {filters.level ? (
+                         <div className="filter-chips">
+                              <button onClick={onLevelDelBtn}>
+                                   <HiOutlineX />
                               </button>
                               {filters.level}
                          </div>
@@ -88,32 +83,29 @@ const StFilterResult = styled.div`
      justify-content: flex-start;
      gap: 10px;
      margin-top: 10px;
-     div {
-          width: 100%;
-          height: 100%;
+     .filter-chips {
           width: fit-content;
-          div {
-               width: 100%;
-               height: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          color: var(--color-border);
+          border: 1px solid var(--color-border);
+          border-radius: 15px;
+          padding: 0 10px 0 5px;
+          margin-right: 10px;
+          button {
+               width: 14px;
+               height: 14px;
+               background-color: transparent;
+               border: none;
                display: flex;
                align-items: center;
                justify-content: center;
-               gap: 5px;
-               color: var(--color-border);
-               border: 1px solid var(--color-border);
-               border-radius: 15px;
-               padding: 0 10px 0 5px;
-               button {
-                    width: 14px;
-                    height: 14px;
-                    background-color: transparent;
-                    border: none;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 0;
-                    font-size: 20px;
-               }
+               padding: 0;
+               font-size: 20px;
+               cursor: pointer;
           }
      }
 `;

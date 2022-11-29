@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HiChevronUp } from "react-icons/hi2";
+import { HiChevronUp } from "react-icons/hi";
 
 const BtnUpside = () => {
      return (
@@ -22,4 +22,5 @@ const StBtn = styled.button`
      border: none;
      border-radius: 50%;
      background-color: white;
+     z-index: 100;
 `;

@@ -11,6 +11,7 @@ html{
         --color-darktone : #629460;
         --color-bright: #edffec;
         --color-border:#757575;
+        --color-button : #185b6e;
 
     }
 

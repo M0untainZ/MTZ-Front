@@ -1,9 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Mountain = ({ mountain }) => {
+     const navigate = useNavigate();
+
      return (
           <StMountainWrap>
-               <div className="mountain-element">
+               <div
+                    className="mountain-element"
+                    onClick={() => {
+                         navigate(`/detail/${mountain.id}`);
+                    }}
+               >
                     <img
                          src={mountain.img}
                          className="mountain-img"
@@ -23,11 +31,6 @@ const Mountain = ({ mountain }) => {
                               <span> {mountain.mountainLikeTotal}+</span>
                          </p>
                     </div>
-                    <div className="mountain-element-quiz">
-                         <button className="mountain-element-quiz-btn">
-                              Q
-                         </button>
-                    </div>
                </div>
           </StMountainWrap>
      );
@@ -36,10 +39,16 @@ const Mountain = ({ mountain }) => {
 export default Mountain;
 
 const StMountainWrap = styled.div`
-     margin-top: 40px;
-     padding: 10px 0;
-     width: 100%;
+     padding: 5px 0;
      height: 100%;
+     width: 48%;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     :first-child,
+     :nth-child(2) {
+          margin-top: 30px;
+     }
      .mountain-element {
           height: 240px;
           width: 100%;
@@ -47,8 +56,10 @@ const StMountainWrap = styled.div`
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: flex-end;
           position: relative;
+          cursor: pointer;
+
           .mountain-img {
                position: absolute;
                width: 100%;
@@ -60,13 +71,13 @@ const StMountainWrap = styled.div`
           .mountain-element-info {
                z-index: 1;
                box-sizing: border-box;
-               height: 76px;
+               height: 48px;
                display: flex;
                align-items: center;
                justify-content: space-between;
                background-color: rgba(255, 255, 255, 0.7);
                padding: 0 20px;
-               font-size: 30px;
+               font-size: 26px;
 
                .mountain-element-name {
                     font-weight: bold;
@@ -74,7 +85,7 @@ const StMountainWrap = styled.div`
                .mountain-element-like-total {
                     display: flex;
                     align-items: center;
-                    font-size: 24px;
+                    font-size: 20px;
                     .heartImg {
                          width: 24px;
                          height: 24px;

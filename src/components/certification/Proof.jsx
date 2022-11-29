@@ -1,30 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import { useQuery } from "react-query";
-// import { getProof } from "../../shared/api";
-import { useDispatch, useSelector } from "react-redux";
-import { __getProof, __proofDelete } from "../../redux/modules/proofSlice";
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "react-query";
+import { getProof, deleteProof } from "../../shared/api";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useInView } from "react-intersection-observer";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const Proof = () => {
-    // const {data} = useQuery(["proof"], getProof);
+    const MySwal = withReactContent(Swal)
+    const queryClient = useQueryClient();
     const userNickName = JSON.parse(sessionStorage.getItem("userinfos"));
     const authority = sessionStorage.getItem("authority");
-    const dispatch = useDispatch();
-    const {proofs} = useSelector((state) => state.proofs)
-
-    const onDeleteProof = (id, photo) => {
-        if (sessionStorage.getItem("Access_Token") !== null ) {
-        dispatch(__proofDelete({certificationId:id, photo:photo}))
-        window.location.replace("/certification");
+    
+    const { data } = useQuery(["proof"], getProof);
+    const { mutate:deleteProofs } = useMutation(deleteProof, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["proof"]);
         }
-    }
-    useEffect(() => {
-        dispatch(__getProof());
-    }, [dispatch]);
+    })
 
+    const onDeleteHandler = (id, photo) => {
+        MySwal.fire({
+            title: "정말 삭제하시겠어요?",
+            text: "삭제를 하면 되돌릴 수 없어요!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "네",
+            cancelButtonText: '아니오',
+            background: "skyblue",
+            confirmButtonColor: "yellowgreen",
+            cancelButtonColor: "darkblue",
+            color: "blue",
+            iconColor: "red",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProofs({id, photo})
+                toast.success("성공적으로 삭제 되었습니다.", {
+                    autoClose: 1500,
+                    position: toast.POSITION.TOP_CENTER
+                })
+            } 
+        })
+    }
+    
     return (
         <StImgContainer>
-            {proofs.data?.slice(0).reverse().map((el, idx) => {
+            {data?.data.slice().reverse().map((el, idx) => {
                 return (
                     <StProofBox key={idx}>
                         <img src={el.photo} alt="" />
@@ -37,12 +60,13 @@ const Proof = () => {
                                 <span>{el.nickName}</span>
                             </div>
                             { (userNickName.nickName === el.nickName) || (authority === "ROLE_ADMIN") ? 
-                                <div className="del-btn">
-                                    <img src="/icons/icon_trash-can.png" alt="" onClick={() => {onDeleteProof(el.certificationId, el.photo)}}/>
-                                </div> 
+                                <div className="del-btn" onClick={() => {onDeleteHandler(el.certificationId, el.photo)}}>
+                                    <img src="/icons/icon_trash-can.png" alt="" />
+                                </div>
                                 :
                                 null
-                            } 
+                            }
+                            <ToastContainer />
                         </StProofInfo>
                     </StProofBox>      
                 )})
@@ -109,7 +133,6 @@ const StProofInfo = styled.div`
         margin-left: 15px;
         width: 24px;
         height: 24px;
-        
         img {
             object-fit: cover;
             width: 100%;

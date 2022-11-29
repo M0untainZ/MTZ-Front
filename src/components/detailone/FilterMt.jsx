@@ -1,20 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
      __getMountains,
      __postFilterMountains,
-     isSeasonFalse,
-     isRegionFalse,
-     isLevelFalse,
-     isTimeFalse,
 } from "../../redux/modules/mountainsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { redirect, useNavigate } from "react-router-dom";
 
 const FilterMt = () => {
      const dispatch = useDispatch();
 
      const [filter, setFilter] = useState();
-     const [filterbox, setFilterbox] = useState();
+
+     const initialState = {};
 
      //리스트 체크박스
      const regionList = [
@@ -40,73 +38,15 @@ const FilterMt = () => {
 
      //필터 선택 onChange - time
      const onFilterTime = (e) => {
-          const checkboxes = document.getElementsByName("time");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
           console.log("확인", filter);
      };
      //필터 선택 onChange - region
-     const onFilterRegion = (e) => {
-          const checkboxes = document.getElementsByName("region");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-          // document
-          //      .getElementsByName("region")
-          //      .forEach((el) => (el.checked = false));
-          // e.target.checked = true;
+     const onFilterSelect = (e) => {
+          const { name, value } = e.target;
+          setFilter({ ...filter, [name]: value });
 
-          //새로 checked된 값들은 value들은 새로운 입력값을 줌
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          //checked된 값은 삭제 시켜줌
-          if (!e.target.checked) {
-               delete filter["region"];
-          }
-          console.log("확인", filter);
-     };
-     //필터 선택 onChange - season
-     const onFilterSeason = (e) => {
-          const checkboxes = document.getElementsByName("season");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          if (!e.target.checked) {
-               delete filter["season"];
-          }
-          console.log("확인", filter);
-     };
-     //필터 선택 onChange - level
-     const onFilterLevel = (e) => {
-          const checkboxes = document.getElementsByName("level");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          if (!e.target.checked) {
-               delete filter["level"];
-          }
           console.log("확인", filter);
      };
 
@@ -117,13 +57,11 @@ const FilterMt = () => {
      //필터 초기화 시 -> 전체 산 리스트 불러오기
      const onFilterListnope = () => {
           dispatch(__getMountains());
-          dispatch(isSeasonFalse());
-          dispatch(isRegionFalse());
-          dispatch(isLevelFalse());
-          dispatch(isTimeFalse());
+          dispatch(__postFilterMountains(initialState));
           setFilter("");
      };
 
+     console.log("확인", filter);
      return (
           <StFilterMT>
                <form className="checkbox-list-style">
@@ -177,10 +115,10 @@ const FilterMt = () => {
                               {regionList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterRegion}
+                                             onClick={onFilterSelect}
                                         />
                                         {item.value}
                                    </label>
@@ -193,10 +131,10 @@ const FilterMt = () => {
                               {seasonList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterSeason}
+                                             onClick={onFilterSelect}
                                         />
                                         {item.value}
                                    </label>
@@ -209,10 +147,10 @@ const FilterMt = () => {
                               {levelList.map((item) => (
                                    <label key={item.id}>
                                         <input
-                                             type="checkbox"
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterLevel}
+                                             onClick={onFilterSelect}
                                         />
                                         {item.value}
                                    </label>
@@ -244,7 +182,8 @@ const StFilterMT = styled.div`
                font-weight: 500;
                border: 1px solid black;
                :nth-child(2) {
-                    background-color: #d9d9d9;
+                    background-color: var(--color-button);
+                    color: white;
                }
           }
      }
@@ -267,12 +206,15 @@ const StFilterMT = styled.div`
                padding: 5px;
                label {
                     width: fit-content;
-                    input[type="checkbox"] {
+                    input[type="radio"] {
                          accent-color: var(--color-border);
                     }
                }
           }
           .season-style {
+               height: 6.9vh;
+          }
+          .level-style {
                height: 6.9vh;
           }
      }
@@ -298,9 +240,10 @@ const StFilterSlide = styled.div`
      input {
           width: 90%;
      }
-     /* input[type="range"] {
+     input[type="range"] {
           width: 85%;
           -webkit-appearance: none;
           background: transparent;
-     } */
+          accent-color: var(--color-border);
+     }
 `;

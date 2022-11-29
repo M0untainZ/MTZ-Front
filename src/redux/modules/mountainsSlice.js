@@ -21,6 +21,7 @@ export const __postFilterMountains = createAsyncThunk(
 
      async (payload, thunkAPI) => {
           try {
+               console.log("^^", payload);
                const { data } = await axios.post(
                     `${process.env.REACT_APP_AXIOS_API}/api/mountains/filter`,
                     payload
@@ -55,53 +56,21 @@ const initialState = {
           season: "",
           level: "",
      },
-
-     isseason: false,
-     isregion: false,
-     islevel: false,
-     istime: false,
 };
 
 export const mountainsSlice = createSlice({
      name: "mountains",
      initialState,
-     reducers: {
-          //필터 팁 - 선택확인(상태관리)
-          isSeasonFalse: (state) => {
-               state.isseason = false;
-          },
-          isRegionFalse: (state) => {
-               state.isregion = false;
-          },
-          isLevelFalse: (state) => {
-               state.islevel = false;
-          },
-          isTimeFalse: (state) => {
-               state.istime = false;
-          },
-     },
+     reducers: {},
      extraReducers: {
           [__getMountains.fulfilled]: (state, action) => {
                state.mountains = action.payload;
           },
           [__getMountains.rejected]: (state, action) => {},
           [__postFilterMountains.fulfilled]: (state, action) => {
-               console.log("filter", action);
+               //console.log("filter", action);
                state.filter = action.meta.arg;
                state.mountains = action.payload;
-               //filter에 따라 뜨도록 설정(전역관리)
-               if (Object.keys(action.meta.arg).includes("season")) {
-                    state.isseason = true;
-               }
-               if (Object.keys(action.meta.arg).includes("region")) {
-                    state.isregion = true;
-               }
-               if (Object.keys(action.meta.arg).includes("level")) {
-                    state.islevel = true;
-               }
-               if (Object.keys(action.meta.arg).includes("time")) {
-                    state.istime = true;
-               }
           },
           [__postFilterMountains.rejected]: (state, action) => {},
           [__postSearchMountains.fulfilled]: (state, action) => {

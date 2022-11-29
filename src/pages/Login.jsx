@@ -51,50 +51,66 @@ const Login = () => {
 
   return (
     <StLoginContainer>
-      <div>
-        <div className="logo">로그인</div>
+      <div className="imgBox">
+        <img className="loginImg" alt="" src="/icons/loginImg.png"></img>
       </div>
-      <StLoginBox>
-        <StInputBox>
-          <div className="emailInputBox">
-            <input
-              onChange={onChangeHandler}
-              onKeyPress={onSearchEnter}
-              name="email"
-              value={loginUser.email}
-              className="emailInput"
-              type="text"
-              placeholder="이메일"
-            />
+      <StParentsBox>
+        <div>
+          <div className="helloLogo">안녕하세요,</div>
+          <div className="logo">당신의 셰르파 MTZ입니다.</div>
+        </div>
+        <StLoginBox>
+          <StInputBox>
+            <div className="emailInputBox">
+              <div> 이메일</div>
+              <input
+                onChange={onChangeHandler}
+                onKeyPress={onSearchEnter}
+                name="email"
+                value={loginUser.email}
+                className="emailInput"
+                type="text"
+                placeholder="이메일"
+              />
+            </div>
+            <div>비밀번호</div>
+            <div className="pwInputBox">
+              <input
+                onChange={onChangeHandler}
+                name="password"
+                value={loginUser.password}
+                autoComplete="off"
+                className="pwInput"
+                type="password"
+                placeholder="비밀번호"
+              />
+            </div>
+          </StInputBox>
+          <StButtonBox>
+            <div className="loginBox">
+              <button className="login" onClick={onSubmit}>
+                <img
+                  className="loginButtonImg"
+                  alt=""
+                  src="/icons/loginButton.png"
+                ></img>
+                <div className="loginButtonDiv">
+                  <div className="loginButtonLogo">이메일로 로그인</div>
+                </div>
+              </button>
+            </div>
+          </StButtonBox>
+          <StButtonBox>
+            <OAuth />
+          </StButtonBox>
+          <div className="sign-up">
+            <span>아직 계정이 없으신가요?</span>
+            <span onClick={() => navigate("/SignUp")} className="signUpTag">
+              회원가입하기
+            </span>
           </div>
-          <div className="pwInputBox">
-            <input
-              onChange={onChangeHandler}
-              name="password"
-              value={loginUser.password}
-              autoComplete="off"
-              className="pwInput"
-              type="password"
-              placeholder="비밀번호"
-            />
-          </div>
-        </StInputBox>
-        <StButtonBox>
-          <div className="loginBox">
-            <button className="login" onClick={onSubmit}>
-              로그인
-            </button>
-          </div>
-          <div className="signUpBox">
-            <button className="signUp" onClick={() => navigate("/SignUp")}>
-              회원가입
-            </button>
-          </div>
-        </StButtonBox>
-        <StKakaOButton>
-          <OAuth />
-        </StKakaOButton>
-      </StLoginBox>
+        </StLoginBox>
+      </StParentsBox>
     </StLoginContainer>
   );
 };
@@ -102,11 +118,34 @@ const Login = () => {
 export default Login;
 
 const StLoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
   height: 100%;
   width: 100%;
+  .imgBox {
+    margin-left: -11%;
+    height: 100%;
+    width: 30%;
+  }
+  .loginImg {
+    width: 100%;
+  }
+`;
+
+const StParentsBox = styled.div`
+  width: 388px;
+  text-align: left;
+  margin-left: 10%;
+
+  .helloLogo {
+    margin-top: 30%;
+    font-weight: normal;
+    font-size: large;
+  }
   .logo {
-    padding-top: 10%;
-    font-size: xx-large;
+    display: flex;
+    font-weight: bolder;
+    font-size: x-large;
     text-align: center;
   }
 `;
@@ -114,19 +153,31 @@ const StLoginContainer = styled.div`
 const StLoginBox = styled.div`
   height: 70%;
   text-align: center;
+  .sign-up {
+    margin-top: 15%;
+    font-size: small;
+    .signUpTag {
+      color: #185b6e;
+      text-decoration: underline;
+      :hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
 `;
 
 const StInputBox = styled.div`
-  height: 30%;
-  margin-top: 3%;
+  text-align: left;
+  margin-top: 10%;
   .emailInputBox {
     width: 100%;
     height: 40%;
     .emailInput {
       margin-top: 1%;
-      width: 50%;
-      height: 60%;
-      font-size: xx-large;
+      width: 90%;
+      height: 40px;
+      margin-bottom: 5%;
     }
   }
   .pwInputBox {
@@ -134,44 +185,38 @@ const StInputBox = styled.div`
     height: 40%;
     .pwInput {
       margin-top: 1%;
-      width: 50%;
-      height: 60%;
-      font-size: xx-large;
+      width: 90%;
+      height: 40px;
     }
   }
 `;
 
 const StButtonBox = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 50%;
+  width: 100%;
   height: 7%;
-  margin: auto;
+  margin-top: 20%;
   .loginBox {
-    width: 46%;
+    width: 92%;
+    height: 48px;
     .login {
+      cursor: pointer;
+      background-color: #185b6e;
+      border: 0px;
       width: 100%;
       height: 100%;
+      display: flex;
+      .loginButtonImg {
+        margin: auto;
+      }
+      .loginButtonDiv {
+        color: white;
+        height: 100%;
+        width: 90%;
+        font-weight: bold;
+        .loginButtonLogo {
+          margin-top: 5%;
+        }
+      }
     }
-  }
-  .signUpBox {
-    width: 46%;
-    margin-left: 9%;
-    background-color: black;
-    .signUp {
-      width: 100%;
-      height: 100%;
-    }
-  }
-`;
-
-const StKakaOButton = styled.div`
-  width: 50%;
-  margin: auto;
-  margin-top: 20px;
-  height: 7%;
-  .kakaO {
-    width: 100%;
-    height: 100%;
   }
 `;

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 // import { useQuery } from "react-query";
 // import { getProof } from "../../shared/api";
 import { useDispatch, useSelector } from "react-redux";
 import { __getProof, __proofDelete } from "../../redux/modules/proofSlice";
-import DeleteModal from "./DeleteModal";
 
 const Proof = () => {
     // const {data} = useQuery(["proof"], getProof);
@@ -12,10 +11,6 @@ const Proof = () => {
     const authority = sessionStorage.getItem("authority");
     const dispatch = useDispatch();
     const {proofs} = useSelector((state) => state.proofs)
-    const [modalOn, setModalOn] = useState(false);
-    const onModalOpen = () => {
-        setModalOn(true);
-    };
 
     const onDeleteProof = (id, photo) => {
         if (sessionStorage.getItem("Access_Token") !== null ) {
@@ -43,8 +38,7 @@ const Proof = () => {
                             </div>
                             { (userNickName.nickName === el.nickName) || (authority === "ROLE_ADMIN") ? 
                                 <div className="del-btn">
-                                    <img src="/icons/icon_trash-can.png" alt="" onClick={onModalOpen}/>
-                                    {modalOn && <DeleteModal setModalOn={setModalOn}/>} 
+                                    <img src="/icons/icon_trash-can.png" alt="" onClick={() => {onDeleteProof(el.certificationId, el.photo)}}/>
                                 </div> 
                                 :
                                 null

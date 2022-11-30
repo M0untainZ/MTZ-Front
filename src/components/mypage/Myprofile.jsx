@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Modal from "../../common/modal/Modal";
+import MyModal from "./modal/MyModal";
 import { useNavigate } from "react-router-dom";
 import ModalMypage from "./ModalMypage";
 import { logoutState } from "../../redux/modules/userSlice";
@@ -39,12 +39,9 @@ const Myprofile = () => {
                          src="/icons/badge/profile.png"
                          alt="profile"
                     />
-                    <button
-                         className="profile-setting-btn-style"
-                         onClick={onModalOpen}
-                    >
-                         <img src="/icons/profile_setting.png" alt="setting" />
-                    </button>
+                    <div className="profile-setting-btn-style">
+                         <ModalMypage />
+                    </div>
                </div>
                <div className="profile-user-info-style">
                     <p>{userinfo?.region}</p>
@@ -55,14 +52,14 @@ const Myprofile = () => {
                </button>
 
                {modalOn && (
-                    <Modal
+                    <MyModal
                          open={modalOn}
                          onClose={() => {
                               setModalOn(false);
                          }}
                     >
                          <ModalMypage />
-                    </Modal>
+                    </MyModal>
                )}
           </STProfile>
      );
@@ -71,8 +68,8 @@ const Myprofile = () => {
 export default Myprofile;
 
 const STProfile = styled.div`
-     width: 220px;
-     height: 450px;
+     width: 330px;
+     height: 935px;
      border: none;
      font-size: 18px;
      display: flex;
@@ -82,7 +79,7 @@ const STProfile = styled.div`
      padding: 80px 0;
      .profile-badge-style {
           position: relative;
-          width: 100%;
+          width: 120px;
           display: flex;
           justify-content: center;
           .profile-badge-view-style {
@@ -91,19 +88,19 @@ const STProfile = styled.div`
           }
           .profile-setting-btn-style {
                position: absolute;
-               bottom: 0;
-               right: 10%;
+               bottom: -4%;
+               right: 0.5%;
                display: flex;
                align-items: center;
                justify-content: center;
                background-color: white;
-               width: 46px;
-               height: 46px;
+               width: 32px;
+               height: 32px;
                border: none;
                border-radius: 50%;
                cursor: pointer;
                img {
-                    width: 26px;
+                    width: 22px;
                }
           }
      }

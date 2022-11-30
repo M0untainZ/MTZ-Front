@@ -12,6 +12,7 @@ html{
         --color-bright: #edffec;
         --color-border:#757575;
         --color-button : #185b6e;
+        --color-mypage: #4A5568;
 
     }
 

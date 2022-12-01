@@ -4,7 +4,6 @@ import {
      __postSearchMountains,
      __postFilterMountains,
 } from "../../redux/modules/mountainsSlice";
-import { HiOutlineX } from "react-icons/hi";
 
 const FilterResult = () => {
      const dispatch = useDispatch();
@@ -40,33 +39,45 @@ const FilterResult = () => {
                     {filters.region ? (
                          <div className="filter-chips">
                               <button value="region" onClick={onRegionDelBtn}>
-                                   <HiOutlineX />
+                                   <img
+                                        src="icons/delete-filter.png"
+                                        alt="delete-filter"
+                                   />
                               </button>
-                              {filters.region}
+                              <span>{filters.region}</span>
                          </div>
                     ) : null}
                     {filters.season ? (
                          <div className="filter-chips">
                               <button name="season" onClick={onSeasonDelBtn}>
-                                   <HiOutlineX />
+                                   <img
+                                        src="icons/delete-filter.png"
+                                        alt="delete-filter"
+                                   />
                               </button>
-                              {filters.season}
+                              <span> {filters.season}</span>
                          </div>
                     ) : null}
                     {filters.time ? (
                          <div className="filter-chips">
                               <button onClick={onTimeDelBtn}>
-                                   <HiOutlineX />
+                                   <img
+                                        src="icons/delete-filter.png"
+                                        alt="delete-filter"
+                                   />
                               </button>
-                              {filters.time}시간
+                              <span>{filters.time}시간</span>
                          </div>
                     ) : null}
                     {filters.level ? (
                          <div className="filter-chips">
                               <button onClick={onLevelDelBtn}>
-                                   <HiOutlineX />
+                                   <img
+                                        src="icons/delete-filter.png"
+                                        alt="delete-filter"
+                                   />
                               </button>
-                              {filters.level}
+                              <span> {filters.level}</span>
                          </div>
                     ) : null}
                </div>
@@ -82,7 +93,7 @@ const StFilterResult = styled.div`
      display: flex;
      justify-content: flex-start;
      gap: 10px;
-     margin-top: 10px;
+     margin-top: 15px;
      .filter-chips {
           width: fit-content;
           height: 100%;
@@ -92,12 +103,11 @@ const StFilterResult = styled.div`
           gap: 5px;
           color: var(--color-border);
           border: 1px solid var(--color-border);
-          border-radius: 15px;
-          padding: 0 10px 0 5px;
+          border-radius: 20px;
+          padding: 0.5px 15px;
           margin-right: 10px;
+          font-size: 16px;
           button {
-               width: 14px;
-               height: 14px;
                background-color: transparent;
                border: none;
                display: flex;
@@ -106,6 +116,13 @@ const StFilterResult = styled.div`
                padding: 0;
                font-size: 20px;
                cursor: pointer;
+               img {
+                    width: 14px;
+                    height: 14px;
+               }
+          }
+          span {
+               margin-top: 2px;
           }
      }
 `;

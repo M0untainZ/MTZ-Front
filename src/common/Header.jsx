@@ -74,6 +74,7 @@ const StHeader = styled.div`
      gap: 10%;
      padding: 0 14%;
      div {
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -91,6 +92,7 @@ const StHeader = styled.div`
                border: 1px solid #000;
                padding: 5px 10px;
                cursor: pointer;
+               height: 55%;
           }
           .header-title {
                font-size: 4vh;
@@ -105,6 +107,11 @@ const StHeader = styled.div`
           .header-login-btn {
                padding: 5px 15px;
                margin-left: 20px;
+          }
+          .header-login-btn {
+               color: white;
+               border: none;
+               background-color: var(--color-button);
           }
      }
 `;

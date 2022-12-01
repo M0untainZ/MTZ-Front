@@ -45,12 +45,13 @@ const StMountainWrap = styled.div`
      display: flex;
      flex-wrap: wrap;
      justify-content: flex-start;
+     z-index: 0;
      :first-child,
      :nth-child(2) {
-          margin-top: 30px;
+          margin-top: 50px;
      }
      .mountain-element {
-          height: 240px;
+          height: 25.5vh;
           width: 100%;
           margin-bottom: 1%;
           box-sizing: border-box;
@@ -60,6 +61,11 @@ const StMountainWrap = styled.div`
           position: relative;
           cursor: pointer;
 
+          :hover {
+               transform: scale(1.04);
+               border: 3px solid #fff;
+               z-index: 3;
+          }
           .mountain-img {
                position: absolute;
                width: 100%;

@@ -18,6 +18,7 @@ const ModalMypage = () => {
 
      const [profile, setProfile] = useState(initialState);
      const [modal, setModal] = useState(false);
+     const [badge, setBadge] = useState(false);
 
      //입력정보 불러오기
      const userinfo = useSelector((state) => state.mypage.mypage?.data);
@@ -57,6 +58,17 @@ const ModalMypage = () => {
           setProfile({ ...profile, [name]: value });
           console.log(profile);
      };
+
+     const onChangeBadge = (e) => {
+          const { name, value } = e.target;
+          setProfile({ ...profile, [name]: value });
+          console.log(profile);
+          console.log(profile.badgeName);
+          if (!!profile.badgeName) {
+          }
+     };
+
+     useEffect(() => {});
 
      //정보 변경 사항 보내기
      const onSubmitInfo = () => {
@@ -123,8 +135,13 @@ const ModalMypage = () => {
                                    <div className="pick-badge-list">
                                         {badgeTest.map((badges, idx) => (
                                              <button
-                                                  onClick={onChangeInfo}
-                                                  className="pick-badge-element"
+                                                  onClick={onChangeBadge}
+                                                  // className="pick-badge-element"
+                                                  className={
+                                                       profile.badgeName
+                                                            ? "picked"
+                                                            : "pick-badge-element"
+                                                  }
                                                   name="badgeName"
                                                   value={badges}
                                                   key={idx}
@@ -213,9 +230,9 @@ const StMypageInfo = styled.div`
                     background-color: var(--color-point);
                     border: 2px solid var(--color-border);
                     cursor: pointer;
-                    :focus {
-                         border: 3px solid var(--color-button);
-                    }
+               }
+               .picked {
+                    border: 3px solid var(--color-button);
                }
           }
      }

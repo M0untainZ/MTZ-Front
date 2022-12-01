@@ -88,15 +88,19 @@ const FilterMt = () => {
                     </div>
                     <div>
                          <p>소요시간</p>
+                         <div className="marker-name">
+                              <span>~ 1시간</span>
+                              <span>6시간 이상~</span>
+                         </div>
                          <StFilterSlide>
-                              <div className="marker">
-                                   <span>~1시간</span>
-                                   <span></span>
-                                   <span></span>
-                                   <span></span>
-                                   <span></span>
-                                   <span>6시간 이상</span>
-                              </div>
+                              <datalist id="markers">
+                                   <option value="1"></option>
+                                   <option value="2"></option>
+                                   <option value="3"></option>
+                                   <option value="4"></option>
+                                   <option value="5"></option>
+                                   <option value="6"></option>
+                              </datalist>
                               <input
                                    type="range"
                                    min="1"
@@ -114,13 +118,13 @@ const FilterMt = () => {
                          <div className="list region-style">
                               {regionList.map((item) => (
                                    <label key={item.id}>
-                                        <input
+                                        <StInput
                                              type="radio"
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -130,13 +134,13 @@ const FilterMt = () => {
                          <div className="list season-style">
                               {seasonList.map((item) => (
                                    <label key={item.id}>
-                                        <input
+                                        <StInput
                                              type="radio"
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -146,13 +150,13 @@ const FilterMt = () => {
                          <div className="list level-style">
                               {levelList.map((item) => (
                                    <label key={item.id}>
-                                        <input
+                                        <StInput
                                              type="radio"
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -166,7 +170,7 @@ export default FilterMt;
 
 const StFilterMT = styled.div`
      padding: 40px 0;
-     width: 14%;
+     width: 18.5%;
      height: 100%;
      display: flex;
      flex-direction: column;
@@ -176,11 +180,13 @@ const StFilterMT = styled.div`
           display: flex;
           justify-content: space-between;
           button {
-               width: 47%;
+               width: 49%;
+               min-height: 44px;
                padding: 5px 0;
                font-size: 18px;
                font-weight: 500;
                border: 1px solid black;
+               cursor: pointer;
                :nth-child(2) {
                     background-color: var(--color-button);
                     color: white;
@@ -198,25 +204,46 @@ const StFilterMT = styled.div`
           }
           .list {
                display: flex;
-               flex-direction: column;
                flex-wrap: wrap;
                align-content: space-between;
-               gap: 5%;
-               height: 15.2vh;
-               padding: 5px;
+               gap: 35%;
                label {
-                    width: fit-content;
-                    input[type="radio"] {
-                         accent-color: var(--color-border);
-                    }
+                    width: 30%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    color: var(--color-border);
+                    padding: 3px 0;
+                    font-size: 18px;
                }
           }
-          .season-style {
-               height: 6.9vh;
+     }
+     .marker-name {
+          display: flex;
+          justify-content: space-between;
+          width: 105%;
+          margin-bottom: -5px;
+          span {
+               font-size: 14px;
           }
-          .level-style {
-               height: 6.9vh;
-          }
+     }
+`;
+
+const StInput = styled.input`
+     appearance: none;
+     border: 1.5px solid gainsboro;
+     width: 1.5rem;
+     height: 1.5rem;
+     cursor: pointer;
+     margin: 0;
+
+     &:checked {
+          border-color: transparent;
+          background-image: url("/icons/Property 1=check.png");
+          background-size: 100% 100%;
+          background-position: 50%;
+          background-repeat: no-repeat;
      }
 `;
 
@@ -228,22 +255,45 @@ const StFilterSlide = styled.div`
      justify-content: flex-start;
      align-items: center;
      position: relative;
-     .marker {
-          width: 98%;
-          margin-bottom: 0;
+     #markers {
+          margin-left: 10px;
+          width: 120%;
+          min-height: 100%;
           display: flex;
-          justify-content: space-between;
-          span {
-               font-size: 13px;
-          }
-     }
-     input {
-          width: 90%;
+          justify-content: space-evenly;
+          align-items: center;
+          position: relative;
+          top: 20px;
      }
      input[type="range"] {
-          width: 85%;
+          width: 97%;
+          margin-left: 15px;
           -webkit-appearance: none;
           background: transparent;
+          border-radius: 30px;
+          border: 1px solid var(--color-border);
           accent-color: var(--color-border);
+          box-sizing: border-box;
+          padding: 0 1px;
+          z-index: 1;
+     }
+     input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background: var(--color-border);
+          border: 1px solid var(--color-border);
+          cursor: pointer;
+          height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          z-index: 3;
+     }
+     #markers option {
+          border-right: 1px solid var(--color-border);
+          min-height: 12px;
+          box-sizing: border-box;
+          :first-child,
+          :last-child {
+               border: none;
+          }
      }
 `;

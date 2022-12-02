@@ -116,6 +116,11 @@ const SignUp = () => {
                 {user.email.trim() === "" ? null : emailState ? (
                   overlapEmail ? (
                     <div className="checkLogo" style={{ color: "blue" }}>
+                      <img
+                        className="checkImg"
+                        alt=""
+                        src="/icons/signUpCheck.png"
+                      />
                       사용 가능한 이메일입니다.
                     </div>
                   ) : (
@@ -125,7 +130,12 @@ const SignUp = () => {
                     </StErrorMassage>
                   )
                 ) : emailCheck ? (
-                  <div style={{ color: "blue" }}>
+                  <div className="checkLogo" style={{ color: "blue" }}>
+                    <img
+                      className="checkImg"
+                      alt=""
+                      src="/icons/signUpCheck.png"
+                    />
                     형식에 맞는 이메일 입니다.
                   </div>
                 ) : (
@@ -148,7 +158,12 @@ const SignUp = () => {
                 placeholder="닉네임"
               />
               {user.nickName.trim() === "" ? null : overlapName ? (
-                <div style={{ color: "blue" }}>
+                <div className="checkLogo" style={{ color: "blue" }}>
+                  <img
+                    className="checkImg"
+                    alt=""
+                    src="/icons/signUpCheck.png"
+                  />
                   사용 할 수 있는 닉네임입니다.
                 </div>
               ) : (
@@ -170,7 +185,14 @@ const SignUp = () => {
               />
               <div>
                 {user.password.trim() === "" ? null : pwCheck ? (
-                  <div style={{ color: "blue" }}>올바른 비밀번호입니다.</div>
+                  <div className="checkLogo" style={{ color: "blue" }}>
+                    <img
+                      className="checkImg"
+                      alt=""
+                      src="/icons/signUpCheck.png"
+                    />
+                    올바른 비밀번호입니다.
+                  </div>
                 ) : (
                   <StErrorMassage>
                     <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
@@ -192,7 +214,14 @@ const SignUp = () => {
               <div>
                 {user.password.trim() === "" ? null : user.password ===
                   user.passwordConfirm ? (
-                  <div style={{ color: "blue" }}>비밀번호가 일치합니다.</div>
+                  <div className="checkLogo" style={{ color: "blue" }}>
+                    <img
+                      className="checkImg"
+                      alt=""
+                      src="/icons/signUpCheck.png"
+                    />
+                    비밀번호가 일치합니다.
+                  </div>
                 ) : (
                   <StErrorMassage>
                     <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
@@ -201,8 +230,8 @@ const SignUp = () => {
                 )}
               </div>
             </div>
-            <div>지역선택 </div>
             <StSelectBox>
+              <div className="selectLogo">지역선택 </div>
               <div className="selectBox">
                 <select
                   onChange={onChangeHandler}
@@ -310,7 +339,7 @@ const StInputBox = styled.div`
   }
 
   .inputName {
-    margin-top: 5%;
+    margin-top: 8%;
   }
   .nickNameInputBox {
     width: 100%;
@@ -340,6 +369,17 @@ const StInputBox = styled.div`
       width: 90%;
       height: 60%;
       font-size: medium;
+    }
+  }
+  .checkLogo {
+    width: fit-content;
+    background-color: white;
+    margin-top: -2px;
+    font-size: 12px;
+    .checkImg {
+      margin-right: 3px;
+      margin-top: 3px;
+      width: 12px;
     }
   }
 `;
@@ -395,8 +435,10 @@ const StButtonBox = styled.div`
 const StSelectBox = styled.div`
   width: 100%;
   height: 30%;
+  .selectLogo {
+    margin-top: 5px;
+  }
   .selectBox {
-    margin-top: 1%;
     width: 92%;
     height: 100%;
     select {
@@ -410,9 +452,10 @@ const StErrorMassage = styled.div`
   width: fit-content;
   background-color: white;
   color: red;
-  margin-top: 5px;
+  margin-top: 0px;
+  font-size: 12px;
 `;
 const StDangerImg = styled.img`
-  width: 14px;
-  margin-right: 5px;
+  width: 12px;
+  margin-right: 3px;
 `;

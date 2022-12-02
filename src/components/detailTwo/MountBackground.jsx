@@ -10,12 +10,14 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { MountGeolocation, positionOptions } from "./MountGeolocation";
 
 const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
   const id = Number(mountId.id);
   const { isLike } = useSelector((state) => state.twoSlice);
+  const { location, error } = MountGeolocation(positionOptions);
 
   //좋아요 버튼
   const lovePost = () => {

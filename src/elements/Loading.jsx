@@ -24,7 +24,7 @@ const StLoading = styled.div`
     height: 40px;
     animation: spin 2s linear infinite;
     path {
-      color: var(--lightGray-color);
+      color: gray;
     }
   }
   @keyframes spin {

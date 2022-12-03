@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import FilterList from "./FilterList";
 import Proof from "./Proof";
 
 const ProofList = () => {
     return (
         <StProof>
-            <FilterList />
             <Proof />
         </StProof>
     );
@@ -15,10 +13,10 @@ const ProofList = () => {
 export default ProofList;
 
 const StProof = styled.div`
-    width: 1400px;
+    width: 1000px;
     height: 100%;
     display: flex;
     justify-content: space-around;
     position: relative;
-    margin-top: 20px;
+    margin-left: 20px;
 `;

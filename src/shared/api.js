@@ -68,7 +68,14 @@ export const getLevelTag = async (level) => {
   return data;
 }
 
+export const kakaoLogin = async (code) => {
+  const data = await axiosIns.get(`/kakao/callback?code=${code}`)
+  return data;
+}
+
+// 필터
 export const proofFilter = async (payload) => {
+    console.log(payload)
     const {data} = await axiosIns.post("/api/photos/filter", payload);
     return data;
 }

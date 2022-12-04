@@ -17,7 +17,7 @@ const Header = () => {
                <StHeader>
                     <div>
                          <Link to="/" className="header-title">
-                              MTZ
+                              <img src="/icons/title_logo.png" alt="logo" />
                          </Link>
                          <Link to="/" className="header-main-btn">
                               메인페이지
@@ -50,7 +50,7 @@ const Header = () => {
                                    onClick={() => navigate("/login")}
                                    className="header-login-btn"
                               >
-                                   로그인 / 가입
+                                   로그인
                               </button>
                          )}
                     </div>
@@ -64,15 +64,17 @@ export default Header;
 const StHeader = styled.div`
      box-sizing: border-box;
      width: 100%;
-     height: 6vh;
-     background-color: #fff;
-     color: #000;
+     height: 9vh;
+     background-color: transparent;
      font-size: 16px;
      display: flex;
      justify-content: space-between;
      align-items: center;
      gap: 10%;
      padding: 0 14%;
+     z-index: 10;
+     position: absolute;
+
      div {
           height: 100%;
           display: flex;
@@ -92,7 +94,7 @@ const StHeader = styled.div`
                border: 1px solid #000;
                padding: 5px 10px;
                cursor: pointer;
-               height: 55%;
+               height: 35%;
           }
           .header-title {
                font-size: 4vh;
@@ -105,7 +107,7 @@ const StHeader = styled.div`
           }
           .header-mypage-btn,
           .header-login-btn {
-               padding: 5px 15px;
+               padding: 5px 30px;
                margin-left: 20px;
           }
           .header-login-btn {

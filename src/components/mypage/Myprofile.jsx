@@ -76,7 +76,7 @@ const STProfile = styled.div`
      flex-direction: column;
      align-items: center;
      gap: 2vh;
-     padding: 80px 0;
+     padding: 40px 0;
      .profile-badge-style {
           position: relative;
           width: 120px;

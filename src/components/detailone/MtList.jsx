@@ -7,18 +7,17 @@ import {
 } from "../../redux/modules/mountainsSlice";
 import SearchMt from "./SearchMt";
 import Mountain from "./Mountain";
-import { useNavigate } from "react-router-dom";
 
 const MtList = () => {
      const dispatch = useDispatch();
+
      const { mountains } = useSelector((state) => state.mountains);
-     const { filter } = useSelector((state) => state.mountains);
 
      const initialState = {};
 
      useEffect(() => {
-          dispatch(__getMountains());
           dispatch(__postFilterMountains(initialState));
+          dispatch(__getMountains());
      }, [dispatch]);
 
      return (

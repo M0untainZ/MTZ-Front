@@ -292,6 +292,7 @@ const StLoginContainer = styled.div`
      justify-content: center;
      height: 100%;
      width: 100%;
+     margin-top: 8vh;
      .imgBox {
           margin-left: -11%;
           height: 100%;

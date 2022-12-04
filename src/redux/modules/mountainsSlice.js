@@ -68,7 +68,6 @@ export const mountainsSlice = createSlice({
           },
           [__getMountains.rejected]: (state, action) => {},
           [__postFilterMountains.fulfilled]: (state, action) => {
-               //console.log("filter", action);
                state.filter = action.meta.arg;
                state.mountains = action.payload;
           },
@@ -80,6 +79,5 @@ export const mountainsSlice = createSlice({
      },
 });
 
-export const { isSeasonFalse, isRegionFalse, isTimeFalse, isLevelFalse } =
-     mountainsSlice.actions;
+export const { isFilters, isBtnFalse, isBtnTrue } = mountainsSlice.actions;
 export default mountainsSlice.reducer;

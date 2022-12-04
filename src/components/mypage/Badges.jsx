@@ -226,7 +226,6 @@ export default Badges;
 
 const STBadgeContainer = styled.div`
      box-sizing: border-box;
-     padding: 40px 0 20px 0;
      width: 1046px;
      height: 100%;
      display: flex;

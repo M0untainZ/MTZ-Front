@@ -56,7 +56,10 @@ const ProofImage = () => {
                 if(idx === 9) {
                   return (
                        <SwiperSlide className="swiper-slide" key={idx}>
-                            <div onClick={() => navigate("/certification")}>더보기</div>
+                            <div className="see-more" onClick={() => navigate("/certification")}>
+                              <img src="icons/icon_dot.png" alt="" />
+                              <p>더보기</p>
+                            </div>
                             <img src={`${el.photo}`} alt="" />
                        </SwiperSlide>
                       )
@@ -112,14 +115,23 @@ const StImageList = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    div {
-          width: 100px;
-          height: 50px;
-          border: 5px solid blue;
-          z-index: 5;
-          position: absolute;
-          color: white;
-          font-size: 30px;
+    .see-more {
+      width: 50px;
+      height: 50px;
+      z-index: 5;
+      position: absolute;
+      color: #ffffff;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      cursor: pointer;
+      img {
+        width: 50%;
+        height: 20%;
+      }
     }
     img {
       width: 100%;

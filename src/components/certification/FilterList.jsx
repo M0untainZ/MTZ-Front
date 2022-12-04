@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { __getProof, __proofFilter } from "../../redux/modules/proofSlice";
+import { useMutation } from "react-query"
+import { proofFilter } from "../../shared/api.js";
+import { filterFalse, filterTrue, proofData } from "../../redux/modules/proofSlice";
 
 const FilterList = () => {
+     const dispatch = useDispatch()
      // 산 리스트 저장
      const [checkRegion, setCheckRegion] = useState([]);
      // 클릭된 지역 필터 정보 저장
      const [checkFilter, setCheckFilter] = useState("");
      // 선택된 옵션 필터 정보 저장(산이름)
      const [selectOption, setSelectOption] = useState("");
-     const dispatch = useDispatch();
+
      const regionList = [
           { id: 0, name: "region", value: "서울" },
           { id: 1, name: "region", value: "강원" },
@@ -21,7 +24,7 @@ const FilterList = () => {
           { id: 6, name: "region", value: "제주" },
      ];
 
-     const onChangeMTList = (e) => {
+     const onChangeRegionList = (e) => {
           const seoul = [
                "도봉산",
                "수락산",
@@ -64,15 +67,21 @@ const FilterList = () => {
           } else if (e.target.value === "제주") {
                setCheckRegion(jeju);
           }
-          const checkbox = document.getElementsByName("region");
-          for (let i = 0; i < checkbox.length; i++) {
-               if (checkbox[i] !== e.target) {
-                    checkbox[i].checked = false;
+          const regionCheckbox = document.getElementsByName("region");
+          for (let i = 0; i < regionCheckbox.length; i++) {
+               if (regionCheckbox[i] !== e.target) {
+                    regionCheckbox[i].checked = false;
                }
           }
           const { name, value } = e.target;
           setCheckFilter({ ...checkFilter, [name]: value });
      };
+
+     const onChangeMTList = (e) => {
+          const { name, value } = e.target;
+          setCheckFilter({ ...checkFilter, [name]: value });
+     }
+
      // 선택된 항목들 초기화
      const onResetHandler = () => {
           const checkFilter = document.getElementsByName("region");
@@ -82,13 +91,20 @@ const FilterList = () => {
           setCheckRegion([]);
           setCheckFilter("");
           setSelectOption("");
-          dispatch(__getProof());
+          dispatch(filterFalse());
      };
 
-     const onFilterApply = () => {
-          dispatch(__proofFilter(checkFilter));
-     };
+     const { mutate: filter } = useMutation(proofFilter, {
+          onSuccess: (config) => {
+               dispatch(proofData(config.data))
+          }
+     });
 
+     const onApplyHandler = () => {
+          filter(checkFilter)
+          dispatch(filterTrue());
+     };
+     
      return (
           <StFilterContainer>
                <div className="filter-box">
@@ -97,38 +113,21 @@ const FilterList = () => {
                          <button onClick={onResetHandler}>초기화</button>
                          <button
                               type="button"
-                              onClick={() => {
-                                   onFilterApply();
-                              }}
-                         >
+                              onClick={() => {onApplyHandler()}}>
                               적용
                          </button>
                     </div>
                </div>
                <p>지역선택</p>
                <div className="region-list">
-                    {/* <input id="seoul" type="checkbox" name="region" value="서울" onChange={onChangeMTList} />
-                    <label htmlFor="seoul">서울</label>
-                    <input id="gangwon" type="checkbox" name="region" value="강원" onChange={onChangeMTList} />
-                    <label htmlFor="gangwon">강원</label>
-                    <input id="gyeonggi" type="checkbox" name="region" value="경기" onChange={onChangeMTList} />
-                    <label htmlFor="gyeonggi">경기</label>
-                    <input id="chungchung" type="checkbox" name="region" value="충청" onChange={onChangeMTList} />
-                    <label htmlFor="chungchung">충청</label>
-                    <input id="gyeongsang" type="checkbox" name="region" value="경상" onChange={onChangeMTList} />
-                    <label htmlFor="gyeongsang">경상</label>
-                    <input id="jeolla" type="checkbox" name="region" value="전라" onChange={onChangeMTList} />
-                    <label htmlFor="jeolla">전라</label>
-                    <input id="jeju" type="checkbox" name="region" value="제주" onChange={onChangeMTList} />
-                    <label htmlFor="jeju">제주</label> */}
-                    {regionList.map((el, idx) => (
+                    {regionList.map((el) => (
                          <label key={el.id}>
                               <input
                                    type="checkbox"
-                                   name={el.name}
                                    className="region"
+                                   name={el.name}
                                    value={el.value}
-                                   onChange={onChangeMTList}
+                                   onChange={onChangeRegionList}
                               />
                               {el.value}
                          </label>
@@ -136,12 +135,12 @@ const FilterList = () => {
                </div>
                <p>산 필터링</p>
                <div className="mt-list">
-               {checkRegion.map((mountain, idx) => (
-                    <label key={idx}>
-                         <input type="checkbox" name="name" value={mountain} onChange={onChangeMTList} />
-                         {mountain}
-                    </label>
-               ))}
+                    <select name="name" onChange={onChangeMTList}>
+                         <option defaultValue>선택</option>
+                         {checkRegion.map((mountain, idx) => (
+                         <option key={idx} value={mountain}>{mountain}</option>
+                         ))}
+                    </select>
                </div>
           </StFilterContainer>
      );
@@ -160,6 +159,13 @@ const StFilterContainer = styled.div`
                width: 128px;
                height: 25px;
           }
+          button:first-child {
+               background-color: #EDF4F5;
+          }
+          button:last-child {
+               background-color: #276575;
+               color: #ffffff;
+          }
      }
      .region-list {
           display: flex;
@@ -170,31 +176,11 @@ const StFilterContainer = styled.div`
                justify-content: center;
                align-items: center;
                width: 40%;
-               box-sizing: border-box;
-               border: 1px solid black;
-               border-radius: 20px;
-               cursor: pointer;
-               input {
-               display: none;
-          }
           }
      }
-     .mt-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10%;
-          label {
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               width: 40%;
-               box-sizing: border-box;
-               border: 1px solid black;
-               border-radius: 20px;
-               cursor: pointer;
-          }
-          input {
-               display: none;
-          }
+     select {
+          width: 150px;
+          height: 30px;
      }
+     
 `;

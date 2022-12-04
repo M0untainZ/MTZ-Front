@@ -6,14 +6,10 @@ import {
 } from "../../redux/modules/mountainsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
-
 const FilterMt = () => {
      const dispatch = useDispatch();
-
      const [filter, setFilter] = useState();
-
      const initialState = {};
-
      //리스트 체크박스
      const regionList = [
           { id: 0, name: "region", value: "서울" },
@@ -35,7 +31,6 @@ const FilterMt = () => {
           { id: 1, name: "level", value: "중급" },
           { id: 2, name: "level", value: "고급" },
      ];
-
      //필터 선택 onChange - time
      const onFilterTime = (e) => {
           const { name, value } = e.target;
@@ -46,21 +41,18 @@ const FilterMt = () => {
      const onFilterSelect = (e) => {
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
-
           console.log("확인", filter);
      };
-
      //필터에 따른 산 리스트 불러오기
      const onFilterList = () => {
           dispatch(__postFilterMountains(filter));
      };
      //필터 초기화 시 -> 전체 산 리스트 불러오기
      const onFilterListnope = () => {
-          dispatch(__getMountains());
           dispatch(__postFilterMountains(initialState));
+          // dispatch(__getMountains());
           setFilter("");
      };
-
      console.log("확인", filter);
      return (
           <StFilterMT>

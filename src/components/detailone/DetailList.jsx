@@ -18,4 +18,5 @@ const StDetailList = styled.div`
      justify-content: space-between;
      width: 1400px;
      height: 100%;
+     margin-top: 10vh;
 `;

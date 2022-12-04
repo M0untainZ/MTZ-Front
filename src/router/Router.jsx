@@ -16,8 +16,8 @@ import Kakao from "../components/kakao/Kakao";
 const Router = () => {
      return (
           <BrowserRouter>
-               <Header />
                <Layout>
+                    <Header />
                     <Routes>
                          <Route path="/" element={<Main />} />
                          <Route path="/mypage" element={<MyPage />} />

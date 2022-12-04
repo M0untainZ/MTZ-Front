@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCurrentLocation, positionOptions } from "./Geolocation";
+import Mapmodal from "./modal/Mapmodal";
 
 const Weather = () => {
      const navigate = useNavigate();
@@ -10,8 +11,13 @@ const Weather = () => {
      const [city, setCity] = useState("");
      const [weather, setWeather] = useState("");
      const [temp, setTemp] = useState("");
+     const [modal, setModal] = useState(false);
      const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
      const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
+
+     const onModalOpen = () => {
+          setModal(!modal);
+     }
 
      useEffect(() => {
           if (error) {
@@ -55,6 +61,43 @@ const Weather = () => {
           <>
                <StMainImageBanner>
                     <img alt="" src="/icons/mainbanner.png" />
+                    <StMap onClick={onModalOpen}>
+                         <img alt="" src="/icons/map_search.png" />
+                         <span>지도보기</span>
+                    </StMap>
+                    { modal && <Mapmodal open={modal} onClose={() => {setModal(false)}}>
+                              <StMapContainer>
+                                   <img alt="" src="/icons/main_map.png" />
+                                   <div className="seoul">
+                                        <p>서울</p>
+                                        <span>5</span>
+                                   </div>
+                                   <div className="gangwon">
+                                        <p>강원</p>
+                                        <span>5</span>
+                                   </div>
+                                   <div className="gyeonggi">
+                                        <p>경기</p>
+                                        <span>12</span>
+                                   </div>
+                                   <div className="gyeongsang">
+                                        <p>경상</p>
+                                        <span>5</span>
+                                   </div>
+                                   <div className="chungchung">
+                                        <p>충청</p>
+                                        <span>4</span>
+                                   </div>
+                                   <div className="jeolla">
+                                        <p>전라</p>
+                                        <span>4</span>
+                                   </div>
+                                   <div className="jeju">
+                                        <p>제주</p>
+                                        <span>1</span>
+                                   </div>
+                              </StMapContainer>
+                         </Mapmodal>}
                     <StWeatherContainer>
                          <StWeatherInfoWrap>
                               <StWeatherIcon>
@@ -116,6 +159,74 @@ const StMainImageBanner = styled.div`
           object-fit: cover;
           width: 100%;
           height: 520px;
+     }
+`;
+
+const StMap = styled.div`
+     width: 150px;
+     height: 50px;
+     position: absolute;
+     bottom: 10%;
+     left: 15%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #185B6E;
+     color: #ffffff;
+     gap: 10px;
+     cursor: pointer;
+     img {
+          width: 18px;
+          height: 18px;
+     }
+`;
+
+const StMapContainer = styled.div`
+     width: 100%;
+     height: 60vh;
+     margin-top: 40px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+     img {
+          width: 400px;
+          height: 550px;
+     }
+     div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+     }
+     .seoul {
+          top: 5%;
+          left: 29%;
+     }
+     .gyeonggi {
+          top: 25%;
+          left: 40%;
+     }
+     .gangwon {
+          top: 10%;
+          right: 33%;
+     }
+     .chungchung {
+          top: 35%;
+          right: 33%;
+     }
+     .gyeongsang {
+          bottom: 35%;
+          right: 33%;
+     }
+     .jeolla {
+          bottom: 20%;
+          left: 32%;
+     }
+     .jeju {
+          bottom: 0;
+          left: 15%;
      }
 `;
 

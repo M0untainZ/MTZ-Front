@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import ProofList from "../components/certification/ProofList";
+import FilterList from "../components/certification/FilterList";
 import { BiArrowToTop } from "react-icons/bi";
 
 const Certification = () => {
 
      const onTopHandler = () => {
           window.scrollTo({
-               top: 0,
-               behavior: "smooth"
+               top: 0
           });
      };
 
@@ -21,6 +21,7 @@ const Certification = () => {
                     <button className="go-top" onClick={onTopHandler}>
                          <BiArrowToTop />
                     </button>
+                    <FilterList />
                     <ProofList />
                </StCertification> :
                <div>인증사진은 회원만 이용할 수 있습니다.</div>
@@ -32,8 +33,11 @@ const Certification = () => {
 export default Certification;
 
 const StCertification = styled.div`
+     max-width: 100%;
+     height: 100%;
      display: flex;
      justify-content: center;
+     margin-top: 30px;
      position: relative;
      .go-top {
         width: 40px;

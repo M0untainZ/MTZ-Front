@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# 🌄 MTZ(마운틴즈)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</br>
 
-## Available Scripts
+> ### 프로젝트 소개
 
-In the project directory, you can run:
+<pre> 초보 등린이부터 등산 전문가들까지! 등산러들을 위한 공간!</pre>
 
-### `yarn start`
+원하는 요소에 따라 **산의 리스트와 산의 정보**를 제공합니다. </br>
+여러분의 등반 내역을 자랑해보아요!</br>
+등산할 수 있는 산의 소개부터 여러분의 인증을 통한 뱃지 획득까지!</br>
+랭킹 1위를 향해 등산해봅시다!</br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</br>
+</br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> ### 프로젝트 문서
+>
+> | 내용          | 설명                                                                                                                   |
+> | ------------- | ---------------------------------------------------------------------------------------------------------------------- |
+> | 프로젝트 명   | MTZ(마운틴즈)                                                                                                          |
+> | 프로젝트 기간 | 2022.11.03 ~ 2022                                                                                                      |
+> | 베포 URL      |                                                                                                                        |
+> | FE Github URL | https://github.com/M0untainZ/MTZ-Front.git                                                                             |
+> | BE Github URL | https://github.com/M0untainZ/MTZ-BE.git                                                                                |
+> | 프로젝트 문서 | [프로젝트 문서로 이동](https://docs.google.com/spreadsheets/d/1HtE2SUzSS5GC-LgEqoSsjKZNVe2-Jc1JQHZ8GDhCGHs/edit#gid=0) |
 
-### `yarn test`
+</br>
+</br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> ### 주요 기능
 
-### `yarn build`
+| PAGE          | FUNCTION                                                             |
+| ------------- | -------------------------------------------------------------------- |
+| MAIN          | 메인화면, 위치정보 기반 날씨, 추천 등산 코스, 랭킹, 인증 사진 리스트 |
+| DETAIL 01     | 산 리스트, 산 리스트 필터, 무한 스크롤                               |
+| DETAIL 02     | 각 산에 대한 정보, 카카오맵 기반 산의 위치, 인증 사진 리스트         |
+| CERTIFICATION | 인증 사진 리스트, , 무한 스크롤                                      |
+| MYPAGE        | 프로필 수정, 뱃지 리스트                                             |
+| LOGIN         | 로그인, 회원가입, 소셜(카카오) 로그인                                |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</br>
+</br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> ### 프론트엔드 기술 정보
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<pre>프로젝트에서 사용한 주요 기술 정보</pre>
+<div>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
+  <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
+  
+</div>

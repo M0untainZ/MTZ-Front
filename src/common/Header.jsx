@@ -7,18 +7,17 @@ const Header = () => {
      const userinfoSto = JSON.parse(sessionStorage.getItem("userinfos"));
      const userinfo = userinfoSto ? userinfoSto : "";
      //뱃지 null일 때 기본 값 이름
-     const userbadge = userinfoSto?.badgeName
-          ? userinfoSto?.badgeName == null
+     const userbadge =
+          userinfoSto?.badgeName == null
                ? "등산 비기너, "
-               : `${userinfoSto?.badgeName}, `
-          : "";
+               : `${userinfoSto?.badgeName}, `;
 
      return (
           <>
                <StHeader>
                     <div>
                          <Link to="/" className="header-title">
-                              MTZ
+                              <img src="/icons/title_logo.png" alt="logo" />
                          </Link>
                          <Link to="/" className="header-main-btn">
                               메인페이지
@@ -33,7 +32,7 @@ const Header = () => {
                               인증샷페이지
                          </Link>
                     </div>
-                    <div>
+                    <div className="header-info-my-btn">
                          {/* <img src="" alt="badge" /> */}
 
                          {userinfo ? (
@@ -65,16 +64,19 @@ export default Header;
 const StHeader = styled.div`
      box-sizing: border-box;
      width: 100%;
-     height: 6vh;
-     background-color: #fff;
-     color: #000;
+     height: 9vh;
+     background-color: transparent;
      font-size: 16px;
      display: flex;
      justify-content: space-between;
      align-items: center;
      gap: 10%;
      padding: 0 14%;
+     z-index: 10;
+     position: absolute;
+
      div {
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -92,6 +94,7 @@ const StHeader = styled.div`
                border: 1px solid #000;
                padding: 5px 10px;
                cursor: pointer;
+               height: 35%;
           }
           .header-title {
                font-size: 4vh;
@@ -101,6 +104,17 @@ const StHeader = styled.div`
           }
           span {
                font-size: 1.6vh;
+          }
+          .header-mypage-btn,
+          .header-login-btn {
+               padding: 5px 15px;
+               margin-left: 20px;
+          }
+          .header-login-btn {
+               color: white;
+               padding: 5px 30px;
+               border: none;
+               background-color: var(--color-button);
           }
      }
 `;

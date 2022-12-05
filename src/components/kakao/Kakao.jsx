@@ -8,9 +8,9 @@ const Kakao = () => {
 
     useEffect(() => {
         kakaoLogin(code).then((res) => {
-            localStorage.setItem("Access_Token", res.headers.authorization);
-            localStorage.setItem("Refresh_Token", res.headers.refresh_token);
-            localStorage.setItem("nickName", res.data.nickname);
+            sessionStorage.setItem("Access_Token", res.headers.authorization);
+            sessionStorage.setItem("Refresh_Token", res.headers.refresh_token);
+            sessionStorage.setItem("nickName", res.data.nickname);
             navigate("/");
         });
     }, []);

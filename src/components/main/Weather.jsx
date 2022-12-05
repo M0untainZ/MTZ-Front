@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCurrentLocation, positionOptions } from "./Geolocation";
 import Mapmodal from "./modal/Mapmodal";
+import { getRegionTag } from "../../shared/api";
 
 const Weather = () => {
      const navigate = useNavigate();
@@ -40,11 +41,7 @@ const Weather = () => {
                               axios.spread((res1, res2) => {
                                    const geo_res = res1.data;
                                    const weather_res = res2.data;
-                                   setCity(
-                                        geo_res.plus_code.compound_code.substring(
-                                             13
-                                        )
-                                   );
+                                   setCity(geo_res.plus_code.compound_code.substring(13));
                                    setWeather(weather_res.weather[0].icon);
                                    setTemp(Math.floor(weather_res.main.temp));
                               })
@@ -199,6 +196,7 @@ const StMapContainer = styled.div`
           justify-content: center;
           align-items: center;
           position: absolute;
+          cursor: pointer;
      }
      .seoul {
           top: 5%;

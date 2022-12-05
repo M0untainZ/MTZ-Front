@@ -15,6 +15,26 @@ export const __getMountains = createAsyncThunk(
           }
      }
 );
+
+//무한 스크롤
+export const __infiniteScroll = createAsyncThunk(
+     "INFINITE_SCROLL",
+     async (page, thunkAPI) => {
+          try {
+               const { data } = await axios.get(
+                    `${process.env.REACT_APP_AXIOS_API}/api/mountains?page=${page}`
+               );
+               if (data.data.length === 0) {
+                    throw data;
+               }
+               console.log("test", data.data);
+               return thunkAPI.fulfillWithValue(data.data);
+          } catch (e) {
+               return thunkAPI.rejectWithValue(e);
+          }
+     }
+);
+
 //필터에 따라 상세 1 산 리스트 불러오기
 export const __postFilterMountains = createAsyncThunk(
      "POSTMOUNTAINS",
@@ -63,13 +83,25 @@ export const mountainsSlice = createSlice({
      initialState,
      reducers: {},
      extraReducers: {
-          [__getMountains.fulfilled]: (state, action) => {
-               state.mountains = action.payload;
+          // [__getMountains.fulfilled]: (state, action) => {
+          //      state.mountains = action.payload;
+          // },
+          // [__getMountains.rejected]: (state, action) => {},
+          [__infiniteScroll.pending]: (state, action) => {
+               state.mountains = [];
+               state.isLoading = true;
           },
-          [__getMountains.rejected]: (state, action) => {},
+          [__infiniteScroll.fulfilled]: (state, action) => {
+               console.log("scroll", action);
+               state.filter = {};
+               state.mountains.push(...action.payload);
+               state.isLoading = false;
+          },
+          [__infiniteScroll.rejected]: (state, action) => {},
           [__postFilterMountains.fulfilled]: (state, action) => {
+               console.log("filter", action);
                state.filter = action.meta.arg;
-               state.mountains = action.payload;
+               state.mountains = action.payload.data;
           },
           [__postFilterMountains.rejected]: (state, action) => {},
           [__postSearchMountains.fulfilled]: (state, action) => {

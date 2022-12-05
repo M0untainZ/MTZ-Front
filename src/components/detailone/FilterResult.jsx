@@ -4,6 +4,7 @@ import {
      __postSearchMountains,
      __postFilterMountains,
 } from "../../redux/modules/mountainsSlice";
+import { useEffect, useState } from "react";
 
 const FilterResult = () => {
      const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const FilterResult = () => {
      //필터 팁 관련 전역 관리
      const filters = useSelector((state) => state.mountains.filter);
      //const isfilters = useSelector((state) => state.mountains);
+
+     const initialState = {};
 
      // console.log("이전", isfilters);
 

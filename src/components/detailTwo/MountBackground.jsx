@@ -10,6 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { MountGeolocation, positionOptions } from "./MountGeolocation";
 
 const MountBackground = () => {
      const mountId = useParams();

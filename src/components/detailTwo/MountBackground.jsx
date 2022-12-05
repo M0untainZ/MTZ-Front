@@ -124,63 +124,63 @@ const MountBackground = () => {
 export default MountBackground;
 
 const StContainer = styled.div`
-     background-size: 1920px;
-     height: 65vh;
-     width: 100%;
-     display: flex;
-     justify-content: flex-end;
-     position: relative;
-     .mountainInfo {
-          z-index: 5;
-          margin-bottom: 5%;
-     }
-     .backgroundImg {
-          background-size: 1920px;
-          height: 65vh;
-          width: 100%;
-          display: flex;
-          justify-content: flex-end;
-          position: absolute;
-          object-fit: cover;
-          z-index: 0;
-     }
-     .likeBtn {
-          background-color: rgba(0, 0, 0, 0);
-          border: 0px;
-          cursor: pointer;
-     }
-     .titleBox {
-          background-color: rgba(255, 255, 255, 0.4);
-          margin-right: 27vh;
-          width: 40vh;
-          height: 25%;
-          margin-top: 9vh;
-          font-size: smaller;
-          .mountainName {
-               font-size: large;
-               font-weight: bold;
-               display: flex;
-               justify-content: space-between;
-               padding: 10px;
-               .heartImg {
-                    width: 22px;
-                    height: 22px;
-               }
-          }
-          .information {
-               font-size: 14px;
-               padding-left: 10px;
-               padding-top: 5px;
-               display: flex;
-               align-items: center;
-               .routeImg {
-                    width: 15px;
-                    height: 15px;
-               }
-               .starImg {
-                    width: 15px;
-                    height: 15px;
-               }
-          }
-     }
+  background-size: 1920px;
+  height: 65vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  .mountainInfo {
+    z-index: 5;
+    margin-bottom: 5%;
+  }
+  .backgroundImg {
+    background-size: 1920px;
+    height: 65vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .likeBtn {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    cursor: pointer;
+  }
+  .titleBox {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-right: 27vh;
+    width: 40vh;
+    height: 25%;
+    margin-top: 8%;
+    font-size: smaller;
+    .mountainName {
+      font-size: large;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      .heartImg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    .information {
+      font-size: 14px;
+      padding-left: 10px;
+      padding-top: 5px;
+      display: flex;
+      align-items: center;
+      .routeImg {
+        width: 15px;
+        height: 15px;
+      }
+      .starImg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
 `;

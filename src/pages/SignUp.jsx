@@ -86,6 +86,17 @@ const SignUp = () => {
           navigate("/login");
      };
 
+
+  return (
+    <StLoginContainer>
+      <div className="imgBox">
+        <img className="loginImg" alt="" src="/icons/loginImg.png"></img>
+      </div>
+      <StParentsBox>
+        <div>
+          <div className="helloLogo">MTZ에 합류해보세요!</div>
+          <div className="logo">회원가입</div>
+        </div>
         <StLoginBox>
           <StInputBox>
             <div className="emailInputBox">
@@ -326,6 +337,10 @@ const StInputBox = styled.div`
 
   .inputName {
     margin-top: 8%;
+  }
+
+  .inputName {
+    margin-top: 5%;
   }
   .nickNameInputBox {
     width: 100%;

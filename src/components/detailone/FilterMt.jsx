@@ -161,7 +161,7 @@ const FilterMt = () => {
 export default FilterMt;
 
 const StFilterMT = styled.div`
-     padding: 40px 0;
+     padding: 20px 0;
      width: 18.5%;
      height: 100%;
      display: flex;

@@ -1,31 +1,53 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-     __getMountains,
-     __postFilterMountains,
-} from "../../redux/modules/mountainsSlice";
+import { __infiniteScroll } from "../../redux/modules/mountainsSlice";
 import SearchMt from "./SearchMt";
 import Mountain from "./Mountain";
+import { useCallback } from "react";
+import { useInView } from "react-intersection-observer";
 
 const MtList = () => {
      const dispatch = useDispatch();
 
-     const { mountains } = useSelector((state) => state.mountains);
+     const [page, setPage] = useState(0);
+     const [ref, inView] = useInView();
 
-     const initialState = {};
+     const { mountains, isLoading } = useSelector((state) => state.mountains);
+
+     const test = useSelector((state) => state.mountains.filter);
+
+     console.log("?", test, mountains, isLoading);
+
+     //infinite scroll
+     const getItems = useCallback(() => {
+          dispatch(__infiniteScroll(page));
+     }, [page, dispatch]);
 
      useEffect(() => {
-          dispatch(__postFilterMountains(initialState));
-          dispatch(__getMountains());
-     }, [dispatch]);
+          getItems(page);
+     }, [getItems]);
+
+     useEffect(() => {
+          if (inView && !isLoading) {
+               setPage((prevState) => prevState + 1);
+          }
+     }, [inView, isLoading]);
 
      return (
           <StMTList>
                <SearchMt />
                <div className="mtlist-side">
-                    {mountains.data?.map((mountain, index) => {
-                         return <Mountain mountain={mountain} key={index} />;
+                    {mountains?.map((mountain, idx) => {
+                         return (
+                              <div className="mountains" key={idx}>
+                                   <Mountain mountain={mountain} />
+                                   <div
+                                        ref={ref}
+                                        className="Target-Element"
+                                   ></div>
+                              </div>
+                         );
                     })}
                </div>
           </StMTList>
@@ -34,7 +56,6 @@ const MtList = () => {
 export default MtList;
 
 const StMTList = styled.div`
-     padding: 20px 0;
      width: 1080px;
      height: 100%;
      display: flex;
@@ -48,5 +69,10 @@ const StMTList = styled.div`
           flex-wrap: wrap;
           justify-content: flex-start;
           gap: 4vh;
+          padding: 40px 0;
+          .mountains {
+               height: 100%;
+               width: 48%;
+          }
      }
 `;

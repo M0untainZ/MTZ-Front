@@ -107,11 +107,12 @@ const StHeader = styled.div`
           }
           .header-mypage-btn,
           .header-login-btn {
-               padding: 5px 30px;
+               padding: 5px 15px;
                margin-left: 20px;
           }
           .header-login-btn {
                color: white;
+               padding: 5px 30px;
                border: none;
                background-color: var(--color-button);
           }

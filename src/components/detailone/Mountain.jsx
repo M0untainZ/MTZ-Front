@@ -41,15 +41,11 @@ export default Mountain;
 const StMountainWrap = styled.div`
      padding: 5px 0;
      height: 100%;
-     width: 48%;
+     width: 100%;
      display: flex;
      flex-wrap: wrap;
      justify-content: flex-start;
      z-index: 0;
-     :first-child,
-     :nth-child(2) {
-          margin-top: 50px;
-     }
      .mountain-element {
           height: 25.5vh;
           width: 100%;

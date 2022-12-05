@@ -49,33 +49,31 @@ export const getProof = async () => {
 }
 
 export const getRegionTag = async (region) => {
-  const {data} = await axiosIns.get(`/api/mountains/${region}`);
+  const {data} = await axiosIns.get(`/api/mountains/region/${region}`);
   return data;
 }
 
-export const getSeasonTag = async (season) => {
-  const {data} = await axiosIns.get(`/api/mountains/${season}`);
-  return data;
-}
+// export const getSeasonTag = async (season) => {
+//   const {data} = await axiosIns.get(`/api/mountains/season/${season}`);
+//   return data;
+// }
 
-export const getTimeTag = async (time) => {
-  const {data} = await axiosIns.get(`/api/mountains/${time}`);
-  return data;
-}
+// export const getTimeTag = async (time) => {
+//   const {data} = await axiosIns.get(`/api/mountains/time/${time}`);
+//   return data;
+// }
 
-export const getLevelTag = async (level) => {
-  const {data} = await axiosIns.get(`/api/mountains/${level}`);
-  return data;
-}
+// export const getLevelTag = async (level) => {
+//   const {data} = await axiosIns.get(`/api/mountains/level/${level}`);
+//   return data;
+// }
 
 export const kakaoLogin = async (code) => {
   const data = await axiosIns.get(`/kakao/callback?code=${code}`)
   return data;
 }
 
-// 필터
 export const proofFilter = async (payload) => {
-    console.log(payload)
     const {data} = await axiosIns.post("/api/photos/filter", payload);
     return data;
 }

@@ -11,7 +11,6 @@ import {
 const SignUp = () => {
      const navigate = useNavigate();
      const dispatch = useDispatch();
-
      const initialState = {
           email: "",
           nickName: "",
@@ -24,13 +23,11 @@ const SignUp = () => {
      const [emailCheck, setEmailCheck] = useState(false);
      const [pwCheck, setPwCheck] = useState(false);
      const [emailState, setEmailState] = useState(false);
-
      const regEmail =
           /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 
      const regPw =
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
-
      const onChangeHandler = (e) => {
           const { name, value } = e.target;
           setUser({
@@ -85,7 +82,6 @@ const SignUp = () => {
           alert("회원가입이 완료되었습니다!");
           navigate("/login");
      };
-
 
   return (
     <StLoginContainer>
@@ -304,7 +300,6 @@ const StParentsBox = styled.div`
      width: 388px;
      text-align: left;
      margin-left: 10%;
-
      .helloLogo {
           margin-top: 25%;
           font-weight: bolder;
@@ -334,7 +329,6 @@ const StInputBox = styled.div`
                font-size: medium;
           }
      }
-
   .inputName {
     margin-top: 8%;
   }

@@ -60,12 +60,39 @@ export const getProof = async () => {
 //      return data;
 // };
 
-// export const postFilter = async (dataFilter) => {
-//     const {data} = await axiosIns.post("/api/photos/filter", dataFilter);
-//     return data;
+export const getRegionTag = async (region) => {
+  const {data} = await axiosIns.get(`/api/mountains/region/${region}`);
+  return data;
+}
+
+// export const getSeasonTag = async (season) => {
+//   const {data} = await axiosIns.get(`/api/mountains/season/${season}`);
+//   return data;
 // }
 
-// export const deleteProof = async () => {
-//     const {data} = await axiosIns.delete("/photos/sakje");
-//     return data;
+// export const getTimeTag = async (time) => {
+//   const {data} = await axiosIns.get(`/api/mountains/time/${time}`);
+//   return data;
 // }
+
+// export const getLevelTag = async (level) => {
+//   const {data} = await axiosIns.get(`/api/mountains/level/${level}`);
+//   return data;
+// }
+
+export const kakaoLogin = async (code) => {
+  const data = await axiosIns.get(`/kakao/callback?code=${code}`)
+  return data;
+}
+
+export const proofFilter = async (payload) => {
+    const {data} = await axiosIns.post("/api/photos/filter", payload);
+    return data;
+}
+
+export const deleteProof = async (payload) => {
+    const {data} = await axiosIns.delete("/api/photos/sakje", {
+      data: {certificationId:payload.id, photo:payload.photo}
+    });
+    return data;
+}

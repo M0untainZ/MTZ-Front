@@ -1,46 +1,78 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __getMountains } from "../../redux/modules/mountainsSlice";
+import { __infiniteScroll } from "../../redux/modules/mountainsSlice";
 import SearchMt from "./SearchMt";
 import Mountain from "./Mountain";
+import { useCallback } from "react";
+import { useInView } from "react-intersection-observer";
 
 const MtList = () => {
      const dispatch = useDispatch();
 
-     const mountains = useSelector((state) => state.mountains.mountains);
+     const [page, setPage] = useState(0);
+     const [ref, inView] = useInView();
 
-     console.log("test", mountains);
+     const { mountains, isLoading } = useSelector((state) => state.mountains);
+
+     const test = useSelector((state) => state.mountains.filter);
+
+     console.log("?", test, mountains, isLoading);
+
+     //infinite scroll
+     const getItems = useCallback(() => {
+          dispatch(__infiniteScroll(page));
+     }, [page, dispatch]);
 
      useEffect(() => {
-          dispatch(__getMountains());
-     }, [dispatch]);
+          getItems(page);
+     }, [getItems]);
+
+     useEffect(() => {
+          if (inView && !isLoading) {
+               setPage((prevState) => prevState + 1);
+          }
+     }, [inView, isLoading]);
 
      return (
           <StMTList>
                <SearchMt />
-
-               {mountains.data?.map((mountain, index) => {
-                    return (
-                         <div key={index}>
-                              <Mountain mountain={mountain} />
-                         </div>
-                    );
-               })}
+               <div className="mtlist-side">
+                    {mountains?.map((mountain, idx) => {
+                         return (
+                              <div className="mountains" key={idx}>
+                                   <Mountain mountain={mountain} />
+                                   <div
+                                        ref={ref}
+                                        className="Target-Element"
+                                   ></div>
+                              </div>
+                         );
+                    })}
+               </div>
           </StMTList>
      );
 };
 export default MtList;
 
 const StMTList = styled.div`
-     padding: 20px 0;
-     width: 74%;
+     width: 1080px;
      height: 100%;
      display: flex;
      flex-direction: column;
-     align-items: flex-end;
+     align-items: flex-start;
      gap: 5%;
-     div {
+     box-sizing: border-box;
+     .mtlist-side {
           width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 4vh;
+          padding: 40px 0;
+          .mountains {
+               height: 100%;
+               width: 48%;
+          }
      }
 `;

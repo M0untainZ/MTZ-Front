@@ -24,6 +24,9 @@ const PhotoModal = () => {
           prevEl: prevRef.current,
           nextEl: nextRef.current,
         },
+        pagination: {
+          clickable: true,
+        },
         slidesPerView: 4,
         onBeforeInit: (swiper) => {
           swiper.params.navigation.prevEl = prevRef.current;
@@ -64,10 +67,13 @@ const StModalBox = styled.div`
     object-fit: cover;
     width: 35vh;
     height: 35vh;
-    margin-right: 20px;
     :hover {
       width: 45vh;
       height: 45vh;
     }
+  }
+  .swiper {
+    overflow: hidden;
+    width: 100%;
   }
 `;

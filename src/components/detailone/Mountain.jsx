@@ -1,22 +1,35 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Mountain = ({ mountain }) => {
+     const navigate = useNavigate();
+
      return (
           <StMountainWrap>
-               <div className="mountain-element-style">
-                    <img src={mountain.img} alt="mountain" />
-                    <div className="mountain-element-info-style">
-                         <span className="mountain-element-name-style">
+               <div
+                    className="mountain-element"
+                    onClick={() => {
+                         navigate(`/detail/${mountain.id}`);
+                    }}
+               >
+                    <img
+                         src={mountain.img}
+                         className="mountain-img"
+                         alt="mountain"
+                    />
+                    <div className="mountain-element-info">
+                         <span className="mountain-element-name">
                               {mountain.name}
                          </span>
-                         <span className="mountain-element-like-total-style">
-                              ❤<span>+{mountain.mountainLikeTotal}</span>
-                         </span>
-                    </div>
-                    <div className="mountain-element-quiz-style">
-                         <button className="mountain-element-quiz-btn-style">
-                              Q
-                         </button>
+                         <p className="mountain-element-like-total">
+                              <img
+                                   alt=""
+                                   className="heartImg"
+                                   src="/icons/icon_redheart.png"
+                              />
+                              &nbsp;
+                              <span> {mountain.mountainLikeTotal}+</span>
+                         </p>
                     </div>
                </div>
           </StMountainWrap>
@@ -26,51 +39,69 @@ const Mountain = ({ mountain }) => {
 export default Mountain;
 
 const StMountainWrap = styled.div`
-     padding: 20px 0;
-     width: 100%;
+     padding: 5px 0;
      height: 100%;
-     .mountain-element-style {
-          background-position: center;
-          background-size: cover;
-          height: 240px;
+     width: 100%;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     z-index: 0;
+     .mountain-element {
+          height: 25.5vh;
           width: 100%;
-          margin-bottom: 3%;
+          margin-bottom: 1%;
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: flex-end;
           position: relative;
-          img {
+          cursor: pointer;
+
+          :hover {
+               transform: scale(1.04);
+               border: 3px solid #fff;
+               z-index: 3;
+          }
+          .mountain-img {
                position: absolute;
                width: 100%;
                height: 100%;
                object-fit: cover;
+               object-position: 30% center;
                z-index: 0;
           }
-          .mountain-element-info-style {
+          .mountain-element-info {
                z-index: 1;
                box-sizing: border-box;
-               height: 76px;
+               height: 48px;
                display: flex;
                align-items: center;
                justify-content: space-between;
                background-color: rgba(255, 255, 255, 0.7);
                padding: 0 20px;
-               font-size: 30px;
+               font-size: 26px;
 
-               .mountain-element-name-style {
+               .mountain-element-name {
                     font-weight: bold;
                }
-               .mountain-element-like-total-style {
-                    font-size: 24px;
+               .mountain-element-like-total {
+                    display: flex;
+                    align-items: center;
+                    font-size: 20px;
+                    .heartImg {
+                         width: 24px;
+                         height: 24px;
+                    }
                }
           }
-          .mountain-element-quiz-style {
+          .mountain-element-quiz {
                z-index: 1;
                display: flex;
                justify-content: flex-end;
+               align-items: flex-end;
                padding: 20px;
-               .mountain-element-quiz-btn-style {
+               box-sizing: border-box;
+               .mountain-element-quiz-btn {
                     width: 60px;
                     height: 60px;
                     font-size: 24px;

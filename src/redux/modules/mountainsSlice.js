@@ -3,7 +3,7 @@ import axios from "axios";
 
 //전체 산리스트 불러오기
 export const __getMountains = createAsyncThunk(
-     "getMountains",
+     "GETMOUNTAINS",
      async (payload, thunkAPI) => {
           try {
                const { data } = await axios.get(
@@ -15,12 +15,33 @@ export const __getMountains = createAsyncThunk(
           }
      }
 );
+
+//무한 스크롤
+export const __infiniteScroll = createAsyncThunk(
+     "INFINITE_SCROLL",
+     async (page, thunkAPI) => {
+          try {
+               const { data } = await axios.get(
+                    `${process.env.REACT_APP_AXIOS_API}/api/mountains?page=${page}`
+               );
+               if (data.data.length === 0) {
+                    throw data;
+               }
+               console.log("test", data.data);
+               return thunkAPI.fulfillWithValue(data.data);
+          } catch (e) {
+               return thunkAPI.rejectWithValue(e);
+          }
+     }
+);
+
 //필터에 따라 상세 1 산 리스트 불러오기
 export const __postFilterMountains = createAsyncThunk(
-     "postMountains",
+     "POSTMOUNTAINS",
 
      async (payload, thunkAPI) => {
           try {
+               console.log("^^", payload);
                const { data } = await axios.post(
                     `${process.env.REACT_APP_AXIOS_API}/api/mountains/filter`,
                     payload
@@ -33,7 +54,7 @@ export const __postFilterMountains = createAsyncThunk(
 );
 //상세 1 검색하기
 export const __postSearchMountains = createAsyncThunk(
-     "getSearchMountains",
+     "GETSEARCHMOUNTAINS",
      async (payload, thunkAPI) => {
           try {
                const { data } = await axios.post(
@@ -55,53 +76,32 @@ const initialState = {
           season: "",
           level: "",
      },
-
-     isseason: false,
-     isregion: false,
-     islevel: false,
-     istime: false,
 };
 
 export const mountainsSlice = createSlice({
      name: "mountains",
      initialState,
-     reducers: {
-          //필터 팁 - 선택확인(상태관리)
-          isSeasonFalse: (state) => {
-               state.isseason = false;
-          },
-          isRegionFalse: (state) => {
-               state.isregion = false;
-          },
-          isLevelFalse: (state) => {
-               state.islevel = false;
-          },
-          isTimeFalse: (state) => {
-               state.istime = false;
-          },
-     },
+     reducers: {},
      extraReducers: {
-          [__getMountains.fulfilled]: (state, action) => {
-               state.mountains = action.payload;
+          // [__getMountains.fulfilled]: (state, action) => {
+          //      state.mountains = action.payload;
+          // },
+          // [__getMountains.rejected]: (state, action) => {},
+          [__infiniteScroll.pending]: (state, action) => {
+               state.mountains = [];
+               state.isLoading = true;
           },
-          [__getMountains.rejected]: (state, action) => {},
+          [__infiniteScroll.fulfilled]: (state, action) => {
+               console.log("scroll", action);
+               state.filter = {};
+               state.mountains.push(...action.payload);
+               state.isLoading = false;
+          },
+          [__infiniteScroll.rejected]: (state, action) => {},
           [__postFilterMountains.fulfilled]: (state, action) => {
                console.log("filter", action);
                state.filter = action.meta.arg;
-               state.mountains = action.payload;
-               //filter에 따라 뜨도록 설정(전역관리)
-               if (Object.keys(action.meta.arg).includes("season")) {
-                    state.isseason = true;
-               }
-               if (Object.keys(action.meta.arg).includes("region")) {
-                    state.isregion = true;
-               }
-               if (Object.keys(action.meta.arg).includes("level")) {
-                    state.islevel = true;
-               }
-               if (Object.keys(action.meta.arg).includes("time")) {
-                    state.istime = true;
-               }
+               state.mountains = action.payload.data;
           },
           [__postFilterMountains.rejected]: (state, action) => {},
           [__postSearchMountains.fulfilled]: (state, action) => {
@@ -111,6 +111,5 @@ export const mountainsSlice = createSlice({
      },
 });
 
-export const { isSeasonFalse, isRegionFalse, isTimeFalse, isLevelFalse } =
-     mountainsSlice.actions;
+export const { isFilters, isBtnFalse, isBtnTrue } = mountainsSlice.actions;
 export default mountainsSlice.reducer;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { __imgPost } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
 import imageCompression from "browser-image-compression";
+import { MountGeolocation } from "browser-image-compression";
 const MountModal = () => {
   const dispatch = useDispatch();
   const mountId = useParams();

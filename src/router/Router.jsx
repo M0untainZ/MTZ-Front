@@ -17,8 +17,8 @@ import Notfound from "../common/Notfound";
 const Router = () => {
      return (
           <BrowserRouter>
-               <Header />
                <Layout>
+                    <Header />
                     <Routes>
                          <Route path="/" element={<Main />} />
                          <Route path="/mypage" element={<MyPage />} />

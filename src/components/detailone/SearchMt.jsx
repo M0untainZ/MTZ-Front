@@ -31,17 +31,14 @@ const SearchMt = () => {
           <StSearchMT>
                <div>
                     <input
-                         className="search-input-style"
+                         className="search-input"
                          name="keyword"
                          type="text"
                          placeholder="궁금하신 산을 검색해주세요"
                          onChange={onChangeSearch}
                          onKeyPress={onSearchEnter}
                     />
-                    <button
-                         className="search-btn-style"
-                         onClick={onClickSearch}
-                    >
+                    <button className="search-btn" onClick={onClickSearch}>
                          <BiSearch />
                     </button>
                </div>
@@ -67,21 +64,21 @@ const StSearchMT = styled.div`
           position: relative;
           display: flex;
           align-items: center;
-          .search-input-style {
+          .search-input {
                width: 525px;
                height: 50px;
                padding: 0 25px 0 40px;
                box-sizing: border-box;
-               border: 1px solid var(--color-border);
+               border: 2px solid var(--color-border);
                position: relative;
           }
-          .search-btn-style {
+          .search-btn {
                padding: 0 10px;
                position: absolute;
                left: 0;
                display: flex;
                align-items: center;
-               font-size: 19px;
+               font-size: 25px;
                background-color: transparent;
                border: none;
           }

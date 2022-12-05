@@ -5,7 +5,6 @@ import FilterList from "../components/certification/FilterList";
 import { BiArrowToTop } from "react-icons/bi";
 
 const Certification = () => {
-
      const onTopHandler = () => {
           window.scrollTo({
                top: 0
@@ -39,18 +38,19 @@ const StCertification = styled.div`
      justify-content: center;
      margin-top: 30px;
      position: relative;
+     margin-top: 9vh;
      .go-top {
-        width: 40px;
-        height: 40px;
-        border: 1px solid purple;
-        border-radius: 50%;
-        position: fixed;
-        bottom: 50px;
-        right: 100px;
-        font-size: 25px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+          width: 40px;
+          height: 40px;
+          border: 1px solid purple;
+          border-radius: 50%;
+          position: fixed;
+          bottom: 50px;
+          right: 100px;
+          font-size: 25px;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+     }
 `;

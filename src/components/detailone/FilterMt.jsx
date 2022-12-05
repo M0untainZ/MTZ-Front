@@ -1,21 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
      __getMountains,
      __postFilterMountains,
-     isSeasonFalse,
-     isRegionFalse,
-     isLevelFalse,
-     isTimeFalse,
 } from "../../redux/modules/mountainsSlice";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { redirect, useNavigate } from "react-router-dom";
 const FilterMt = () => {
      const dispatch = useDispatch();
-
      const [filter, setFilter] = useState();
-     const [filterbox, setFilterbox] = useState();
-
+     const initialState = {};
      //리스트 체크박스
      const regionList = [
           { id: 0, name: "region", value: "서울" },
@@ -37,93 +31,29 @@ const FilterMt = () => {
           { id: 1, name: "level", value: "중급" },
           { id: 2, name: "level", value: "고급" },
      ];
-
      //필터 선택 onChange - time
      const onFilterTime = (e) => {
-          const checkboxes = document.getElementsByName("time");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
           console.log("확인", filter);
      };
      //필터 선택 onChange - region
-     const onFilterRegion = (e) => {
-          const checkboxes = document.getElementsByName("region");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-          // document
-          //      .getElementsByName("region")
-          //      .forEach((el) => (el.checked = false));
-          // e.target.checked = true;
-
-          //새로 checked된 값들은 value들은 새로운 입력값을 줌
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          //checked된 값은 삭제 시켜줌
-          if (!e.target.checked) {
-               delete filter["region"];
-          }
+     const onFilterSelect = (e) => {
+          const { name, value } = e.target;
+          setFilter({ ...filter, [name]: value });
           console.log("확인", filter);
      };
-     //필터 선택 onChange - season
-     const onFilterSeason = (e) => {
-          const checkboxes = document.getElementsByName("season");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          if (!e.target.checked) {
-               delete filter["season"];
-          }
-          console.log("확인", filter);
-     };
-     //필터 선택 onChange - level
-     const onFilterLevel = (e) => {
-          const checkboxes = document.getElementsByName("level");
-          for (let i = 0; i < checkboxes.length; i++) {
-               if (checkboxes[i] !== e.target) {
-                    checkboxes[i].checked = false;
-               }
-          }
-
-          if (e.target.checked) {
-               const { name, value } = e.target;
-               setFilter({ ...filter, [name]: value });
-          }
-          if (!e.target.checked) {
-               delete filter["level"];
-          }
-          console.log("확인", filter);
-     };
-
      //필터에 따른 산 리스트 불러오기
      const onFilterList = () => {
           dispatch(__postFilterMountains(filter));
      };
      //필터 초기화 시 -> 전체 산 리스트 불러오기
      const onFilterListnope = () => {
-          dispatch(__getMountains());
-          dispatch(isSeasonFalse());
-          dispatch(isRegionFalse());
-          dispatch(isLevelFalse());
-          dispatch(isTimeFalse());
+          dispatch(__postFilterMountains(initialState));
+          // dispatch(__getMountains());
           setFilter("");
      };
-
+     console.log("확인", filter);
      return (
           <StFilterMT>
                <form className="checkbox-list-style">
@@ -150,15 +80,19 @@ const FilterMt = () => {
                     </div>
                     <div>
                          <p>소요시간</p>
+                         <div className="marker-name">
+                              <span>~ 1시간</span>
+                              <span>6시간 이상~</span>
+                         </div>
                          <StFilterSlide>
-                              <div className="marker">
-                                   <span>~1시간</span>
-                                   <span></span>
-                                   <span></span>
-                                   <span></span>
-                                   <span></span>
-                                   <span>6시간 이상</span>
-                              </div>
+                              <datalist id="markers">
+                                   <option value="1"></option>
+                                   <option value="2"></option>
+                                   <option value="3"></option>
+                                   <option value="4"></option>
+                                   <option value="5"></option>
+                                   <option value="6"></option>
+                              </datalist>
                               <input
                                    type="range"
                                    min="1"
@@ -176,13 +110,13 @@ const FilterMt = () => {
                          <div className="list region-style">
                               {regionList.map((item) => (
                                    <label key={item.id}>
-                                        <input
-                                             type="checkbox"
+                                        <StInput
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterRegion}
+                                             onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -192,13 +126,13 @@ const FilterMt = () => {
                          <div className="list season-style">
                               {seasonList.map((item) => (
                                    <label key={item.id}>
-                                        <input
-                                             type="checkbox"
+                                        <StInput
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterSeason}
+                                             onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -208,13 +142,13 @@ const FilterMt = () => {
                          <div className="list level-style">
                               {levelList.map((item) => (
                                    <label key={item.id}>
-                                        <input
-                                             type="checkbox"
+                                        <StInput
+                                             type="radio"
                                              name={item.name}
                                              value={item.value}
-                                             onClick={onFilterLevel}
+                                             onClick={onFilterSelect}
                                         />
-                                        {item.value}
+                                        &nbsp;{item.value}
                                    </label>
                               ))}
                          </div>
@@ -227,8 +161,8 @@ const FilterMt = () => {
 export default FilterMt;
 
 const StFilterMT = styled.div`
-     padding: 40px 0;
-     width: 14%;
+     padding: 20px 0;
+     width: 18.5%;
      height: 100%;
      display: flex;
      flex-direction: column;
@@ -238,13 +172,16 @@ const StFilterMT = styled.div`
           display: flex;
           justify-content: space-between;
           button {
-               width: 47%;
+               width: 49%;
+               min-height: 44px;
                padding: 5px 0;
                font-size: 18px;
                font-weight: 500;
                border: 1px solid black;
+               cursor: pointer;
                :nth-child(2) {
-                    background-color: #d9d9d9;
+                    background-color: var(--color-button);
+                    color: white;
                }
           }
      }
@@ -259,22 +196,46 @@ const StFilterMT = styled.div`
           }
           .list {
                display: flex;
-               flex-direction: column;
                flex-wrap: wrap;
                align-content: space-between;
-               gap: 5%;
-               height: 15.2vh;
-               padding: 5px;
+               gap: 35%;
                label {
-                    width: fit-content;
-                    input[type="checkbox"] {
-                         accent-color: var(--color-border);
-                    }
+                    width: 30%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    color: var(--color-border);
+                    padding: 3px 0;
+                    font-size: 18px;
                }
           }
-          .season-style {
-               height: 6.9vh;
+     }
+     .marker-name {
+          display: flex;
+          justify-content: space-between;
+          width: 105%;
+          margin-bottom: -5px;
+          span {
+               font-size: 14px;
           }
+     }
+`;
+
+const StInput = styled.input`
+     appearance: none;
+     border: 1.5px solid gainsboro;
+     width: 1.5rem;
+     height: 1.5rem;
+     cursor: pointer;
+     margin: 0;
+
+     &:checked {
+          border-color: transparent;
+          background-image: url("/icons/Property 1=check.png");
+          background-size: 100% 100%;
+          background-position: 50%;
+          background-repeat: no-repeat;
      }
 `;
 
@@ -286,21 +247,45 @@ const StFilterSlide = styled.div`
      justify-content: flex-start;
      align-items: center;
      position: relative;
-     .marker {
-          width: 98%;
-          margin-bottom: 0;
+     #markers {
+          margin-left: 10px;
+          width: 120%;
+          min-height: 100%;
           display: flex;
-          justify-content: space-between;
-          span {
-               font-size: 13px;
-          }
+          justify-content: space-evenly;
+          align-items: center;
+          position: relative;
+          top: 20px;
      }
-     input {
-          width: 90%;
-     }
-     /* input[type="range"] {
-          width: 85%;
+     input[type="range"] {
+          width: 97%;
+          margin-left: 15px;
           -webkit-appearance: none;
           background: transparent;
-     } */
+          border-radius: 30px;
+          border: 1px solid var(--color-border);
+          accent-color: var(--color-border);
+          box-sizing: border-box;
+          padding: 0 1px;
+          z-index: 1;
+     }
+     input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background: var(--color-border);
+          border: 1px solid var(--color-border);
+          cursor: pointer;
+          height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          z-index: 3;
+     }
+     #markers option {
+          border-right: 1px solid var(--color-border);
+          min-height: 12px;
+          box-sizing: border-box;
+          :first-child,
+          :last-child {
+               border: none;
+          }
+     }
 `;

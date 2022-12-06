@@ -63,6 +63,7 @@ const MountModal = () => {
     dispatch(__imgPost({ formData, id: id }));
     alert("사진이 등록되었습니다.");
     setModal(!modal);
+    setSelectImg(false);
   };
   const ModalSwitch = () => {
     if (token) {

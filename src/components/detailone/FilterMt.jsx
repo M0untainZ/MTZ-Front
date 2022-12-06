@@ -3,10 +3,14 @@ import styled from "styled-components";
 import {
      __getMountains,
      __postFilterMountains,
+     resetData
 } from "../../redux/modules/mountainsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
+
 const FilterMt = () => {
+     const filterData = useSelector((state) => state.mountains.filterData)
+     const filterDataState = useSelector((state) => state.mountains.filterDataState)
      const dispatch = useDispatch();
      const [filter, setFilter] = useState();
      const initialState = {};
@@ -35,13 +39,13 @@ const FilterMt = () => {
      const onFilterTime = (e) => {
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
-          console.log("확인", filter);
+          // console.log("확인", filter);
      };
      //필터 선택 onChange - region
      const onFilterSelect = (e) => {
           const { name, value } = e.target;
           setFilter({ ...filter, [name]: value });
-          console.log("확인", filter);
+          // console.log("확인", filter);
      };
      //필터에 따른 산 리스트 불러오기
      const onFilterList = () => {
@@ -52,8 +56,41 @@ const FilterMt = () => {
           dispatch(__postFilterMountains(initialState));
           // dispatch(__getMountains());
           setFilter("");
+          dispatch(resetData());
      };
-     console.log("확인", filter);
+
+
+     //메인에서 클릭시 체크된 상태로 변경 및 해당 캌테고리 값 불러오기
+     useEffect(() => {
+          if (filterDataState && filterData?.region) {
+               dispatch(__postFilterMountains({region: filterData.region}));
+               const checkRegion = document.getElementsByClassName("region-data");
+               for (let i = 0; i < checkRegion.length; i++) {
+                    if (checkRegion[i].value === filterData?.region) {
+                         checkRegion[i].checked = true;
+                    }
+               }
+          }
+          if (filterDataState && filterData?.level) {
+               dispatch(__postFilterMountains({level: filterData.level}));
+               const checkLevel = document.getElementsByClassName("level-data");
+               for (let i = 0; i < checkLevel.length; i++) {
+                    if (checkLevel[i].value === filterData?.level) {
+                         checkLevel[i].checked = true;
+                    }
+               }
+          }
+          if (filterDataState && filterData?.season) {
+               dispatch(__postFilterMountains({season: filterData.season}));
+               const checkSeason = document.getElementsByClassName("season-data");
+               for (let i = 0; i < checkSeason.length; i++) {
+                    if (checkSeason[i].value === filterData?.season) {
+                         checkSeason[i].checked = true;
+                    }
+               }
+          }
+     }, [])
+
      return (
           <StFilterMT>
                <form className="checkbox-list-style">
@@ -115,6 +152,7 @@ const FilterMt = () => {
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
+                                             className="region-data"
                                         />
                                         &nbsp;{item.value}
                                    </label>
@@ -131,6 +169,7 @@ const FilterMt = () => {
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
+                                             className="season-data"
                                         />
                                         &nbsp;{item.value}
                                    </label>
@@ -147,6 +186,7 @@ const FilterMt = () => {
                                              name={item.name}
                                              value={item.value}
                                              onClick={onFilterSelect}
+                                             className="level-data"
                                         />
                                         &nbsp;{item.value}
                                    </label>

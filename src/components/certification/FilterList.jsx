@@ -129,7 +129,7 @@ const FilterList = () => {
                                    value={el.value}
                                    onChange={onChangeRegionList}
                               />
-                              {el.value}
+                              &nbsp;{el.value}
                          </label>
                     ))}
                </div>
@@ -177,6 +177,22 @@ const StFilterContainer = styled.div`
                align-items: center;
                width: 40%;
           }
+          input {
+               appearance: none;
+               border: 1.5px solid gainsboro;
+               width: 1.5rem;
+               height: 1.5rem;
+               cursor: pointer;
+               margin: 0;
+               &:checked {
+                    border-color: transparent;
+                    background-image: url("/icons/Property 1=check.png");
+                    background-size: 100% 100%;
+                    background-position: 50%;
+                    background-repeat: no-repeat;
+               }
+          }
+          
      }
      select {
           width: 150px;

@@ -95,5 +95,5 @@ export const MypageSlice = createSlice({
     },
   },
 });
-export const { overlapNameChk, allbadgelist } = MypageSlice.actions;
+export const { overlapNameChk } = MypageSlice.actions;
 export default MypageSlice.reducer;

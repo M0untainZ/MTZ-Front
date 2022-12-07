@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  __postSearchMountains,
   __postFilterMountains,
   resetData,
 } from "../../redux/modules/mountainsSlice";
-import { useEffect, useState } from "react";
 
 const FilterResult = () => {
   const dispatch = useDispatch();
@@ -14,8 +12,6 @@ const FilterResult = () => {
   const filters = useSelector((state) => state.mountains.filter);
 
   const initialState = {};
-
-  // console.log("이전", isfilters);
 
   //필터 팁 x 눌렀을 때 팁 사라짐 효과
   const onSeasonDelBtn = (e) => {

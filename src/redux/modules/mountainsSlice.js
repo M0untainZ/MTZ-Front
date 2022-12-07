@@ -112,14 +112,12 @@ export const mountainsSlice = createSlice({
       state.isLoading = true;
     },
     [__infiniteScroll.fulfilled]: (state, action) => {
-      // console.log("scroll", action);
       state.filter = {};
       state.mountains.push(...action.payload);
       state.isLoading = false;
     },
     [__infiniteScroll.rejected]: (state, action) => {},
     [__postFilterMountains.fulfilled]: (state, action) => {
-      console.log("filter", action);
       state.filter = action.meta.arg;
       state.mountains = action.payload.data;
     },

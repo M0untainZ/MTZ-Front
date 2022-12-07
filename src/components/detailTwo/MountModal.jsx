@@ -7,7 +7,7 @@ import DetailTwoModal from "./modal/detailTwoModal";
 import imageCompression from "browser-image-compression";
 import { MountGeolocation } from "browser-image-compression";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const MountModal = () => {
   const dispatch = useDispatch();
@@ -64,18 +64,18 @@ const MountModal = () => {
     setModal(!modal);
     toast.success("사진이 등록되었습니다.", {
       autoClose: 1500,
-      position: toast.POSITION.TOP_CENTER
-    })
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
-  
+
   const ModalSwitch = () => {
     if (token) {
       setModal(!modal);
     } else {
-      toast.error("로그인이 필요한 기능입니다." , {
+      toast.error("로그인이 필요한 기능입니다.", {
         autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER
-      })
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
@@ -166,6 +166,7 @@ const StButton = styled.button`
   margin-right: 27vh;
   color: white;
   background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 `;
 
 const StModalBox = styled.div`

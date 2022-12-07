@@ -34,7 +34,7 @@ const FilterMt = () => {
      //필터 선택 onChange - time
      const onFilterTime = (e) => {
           const { name, value } = e.target;
-          setFilter({ ...filter, [name]: value });
+          setFilter({ ...filter, [name]: `${value}시간` });
           console.log("확인", filter);
      };
      //필터 선택 onChange - region
@@ -86,12 +86,12 @@ const FilterMt = () => {
                          </div>
                          <StFilterSlide>
                               <datalist id="markers">
-                                   <option value="1"></option>
-                                   <option value="2"></option>
-                                   <option value="3"></option>
-                                   <option value="4"></option>
-                                   <option value="5"></option>
-                                   <option value="6"></option>
+                                   <option value="1시간"></option>
+                                   <option value="2시간"></option>
+                                   <option value="3시간"></option>
+                                   <option value="4시간"></option>
+                                   <option value="5시간"></option>
+                                   <option value="6시간"></option>
                               </datalist>
                               <input
                                    type="range"

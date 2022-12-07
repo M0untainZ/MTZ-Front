@@ -141,7 +141,7 @@ const StHeader = styled.div`
     button {
       border: none;
       background-color: transparent;
-      color: #fff;
+      color: #000;
     }
     button {
       border-radius: 22px;
@@ -152,6 +152,7 @@ const StHeader = styled.div`
     }
     .header-title {
       font-weight: bold;
+      color: #000;
       padding: 0 1vh;
     }
     span {
@@ -160,8 +161,9 @@ const StHeader = styled.div`
     .header-login-btn {
       padding: 5px 15px;
       margin-left: 20px;
-      background-color: var(--color-button);
       border: none;
+      color: #fff;
+      background-color: var(--color-button);
     }
     .header-login-btn {
       color: white;

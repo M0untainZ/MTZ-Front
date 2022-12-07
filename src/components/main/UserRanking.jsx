@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { getMain } from "../../shared/api";
+import { useQuery } from "react-query";
 
 const UserRanking = () => {
+     const { data } = useQuery(["main"], getMain);
+
      return (
           <>
                <StRankingWrap>
@@ -9,27 +13,18 @@ const UserRanking = () => {
                     <StUserRank>
                          <StUserInfo>
                               <span className="rank">1</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
+                              <img alt="" src={`${data?.data.topMembersPhoto[0]}`} />
+                              <p className="user-name">{`${data?.data.topMembers[0]}`}</p>
                          </StUserInfo>
                          <StUserInfo>
                               <span className="rank">2</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
+                              <img alt="" src={`${data?.data.topMembersPhoto[1]}`} />
+                              <p className="user-name">{`${data?.data.topMembers[1]}`}</p>
                          </StUserInfo>
                          <StUserInfo>
                               <span className="rank">3</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
+                              <img alt="" src={`${data?.data.topMembersPhoto[2]}`} />
+                              <p className="user-name">{`${data?.data.topMembers[2]}`}</p>
                          </StUserInfo>
                     </StUserRank>
                </StRankingWrap>
@@ -68,7 +63,6 @@ const StUserInfo = styled.div`
      img {
           width: 80px;
           height: 80px;
-          border: 1px solid black;
           border-radius: 30px;
           margin-top: 10%;
      }
@@ -77,7 +71,7 @@ const StUserInfo = styled.div`
           justify-content: center;
           align-items: center;
           position: absolute;
-          top: 18%;
+          top: 20%;
           left: 40%;
           width: 20px;
           height: 20px;

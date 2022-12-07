@@ -12,6 +12,7 @@ import Header from "../common/Header";
 import Layout from "../common/Layout";
 import Footer from "../common/Footer";
 import Kakao from "../components/kakao/Kakao";
+import Notfound from "../common/Notfound";
 
 const Router = () => {
      return (
@@ -34,6 +35,7 @@ const Router = () => {
                               path="/oauth/callback/kakao"
                               element={<Kakao />}
                          />
+                         <Route path="/*" element={<Notfound />} />
                     </Routes>
                </Layout>
                <Footer />

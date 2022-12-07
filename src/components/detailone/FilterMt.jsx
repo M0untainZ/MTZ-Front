@@ -1,8 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { __postFilterMountains } from "../../redux/modules/mountainsSlice";
-import { useDispatch } from "react-redux";
+import {
+  __getMountains,
+  __postFilterMountains,
+  resetData,
+} from "../../redux/modules/mountainsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { redirect, useNavigate } from "react-router-dom";
+
 const FilterMt = () => {
+  const filterData = useSelector((state) => state.mountains.filterData);
+  const filterDataState = useSelector(
+    (state) => state.mountains.filterDataState
+  );
   const dispatch = useDispatch();
   const [filter, setFilter] = useState();
   const initialState = {};
@@ -31,11 +41,13 @@ const FilterMt = () => {
   const onFilterTime = (e) => {
     const { name, value } = e.target;
     setFilter({ ...filter, [name]: value });
+    // console.log("확인", filter);
   };
   //필터 선택 onChange - region
   const onFilterSelect = (e) => {
     const { name, value } = e.target;
     setFilter({ ...filter, [name]: value });
+    // console.log("확인", filter);
   };
   //필터에 따른 산 리스트 불러오기
   const onFilterList = () => {
@@ -44,8 +56,45 @@ const FilterMt = () => {
   //필터 초기화 시 -> 전체 산 리스트 불러오기
   const onFilterListnope = () => {
     dispatch(__postFilterMountains(initialState));
+    // dispatch(__getMountains());
     setFilter("");
+    dispatch(resetData());
   };
+
+  //메인에서 클릭시 체크된 상태로 변경 및 해당 캌테고리 값 불러오기
+  useEffect(() => {
+    if (filterDataState && filterData?.region) {
+      dispatch(__postFilterMountains({ region: filterData.region }));
+      const checkRegion = document.getElementsByClassName("region-data");
+      for (let i = 0; i < checkRegion.length; i++) {
+        if (checkRegion[i].value === filterData?.region) {
+          checkRegion[i].checked = true;
+        }
+      }
+    }
+    if (filterDataState && filterData?.level) {
+      dispatch(__postFilterMountains({ level: filterData.level }));
+      const checkLevel = document.getElementsByClassName("level-data");
+      for (let i = 0; i < checkLevel.length; i++) {
+        if (checkLevel[i].value === filterData?.level) {
+          checkLevel[i].checked = true;
+        }
+      }
+    }
+    if (filterDataState && filterData?.season) {
+      dispatch(__postFilterMountains({ season: filterData.season }));
+      const checkSeason = document.getElementsByClassName("season-data");
+      for (let i = 0; i < checkSeason.length; i++) {
+        if (checkSeason[i].value === filterData?.season) {
+          checkSeason[i].checked = true;
+        }
+      }
+    }
+    if (filterDataState && filterData?.time) {
+      dispatch(__postFilterMountains({ time: filterData.time }));
+    }
+  }, []);
+
   return (
     <StFilterMT>
       <form className="checkbox-list-style">
@@ -78,12 +127,12 @@ const FilterMt = () => {
           </div>
           <StFilterSlide>
             <datalist id="markers">
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
+              <option value="1시간"></option>
+              <option value="2시간"></option>
+              <option value="3시간"></option>
+              <option value="4시간"></option>
+              <option value="5시간"></option>
+              <option value="6시간"></option>
             </datalist>
             <input
               type="range"
@@ -93,6 +142,7 @@ const FilterMt = () => {
               list="markers"
               name="time"
               defaultValue="0"
+              className="time-data"
               onClick={onFilterTime}
             />
           </StFilterSlide>
@@ -107,6 +157,7 @@ const FilterMt = () => {
                   name={item.name}
                   value={item.value}
                   onClick={onFilterSelect}
+                  className="region-data"
                 />
                 &nbsp;{item.value}
               </label>
@@ -123,6 +174,7 @@ const FilterMt = () => {
                   name={item.name}
                   value={item.value}
                   onClick={onFilterSelect}
+                  className="season-data"
                 />
                 &nbsp;{item.value}
               </label>
@@ -139,6 +191,7 @@ const FilterMt = () => {
                   name={item.name}
                   value={item.value}
                   onClick={onFilterSelect}
+                  className="level-data"
                 />
                 &nbsp;{item.value}
               </label>

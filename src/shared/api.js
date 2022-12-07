@@ -1,27 +1,3 @@
-// import axios from "axios";
-
-// // `${process.env.REACT_APP_AXIOS_API}
-
-// const api = axios.create({
-//      baseURL: `${process.env.REACT_APP_AXIOS_API}/api`,
-// });
-
-// api.interceptors.request.use(
-//      function (config) {
-//           console.log(config);
-//           if (config.url !== "login") {
-//                //토큰
-//           }
-//           console.log(config);
-//           return config;
-//      },
-//      function (error) {
-//           return Promise.reject(error);
-//      }
-// );
-
-// export default api;
-
 import axios from "axios";
 
 export const axiosIns = axios.create({
@@ -60,12 +36,19 @@ export const getProof = async () => {
 //      return data;
 // };
 
-// export const postFilter = async (dataFilter) => {
-//     const {data} = await axiosIns.post("/api/photos/filter", dataFilter);
-//     return data;
-// }
+export const kakaoLogin = async (code) => {
+  const data = await axiosIns.get(`/kakao/callback?code=${code}`)
+  return data;
+}
 
-// export const deleteProof = async () => {
-//     const {data} = await axiosIns.delete("/photos/sakje");
-//     return data;
-// }
+export const proofFilter = async (payload) => {
+    const {data} = await axiosIns.post("/api/photos/filter", payload);
+    return data;
+}
+
+export const deleteProof = async (payload) => {
+    const {data} = await axiosIns.delete("/api/photos/sakje", {
+      data: {certificationId:payload.id, photo:payload.photo}
+    });
+    return data;
+}

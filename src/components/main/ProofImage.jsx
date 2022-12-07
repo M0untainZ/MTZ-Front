@@ -9,6 +9,7 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const ProofImage = () => {
+  const navigate = useNavigate();
   const [mainProof, setMainProof] = useState([]);
   const { data } = useQuery(["main"], getMain, {
     onSuccess: (config) =>
@@ -51,11 +52,25 @@ const ProofImage = () => {
           </PrevBtn>
           {swiperOptions && (
             <Swiper {...swiperOptions} className="swiper">
-              {mainProof.map((el, idx) => (
-                <SwiperSlide className="swiper-slide" key={idx}>
-                  <img src={`${el.photo}`} alt="" />
-                </SwiperSlide>
-              ))}
+              {mainProof.map((el, idx) => {
+                if(idx === 9) {
+                  return (
+                       <SwiperSlide className="swiper-slide" key={idx}>
+                            <div className="see-more" onClick={() => navigate("/certification")}>
+                              <img src="icons/icon_dot.png" alt="" />
+                              <p>더보기</p>
+                            </div>
+                            <img src={`${el.photo}`} alt="" />
+                       </SwiperSlide>
+                      )
+                } else {
+                      return (
+                          <SwiperSlide className="swiper-slide" key={idx}>
+                                <img src={`${el.photo}`} alt="" />
+                          </SwiperSlide>
+                      )
+                  }
+        })}
             </Swiper>
           )}
           <NextBtn ref={nextRef} className="disabled">
@@ -96,6 +111,28 @@ const StImageList = styled.div`
   .swiper-slide {
     width: 300px;
     height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .see-more {
+      width: 50px;
+      height: 50px;
+      z-index: 5;
+      position: absolute;
+      color: #ffffff;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      cursor: pointer;
+      img {
+        width: 50%;
+        height: 20%;
+      }
+    }
     img {
       width: 100%;
       height: 100%;

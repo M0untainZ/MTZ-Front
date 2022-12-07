@@ -123,7 +123,10 @@ export const userSlice = createSlice({
                          "userinfos",
                          JSON.stringify(action.payload.data.data)
                     );
-                    sessionStorage.setItem("authority", action.payload.data.data.authority);
+                    sessionStorage.setItem(
+                         "authority",
+                         action.payload.data.data.authority
+                    );
                     // sessionStorage.setItem("email", action.payload.data.data.email);
                     alert(`${action.payload.data.data.nickName}님 환영합니다.`);
                } else {

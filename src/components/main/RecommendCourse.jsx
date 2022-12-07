@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { getMain } from "../../shared/api";
+import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { regionData, seasonData, levelData, timeData } from "../../redux/modules/mountainsSlice";
 
 const RecommendCourse = () => {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
+     const {data} = useQuery(["main"], getMain);
      const [recommendList, setRecommendList] = useState(false);
      const onListToggle = () => {
           setRecommendList(!recommendList);
      };
+
      return (
           <>
                <StRecommendWrap>
@@ -17,69 +26,44 @@ const RecommendCourse = () => {
                               <span onClick={onListToggle}>접기</span>
                          )}
                     </StRecommendHeader>
-                    <StRecommend>
-                         <div>
-                              <span>
-                                   # 등산초보 산린이를 위한 산행 코스 추천
-                              </span>
-                              <img
-                                   alt=""
-                                   src="/icons/등산초보 산린이를 위한 산행 코스 추천.png"
-                              />
-                         </div>
-                         <div>
-                              <span>
-                                   # 2022 마지막 단풍놀이, 이곳에서 즐겨요!
-                              </span>
-                              <img
-                                   alt=""
-                                   src="/icons/2022 마지막 단풍놀이, 이곳에서 즐겨요!.png"
-                              />
-                         </div>
-                         {recommendList === false ? null : (
-                              <>
-                                   <div>
-                                        <span>
-                                             # 가족과 함께 가볍게 즐기기 좋은
-                                             짧은 산행 코스
-                                        </span>
-                                        <img
-                                             alt=""
-                                             src="/icons/가족과 함께 가볍게 즐기기 좋은 짧은 산행 코스.png"
-                                        />
-                                   </div>
-                                   <div>
-                                        <span>
-                                             # 서울 도심에서 즐기는 등산 코스
-                                        </span>
-                                        <img
-                                             alt=""
-                                             src="/icons/서울 도심에서 즐기는 등산 코스.png"
-                                        />
-                                   </div>
-                                   <div>
-                                        <span>
-                                             # 이번 주말 데이트로 추천하는
-                                             가벼운 등산 코스
-                                        </span>
-                                        <img
-                                             alt=""
-                                             src="/icons/이번 주말 데이트로 추천하는 가벼운 등산 코스.png"
-                                        />
-                                   </div>
-                                   <div>
-                                        <span>
-                                             # 한걸음 더 나아가, 중급 등산러를
-                                             위한 추천 리스트
-                                        </span>
-                                        <img
-                                             alt=""
-                                             src="/icons/한걸음 더 나아가, 중급 등산러를 위한 추천 리스트.png"
-                                        />
-                                   </div>
-                              </>
-                         )}
-                    </StRecommend>
+                    {recommendList === false ? 
+                         <StRecommend>
+                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[0].name}`}</span>
+                                   <img src={`${data?.data.tagList[0].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(seasonData("겨울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[1].name}`}</span>
+                                   <img src={`${data?.data.tagList[1].img}`} alt="" />
+                              </div>
+                         </StRecommend> :
+                         <StRecommend>
+                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[0].name}`}</span>
+                                   <img src={`${data?.data.tagList[0].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(seasonData("겨울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[1].name}`}</span>
+                                   <img src={`${data?.data.tagList[1].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(timeData("2")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[2].name}`}</span>
+                                   <img src={`${data?.data.tagList[2].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(levelData("초급")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[3].name}`}</span>
+                                   <img src={`${data?.data.tagList[3].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(levelData("중급")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[4].name}`}</span>
+                                   <img src={`${data?.data.tagList[4].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(regionData("서울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[5].name}`}</span>
+                                   <img src={`${data?.data.tagList[5].img}`} alt="" />
+                              </div>
+                         </StRecommend>  
+                    }
                </StRecommendWrap>
           </>
      );
@@ -111,6 +95,7 @@ const StRecommend = styled.div`
           height: 150px;
           margin: 10px 0px;
           position: relative;
+          cursor: pointer;
      }
      img {
           width: 100%;

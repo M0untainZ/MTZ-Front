@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 const OAuth = () => {
   const KAKAO_CLIENT_ID = "cc12618ddc81cd5d765c74e98974c11b";
   const KAKAO_REDIRECT_URL = "http://localhost:3000/oauth/callback/kakao";

@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __postFilterMountains } from "../../redux/modules/mountainsSlice";
+import {
+  __postSearchMountains,
+  __postFilterMountains,
+  resetData,
+} from "../../redux/modules/mountainsSlice";
+import { useEffect, useState } from "react";
 
 const FilterResult = () => {
   const dispatch = useDispatch();
@@ -10,14 +15,18 @@ const FilterResult = () => {
 
   const initialState = {};
 
+  // console.log("이전", isfilters);
+
   //필터 팁 x 눌렀을 때 팁 사라짐 효과
   const onSeasonDelBtn = (e) => {
     const filt = { ...filters, season: null };
     dispatch(__postFilterMountains(filt));
+    //console.log("결과", filt);
   };
   const onRegionDelBtn = () => {
     const filt = { ...filters, region: null };
     dispatch(__postFilterMountains(filt));
+    dispatch(resetData());
   };
   const onLevelDelBtn = () => {
     const filt = { ...filters, level: null };
@@ -52,7 +61,7 @@ const FilterResult = () => {
             <button onClick={onTimeDelBtn}>
               <img src="icons/delete-filter.png" alt="delete-filter" />
             </button>
-            <span>{filters.time}시간</span>
+            <span>{filters.time}</span>
           </div>
         ) : null}
         {filters.level ? (

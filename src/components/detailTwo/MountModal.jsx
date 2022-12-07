@@ -5,6 +5,10 @@ import styled from "styled-components";
 import { __imgPost } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
 import imageCompression from "browser-image-compression";
+import { MountGeolocation } from "browser-image-compression";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const MountModal = () => {
   const dispatch = useDispatch();
   const mountId = useParams();
@@ -60,14 +64,21 @@ const MountModal = () => {
     const formData = new FormData();
     formData.append("photo", file);
     dispatch(__imgPost({ formData, id: id }));
-    alert("사진이 등록되었습니다.");
     setModal(!modal);
+    toast.success("사진이 등록되었습니다.", {
+      autoClose: 1500,
+      position: toast.POSITION.TOP_CENTER
+    })
   };
+  
   const ModalSwitch = () => {
     if (token) {
       setModal(!modal);
     } else {
-      alert("로그인이 필요한 기능입니다.");
+      toast.error("로그인이 필요한 기능입니다." , {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER
+      })
     }
   };
 
@@ -137,6 +148,7 @@ const MountModal = () => {
             </StModalBox>
           </DetailTwoModal>
         )}
+        <ToastContainer />
       </StDiv>
     </>
   );

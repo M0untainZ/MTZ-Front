@@ -27,7 +27,6 @@ export const __infiniteScroll = createAsyncThunk(
                if (data.data.length === 0) {
                     throw data;
                }
-               console.log("test", data.data);
                return thunkAPI.fulfillWithValue(data.data);
           } catch (e) {
                return thunkAPI.rejectWithValue(e);
@@ -76,12 +75,35 @@ const initialState = {
           season: "",
           level: "",
      },
+     filterData: {},
+     filterDataState: false,
 };
 
 export const mountainsSlice = createSlice({
      name: "mountains",
      initialState,
-     reducers: {},
+     reducers: {
+          regionData: (state, { payload }) => {
+               state.filterData = { region: payload };
+               state.filterDataState = true;
+          },
+          seasonData: (state, { payload }) => {
+               state.filterData = { season: payload };
+               state.filterDataState = true;
+          },
+          levelData: (state, { payload }) => {
+               state.filterData = { level: payload };
+               state.filterDataState = true;
+          },
+          timeData: (state, { payload }) => {
+               state.filterData = { time: payload };
+               state.filterDataState = true;
+          },
+          resetData: (state) => {
+               state.filterData = {}
+               state.filterDataState = false;
+          }
+     },
      extraReducers: {
           // [__getMountains.fulfilled]: (state, action) => {
           //      state.mountains = action.payload;
@@ -91,7 +113,7 @@ export const mountainsSlice = createSlice({
                state.isLoading = true;
           },
           [__infiniteScroll.fulfilled]: (state, action) => {
-               console.log("scroll", action);
+               // console.log("scroll", action);
                state.filter = {};
                state.mountains.push(...action.payload);
                state.isLoading = false;
@@ -110,5 +132,5 @@ export const mountainsSlice = createSlice({
      },
 });
 
-export const { isFilters, isBtnFalse, isBtnTrue } = mountainsSlice.actions;
+export const { isFilters, isBtnFalse, isBtnTrue, regionData, seasonData, levelData, timeData, resetData } = mountainsSlice.actions;
 export default mountainsSlice.reducer;

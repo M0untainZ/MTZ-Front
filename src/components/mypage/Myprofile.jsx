@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 import ModalMypage from "./ModalMypage";
 import { logoutState } from "../../redux/modules/userSlice";
 import { __getMyinfo } from "../../redux/modules/mypageSlice";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const Myprofile = () => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
+     const mySwal = withReactContent(Swal);
 
      const userinfo = useSelector((state) => state.mypage.mypage?.data);
      //마이페이지 개인정보 불러오기
@@ -19,10 +22,23 @@ const Myprofile = () => {
 
      //로그아웃
      const onLogout = () => {
-          sessionStorage.clear();
-          dispatch(logoutState());
-          alert("로그아웃되셨습니다.");
-          navigate("/");
+          mySwal.fire({
+               title: "로그아웃 하시겠습니까?",
+               icon: "success",
+               showCancelButton: true,
+               confirmButtonText: "네",
+               cancelButtonText: '아니오',
+               background: "#ffffff",
+               confirmButtonColor: "#185B6E",
+               cancelButtonColor: "#C6C6C6",
+               iconColor: "#699BF7",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    sessionStorage.clear();
+                    dispatch(logoutState());
+                    navigate("/");         
+               }
+          })
      };
 
      //모달관리
@@ -50,7 +66,6 @@ const Myprofile = () => {
                <button className="profile-logout-btn-style" onClick={onLogout}>
                     로그아웃
                </button>
-
                {modalOn && (
                     <MyModal
                          open={modalOn}

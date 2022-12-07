@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
      __postSearchMountains,
      __postFilterMountains,
+     resetData
 } from "../../redux/modules/mountainsSlice";
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,7 @@ const FilterResult = () => {
      const onRegionDelBtn = () => {
           const filt = { ...filters, region: null };
           dispatch(__postFilterMountains(filt));
+          dispatch(resetData())
      };
      const onLevelDelBtn = () => {
           const filt = { ...filters, level: null };

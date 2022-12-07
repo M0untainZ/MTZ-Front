@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { regionData, seasonData, levelData, timeData } from "../../redux/modules/mountainsSlice";
 
 const RecommendCourse = () => {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
      const {data} = useQuery(["main"], getMain);
      const [recommendList, setRecommendList] = useState(false);
      const onListToggle = () => {
@@ -21,26 +26,44 @@ const RecommendCourse = () => {
                               <span onClick={onListToggle}>접기</span>
                          )}
                     </StRecommendHeader>
-                    { recommendList === false ? 
+                    {recommendList === false ? 
                          <StRecommend>
-                              {data?.data.tagList.slice(0, 2).map((el, idx) => (
-                                        <div key={idx}>
-                                             <span>{el.name}</span>
-                                             <img src={el.img} alt="" />
-                                        </div>
-                                   )
-                              )}
+                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[0].name}`}</span>
+                                   <img src={`${data?.data.tagList[0].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(seasonData("겨울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[1].name}`}</span>
+                                   <img src={`${data?.data.tagList[1].img}`} alt="" />
+                              </div>
                          </StRecommend> :
                          <StRecommend>
-                         {data?.data.tagList.map((el, idx) => (
-                                   <div key={idx}>
-                                        <span>{el.name}</span>
-                                        <img src={el.img} alt="" />
-                                   </div>
-                              )
-                         )}
-                    </StRecommend> 
-               }
+                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[0].name}`}</span>
+                                   <img src={`${data?.data.tagList[0].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(seasonData("겨울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[1].name}`}</span>
+                                   <img src={`${data?.data.tagList[1].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(timeData("2")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[2].name}`}</span>
+                                   <img src={`${data?.data.tagList[2].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(levelData("초급")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[3].name}`}</span>
+                                   <img src={`${data?.data.tagList[3].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(levelData("중급")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[4].name}`}</span>
+                                   <img src={`${data?.data.tagList[4].img}`} alt="" />
+                              </div>
+                              <div onClick={() => {dispatch(regionData("서울")); navigate("/detail")}}>
+                                   <span>{`${data?.data.tagList[5].name}`}</span>
+                                   <img src={`${data?.data.tagList[5].img}`} alt="" />
+                              </div>
+                         </StRecommend>  
+                    }
                </StRecommendWrap>
           </>
      );
@@ -72,6 +95,7 @@ const StRecommend = styled.div`
           height: 150px;
           margin: 10px 0px;
           position: relative;
+          cursor: pointer;
      }
      img {
           width: 100%;

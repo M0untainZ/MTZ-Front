@@ -4,9 +4,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCurrentLocation, positionOptions } from "./Geolocation";
 import Mapmodal from "./modal/Mapmodal";
-import { getRegionTag } from "../../shared/api";
+import { useDispatch, useSelector } from "react-redux";
+import { regionData } from "../../redux/modules/mountainsSlice";
 
 const Weather = () => {
+     const dispatch = useDispatch();
+     const a = useSelector((state) => state.mountains.filterData)
      const navigate = useNavigate();
      const { location, error } = useCurrentLocation(positionOptions);
      const [city, setCity] = useState("");
@@ -65,31 +68,31 @@ const Weather = () => {
                     { modal && <Mapmodal open={modal} onClose={() => {setModal(false)}}>
                               <StMapContainer>
                                    <img alt="" src="/icons/main_map.png" />
-                                   <div className="seoul">
+                                   <div className="seoul" onClick={() => {dispatch(regionData("서울")); navigate("/detail"); setModal(false)}}>
                                         <p>서울</p>
                                         <span>5</span>
                                    </div>
-                                   <div className="gangwon">
+                                   <div className="gangwon" onClick={() => {dispatch(regionData("강원")); navigate("/detail"); setModal(false)}}>
                                         <p>강원</p>
                                         <span>5</span>
                                    </div>
-                                   <div className="gyeonggi">
+                                   <div className="gyeonggi" onClick={() => {dispatch(regionData("경기")); navigate("/detail"); setModal(false)}}>
                                         <p>경기</p>
                                         <span>12</span>
                                    </div>
-                                   <div className="gyeongsang">
+                                   <div className="gyeongsang" onClick={() => {dispatch(regionData("경상")); navigate("/detail"); setModal(false)}}>
                                         <p>경상</p>
                                         <span>5</span>
                                    </div>
-                                   <div className="chungchung">
+                                   <div className="chungchung" onClick={() => {dispatch(regionData("충청")); navigate("/detail"); setModal(false)}}>
                                         <p>충청</p>
                                         <span>4</span>
                                    </div>
-                                   <div className="jeolla">
+                                   <div className="jeolla" onClick={() => {dispatch(regionData("전라")); navigate("/detail"); setModal(false)}}>
                                         <p>전라</p>
                                         <span>4</span>
                                    </div>
-                                   <div className="jeju">
+                                   <div className="jeju" onClick={() => {dispatch(regionData("제주")); navigate("/detail"); setModal(false)}}>
                                         <p>제주</p>
                                         <span>1</span>
                                    </div>

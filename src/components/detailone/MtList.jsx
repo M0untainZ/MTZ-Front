@@ -13,11 +13,9 @@ const MtList = () => {
      const [page, setPage] = useState(0);
      const [ref, inView] = useInView();
 
-     const { mountains, isLoading } = useSelector((state) => state.mountains);
+     const { mountains, isLoading, filterDataState } = useSelector((state) => state.mountains);
 
      const test = useSelector((state) => state.mountains.filter);
-
-     console.log("?", test, mountains, isLoading);
 
      //infinite scroll
      const getItems = useCallback(() => {
@@ -25,7 +23,9 @@ const MtList = () => {
      }, [page, dispatch]);
 
      useEffect(() => {
-          getItems(page);
+          if (!filterDataState) {
+               getItems(page);
+          }
      }, [getItems]);
 
      useEffect(() => {

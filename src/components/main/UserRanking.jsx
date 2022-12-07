@@ -1,36 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { getMain } from "../../shared/api";
+import { useQuery } from "react-query";
 
 const UserRanking = () => {
+     const { data } = useQuery(["main"], getMain);
+
      return (
           <>
                <StRankingWrap>
                     <p>최고의 MTZ 프렌즈를 만나보세요 !</p>
                     <StUserRank>
-                         <StUserInfo>
-                              <span className="rank">1</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
-                         <StUserInfo>
-                              <span className="rank">2</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
-                         <StUserInfo>
-                              <span className="rank">3</span>
-                              <img alt="" src="logo192.png" />
-                              <p className="user-name">나는야셰르파</p>
-                              <span className="badge-cnt">
-                                   모은 뱃지 갯수 50개
-                              </span>
-                         </StUserInfo>
+                         {data.data.topMembers.map((el, idx) => (
+                              <StUserInfo key={idx}>
+                                   <span className="rank">{idx + 1}</span>
+                                   <img alt="" src="logo192.png" />
+                                   <p className="user-name">{el}</p>
+                              </StUserInfo>
+                         ))}
                     </StUserRank>
                </StRankingWrap>
           </>

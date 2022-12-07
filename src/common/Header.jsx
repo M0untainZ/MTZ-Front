@@ -161,6 +161,9 @@ const StHeader = styled.div`
     .header-login-btn {
       padding: 5px 15px;
       margin-left: 20px;
+      border: none;
+      color: #fff;
+      background-color: var(--color-button);
     }
     .header-login-btn {
       color: white;

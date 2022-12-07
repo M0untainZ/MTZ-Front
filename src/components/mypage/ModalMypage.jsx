@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import {
   __getMyinfo,
   __mynameCheck,
@@ -11,7 +10,6 @@ import Modal from "./modal/MyModal";
 
 const ModalMypage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const initialState = {
     memberPhoto: "",

@@ -5,7 +5,7 @@ const Badges = ({ badges }) => {
     <StBadges>
       <img className="badge-element-img-style" src={badges.img} alt="badges" />
       <div className="badges-info-style">
-        <p className="badges-name">{badges.title}</p>
+        <p className="badges-name">{badges.badgeName}</p>
         <p className="badges-info-day">
           {badges.content.split("!")[0]}
           <br />

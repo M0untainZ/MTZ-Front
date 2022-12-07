@@ -78,7 +78,6 @@ export const MypageSlice = createSlice({
   },
   extraReducers: {
     [__getMyinfo.fulfilled]: (state, action) => {
-      console.log(action);
       state.mypage = action.payload;
     },
     [__getMyinfo.rejected]: (state, action) => {},
@@ -96,5 +95,5 @@ export const MypageSlice = createSlice({
     },
   },
 });
-export const { overlapNameChk, allbadgelist } = MypageSlice.actions;
+export const { overlapNameChk } = MypageSlice.actions;
 export default MypageSlice.reducer;

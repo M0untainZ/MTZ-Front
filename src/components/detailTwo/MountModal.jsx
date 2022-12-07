@@ -38,16 +38,13 @@ const MountModal = () => {
     try {
       const reader = new FileReader();
       const imgFile = await imageCompression(post_Img, options);
-      console.log(imgFile, "imgFile");
       reader.readAsDataURL(imgFile);
       reader.onloadend = () => {
         const base64data = reader.result;
         setPost_Img(base64data);
         handlingDataForm(base64data);
       };
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handlingDataForm = async (dataURI) => {
@@ -163,10 +160,10 @@ const StDiv = styled.div`
 
 const StButton = styled.button`
   border: 1px solid white;
-  border-radius: 5px;
-  height: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+  border-radius: 2px;
+  height: 40px;
+  width: 37vh;
+  margin-right: 27vh;
   color: white;
   background-color: rgba(255, 255, 255, 0.2);
 `;

@@ -67,10 +67,10 @@ const StModalBox = styled.div`
     object-fit: cover;
     width: 35vh;
     height: 35vh;
-    :hover {
+    /* :hover {
       width: 45vh;
       height: 45vh;
-    }
+    } */
   }
   .swiper {
     overflow: hidden;

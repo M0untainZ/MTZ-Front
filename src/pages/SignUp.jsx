@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-     __addUsers,
-     overlapEmailCheck,
-     __nameCheck,
-     __emailCheck,
+  __addUsers,
+  overlapEmailCheck,
+  __nameCheck,
+  __emailCheck,
 } from "../redux/modules/userSlice";
 const SignUp = () => {
      const navigate = useNavigate();
@@ -36,52 +36,52 @@ const SignUp = () => {
           });
      };
 
-     //이메일 중복검사
-     const EmailCk = () => {
-          if (emailCheck === true) {
-               setEmailState(true);
-               dispatch(__emailCheck({ email: user.email }));
-          }
-     };
+  //이메일 중복검사
+  const EmailCk = () => {
+    if (emailCheck === true) {
+      setEmailState(true);
+      dispatch(__emailCheck({ email: user.email }));
+    }
+  };
 
-     //닉네임 중복검사
-     const NameCk = () => {
-          dispatch(__nameCheck({ nickName: user.nickName }));
-     };
+  //닉네임 중복검사
+  const NameCk = () => {
+    dispatch(__nameCheck({ nickName: user.nickName }));
+  };
 
-     useEffect(() => {
-          if (regEmail.test(user.email)) {
-               setEmailCheck(true);
-          } else {
-               setEmailCheck(false);
-          }
-          dispatch(overlapEmailCheck());
-          // eslint-disable-next-line
-     }, [user.email]);
+  useEffect(() => {
+    if (regEmail.test(user.email)) {
+      setEmailCheck(true);
+    } else {
+      setEmailCheck(false);
+    }
+    dispatch(overlapEmailCheck());
+    // eslint-disable-next-line
+  }, [user.email]);
 
-     useEffect(() => {
-          if (regPw.test(user.password)) {
-               setPwCheck(true);
-          } else {
-               setPwCheck(false);
-          }
-          // eslint-disable-next-line
-     }, [user.password]);
+  useEffect(() => {
+    if (regPw.test(user.password)) {
+      setPwCheck(true);
+    } else {
+      setPwCheck(false);
+    }
+    // eslint-disable-next-line
+  }, [user.password]);
 
-     const onSubmit = () => {
-          dispatch(
-               __addUsers({
-                    email: user.email,
-                    nickName: user.nickName,
-                    password: user.password,
-                    passwordConfirm: user.passwordConfirm,
-                    region: user.region,
-               })
-          );
-          setUser(initialState);
-          alert("회원가입이 완료되었습니다!");
-          navigate("/login");
-     };
+  const onSubmit = () => {
+    dispatch(
+      __addUsers({
+        email: user.email,
+        nickName: user.nickName,
+        password: user.password,
+        passwordConfirm: user.passwordConfirm,
+        region: user.region,
+      })
+    );
+    setUser(initialState);
+    alert("회원가입이 완료되었습니다!");
+    navigate("/login");
+  };
 
   return (
     <StLoginContainer>
@@ -235,12 +235,12 @@ const SignUp = () => {
                 >
                   <option hidden>--지역을 선택해주세요.--</option>
                   <option>서울</option>
-                  <option>경기도</option>
-                  <option>경상도</option>
-                  <option>충청도</option>
-                  <option>전라도</option>
-                  <option>강원도</option>
-                  <option>제주도</option>
+                  <option>경기</option>
+                  <option>경상</option>
+                  <option>충청</option>
+                  <option>전라</option>
+                  <option>강원</option>
+                  <option>제주</option>
                 </select>
               </div>
             </StSelectBox>
@@ -282,53 +282,53 @@ const SignUp = () => {
 
 export default SignUp;
 const StLoginContainer = styled.div`
-     display: flex;
-     justify-content: center;
-     height: 100%;
-     width: 100%;
-     margin-top: 8vh;
-     .imgBox {
-          margin-left: -11%;
-          height: 100%;
-          width: 30%;
-     }
-     .loginImg {
-          width: 100%;
-     }
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 8vh;
+  .imgBox {
+    margin-left: -11%;
+    height: 100%;
+    width: 30%;
+  }
+  .loginImg {
+    width: 100%;
+  }
 `;
 const StParentsBox = styled.div`
-     width: 388px;
-     text-align: left;
-     margin-left: 10%;
-     .helloLogo {
-          margin-top: 25%;
-          font-weight: bolder;
-          font-size: large;
-     }
-     .logo {
-          display: flex;
-          font-weight: bolder;
-          font-size: x-large;
-          text-align: center;
-     }
+  width: 388px;
+  text-align: left;
+  margin-left: 10%;
+  .helloLogo {
+    margin-top: 25%;
+    font-weight: bolder;
+    font-size: large;
+  }
+  .logo {
+    display: flex;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+  }
 `;
 const StLoginBox = styled.div`
-     height: 60%;
-     text-align: left;
+  height: 60%;
+  text-align: left;
 `;
 const StInputBox = styled.div`
-     height: 30%;
-     margin-top: 3%;
-     .emailInputBox {
-          width: 100%;
-          height: 40%;
-          .emailInput {
-               margin-top: 1%;
-               width: 90%;
-               height: 60%;
-               font-size: medium;
-          }
-     }
+  height: 30%;
+  margin-top: 3%;
+  .emailInputBox {
+    width: 100%;
+    height: 40%;
+    .emailInput {
+      margin-top: 1%;
+      width: 90%;
+      height: 60%;
+      font-size: medium;
+    }
+  }
   .inputName {
     margin-top: 8%;
   }
@@ -380,51 +380,51 @@ const StInputBox = styled.div`
 `;
 
 const StButtonBox = styled.div`
-     width: 100%;
-     height: 7%;
-     .signUpBox {
-          width: 100%;
-          height: 48px;
-          .signUpDisabled {
-               background-color: #dddfe4;
-               border: 0px;
-               width: 92%;
-               height: 100%;
-               display: flex;
-               .signUpButtonImg {
-                    margin: auto;
-               }
-               .signUpButtonDiv {
-                    color: white;
-                    height: 100%;
-                    width: 90%;
-                    font-weight: bold;
-                    .signUpButtonLogo {
-                         margin-top: 5%;
-                    }
-               }
-          }
-          .signUp {
-               cursor: pointer;
-               background-color: #185b6e;
-               border: 0px;
-               width: 92%;
-               height: 100%;
-               display: flex;
-               .signUpButtonImg {
-                    margin: auto;
-               }
-               .signUpButtonDiv {
-                    color: white;
-                    height: 100%;
-                    width: 90%;
-                    font-weight: bold;
-                    .signUpButtonLogo {
-                         margin-top: 5%;
-                    }
-               }
-          }
-     }
+  width: 100%;
+  height: 7%;
+  .signUpBox {
+    width: 100%;
+    height: 48px;
+    .signUpDisabled {
+      background-color: #dddfe4;
+      border: 0px;
+      width: 92%;
+      height: 100%;
+      display: flex;
+      .signUpButtonImg {
+        margin: auto;
+      }
+      .signUpButtonDiv {
+        color: white;
+        height: 100%;
+        width: 90%;
+        font-weight: bold;
+        .signUpButtonLogo {
+          margin-top: 5%;
+        }
+      }
+    }
+    .signUp {
+      cursor: pointer;
+      background-color: #185b6e;
+      border: 0px;
+      width: 92%;
+      height: 100%;
+      display: flex;
+      .signUpButtonImg {
+        margin: auto;
+      }
+      .signUpButtonDiv {
+        color: white;
+        height: 100%;
+        width: 90%;
+        font-weight: bold;
+        .signUpButtonLogo {
+          margin-top: 5%;
+        }
+      }
+    }
+  }
 `;
 
 const StSelectBox = styled.div`

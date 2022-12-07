@@ -14,7 +14,6 @@ const MountTest = () => {
   const maxNumber = 5;
 
   const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 

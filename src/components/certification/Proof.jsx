@@ -47,8 +47,8 @@ const Proof = () => {
             text: "삭제를 누르시면 되돌릴 수 없어요 !",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "네",
-            cancelButtonText: '아니오',
+            confirmButtonText: "삭제",
+            cancelButtonText: '취소',
             background: "#ffffff",
             confirmButtonColor: "#185B6E",
             cancelButtonColor: "#C6C6C6",
@@ -86,7 +86,7 @@ const Proof = () => {
         return (
             <StImgContainer>
                 <Fragment>
-                        {filterData?.slice().reverse().map((el, idx) => (
+                        {filterData.map((el, idx) => (
                             <StProofBox key={idx}>
                                 <img src={el.photo} alt="" />
                                 <StProofInfo>
@@ -116,7 +116,7 @@ const Proof = () => {
                 <StImgContainer>
                 {data?.pages.map((page, i) => (
                     <Fragment key={i}>
-                        {page.data.slice().reverse().map((el, idx) => (
+                        {page.data.map((el, idx) => (
                             <StProofBox key={idx}>
                                 <img src={el.photo} alt="" />
                                 <StProofInfo>
@@ -149,15 +149,17 @@ const Proof = () => {
 export default Proof;
 
 const StImgContainer = styled.div`
-    width: 1000px;
+    padding: 20px 0;
+    width: 1080px;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 47px;
+    gap: 5%;
     position: relative;
     margin-bottom: 20px;
 `;
 const StProofBox = styled.div`
+    margin-bottom: 20px;
     width: 300px;
     height: 350px;
     display: flex;
@@ -201,7 +203,7 @@ const StProofInfo = styled.div`
         }
     }
     .del-btn {
-        margin-left: 15px;
+        margin-right: 10px;
         width: 24px;
         height: 24px;
         img {

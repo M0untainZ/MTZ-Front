@@ -7,11 +7,8 @@ import { filterFalse, filterTrue, proofData } from "../../redux/modules/proofSli
 
 const FilterList = () => {
      const dispatch = useDispatch()
-     // 산 리스트 저장
      const [checkRegion, setCheckRegion] = useState([]);
-     // 클릭된 지역 필터 정보 저장
      const [checkFilter, setCheckFilter] = useState("");
-     // 선택된 옵션 필터 정보 저장(산이름)
      const [selectOption, setSelectOption] = useState("");
 
      const regionList = [
@@ -67,12 +64,6 @@ const FilterList = () => {
           } else if (e.target.value === "제주") {
                setCheckRegion(jeju);
           }
-          const regionCheckbox = document.getElementsByName("region");
-          for (let i = 0; i < regionCheckbox.length; i++) {
-               if (regionCheckbox[i] !== e.target) {
-                    regionCheckbox[i].checked = false;
-               }
-          }
           const { name, value } = e.target;
           setCheckFilter({ ...checkFilter, [name]: value });
      };
@@ -82,7 +73,6 @@ const FilterList = () => {
           setCheckFilter({ ...checkFilter, [name]: value });
      }
 
-     // 선택된 항목들 초기화
      const onResetHandler = () => {
           const checkFilter = document.getElementsByName("region");
           checkFilter.forEach((ch) => {
@@ -97,7 +87,7 @@ const FilterList = () => {
      const { mutate: filter } = useMutation(proofFilter, {
           onSuccess: (config) => {
                dispatch(proofData(config.data))
-          }
+          },
      });
 
      const onApplyHandler = () => {
@@ -107,8 +97,8 @@ const FilterList = () => {
      
      return (
           <StFilterContainer>
+               <p>상세조건</p>
                <div className="filter-box">
-                    <p>상세조건</p>
                     <div className="filter-btn">
                          <button onClick={onResetHandler}>초기화</button>
                          <button
@@ -123,7 +113,7 @@ const FilterList = () => {
                     {regionList.map((el) => (
                          <label key={el.id}>
                               <input
-                                   type="checkbox"
+                                   type="radio"
                                    className="region"
                                    name={el.name}
                                    value={el.value}
@@ -149,33 +139,54 @@ const FilterList = () => {
 export default FilterList;
 
 const StFilterContainer = styled.div`
-     width: 260px;
-     height: 550px;
+     padding: 20px 0px;
+     width: 18.5%;
+     height: 100%;
      font-size: 18px;
+     flex-direction: column;
+     justify-content: flex-start;
+     box-sizing: border-box;
+     p {
+          margin-bottom: 10px;
+     }
+     .filter-box {
+          margin-bottom: 30px;
+     }
      .filter-btn {
           display: flex;
           justify-content: space-between;
           button {
-               width: 128px;
-               height: 25px;
-          }
-          button:first-child {
-               background-color: #EDF4F5;
-          }
-          button:last-child {
-               background-color: #276575;
-               color: #ffffff;
+               width: 49%;
+               min-height: 44px;
+               padding: 5px 0;
+               font-size: 18px;
+               font-weight: 500;
+               border: 1px solid black;
+               cursor: pointer;
+               :nth-child(2) {
+                    background-color: var(--color-button);
+                    color: white;
+               }
           }
      }
      .region-list {
           display: flex;
           flex-wrap: wrap;
-          gap: 10%;
+          align-content: space-between;
+          gap: 35%;
+          margin-bottom: 30px;
+          p {
+               margin-bottom: 10px;
+          }
           label {
+               width: 30%;
+               cursor: pointer;
                display: flex;
-               justify-content: center;
                align-items: center;
-               width: 40%;
+               justify-content: flex-start;
+               color: var(--color-border);
+               padding: 3px 0;
+               font-size: 18px;
           }
           input {
                appearance: none;

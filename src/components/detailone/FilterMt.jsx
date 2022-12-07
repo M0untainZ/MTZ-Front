@@ -59,7 +59,6 @@ const FilterMt = () => {
           dispatch(resetData());
      };
 
-
      //메인에서 클릭시 체크된 상태로 변경 및 해당 캌테고리 값 불러오기
      useEffect(() => {
           if (filterDataState && filterData?.region) {
@@ -88,6 +87,9 @@ const FilterMt = () => {
                          checkSeason[i].checked = true;
                     }
                }
+          }
+          if (filterDataState && filterData?.time) {
+               dispatch(__postFilterMountains({time: filterData.time}));
           }
      }, [])
 
@@ -138,6 +140,7 @@ const FilterMt = () => {
                                    list="markers"
                                    name="time"
                                    defaultValue="0"
+                                   className="time-data"
                                    onClick={onFilterTime}
                               />
                          </StFilterSlide>

@@ -39,10 +39,10 @@ const StOverlay = styled.div`
 
 const StModalWrap = styled.div`
   width: 100%;
-  height: 62vh;
+  height: 55vh;
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
-  top: 38.5%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 15px;

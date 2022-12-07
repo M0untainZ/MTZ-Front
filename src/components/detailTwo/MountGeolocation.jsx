@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 const MountGeolocation = (options = {}) => {
   const [location, setLocation] = useState();
   const [error, setError] = useState();
-  console.log(location, "위치");
   const handleSuccess = (pos) => {
     const { latitude, longitude } = pos.coords;
     setLocation({

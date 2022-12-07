@@ -134,11 +134,11 @@ const StContainer = styled.div`
     cursor: pointer;
   }
   .titleBox {
-    background-color: rgba(255, 255, 255, 0.7);
-    margin-right: 27vh;
-    width: 40vh;
-    height: 25%;
-    margin-top: 8%;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 37vh;
+    height: 20%;
+    margin-top: 15%;
+    padding-bottom: 5px;
     font-size: smaller;
     .mountainName {
       font-size: large;
@@ -154,7 +154,7 @@ const StContainer = styled.div`
     .information {
       font-size: 14px;
       padding-left: 10px;
-      padding-top: 5px;
+      padding-top: 2px;
       display: flex;
       align-items: center;
       .routeImg {

@@ -122,7 +122,6 @@ const StLoginContainer = styled.div`
   width: 100%;
   margin-top: 8vh;
   .imgBox {
-    margin-left: -11%;
     height: 100%;
     width: 30%;
   }
@@ -132,9 +131,10 @@ const StLoginContainer = styled.div`
 `;
 
 const StParentsBox = styled.div`
+  background-color: #fff;
   width: 388px;
   text-align: left;
-  margin-left: 10%;
+  padding: 0 5% 0 5%;
 
   .helloLogo {
     margin-top: 30%;
@@ -169,6 +169,10 @@ const StLoginBox = styled.div`
 const StInputBox = styled.div`
   text-align: left;
   margin-top: 10%;
+  input {
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
   .emailInputBox {
     width: 100%;
     height: 40%;

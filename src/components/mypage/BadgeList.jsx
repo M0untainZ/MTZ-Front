@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __getMyinfo } from "../../redux/modules/mypageSlice";
+import { getMypage } from "../../shared/api";
 import Badges from "./Badges";
 
 const BadgeList = () => {
@@ -10,12 +10,12 @@ const BadgeList = () => {
 
   const { badgeModal, setbadgeModal } = useState([]);
 
-  const userinfo = useSelector((state) => state.mypage.mypage);
+  const { data } = useQuery(["mypage"], getMypage);
 
   //미상의 뱃지 리스트
   function repeat(badgeModal) {
     let arr = [];
-    for (let i = 0; i < 12 - userinfo.data?.badgeList?.length; i++) {
+    for (let i = 0; i < 12 - data?.data.badgeList.length; i++) {
       arr.push(
         <div className="badge-element-style" key={i}>
           <img
@@ -37,16 +37,11 @@ const BadgeList = () => {
     return arr;
   }
 
-  //뱃지리스트 불러오기
-  useEffect(() => {
-    dispatch(__getMyinfo());
-  }, [dispatch]);
-
   return (
     <STBadgeContainer>
       <p className="badges-title-style">🎖 활동 뱃지</p>
       <div className="badges-list-style">
-        {userinfo.data?.badgeList?.map((badges, idx) => {
+        {data?.data.badgeList.map((badges, idx) => {
           return <Badges badges={badges} key={idx} />;
         })}
         {repeat(badgeModal)}

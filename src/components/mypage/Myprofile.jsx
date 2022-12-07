@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import MyModal from "./modal/MyModal";
 import { useNavigate } from "react-router-dom";
 import ModalMypage from "./ModalMypage";
 import { logoutState } from "../../redux/modules/userSlice";
-import { __getMyinfo } from "../../redux/modules/mypageSlice";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useQuery } from "react-query";
+import { getMypage } from "../../shared/api";
 
 const Myprofile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const mySwal = withReactContent(Swal);
 
-  const userinfo = useSelector((state) => state.mypage.mypage?.data);
-  //마이페이지 개인정보 불러오기
-  useEffect(() => {
-    dispatch(__getMyinfo());
-  }, [dispatch]);
+  const { data } = useQuery(["mypage"], getMypage);
 
   //로그아웃
   const onLogout = () => {
@@ -52,18 +49,26 @@ const Myprofile = () => {
   return (
     <STProfile>
       <div className="profile-badge-style">
-        <img
-          className="profile-badge-view-style"
-          src="/icons/badge/profile.png"
-          alt="profile"
-        />
+        {data?.data.profilePhoto == null ? (
+          <img
+            className="profile-badge-view-style"
+            src="icons/badge/lockBadge.png"
+            alt="profile"
+          />
+        ) : (
+          <img
+            className="profile-badge-view-style"
+            src={data?.data.profilePhoto}
+            alt="profile"
+          />
+        )}
         <div className="profile-setting-btn-style">
           <ModalMypage />
         </div>
       </div>
       <div className="profile-user-info-style">
-        <p>{userinfo?.region}</p>
-        <p>{userinfo?.nickName}</p>
+        <p>{data?.data.region}</p>
+        <p>{data?.data.nickName}</p>
       </div>
       <button className="profile-logout-btn-style" onClick={onLogout}>
         로그아웃

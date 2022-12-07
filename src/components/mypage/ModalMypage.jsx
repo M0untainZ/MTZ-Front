@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-  __getMyinfo,
-  __mynameCheck,
-  __putMyinfo,
-} from "../../redux/modules/mypageSlice";
+import { __mynameCheck } from "../../redux/modules/mypageSlice";
 import Modal from "./modal/MyModal";
+import { getMypage, putMypage } from "../../shared/api";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModalMypage = () => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const initialState = {
     memberPhoto: "",
@@ -18,18 +19,21 @@ const ModalMypage = () => {
     badgeName: "",
   };
 
+  const { userinf } = useSelector((state) => state.mypage);
   const [profile, setProfile] = useState(initialState);
   const [modal, setModal] = useState(false);
   const { badgeModal, setBadgeModal } = useState([]);
 
-  //입력정보 불러오기
-  const userinfo = useSelector((state) => state.mypage.mypage?.data);
-
-  useEffect(() => {
-    dispatch(__getMyinfo());
-  }, [dispatch]);
+  const { data } = useQuery(["mypage"], getMypage);
 
   const regionList = ["서울", "경상", "경기", "충청", "전라", "강원", "제주"];
+
+  //프로필 수정 쿼리
+  const { mutate: putMypages } = useMutation(putMypage, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["mypage"]);
+    },
+  });
 
   //정보 변경
   const onChangeInfo = (e) => {
@@ -37,15 +41,18 @@ const ModalMypage = () => {
     setProfile({ ...profile, [name]: value });
   };
 
+  //뱃지 수정
   const onChangeBadge = (e) => {
     const { src, alt } = e.target;
     setProfile({ ...profile, badgeName: alt, profilePhoto: src });
   };
   const { mynameChk } = useSelector((state) => state.mypage);
 
+  //닉네임 중복확인
   const NameCk = () => {
     dispatch(__mynameCheck({ nickName: profile.nickName }));
   };
+
   //정보 변경 사항 보내기
   const onSubmitInfo = () => {
     if (
@@ -53,29 +60,47 @@ const ModalMypage = () => {
       profile.nickName === "" ||
       profile.region === ""
     ) {
-      alert("모든 내용을 입력해주세요.");
+      toast.warning("모든 정보를 입력해주세요.", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else if (!mynameChk) {
-      alert("닉네임 중복확인을 확인해주세요.");
+      toast.warning("닉네임 중복을 확인해주세요.", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else {
-      dispatch(__putMyinfo(profile));
+      putMypages(profile);
       sessionStorage.removeItem("userinfos");
       sessionStorage.setItem("userinfos", JSON.stringify(profile));
-      alert("정보 변경이 완료되었습니다.");
-      window.location.replace("/mypage");
       setModal(!modal);
+      toast.success("수정이 완료되었습니다.", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
+
   const ModalSwitch = () => {
     setModal(!modal);
   };
+
+  //뱃지 선택 금지
+  const onStopAlert = () => {
+    toast.error("선택하실 수 없는 뱃지입니다 😭", {
+      autoClose: 1000,
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   //미상의 뱃지 리스트
   function repeat(badgeModal) {
     let arr = [];
-    for (let i = 0; i < 12 - userinfo.badgeList.length; i++) {
+    for (let i = 0; i < 12 - data?.data.badgeList.length; i++) {
       arr.push(
         <img
           src="/icons/badge/lockBadge.png"
-          onClick={onChangeBadge}
+          onClick={onStopAlert}
           className="badge-element-img"
           name="badgeName"
           alt="lockBadge"
@@ -106,7 +131,7 @@ const ModalMypage = () => {
                 onChange={onChangeInfo}
                 type="text"
                 name="nickName"
-                defaultValue={userinfo?.nickName}
+                defaultValue={data?.data?.nickName}
               />
               {profile.nickName.trim() === "" ? null : mynameChk ? (
                 <div className="use-name" style={{ color: "blue" }}>
@@ -125,8 +150,8 @@ const ModalMypage = () => {
             <div className="pick modal-setting-region">
               <p>지역선택</p>
               <select onChange={onChangeInfo} name="region">
-                <option value={userinfo?.region} hidden>
-                  {userinfo?.region}
+                <option value={data?.data?.region} hidden>
+                  {data?.data?.region}
                 </option>
                 {regionList.map((regions, idx) => (
                   <option key={idx} value={regions}>
@@ -138,7 +163,7 @@ const ModalMypage = () => {
             <div className="pick pick-setting-badges">
               <p>대표 뱃지 설정 : {profile.badgeName}</p>
               <div className="pick-badge-list">
-                {userinfo?.badgeList.map((badges, idx) => {
+                {data?.data?.badgeList.map((badges, idx) => {
                   return (
                     <img
                       key={idx}
@@ -171,6 +196,7 @@ const ModalMypage = () => {
           </StMypageInfo>
         </Modal>
       )}
+      <ToastContainer style={{ width: "fit-content" }} />
     </StModalMypage>
   );
 };

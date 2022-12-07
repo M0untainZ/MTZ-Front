@@ -70,6 +70,7 @@ const MountModal = () => {
       position: toast.POSITION.TOP_CENTER
     })
   };
+  
   const ModalSwitch = () => {
     if (token) {
       setModal(!modal);

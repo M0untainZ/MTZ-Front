@@ -71,7 +71,7 @@ const FilterResult = () => {
                                         alt="delete-filter"
                                    />
                               </button>
-                              <span>{filters.time}시간</span>
+                              <span>{filters.time}</span>
                          </div>
                     ) : null}
                     {filters.level ? (

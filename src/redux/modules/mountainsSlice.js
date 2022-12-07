@@ -110,7 +110,6 @@ export const mountainsSlice = createSlice({
           // },
           // [__getMountains.rejected]: (state, action) => {},
           [__infiniteScroll.pending]: (state, action) => {
-               // state.mountains = [];
                state.isLoading = true;
           },
           [__infiniteScroll.fulfilled]: (state, action) => {

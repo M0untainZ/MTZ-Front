@@ -9,32 +9,32 @@ import {
   __emailCheck,
 } from "../redux/modules/userSlice";
 const SignUp = () => {
-     const navigate = useNavigate();
-     const dispatch = useDispatch();
-     const initialState = {
-          email: "",
-          nickName: "",
-          password: "",
-          passwordConfirm: "",
-          region: "",
-     };
-     const [user, setUser] = useState(initialState);
-     const { overlapEmail, overlapName } = useSelector((state) => state.user);
-     const [emailCheck, setEmailCheck] = useState(false);
-     const [pwCheck, setPwCheck] = useState(false);
-     const [emailState, setEmailState] = useState(false);
-     const regEmail =
-          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const initialState = {
+    email: "",
+    nickName: "",
+    password: "",
+    passwordConfirm: "",
+    region: "",
+  };
+  const [user, setUser] = useState(initialState);
+  const { overlapEmail, overlapName } = useSelector((state) => state.user);
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [pwCheck, setPwCheck] = useState(false);
+  const [emailState, setEmailState] = useState(false);
+  const regEmail =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 
-     const regPw =
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
-     const onChangeHandler = (e) => {
-          const { name, value } = e.target;
-          setUser({
-               ...user,
-               [name]: value,
-          });
-     };
+  const regPw =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
 
   //이메일 중복검사
   const EmailCk = () => {
@@ -288,7 +288,6 @@ const StLoginContainer = styled.div`
   width: 100%;
   margin-top: 8vh;
   .imgBox {
-    margin-left: -11%;
     height: 100%;
     width: 30%;
   }
@@ -299,7 +298,8 @@ const StLoginContainer = styled.div`
 const StParentsBox = styled.div`
   width: 388px;
   text-align: left;
-  margin-left: 10%;
+  background-color: #fff;
+  padding: 0 5% 0 5%;
   .helloLogo {
     margin-top: 25%;
     font-weight: bolder;
@@ -319,12 +319,15 @@ const StLoginBox = styled.div`
 const StInputBox = styled.div`
   height: 30%;
   margin-top: 3%;
+  input {
+    padding-left: 2%;
+  }
   .emailInputBox {
     width: 100%;
     height: 40%;
     .emailInput {
       margin-top: 1%;
-      width: 90%;
+      width: 88%;
       height: 60%;
       font-size: medium;
     }
@@ -341,7 +344,7 @@ const StInputBox = styled.div`
     height: 40%;
     .nickNameInput {
       margin-top: 1%;
-      width: 90%;
+      width: 88%;
       height: 60%;
       font-size: medium;
     }
@@ -351,7 +354,7 @@ const StInputBox = styled.div`
     height: 40%;
     .pwInput {
       margin-top: 1%;
-      width: 90%;
+      width: 88%;
       height: 60%;
       font-size: medium;
     }
@@ -361,7 +364,7 @@ const StInputBox = styled.div`
     height: 40%;
     .pwCheck {
       margin-top: 1%;
-      width: 90%;
+      width: 88%;
       height: 60%;
       font-size: medium;
     }

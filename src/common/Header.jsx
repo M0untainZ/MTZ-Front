@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { HiMenu } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { getMypage } from "../shared/api";
+import { useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const [logininfo, setLogininfo] = useState({});
   const { data } = useQuery(["mypage"], getMypage);
   const userinfos = JSON.parse(sessionStorage.getItem("userinfos"));
+  const kakaoinfos = sessionStorage.getItem("nickName");
+
   //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
   const userinfo = userinfos ? userinfos : "";
 
@@ -64,6 +67,7 @@ const Header = () => {
     );
   } else {
     //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
+
     const userbadge =
       userinfos?.badgeName == null
         ? "등산 비기너, "

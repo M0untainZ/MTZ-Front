@@ -1,63 +1,118 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { HiMenu } from "react-icons/hi";
+import { useQuery } from "react-query";
+import { getMypage } from "../shared/api";
 
 const Header = () => {
   const navigate = useNavigate();
-  //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
+
+  const { data } = useQuery(["mypage"], getMypage);
   const userinfos = JSON.parse(sessionStorage.getItem("userinfos"));
+  //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
   const userinfo = userinfos ? userinfos : "";
-  //뱃지 null일 때 기본 값 이름
-  const userbadge =
-    userinfos?.badgeName == null
-      ? "등산 비기너, "
-      : `${userinfos?.badgeName}, `;
 
-  return (
-    <>
-      <StHeader>
-        <div>
-          <Link to="/" className="header-title">
-            <img src="/icons/title_logo.png" alt="logo" />
-          </Link>
-          <Link to="/" className="header-main-btn">
-            메인페이지
-          </Link>
-          <Link to="/detail" className="header-detail-btn">
-            상세페이지
-          </Link>
-          <Link to="/certification" className="header-certify-btn">
-            인증샷페이지
-          </Link>
-        </div>
-        <div className="header-info-my-btn">
-          {/* <img src="" alt="badge" /> */}
-
-          {userinfo ? (
-            <div>
-              <span>{`${userbadge} ${userinfos?.nickName}`}</span>
+  if (window.location.pathname === "/mypage") {
+    //뱃지 null일 때 기본 값 이름
+    const userbadge =
+      userinfos.badgeName == null
+        ? "등산 비기너, "
+        : `${data?.data.badgeName}, `;
+    const userName = data?.data.nickName;
+    return (
+      <>
+        <StHeader>
+          <div>
+            <Link to="/" className="header-title">
+              <img src="/icons/title_logo.png" alt="logo" />
+            </Link>
+            <Link to="/" className="header-main-btn">
+              메인페이지
+            </Link>
+            <Link to="/detail" className="header-detail-btn">
+              상세페이지
+            </Link>
+            <Link to="/certification" className="header-certify-btn">
+              인증샷페이지
+            </Link>
+          </div>
+          <div className="header-info-my-btn">
+            {userinfo ? (
+              <div>
+                <span>{`${userbadge} ${userName}`}</span>
+                <button
+                  onClick={() => navigate("/mypage")}
+                  className="header-mypage-btn"
+                >
+                  마이페이지
+                </button>
+              </div>
+            ) : (
               <button
-                onClick={() => navigate("/mypage")}
-                className="header-mypage-btn"
+                onClick={() => navigate("/login")}
+                className="header-login-btn"
               >
-                마이페이지
+                로그인
               </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => navigate("/login")}
-              className="header-login-btn"
-            >
-              로그인
+            )}
+            <button className="mobile-btn">
+              <HiMenu />
             </button>
-          )}
-          <button className="mobile-btn">
-            <HiMenu />
-          </button>
-        </div>
-      </StHeader>
-    </>
-  );
+          </div>
+        </StHeader>
+      </>
+    );
+  } else {
+    //유저 정보가 있으면 header에 개인정보(뱃지,이름) 불러오기
+    const userbadge =
+      userinfos?.badgeName == null
+        ? "등산 비기너, "
+        : `${userinfos?.badgeName}, `;
+    const userName = userinfos?.nickName;
+    return (
+      <>
+        <StHeader>
+          <div>
+            <Link to="/" className="header-title">
+              <img src="/icons/title_logo.png" alt="logo" />
+            </Link>
+            <Link to="/" className="header-main-btn">
+              메인페이지
+            </Link>
+            <Link to="/detail" className="header-detail-btn">
+              상세페이지
+            </Link>
+            <Link to="/certification" className="header-certify-btn">
+              인증샷페이지
+            </Link>
+          </div>
+          <div className="header-info-my-btn">
+            {userinfo ? (
+              <div>
+                <span>{`${userbadge} ${userName}`}</span>
+                <button
+                  onClick={() => navigate("/mypage")}
+                  className="header-mypage-btn"
+                >
+                  마이페이지
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="header-login-btn"
+              >
+                로그인
+              </button>
+            )}
+            <button className="mobile-btn">
+              <HiMenu />
+            </button>
+          </div>
+        </StHeader>
+      </>
+    );
+  }
 };
 
 export default Header;

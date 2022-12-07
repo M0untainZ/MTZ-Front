@@ -15,32 +15,26 @@ import Kakao from "../components/kakao/Kakao";
 import Notfound from "../common/Notfound";
 
 const Router = () => {
-     return (
-          <BrowserRouter>
-               <Layout>
-                    <Header />
-                    <Routes>
-                         <Route path="/" element={<Main />} />
-                         <Route path="/mypage" element={<MyPage />} />
-                         <Route path="/login" element={<Login />} />
-                         <Route path="/signup" element={<SignUp />} />
-                         <Route path="/detail" element={<DetailOne />} />
-                         <Route path="/detail/:id" element={<DetailTwo />} />
-                         <Route
-                              path="/certification"
-                              element={<Certification />}
-                         />
-                         <Route path="/Test" element={<Test />} />
-                         <Route
-                              path="/oauth/callback/kakao"
-                              element={<Kakao />}
-                         />
-                         <Route path="/*" element={<Notfound />} />
-                    </Routes>
-               </Layout>
-               <Footer />
-          </BrowserRouter>
-     );
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/detail" element={<DetailOne />} />
+          <Route path="/detail/:id" element={<DetailTwo />} />
+          <Route path="/certification" element={<Certification />} />
+          <Route path="/Test" element={<Test />} />
+          <Route path="/oauth/callback/kakao" element={<Kakao />} />
+          <Route path="/*" element={<Notfound />} />
+        </Routes>
+      </Layout>
+      <Footer />
+    </BrowserRouter>
+  );
 };
 
 export default Router;

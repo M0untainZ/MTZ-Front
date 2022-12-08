@@ -2,6 +2,8 @@ import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,10 +14,19 @@ const MountBackground = () => {
   const dispatch = useDispatch();
   const id = Number(mountId.id);
   const { isLike } = useSelector((state) => state.twoSlice);
+  const isLogin = useSelector((state) => state.twoSlice.isLoginState);
+
 
   //좋아요 버튼
   const lovePost = () => {
-    dispatch(__likePost(id));
+    if (isLogin) {
+      dispatch(__likePost(id));
+    } else {
+      toast.error("로그인이 필요한 기능입니다", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
   };
 
   useEffect(() => {

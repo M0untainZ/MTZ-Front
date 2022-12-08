@@ -2,15 +2,10 @@ import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
-import {
-  __likePost,
-  __getMountain,
-  likeState,
-} from "../../redux/modules/twoSlice";
+import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { MountGeolocation, positionOptions } from "./MountGeolocation";
 
 const MountBackground = () => {
   const mountId = useParams();
@@ -22,12 +17,6 @@ const MountBackground = () => {
   const lovePost = () => {
     dispatch(__likePost(id));
   };
-
-  //상세 2 정보 불러오기
-  // useEffect(() => {
-  //   dispatch(__getMountain(id));
-  //   // eslint-disable-next-line
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(__getMountain(id));

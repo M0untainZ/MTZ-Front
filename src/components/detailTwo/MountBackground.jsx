@@ -14,12 +14,12 @@ const MountBackground = () => {
   const dispatch = useDispatch();
   const id = Number(mountId.id);
   const { isLike } = useSelector((state) => state.twoSlice);
-  const isLogin = useSelector((state) => state.twoSlice.isLoginState);
+  const token = sessionStorage.getItem("Access_Token")
 
 
   //좋아요 버튼
   const lovePost = () => {
-    if (isLogin) {
+    if (token !== null) {
       dispatch(__likePost(id));
     } else {
       toast.error("로그인이 필요한 기능입니다", {

@@ -102,7 +102,7 @@ const Login = () => {
                 </div>
               </button>
             </div>
-            <ToastContainer />
+            <ToastContainer style={{ width: "fit-content" }} />
           </StButtonBox>
           <StButtonBox>
             <OAuth />

@@ -27,7 +27,7 @@ export const __infiniteScroll = createAsyncThunk(
       if (data.data.length === 0) {
         throw data;
       }
-      console.log("test", data.data);
+      //console.log("test", data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -111,10 +111,16 @@ export const mountainsSlice = createSlice({
       state.isLoading = true;
     },
     [__infiniteScroll.fulfilled]: (state, action) => {
-      console.log("scroll", action);
+      //console.log("scroll", action);
       state.filter = {};
-      state.mountains.push(...action.payload);
-      state.isLoading = false;
+      if (action.meta.arg === 0) {
+        state.mountains = [];
+        state.mountains.push(...action.payload);
+        state.isLoading = false;
+      } else {
+        state.mountains.push(...action.payload);
+        state.isLoading = false;
+      }
     },
     [__infiniteScroll.rejected]: (state, action) => {},
     [__postFilterMountains.fulfilled]: (state, action) => {

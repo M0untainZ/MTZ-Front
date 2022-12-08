@@ -21,14 +21,18 @@ const MountBackground = () => {
   //좋아요 버튼
   const lovePost = () => {
     dispatch(__likePost(id));
-    dispatch(likeState());
   };
 
   //상세 2 정보 불러오기
+  // useEffect(() => {
+  //   dispatch(__getMountain(id));
+  //   // eslint-disable-next-line
+  // }, [dispatch]);
+
   useEffect(() => {
     dispatch(__getMountain(id));
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, []);
 
   const likeList = useSelector((state) => state.twoSlice);
   const mountList = useSelector((state) => state.twoSlice.mountain.data);

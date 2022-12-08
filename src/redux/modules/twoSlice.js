@@ -69,15 +69,13 @@ const initialState = {
 export const twoSlice = createSlice({
   name: "two",
   initialState,
-  reducers: {
-    likeState: (state) => {
-      state.isLike = false;
-    },
-  },
+  reducers: {},
   extraReducers: {
     //상세페이지 2 정보 불러오기
     [__getMountain.fulfilled]: (state, action) => {
       state.mountain = action.payload;
+      state.correctLike = action.payload.data.correctLike;
+      state.countLike = action.payload.data.countLike;
     },
     [__getMountain.rejected]: (state, action) => {},
     //좋아요

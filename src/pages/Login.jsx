@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutState, __loginUser } from "../redux/modules/userSlice";
 import OAuth from "../components/kakao/OAuth";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Login = () => {
         toast.error("아이디와 비밀번호를 확인해주세요", {
           autoClose: 1500,
           position: toast.POSITION.TOP_CENTER,
-        })
+        });
       }
     }
     // eslint-disable-next-line
@@ -108,7 +108,7 @@ const Login = () => {
             <OAuth />
           </StButtonBox>
           <div className="sign-up">
-            <span>아직 계정이 없으신가요?</span>
+            <span>아직 계정이 없으신가요?</span>&nbsp;&nbsp;
             <span onClick={() => navigate("/SignUp")} className="signUpTag">
               회원가입하기
             </span>
@@ -129,7 +129,7 @@ const StLoginContainer = styled.div`
   margin-top: 8vh;
   .imgBox {
     height: 100%;
-    width: 30%;
+    width: 61.5vh;
   }
   .loginImg {
     width: 100%;

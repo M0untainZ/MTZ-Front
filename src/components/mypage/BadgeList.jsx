@@ -59,6 +59,7 @@ const STBadgeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-bottom: 30px;
   gap: 5%;
   .badges-title-style {
     font-size: 24px;

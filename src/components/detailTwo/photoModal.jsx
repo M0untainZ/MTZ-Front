@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperCore, { Navigation } from "swiper/core";
@@ -67,10 +66,6 @@ const StModalBox = styled.div`
     object-fit: cover;
     width: 35vh;
     height: 35vh;
-    /* :hover {
-      width: 45vh;
-      height: 45vh;
-    } */
   }
   .swiper {
     overflow: hidden;

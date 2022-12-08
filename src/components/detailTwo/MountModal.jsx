@@ -61,6 +61,7 @@ const MountModal = () => {
     formData.append("photo", file);
     dispatch(__imgPost({ formData, id: id }));
     setModal(!modal);
+    setSelectImg(false);
     toast.success("사진이 등록되었습니다.", {
       autoClose: 1500,
       position: toast.POSITION.TOP_CENTER,

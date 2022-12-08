@@ -34,6 +34,7 @@ const MtList = () => {
     }
   }, [inView, isLoading]);
 
+  // console.log("let", isLoading, mountains, inView);
   return (
     <StMTList>
       <SearchMt />

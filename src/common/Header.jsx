@@ -134,6 +134,7 @@ const StHeader = styled.div`
   padding: 0 14%;
   z-index: 10;
   position: absolute;
+  color: #000;
   div {
     height: 100%;
     display: flex;
@@ -141,6 +142,7 @@ const StHeader = styled.div`
     align-items: center;
     gap: 10px;
     width: fit-content;
+
     a,
     button {
       border: none;

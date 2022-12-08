@@ -28,7 +28,7 @@ const RecommendCourse = () => {
                     </StRecommendHeader>
                     {recommendList === false ? 
                          <StRecommend>
-                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                              <div onClick={() => {dispatch(timeData("1시간")); navigate("/detail")}}>
                                    <span>{`${data?.data.tagList[0].name}`}</span>
                                    <img src={`${data?.data.tagList[0].img}`} alt="" />
                               </div>
@@ -38,7 +38,7 @@ const RecommendCourse = () => {
                               </div>
                          </StRecommend> :
                          <StRecommend>
-                              <div onClick={() => {dispatch(timeData("1")); navigate("/detail")}}>
+                              <div onClick={() => {dispatch(timeData("1시간")); navigate("/detail")}}>
                                    <span>{`${data?.data.tagList[0].name}`}</span>
                                    <img src={`${data?.data.tagList[0].img}`} alt="" />
                               </div>
@@ -46,7 +46,7 @@ const RecommendCourse = () => {
                                    <span>{`${data?.data.tagList[1].name}`}</span>
                                    <img src={`${data?.data.tagList[1].img}`} alt="" />
                               </div>
-                              <div onClick={() => {dispatch(timeData("2")); navigate("/detail")}}>
+                              <div onClick={() => {dispatch(timeData("2시간")); navigate("/detail")}}>
                                    <span>{`${data?.data.tagList[2].name}`}</span>
                                    <img src={`${data?.data.tagList[2].img}`} alt="" />
                               </div>

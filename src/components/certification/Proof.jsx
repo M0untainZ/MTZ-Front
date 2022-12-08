@@ -72,6 +72,10 @@ const Proof = () => {
                 if (lastPage.data.length === 12) {
                     return allPage.length
                 }
+            },
+            refetchOnWindowFocus: false,
+            onSuccess: () => {
+                queryClient.invalidateQueries(["proof"]);
             }
         }
     ) 

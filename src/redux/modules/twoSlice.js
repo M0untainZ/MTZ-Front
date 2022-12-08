@@ -95,5 +95,4 @@ export const twoSlice = createSlice({
   },
 });
 
-export const { likeState } = twoSlice.actions;
 export default twoSlice.reducer;

@@ -39,8 +39,8 @@ const FilterMt = () => {
   //필터 선택 onChange - time
   const onFilterTime = (e) => {
     const { name, value } = e.target;
-    setFilter({ ...filter, [name]: value });
-  };
+    setFilter({ ...filter, [name]: `${value}시간` });
+    };
   //필터 선택 onChange - region
   const onFilterSelect = (e) => {
     const { name, value } = e.target;

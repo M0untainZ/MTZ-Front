@@ -7,7 +7,6 @@ import SignUp from "../pages/SignUp";
 import DetailOne from "../pages/DetailOne";
 import DetailTwo from "../pages/DetailTwo";
 import Certification from "../pages/Certification";
-import Test from "../pages/Test";
 import Header from "../common/Header";
 import Layout from "../common/Layout";
 import Footer from "../common/Footer";
@@ -27,7 +26,6 @@ const Router = () => {
           <Route path="/detail" element={<DetailOne />} />
           <Route path="/detail/:id" element={<DetailTwo />} />
           <Route path="/certification" element={<Certification />} />
-          <Route path="/Test" element={<Test />} />
           <Route path="/oauth/callback/kakao" element={<Kakao />} />
           <Route path="/*" element={<Notfound />} />
         </Routes>

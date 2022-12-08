@@ -4,12 +4,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCurrentLocation, positionOptions } from "./Geolocation";
 import Mapmodal from "./modal/Mapmodal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { regionData } from "../../redux/modules/mountainsSlice";
 
 const Weather = () => {
   const dispatch = useDispatch();
-  const a = useSelector((state) => state.mountains.filterData);
   const navigate = useNavigate();
   const { location, error } = useCurrentLocation(positionOptions);
   const [city, setCity] = useState("");
@@ -27,7 +26,7 @@ const Weather = () => {
     if (error) {
       return console.log("error");
     }
-
+    
     if (location) {
       const geo_key = `${GEOCODING_KEY}`;
       const weather_key = `${WEATHER_KEY}`;

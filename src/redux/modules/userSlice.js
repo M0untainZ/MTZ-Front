@@ -117,6 +117,8 @@ export const userSlice = createSlice({
         );
         sessionStorage.setItem("authority", action.payload.data.data.authority);
         alert(`${action.payload.data.data.nickName}님 환영합니다.`);
+      } else {
+        state.loginFalse = true;
       }
     },
     [__loginUser.rejected]: (state, action) => {

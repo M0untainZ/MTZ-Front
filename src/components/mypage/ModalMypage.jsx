@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 const ModalMypage = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-
   const initialState = {
     memberPhoto: "",
     nickName: "",
@@ -24,7 +23,9 @@ const ModalMypage = () => {
   const [modal, setModal] = useState(false);
   const { badgeModal, setBadgeModal } = useState([]);
 
-  const { data } = useQuery(["mypage"], getMypage);
+  const { data } = useQuery(["mypage"], getMypage, {
+    refetchOnWindowFocus: false,
+  });
 
   const regionList = ["서울", "경상", "경기", "충청", "전라", "강원", "제주"];
 

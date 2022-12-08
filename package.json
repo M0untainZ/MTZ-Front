@@ -34,7 +34,8 @@
           "build": "react-scripts build",
           "test": "react-scripts test",
           "eject": "react-scripts eject",
-          "deploy": "aws s3 sync ./build s3://mtz-front --profile=mtz"
+          "deploy": "aws s3 sync ./build s3://mtz-front --profile=mtz",
+          "invalidate": "aws cloudfront create-invalidation --profile=mtz --distribution-id EYFKT08FIMIXH --paths /*"
      },
      "eslintConfig": {
           "extends": [

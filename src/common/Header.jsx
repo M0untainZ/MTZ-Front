@@ -8,7 +8,13 @@ import { useState } from "react";
 const Header = () => {
   const navigate = useNavigate();
   const [logininfo, setLogininfo] = useState({});
-  const { data } = useQuery(["mypage"], getMypage);
+  const [myPageData, setMyPageData] = useState([]);
+  const { data } = useQuery(["mypage"], getMypage, {
+    onSuccess: (config) => {
+      setMyPageData(config.data)
+    },
+    enabled: false
+  });
   const userinfos = JSON.parse(sessionStorage.getItem("userinfos"));
   const kakaoinfos = sessionStorage.getItem("nickName");
 
@@ -20,8 +26,8 @@ const Header = () => {
     const userbadge =
       userinfos.badgeName == null
         ? "등산 비기너, "
-        : `${data?.data.badgeName}, `;
-    const userName = data?.data.nickName;
+        : `${myPageData.badgeName}, `;
+    const userName = myPageData.nickName;
     return (
       <>
         <StHeader>

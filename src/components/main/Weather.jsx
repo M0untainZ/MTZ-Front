@@ -6,11 +6,12 @@ import { useCurrentLocation, positionOptions } from "./Geolocation";
 import Mapmodal from "./modal/Mapmodal";
 import { useDispatch } from "react-redux";
 import { regionData } from "../../redux/modules/mountainsSlice";
+import Snow from "../../elements/Snow";
 
 const Weather = () => {
+  const { location, error } = useCurrentLocation(positionOptions);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { location, error } = useCurrentLocation(positionOptions);
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState("");
   const [temp, setTemp] = useState("");
@@ -24,7 +25,7 @@ const Weather = () => {
 
   useEffect(() => {
     if (error) {
-      return console.log("error");
+      return error;
     }
     
     if (location) {
@@ -182,6 +183,7 @@ const Weather = () => {
             </span>
           </StWeatherInfoWrap>
         </StWeatherContainer>
+        <Snow className="snow" />
       </StMainImageBanner>
     </>
   );
@@ -194,6 +196,12 @@ const StMainImageBanner = styled.div`
   height: 55vh;
   position: relative;
   display: flex;
+  overflow: hidden;
+  z-index: 5;
+  .snow {
+    position: absolute;
+    z-index: 0;
+  }
   img {
     object-position: center center;
     object-fit: cover;
@@ -214,6 +222,7 @@ const StMap = styled.div`
   background-color: #185b6e;
   color: #ffffff;
   gap: 10px;
+  z-index: 6;
   cursor: pointer;
   img {
     width: 18px;
@@ -292,6 +301,7 @@ const StWeatherContainer = styled.div`
   right: 13%;
   bottom: 10%;
   padding: 10px;
+  z-index: 6;
   background-color: #e1e5e4;
 `;
 

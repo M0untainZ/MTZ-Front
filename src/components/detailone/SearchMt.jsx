@@ -27,7 +27,6 @@ const SearchMt = () => {
     }
   };
 
-  console.log(keyword);
   return (
     <StSearchMT>
       <div>

@@ -57,7 +57,7 @@ const ProofImage = () => {
                   return (
                        <SwiperSlide className="swiper-slide" key={idx}>
                             <div className="see-more" onClick={() => navigate("/certification")}>
-                              <img src="icons/icon_dot.png" alt="" />
+                              <img src="/icons/icon_dot.png" alt="" />
                               <p>더보기</p>
                             </div>
                             <img src={`${el.photo}`} alt="" />

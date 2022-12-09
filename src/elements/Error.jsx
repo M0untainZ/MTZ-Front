@@ -25,7 +25,7 @@ const StError = styled.div`
     width: 40px;
     height: 40px;
     path {
-      color: var(--red-color);
+      color: red;
     }
   }
   p {

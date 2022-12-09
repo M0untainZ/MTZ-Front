@@ -2,32 +2,31 @@ import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
-import {
-  __likePost,
-  __getMountain,
-  likeState,
-} from "../../redux/modules/twoSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { MountGeolocation, positionOptions } from "./MountGeolocation";
 
 const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
   const id = Number(mountId.id);
   const { isLike } = useSelector((state) => state.twoSlice);
+  const { isLogin } = useSelector((state) => state.user);
 
   //좋아요 버튼
   const lovePost = () => {
-    dispatch(__likePost(id));
+    if (isLogin) {
+      dispatch(__likePost(id));
+    } else {
+      toast.error("로그인이 필요한 기능입니다", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
-
-  //상세 2 정보 불러오기
-  // useEffect(() => {
-  //   dispatch(__getMountain(id));
-  //   // eslint-disable-next-line
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(__getMountain(id));

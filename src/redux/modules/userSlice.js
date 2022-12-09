@@ -86,6 +86,9 @@ export const userSlice = createSlice({
     overlapNameCheck: (state) => {
       state.overlapName = false;
     },
+    isLoginState: (state) => {
+      state.isLogin = false;
+    },
     //     loginState: (state) => {
     //       state.isLogin = true;
     //     },
@@ -117,6 +120,8 @@ export const userSlice = createSlice({
         );
         sessionStorage.setItem("authority", action.payload.data.data.authority);
         alert(`${action.payload.data.data.nickName}님 환영합니다.`);
+      } else {
+        state.loginFalse = true;
       }
     },
     [__loginUser.rejected]: (state, action) => {
@@ -152,6 +157,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { overlapEmailCheck, overlapNameCheck, logoutState } =
+export const { overlapEmailCheck, overlapNameCheck, logoutState, isLoginState } =
   userSlice.actions;
 export default userSlice.reducer;

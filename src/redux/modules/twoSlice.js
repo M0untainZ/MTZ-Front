@@ -86,7 +86,6 @@ export const twoSlice = createSlice({
     },
     [__likePost.rejected]: (state, action) => {
       state.isLike = false;
-      alert("로그인이 필요한 기능입니다.");
     },
     //인증샷
     [__imgPost.fulfilled]: (state, action) => {
@@ -96,5 +95,4 @@ export const twoSlice = createSlice({
   },
 });
 
-export const { likeState } = twoSlice.actions;
 export default twoSlice.reducer;

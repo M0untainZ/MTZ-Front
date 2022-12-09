@@ -6,14 +6,16 @@ import SearchMt from "./SearchMt";
 import Mountain from "./Mountain";
 import { useCallback } from "react";
 import { useInView } from "react-intersection-observer";
+import { useRef } from "react";
 
 const MtList = () => {
   const dispatch = useDispatch();
+  const reftest = useRef();
 
   const [page, setPage] = useState(0);
-  const [ref, inView] = useInView();
+  const [reff, inView] = useInView();
 
-  const { mountains, isLoading, filterDataState } = useSelector(
+  const { mountains, filterDataState } = useSelector(
     (state) => state.mountains
   );
 
@@ -29,12 +31,11 @@ const MtList = () => {
   }, [getItems]);
 
   useEffect(() => {
-    if (inView && !isLoading) {
+    if (inView) {
       setPage((prevState) => prevState + 1);
     }
-  }, [inView, isLoading]);
+  }, [inView]);
 
-  // console.log("let", isLoading, mountains, inView);
   return (
     <StMTList>
       <SearchMt />
@@ -43,7 +44,7 @@ const MtList = () => {
           return (
             <div className="mountains" key={idx}>
               <Mountain mountain={mountain} />
-              <div ref={ref} className="Target-Element"></div>
+              <div ref={reff} className="Target-Element"></div>
             </div>
           );
         })}

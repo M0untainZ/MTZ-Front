@@ -34,12 +34,12 @@ const MtList = () => {
     }
   }, [inView, isLoading]);
 
-  // console.log("let", isLoading, mountains, inView);
+  console.log("let", isLoading, mountains, inView);
   return (
     <StMTList>
       <SearchMt />
       <div className="mtlist-side">
-        {mountains?.map((mountain, idx) => {
+        {mountains.map((mountain, idx) => {
           return (
             <div className="mountains" key={idx}>
               <Mountain mountain={mountain} />

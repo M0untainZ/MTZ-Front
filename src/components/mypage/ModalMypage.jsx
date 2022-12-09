@@ -11,6 +11,16 @@ import "react-toastify/dist/ReactToastify.css";
 const ModalMypage = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const { data } = useQuery(["mypage"], getMypage, {
+    refetchOnWindowFocus: false,
+  });
+  //프로필 수정 쿼리
+  const { mutate: putMypages } = useMutation(putMypage, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["mypage"]);
+    },
+  });
+
   const initialState = {
     memberPhoto: "",
     nickName: "",
@@ -23,18 +33,9 @@ const ModalMypage = () => {
   const [modal, setModal] = useState(false);
   const { badgeModal, setBadgeModal } = useState([]);
 
-  const { data } = useQuery(["mypage"], getMypage, {
-    refetchOnWindowFocus: false,
-  });
+  console.log(profile);
 
   const regionList = ["서울", "경상", "경기", "충청", "전라", "강원", "제주"];
-
-  //프로필 수정 쿼리
-  const { mutate: putMypages } = useMutation(putMypage, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["mypage"]);
-    },
-  });
 
   //정보 변경
   const onChangeInfo = (e) => {
@@ -57,24 +58,41 @@ const ModalMypage = () => {
   //정보 변경 사항 보내기
   const onSubmitInfo = () => {
     if (
-      profile.badgeName === "" ||
-      profile.nickName === "" ||
-      profile.region === ""
+      profile.nickName !== "" &&
+      profile.nickName !== data.data.nickName &&
+      !mynameChk
     ) {
-      toast.warning("모든 정보를 입력해주세요.", {
+      return toast.success("중복된 닉네임 입니다.", {
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
       });
-    } else if (!mynameChk) {
-      toast.warning("닉네임 중복을 확인해주세요.", {
-        autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
-      });
+    } else if (
+      profile.nickName === "" ||
+      profile.region === "" ||
+      profile.badgeName === ""
+    ) {
+      if (profile.nickName === "") {
+        NameCk(true);
+        setProfile({ ...profile, nickName: data.data.nickName });
+        console.log("test", profile, data.data);
+      }
+      if (profile.region === "") {
+        setProfile({ ...profile, region: data.data.region });
+      }
+      if (profile.badgeName === "") {
+        setProfile({
+          ...profile,
+          badgeName: data.data.badgeName,
+          profilePhoto: data.data.profilePhoto,
+        });
+        console.log("test", profile, data.data);
+      }
     } else {
       putMypages(profile);
       sessionStorage.removeItem("userinfos");
       sessionStorage.setItem("userinfos", JSON.stringify(profile));
       setModal(!modal);
+      console.log("why", profile, data.data);
       toast.success("수정이 완료되었습니다.", {
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
@@ -134,7 +152,11 @@ const ModalMypage = () => {
                 name="nickName"
                 defaultValue={data?.data?.nickName}
               />
-              {profile.nickName.trim() === "" ? null : mynameChk ? (
+              {profile.nickName === "" ? (
+                <div className="use-name" style={{ color: "blue" }}>
+                  이전의 닉네임으로 입력이 됩니다.
+                </div>
+              ) : mynameChk ? (
                 <div className="use-name" style={{ color: "blue" }}>
                   사용 할 수 있는 닉네임입니다.
                 </div>
@@ -317,6 +339,7 @@ const Button = styled.button`
   border: ${(props) =>
     props.borderColor ? "2px solid var(--color-button)" : "2px solid #777"};
   color: ${(props) => (props.borderColor ? "var(--color-button);" : "#777")};
+  cursor: pointer;
 `;
 
 const StErrorMassage = styled.div`

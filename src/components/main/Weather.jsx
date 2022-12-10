@@ -61,7 +61,7 @@ const Weather = () => {
   return (
     <>
       <StMainImageBanner>
-        <img alt="" src="/icons/mainbanner.png" />
+        <img alt="" src="/icons/mainbanner.webp" />
         <StMap onClick={onModalOpen}>
           <img alt="" src="/icons/map_search.png" />
           <span>지도보기</span>
@@ -74,7 +74,7 @@ const Weather = () => {
             }}
           >
             <StMapContainer>
-              <img alt="" src="/icons/main_map.png" />
+              <img alt="" src="/icons/main_map.webp" />
               <div
                 className="region seoul"
                 onClick={() => {

@@ -13,14 +13,23 @@ const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
   const id = Number(mountId.id);
-  const { isLike } = useSelector((state) => state.twoSlice);
-  const { isLogin } = useSelector((state) => state.user);
+  const { isLike, badge, correctBadge } = useSelector(
+    (state) => state.twoSlice
+  );
+  const token = sessionStorage.getItem("Access_Token");
 
   //좋아요 버튼
   const lovePost = () => {
-    if (isLogin) {
+    if (token) {
       dispatch(__likePost(id));
-    } else {
+      console.log(correctBadge, "벳지");
+      if (correctBadge) {
+        toast.error(`${badge.badgeName}벳지를 획득 하셨습니다.`, {
+          autoClose: 1500,
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } else if (!token) {
       toast.error("로그인이 필요한 기능입니다", {
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,

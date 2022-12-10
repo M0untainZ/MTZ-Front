@@ -191,7 +191,7 @@ const SignUp = () => {
                 ) : (
                   <StErrorMassage>
                     <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
-                    비밀번호가 형식에 맞지 않습니다.
+                    8~16자 영문, 숫자, 특수문자를 사용하세요.
                   </StErrorMassage>
                 )}
               </div>

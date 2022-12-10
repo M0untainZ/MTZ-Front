@@ -65,6 +65,8 @@ const initialState = {
   mountain: {},
   correctLike: {},
   isLike: false,
+  badge: {},
+  correctBadge: false,
 };
 export const twoSlice = createSlice({
   name: "two",
@@ -80,6 +82,9 @@ export const twoSlice = createSlice({
     [__getMountain.rejected]: (state, action) => {},
     //좋아요
     [__likePost.fulfilled]: (state, action) => {
+      state.badge = action.payload.data.badge;
+      state.correctBadge = action.payload.data.correctBadge;
+      console.log(state.correctBadge, "서버");
       state.correctLike = action.payload.data.correctLike;
       state.countLike = action.payload.data.countLike;
       state.isLike = true;

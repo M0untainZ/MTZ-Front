@@ -73,10 +73,6 @@ const Proof = () => {
                     return allPage.length
                 }
             },
-            refetchOnWindowFocus: false,
-            onSuccess: () => {
-                queryClient.invalidateQueries(["proof"]);
-            }
         }
     ) 
     useEffect(() => {

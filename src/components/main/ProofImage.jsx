@@ -12,6 +12,9 @@ const ProofImage = () => {
   const navigate = useNavigate();
   const [mainProof, setMainProof] = useState([]);
   const { data } = useQuery(["main"], getMain, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity,
     onSuccess: (config) =>
       setMainProof(config.data.certificationPhoto.reverse().slice(0, 10)),
   });
@@ -47,7 +50,7 @@ const ProofImage = () => {
       <StProofWrap>
         <p>인증사진 📷</p>
         <StImageList>
-          <PrevBtn ref={prevRef} className="disabled">
+          <PrevBtn ref={prevRef} className="disabled" title="왼쪽 버튼">
             <FaLongArrowAltLeft />
           </PrevBtn>
           {swiperOptions && (
@@ -73,7 +76,7 @@ const ProofImage = () => {
         })}
             </Swiper>
           )}
-          <NextBtn ref={nextRef} className="disabled">
+          <NextBtn ref={nextRef} className="disabled" title="오른쪽 버튼">
             <FaLongArrowAltRight />
           </NextBtn>
         </StImageList>

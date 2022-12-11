@@ -4,7 +4,11 @@ import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
 
 const UserRanking = () => {
-  const { data } = useQuery(["main"], getMain);
+  const { data } = useQuery(["main"], getMain, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity
+  });
 
   return (
     <>

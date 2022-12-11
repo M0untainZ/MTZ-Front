@@ -40,7 +40,7 @@ const MountMap = () => {
         map.setCenter(coords);
       }
     });
-  }, []);
+  }, [mountList]);
 
   return (
     <>

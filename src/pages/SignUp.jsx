@@ -176,7 +176,7 @@ const SignUp = () => {
                 value={user.password}
                 className="pwInput"
                 type="password"
-                placeholder="비밀번호"
+                placeholder="8~16자 영문, 숫자, 특수문자를 사용하세요."
               />
               <div>
                 {user.password.trim() === "" ? null : pwCheck ? (
@@ -325,6 +325,7 @@ const StInputBox = styled.div`
   .emailInputBox {
     width: 100%;
     height: 40%;
+    margin-bottom: 8%;
     .emailInput {
       margin-top: 1%;
       width: 88%;
@@ -342,6 +343,7 @@ const StInputBox = styled.div`
   .nickNameInputBox {
     width: 100%;
     height: 40%;
+    margin-bottom: 8%;
     .nickNameInput {
       margin-top: 1%;
       width: 88%;
@@ -352,6 +354,7 @@ const StInputBox = styled.div`
   .pwInputBox {
     width: 100%;
     height: 40%;
+    margin-bottom: 8%;
     .pwInput {
       margin-top: 1%;
       width: 88%;

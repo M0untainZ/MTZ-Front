@@ -71,7 +71,11 @@ const initialState = {
 export const twoSlice = createSlice({
   name: "two",
   initialState,
-  reducers: {},
+  reducers: {
+    isCorrectBadge: (state) => {
+      state.correctBadge = false;
+    },
+  },
   extraReducers: {
     //상세페이지 2 정보 불러오기
     [__getMountain.fulfilled]: (state, action) => {
@@ -84,7 +88,6 @@ export const twoSlice = createSlice({
     [__likePost.fulfilled]: (state, action) => {
       state.badge = action.payload.data.badge;
       state.correctBadge = action.payload.data.correctBadge;
-      console.log(state.correctBadge, "서버");
       state.correctLike = action.payload.data.correctLike;
       state.countLike = action.payload.data.countLike;
       state.isLike = true;
@@ -100,4 +103,5 @@ export const twoSlice = createSlice({
   },
 });
 
+export const { isCorrectBadge } = twoSlice.actions;
 export default twoSlice.reducer;

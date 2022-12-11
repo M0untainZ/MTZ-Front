@@ -4,7 +4,11 @@ import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { __likePost, __getMountain } from "../../redux/modules/twoSlice";
+import {
+  isCorrectBadge,
+  __likePost,
+  __getMountain,
+} from "../../redux/modules/twoSlice";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -22,13 +26,6 @@ const MountBackground = () => {
   const lovePost = () => {
     if (token) {
       dispatch(__likePost(id));
-      console.log(correctBadge, "벳지");
-      if (correctBadge) {
-        toast.error(`${badge.badgeName}벳지를 획득 하셨습니다.`, {
-          autoClose: 1500,
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
     } else if (!token) {
       toast.error("로그인이 필요한 기능입니다", {
         autoClose: 1500,
@@ -41,6 +38,17 @@ const MountBackground = () => {
     dispatch(__getMountain(id));
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (correctBadge) {
+      toast.error(`${badge.badgeName}벳지를 획득 하셨습니다.`, {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
+      dispatch(isCorrectBadge());
+    }
+    // eslint-disable-next-line
+  }, [correctBadge]);
 
   const likeList = useSelector((state) => state.twoSlice);
   const mountList = useSelector((state) => state.twoSlice.mountain.data);

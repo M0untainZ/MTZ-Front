@@ -7,6 +7,8 @@ import Mapmodal from "./modal/Mapmodal";
 import { useDispatch } from "react-redux";
 import { regionData } from "../../redux/modules/mountainsSlice";
 import Snow from "../../elements/Snow";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Weather = () => {
   const { location, error } = useCurrentLocation(positionOptions);
@@ -51,7 +53,10 @@ const Weather = () => {
             })
           )
           .catch(() => {
-            alert("요청 에러");
+            toast.error("요청에 실패하였습니다", {
+              autoClose: 1500,
+              position: toast.POSITION.TOP_CENTER
+            })
           });
       };
       weatherData();
@@ -157,32 +162,33 @@ const Weather = () => {
         )}
         <StWeatherContainer>
           <StWeatherInfoWrap>
-            <StWeatherIcon>
-              <img
-                alt=""
-                src={
-                  (weather === "01d" && "/icons/01d.png") ||
-                  (weather === "02d" && "/icons/02d.png") ||
-                  ((weather === "03d" || "04d" || "03n" || "04n") &&
-                    "/icons/03d.png") ||
-                  ((weather === "09d" || "09n" || "10d" || "10n") &&
-                    "/icons/09d.png") ||
-                  ((weather === "11d" || "11n") && "/icons/11d.png") ||
-                  ((weather === "13d" || "13n") && "/icons/13d.png") ||
-                  ((weather === "50d" || "50n") && "/icons/50d.png")
-                }
-              />
-            </StWeatherIcon>
-            <StWeatherInfo>
-              <span className="temp">{`${temp}˚C`} ㅣ</span>
-              <span className="city-name">{city}</span>
-              <p>오늘은 어디로 떠나볼까요?</p>
-            </StWeatherInfo>
-            <span className="shortcut" onClick={() => navigate("/detail")}>
-              바로가기
-            </span>
+              <StWeatherIcon>
+                <img
+                  alt=""
+                  src={
+                    (weather === "01d" && "/icons/01d.png") ||
+                    (weather === "02d" && "/icons/02d.png") ||
+                    ((weather === "03d" || "04d" || "03n" || "04n") &&
+                      "/icons/03d.png") ||
+                    ((weather === "09d" || "09n" || "10d" || "10n") &&
+                      "/icons/09d.png") ||
+                    ((weather === "11d" || "11n") && "/icons/11d.png") ||
+                    ((weather === "13d" || "13n") && "/icons/13d.png") ||
+                    ((weather === "50d" || "50n") && "/icons/50d.png")
+                  }
+                />
+              </StWeatherIcon>
+              <StWeatherInfo>
+                <span className="temp">{`${temp}˚C`} ㅣ</span>
+                <span className="city-name">{city}</span>
+                <p>오늘은 어디로 떠나볼까요?</p>
+              </StWeatherInfo>
+              <span className="shortcut" onClick={() => navigate("/detail")}>
+                바로가기
+              </span> 
           </StWeatherInfoWrap>
         </StWeatherContainer>
+        <ToastContainer />
         <Snow className="snow" />
       </StMainImageBanner>
     </>
@@ -308,6 +314,25 @@ const StWeatherContainer = styled.div`
 const StWeatherInfoWrap = styled.div`
   display: flex;
   position: relative;
+  height: 100%;
+  .deny {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      animation: up-down 1.5s infinite ease-in-out alternate;
+      @keyframes up-down{
+        from{
+          transform: translatey(2px);
+        }
+        to{
+          transform: translatey(-2px);
+        }
+      }
+    }
+  }
   .shortcut {
     display: flex;
     justify-content: center;

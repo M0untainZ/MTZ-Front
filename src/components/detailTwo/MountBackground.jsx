@@ -2,6 +2,7 @@ import MountMap from "./MountMap";
 import MountModal from "./MountModal";
 import MountPhoto from "./MountPhoto";
 import styled from "styled-components";
+import LikeModal from "./likeModal/likeModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -12,14 +13,15 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const MountBackground = () => {
   const mountId = useParams();
   const dispatch = useDispatch();
+  const [badgeModal, setBadgeModal] = useState(false);
+  const [modal, setModal] = useState(false);
   const id = Number(mountId.id);
-  const { isLike, badge, correctBadge } = useSelector(
-    (state) => state.twoSlice
-  );
+  const { isLike, correctBadge } = useSelector((state) => state.twoSlice);
   const token = sessionStorage.getItem("Access_Token");
 
   //좋아요 버튼
@@ -41,10 +43,8 @@ const MountBackground = () => {
 
   useEffect(() => {
     if (correctBadge) {
-      toast.error(`${badge.badgeName}벳지를 획득 하셨습니다.`, {
-        autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
-      });
+      setModal(!modal);
+      setBadgeModal(!badgeModal);
       dispatch(isCorrectBadge());
     }
     // eslint-disable-next-line
@@ -118,6 +118,14 @@ const MountBackground = () => {
               <MountModal />
             </div>
           </div>
+        )}
+        {badgeModal && (
+          <LikeModal
+            open={modal}
+            onClose={() => {
+              setBadgeModal(false);
+            }}
+          ></LikeModal>
         )}
       </StContainer>
       <MountPhoto />

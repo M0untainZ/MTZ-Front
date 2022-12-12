@@ -1,23 +1,28 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __imgPost } from "../../redux/modules/twoSlice";
+import { __imgPost, isImgCorrectBadge } from "../../redux/modules/twoSlice";
 import DetailTwoModal from "./modal/detailTwoModal";
+import BadgeModal from "./badgeModal/badgeModal";
 import imageCompression from "browser-image-compression";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const MountModal = () => {
   const dispatch = useDispatch();
   const mountId = useParams();
+  const { imgCorrectBadge } = useSelector((state) => state.twoSlice);
   const id = Number(mountId.id);
   const token = sessionStorage.getItem("Access_Token");
   const [modal, setModal] = useState(false);
+  const [badgeModal, setBadgeModal] = useState(false);
   const [selectImg, setSelectImg] = useState(false);
   const [imgSave, setImgSave] = useState("");
   const [post_Img, setPost_Img] = useState("");
   //이미지 파일 한장 업로드
+
   const saveFileImage = (e) => {
     setImgSave(URL.createObjectURL(e.target.files[0]));
     setPost_Img(e.target.files[0]);
@@ -78,6 +83,15 @@ const MountModal = () => {
       });
     }
   };
+
+  useEffect(() => {
+    console.log(imgCorrectBadge);
+    if (imgCorrectBadge) {
+      setBadgeModal(!badgeModal);
+      dispatch(isImgCorrectBadge());
+    }
+    // eslint-disable-next-line
+  }, [imgCorrectBadge]);
 
   return (
     <>
@@ -144,6 +158,14 @@ const MountModal = () => {
               </div>
             </StModalBox>
           </DetailTwoModal>
+        )}
+        {badgeModal && (
+          <BadgeModal
+            open={modal}
+            onClose={() => {
+              setBadgeModal(false);
+            }}
+          ></BadgeModal>
         )}
         <ToastContainer />
       </StDiv>
@@ -220,7 +242,6 @@ const StModalBox = styled.div`
       display: none;
     }
   }
-
   .buttonBox {
     width: 80%;
     margin-left: 25%;

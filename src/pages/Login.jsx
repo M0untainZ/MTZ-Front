@@ -80,6 +80,7 @@ const Login = () => {
             <div className="pwInputBox">
               <input
                 onChange={onChangeHandler}
+                onKeyPress={onSearchEnter}
                 name="password"
                 value={loginUser.password}
                 autoComplete="off"

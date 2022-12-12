@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __imgPost, isImgCorrectBadge } from "../../redux/modules/twoSlice";
-import DetailTwoModal from "./modal/detailTwoModal";
+import DetailTwoModal from "./detailtwoModal/modal/detailTwoModal";
 import BadgeModal from "./badgeModal/badgeModal";
 import imageCompression from "browser-image-compression";
 import { toast, ToastContainer } from "react-toastify";

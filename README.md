@@ -235,7 +235,7 @@ CI/CD <br>
 - 프로젝트에서 사용자의 현재 위치 날씨를 보여주기 위해 사용자 위치정보를 묻는 > geolocation API 를 사용
 - geolocation API 는 별다른 처리를 하지 않으면 페이지 로드시 곧바로 사용자에게 > 위치 정보 권한 요청을 보냄
 
-  ![mater03](https://user-images.githubusercontent.com/102575747/> 207043714-d4546abc-0d46-4e91-a3d6-2bd7a199cf23.ng)
+![mater03](https://user-images.githubusercontent.com/102575747/> 207043714-d4546abc-0d46-4e91-a3d6-2bd7a199cf23.ng)
 
 하지만 이런 방식은 사용자에게 신뢰감을 줄 수 없다고 판단하였습니다. <br>
 (사용자 입장에서 어떤 목적을 가진 사이트인지 판단하기 어려운데 권한 요청을 보내면 > 거부감이 들기 때문)<br/><br/>
@@ -244,17 +244,17 @@ CI/CD <br>
 
 - 페이지 로드시 곧바로 권한 요청을 묻는게 아닌 사용자의 행동에 따라 수동적으로 > 권한요청을 할 수 있도록 ui 를 변경
 
-  ![soluton03](https://user-images.githubusercontent.com/102575747/> 07043902-99212857-9649-45f2-8198-fefe158aa9f3.png)<br/><br/>
+![soluton03](https://user-images.githubusercontent.com/102575747/> 07043902-99212857-9649-45f2-8198-fefe158aa9f3.png)<br/><br/>
 
 ### 결과 <br>
 
 - 날씨보기 버튼을 클릭하면 다음과 같이 요청을 보내고
 
-  ![solution04](https://user-images.githubusercontent.com/102575747/> 07043952-bceabc9c-4bb0-4509-8777-8397146ebbb3.png)
+![solution04](https://user-images.githubusercontent.com/102575747/> 07043952-bceabc9c-4bb0-4509-8777-8397146ebbb3.png)
 
 - 허용했을 경우에 api를 호출하는 방식으로 개선
 
-  ![solution05](https://user-images.githubusercontent.com/102575747/> 07044047-64792b3b-5708-4393-b492-7de724ca0e64.png)
+![solution05](https://user-images.githubusercontent.com/102575747/> 07044047-64792b3b-5708-4393-b492-7de724ca0e64.png)
 
  </div>
  </details>

@@ -14,6 +14,9 @@ const ModalMypage = () => {
 
   //마이페이지 개인정보 기본값 불러오기
   const { data } = useQuery(["mypage"], getMypage, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity,
     onSuccess: (data) => {
       setProfile({
         profilePhoto: data.data.profilePhoto,

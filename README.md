@@ -147,17 +147,11 @@ CI/CD <br>
 ## ✨**라이브러리**
 
 - @reduxjs/toolkit
-- @testing-library/jest-dom
-- @testing-library/react
-- @testing-library/user-event
 - axios
 - browser-image-compression
-- react
-- react-dom
 - react-icons
 - react-images-uploading
 - react-intersection-observer
-- react-kakao-maps-sdk
 - react-query
 - react-redux
 - react-router-dom
@@ -169,7 +163,6 @@ CI/CD <br>
 - sweetalert2
 - sweetalert2-react-content
 - swiper
-- web-vitals
 
 <br/>
 

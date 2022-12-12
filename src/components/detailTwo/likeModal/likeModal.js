@@ -28,7 +28,7 @@ const LikeModal = ({ onClose, children }) => {
               <img alt="" src={`${badge.img}`}></img>
             </div>
             <div className="BadgeName">{badge.badgeName}</div>
-            <div className="BadgeTime">취득일자 : 2021년 3월 18일</div>
+            <div className="BadgeTime">{badge.content}</div>
           </StBadgeLogo>
           <StButton>
             <button className="myPage" onClick={onClickHandler}>
@@ -120,6 +120,8 @@ const StBadgeLogo = styled.div`
     text-align: center;
   }
   .BadgeTime {
+    margin: auto;
+    width: 70%;
     text-align: center;
     color: #737373;
   }

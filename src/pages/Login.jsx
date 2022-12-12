@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutState, __loginUser } from "../redux/modules/userSlice";
 import OAuth from "../components/kakao/OAuth";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Login = () => {
         toast.error("아이디와 비밀번호를 확인해주세요", {
           autoClose: 1500,
           position: toast.POSITION.TOP_CENTER,
-        })
+        });
       }
     }
     // eslint-disable-next-line
@@ -80,6 +80,7 @@ const Login = () => {
             <div className="pwInputBox">
               <input
                 onChange={onChangeHandler}
+                onKeyPress={onSearchEnter}
                 name="password"
                 value={loginUser.password}
                 autoComplete="off"

@@ -28,7 +28,7 @@ const BadgeModal = ({ onClose, children }) => {
               <img alt="" src={`${imgBadge.img}`}></img>
             </div>
             <div className="BadgeName">{imgBadge.badgeName}</div>
-            <div className="BadgeTime">취득일자 : 2021년 3월 18일</div>
+            <div className="BadgeTime">{imgBadge.content}</div>
           </StBadgeLogo>
           <StButton>
             <button className="myPage" onClick={onClickHandler}>
@@ -120,6 +120,8 @@ const StBadgeLogo = styled.div`
     text-align: center;
   }
   .BadgeTime {
+    margin: auto;
+    width: 70%;
     text-align: center;
     color: #737373;
   }

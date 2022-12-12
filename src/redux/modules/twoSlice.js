@@ -67,6 +67,8 @@ const initialState = {
   isLike: false,
   badge: {},
   correctBadge: false,
+  imgCorrectBadge: false,
+  imgBadge: {},
 };
 export const twoSlice = createSlice({
   name: "two",
@@ -74,6 +76,9 @@ export const twoSlice = createSlice({
   reducers: {
     isCorrectBadge: (state) => {
       state.correctBadge = false;
+    },
+    isImgCorrectBadge: (state) => {
+      state.imgCorrectBadge = false;
     },
   },
   extraReducers: {
@@ -97,11 +102,14 @@ export const twoSlice = createSlice({
     },
     //인증샷
     [__imgPost.fulfilled]: (state, action) => {
+      console.log(state.imgCorrectBadge, "서버");
       state.mountain = action.payload;
+      state.imgCorrectBadge = action.payload.data.correctBadge;
+      state.imgBadge = action.payload.data.badge;
     },
     [__imgPost.rejected]: (state, action) => {},
   },
 });
 
-export const { isCorrectBadge } = twoSlice.actions;
+export const { isCorrectBadge, isImgCorrectBadge } = twoSlice.actions;
 export default twoSlice.reducer;

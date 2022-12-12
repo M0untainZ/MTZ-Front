@@ -4,12 +4,10 @@
 
 ## 💻**프로젝트 소개**<br/>
 
-<hr/>
-
 등산에 관심이 생긴, 취미가 등산인, 산을 정복하고 싶은 여러분 주목!
 남여노소 누구나 '등산왕'이 될 수 있는 등산 필수앱 "MTZ"를 소개합니다!
 
-MTZ 사진넣는 공간
+![title](https://user-images.githubusercontent.com/102575747/207062833-e189d6b6-cb27-4498-8579-639ad6a7651c.png)
 
 ### 🌎 웹사이트 | Website [MTZ 바로가기](https://www.mountainz.net/)
 
@@ -59,8 +57,6 @@ MTZ 사진넣는 공간
 
 ## ✨**주요 기능**<br/>
 
-<hr/>
-
 - 등산 인증을 통한 랭킹 시스템 🥇
 - 다양한 산을 다양한 조건으로 필터 검색하기 🌄
 - 내가 오른 산들을 다른 사람들에게 자랑해보아요 🎇
@@ -82,8 +78,6 @@ MTZ 사진넣는 공간
 </br></br>
 
 ## 💻**기술 스택**
-
-<hr/>
 
 - JWT를 이용한 로그인 기능
 - OAuth2 소셜 로그인 카카오톡 지원
@@ -145,8 +139,6 @@ CI/CD <br>
 
 ## ✨**ERD**
 
-<hr/>
-
 ![ERD](https://user-images.githubusercontent.com/102575747/207043103-844aa2c9-8293-40d6-8f99-38fb49841543.png)
 
 <br/><br/>
@@ -182,8 +174,6 @@ CI/CD <br>
 
 ## ✨**트러블슈팅**
 
-<hr/>
-
 > ### 🔑 FE
 
  <details>
@@ -196,32 +186,30 @@ CI/CD <br>
 ### 문제상황 <br>
 
 ![mater01](https://user-images.githubusercontent.com/102575747/207054952-d5ce91f6-ce16-49b2-ae93-8a504f6ecfd3.png)
-  
+
 ![mater02](https://user-images.githubusercontent.com/102575747/207055031-22984a9c-888b-4434-87e6-6fbd63b7edbe.png)
 
-- 이미지가 많이 사용되는 프로젝트 특성상 PNG 나 JPG 같은 고화질 이미지를 많이 > 사용함
+- 이미지가 많이 사용되는 프로젝트 특성상 PNG 나 JPG 같은 고화질 이미지를 많이 사용함
 - 이러한 이미지들은 웹 성능을 저하시킴<br/><br/>
 
 ### 의견조율 <br>
 
 - 화질은 최대한 유지하면서 압축률은 높일 수 있는 webp 형식의 이미지 파일로 교체
-- 서버에 있는 이미지를 불러올 땐 react-query의 캐싱기능을 활용해 이미지 랜더링 > 속도를 향상
-- 프로젝트 내부에서 사용되는 이미지들은 S3 와 CloudFront 의 캐싱 정책을 변경해 > 처리<br/><br/>
+- 서버에 있는 이미지를 불러올 땐 react-query의 캐싱기능을 활용해 이미지 랜더링 속도를 향상
+- 프로젝트 내부에서 사용되는 이미지들은 S3 와 CloudFront 의 캐싱 정책을 변경해 처리<br/><br/>
 
 ### 결과 <br>
 
 **성능테스트 결과**
 
 ![solution01](https://user-images.githubusercontent.com/102575747/207055071-9d3717f0-3179-4b80-8591-55923de26ec6.png)
-  
+
   </br>
 
 ![solution02](https://user-images.githubusercontent.com/102575747/207055129-9bf1ef34-c4a6-473d-b87c-6157650986e4.png)
 
  </div>
  </details>
-
- <br/>
 
  <details>
  <summary>(FE) UX측면에서 GeoLocation API 사용하기
@@ -232,20 +220,20 @@ CI/CD <br>
 
 ### 문제상황 <br>
 
-- 프로젝트에서 사용자의 현재 위치 날씨를 보여주기 위해 사용자 위치정보를 묻는 > geolocation API 를 사용
-- geolocation API 는 별다른 처리를 하지 않으면 페이지 로드시 곧바로 사용자에게 > 위치 정보 권한 요청을 보냄
+- 프로젝트에서 사용자의 현재 위치 날씨를 보여주기 위해 사용자 위치정보를 묻는 geolocation API 를 사용
+- geolocation API 는 별다른 처리를 하지 않으면 페이지 로드시 곧바로 사용자에게 위치 정보 권한 요청을 보냄
 
 ![mater03](https://user-images.githubusercontent.com/102575747/207055608-b6dadfbe-908e-4960-92c7-8ec1ec9110ec.png)
 
 하지만 이런 방식은 사용자에게 신뢰감을 줄 수 없다고 판단하였습니다. <br>
-(사용자 입장에서 어떤 목적을 가진 사이트인지 판단하기 어려운데 권한 요청을 보내면 > 거부감이 들기 때문)<br/><br/>
+(사용자 입장에서 어떤 목적을 가진 사이트인지 판단하기 어려운데 권한 요청을 보내면 거부감이 들기 때문)<br/><br/>
 
 ### 의견조율 <br>
 
-- 페이지 로드시 곧바로 권한 요청을 묻는게 아닌 사용자의 행동에 따라 수동적으로 > 권한요청을 할 수 있도록 ui 를 변경
+- 페이지 로드시 곧바로 권한 요청을 묻는게 아닌 사용자의 행동에 따라 수동적으로 권한요청을 할 수 있도록 ui 를 변경
 
-![soluton03](https://user-images.githubusercontent.com/102575747/207055661-cf3e8d41-cd5f-49d6-9600-65fdef76d58e.png) 
-  
+![soluton03](https://user-images.githubusercontent.com/102575747/207055661-cf3e8d41-cd5f-49d6-9600-65fdef76d58e.png)
+
 <br/>
 
 ### 결과 <br>
@@ -266,109 +254,98 @@ CI/CD <br>
 > ### 🔒 BE
 
  <details>
- <summary>(BE) 필터 검색시 데이터 동적처리 하기
- </summary>
- <div markdown="1">
-
- <br/>
+<summary>(BE) 필터 검색시 데이터 동적처리 하기
+</summary>
+<div markdown="1">
 
 ### 문제상황 <br>
 
-Spring Data JPA만을 가지고 프로젝트를 하던중 필터검색을 구현해야하는 상황을 > 맞이했고<br>
-동적 처리를 위해 JPQL을 사용했으나 문자열을 통해서 쿼리를 만들게 되면 작성한 > 문자열 쿼리 중<br>
-띄어쓰기 혹은 알파벳의 오류가 있을 경우 이를 컴파일 타임에서 잡아주지 못한다는 > 단점이 존재함<br/>
+- Spring Data JPA만을 가지고 프로젝트를 하던중 필터검색을 구현해야하는 상황을 맞이함
+- 동적 처리를 위해 JPQL을 사용했으나 문자열을 통해서 쿼리를 만들게 되면 작성한 문자열 쿼리 중 띄어쓰기 혹은 알파벳의 오류가 있을 경우 이를 컴파일 타임에서 잡아주지 못한다는 단점이 존재했음<br/><br/>
 
 ### 의견조율 <br>
 
 **QueryDsl을 사용하여 동적으로 데이터를 처리해보기**
 
 - 문자열이 아닌 자바 코드로 쿼리를 생성하여 더 쉽고 간결하며<br>
-  형태도 SQL과 비슷하게 개발할 수 있어 가독성이 좋은 QueryDsl을 사용하기로 > 했다<br/><br/>
+  형태도 SQL과 비슷하게 개발할 수 있어 가독성이 좋은 QueryDsl을 사용하기로 함<br/><br/>
 
 ### 결과 <br>
 
-![필터검색 사진](https://user-images.githubusercontent.com/97796338/> 06993318-228cf809-b333-48ef-9c13-d04065574542.png)
+![필터검색 사진](https://user-images.githubusercontent.com/97796338/206993318-228cf809-b333-48ef-9c13-d04065574542.png)
 
- </div>
- </details>
+</div>
+</details>
 
- <br/>
-
- <details>
- <summary>(BE) 태그 조회시 데이터 처리 성능 개선
- </summary>
- <div markdown="1">
-
- <br/>
+<details>
+<summary>(BE) 태그 조회시 데이터 처리 성능 개선
+</summary>
+<div markdown="1">
 
 ### 문제상황 <br>
 
-사용자들에게 공통적이고 반복적으로 보여지게될 정보에 대해서<br>
-처리 속도를 높여주고 싶은 생각이 들었음<br/>
+사용자들에게 공통적이고 반복적으로 보여지게될 정보에 대해서 처리 속도를 높여주고 싶은 생각이 듬<br/><br/>
 
 ### 의견조율 <br>
 
 **Redis를 사용하여 캐싱처리 해보기**
 
-- 같은 내용을 보여주는 데이터라면 캐싱처리를 해서<br>
-  매번 DB에 접근하는것을 Redis를 통해 성능을 개선해 보기로 함<br/><br/>
+- 같은 내용을 보여주는 데이터라면 캐싱처리를 해서 매번 DB에 접근하는것을 Redis를 통해 성능을 개선해보기로 함<br/><br/>
 
 ### 결과 <br>
 
-**캐싱 처리 전** > ![image](https://user-images.githubusercontent.com/97796338/> 07011178-551d4885-7b23-4103-95b7-7da8edb6df2d.png)
+**캐싱 처리 전**
+![image](https://user-images.githubusercontent.com/97796338/207011178-551d4885-7b23-4103-95b7-7da8edb6df2d.png)
 
- <br>
+<br>
 
-**캐싱 처리 후** > ![image](https://user-images.githubusercontent.com/97796338/> 07011365-06735785-6791-4872-a861-1c4c538f7e21.png)
+**캐싱 처리 후**
+![image](https://user-images.githubusercontent.com/97796338/207011365-06735785-6791-4872-a861-1c4c538f7e21.png)
 
- </div>
- </details>
+</div>
+</details>
 
- <br/>
-
- <details>
- <summary>(BE) CI/CD 설정 오류 해결
- </summary>
- <div markdown="1">
+<details>
+<summary>(BE) CI/CD 설정 오류 해결
+</summary>
+<div markdown="1">
 
 ### 문제상황 <br>
 
-1.  EC2(Ubuntu)에서 default 메모리 설정으로 무중단 배포를 적용하니 신버전 배포 > 시 서버가 다운됨
-2.  EC2(Ubuntu)에 Nginx 설치에 필요한 Ruby 2.5.1 버전이 다운로드 되지 않음
-3.  신버전을 배포할 때 codedepoly에서 실패가 뜨고 신버전이 배포가 되지 않음<br/> ><br/>
+1. EC2(Ubuntu)에서 default 메모리 설정으로 무중단 배포를 적용하니 신버전 배포 시 서버가 다운
+2. EC2(Ubuntu)에 Nginx 설치에 필요한 Ruby 2.5.1 버전이 다운로드 되지 않음
+3. 신버전을 배포할 때 codedepoly에서 실패가 뜨고 신버전이 배포가 되지 않음<br/><br/>
 
 ### 의견조율 <br>
 
-1.  **메모리를 늘리는 방법을 찾아보자고 했다**
+1. **메모리를 늘리는 방법을 찾아보자고 함**
 
-- default 메모리가 1GB만 설정되어 있고 swap 설정이 안되어 있었고
-  1GB가 넘는 boot 파일 두개를 배포하려고 하니 default 메모리 설정이 감당을 > 못하고
-  서버가 다운되는 것같아 swap 메모리 설정을 하기로 함
+   - default 메모리가 1GB만 설정되어 있고 swap 설정이 안되어 있었고
+     1GB가 넘는 boot 파일 두개를 배포하려고 하니 default 메모리 설정이 감당을 못하고
+     서버가 다운되는 것같아 swap 메모리 설정을 하기로 함
 
-2.  **버전 문제인것 같다고 판단해서 버전을 바꿔보자고 했다**
+2. **버전 문제인것 같다고 판단해서 버전을 바꿔보자고 함**
 
-- Ubuntu 22.04는 OpenSSL 3.0과 함께 제공되기 때문에 Ruby 3.0 이하에서는
-  이를 지원하지 않는걸 확인하고 바꾸기로 함
+   - Ubuntu 22.04는 OpenSSL 3.0과 함께 제공되기 때문에 Ruby 3.0 이하에서는
+     이를 지원하지 않는걸 확인하고 바꾸기로 함
 
-3.  **aws codedepoly error log와 EC2(Ubuntu) deploy error log를 확인해보기로 > 했다**
+3. **aws codedepoly error log와 EC2(Ubuntu) deploy error log를 확인해보기로 함**
 
-- 신버전 depoly 시에 EC2(Ubuntu)에서 신버전 boot 파일을 열지 못하는 것을 확인
-- shell script를 bash용으로 작성했는데 Ubuntu의 기본 쉘은 dash여서 호환성 > 문제로 script를 읽지 못함<br/><br/>
+   - 신버전 depoly 시에 EC2(Ubuntu)에서 신버전 boot 파일을 열지 못하는 것을 확인했다
+   - shell script를 bash용으로 작성했는데 Ubuntu의 기본 쉘은 dash여서 호환성 문제로 script를 읽지 못함<br/><br/>
 
 ### 결과 <br>
 
-1.  EC2(Ubuntu) default 메모리가 용량 초과 시 swap 메모리로 넘어갈 수 있게 > 충분한 용량을 주어 설정해주었다
-2.  Ruby 2.5.1을 2.7로 변경하니 정상 작동
-3.  Ubuntu의 기본 쉘을 dash에서 bash로 변경해주고 switch 스크립트를 실행<br/> ><br/>
+1. EC2(Ubuntu) default 메모리가 용량 초과 시 swap 메모리로 넘어갈 수 있게 충분한 용량을 주어 설정해줌
+2. Ruby 2.5.1을 2.7로 변경하니 정상 작동
+3. Ubuntu의 기본 쉘을 dash에서 bash로 변경해주고 switch 스크립트를 실행시킴<br/><br/>
 
- </div>
- </details>
+</div>
+</details>
 
 <br/><br/>
 
 ## 🏅**MTZ 대장님들**<br/>
-
-<hr/>
 
 |        |                                                                 조평연                                                                  |                                                                 이동재                                                                  |                                                     오경민                                                      |                                                        김민석                                                         |                                                                 이현진                                                                  |
 | :----: | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |

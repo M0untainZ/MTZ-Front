@@ -10,7 +10,11 @@ const BadgeList = () => {
 
   const { badgeModal, setbadgeModal } = useState([]);
 
-  const { data } = useQuery(["mypage"], getMypage);
+  const { data } = useQuery(["mypage"], getMypage, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity,
+  });
 
   //미상의 뱃지 리스트
   function repeat(badgeModal) {

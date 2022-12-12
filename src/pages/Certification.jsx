@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProofList from "../components/certification/ProofList";
@@ -30,7 +30,7 @@ const Certification = () => {
                     <ProofList />
                </StCertification> :
                <StNotCertification>
-                    <Fragment onClick={onRedirectLogin()}></Fragment>
+                    <div onClick={onRedirectLogin()}></div>
                </StNotCertification>
           }
           </>

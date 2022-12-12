@@ -195,8 +195,9 @@ CI/CD <br>
 
 ### 문제상황 <br>
 
-![mater01](https://user-images.githubusercontent.com/102575747/> 207043488-12e0af4a-49f2-423b-a877-75d098adfbb6.ng)
-![mater02](https://user-images.githubusercontent.com/102575747/> 207043536-dd322663-dfee-41be-85f7-93bc512bf9fe.ng)
+![mater01](https://user-images.githubusercontent.com/102575747/207054952-d5ce91f6-ce16-49b2-ae93-8a504f6ecfd3.png)
+  
+![mater02](https://user-images.githubusercontent.com/102575747/207055031-22984a9c-888b-4434-87e6-6fbd63b7edbe.png)
 
 - 이미지가 많이 사용되는 프로젝트 특성상 PNG 나 JPG 같은 고화질 이미지를 많이 > 사용함
 - 이러한 이미지들은 웹 성능을 저하시킴<br/><br/>
@@ -211,9 +212,11 @@ CI/CD <br>
 
 **성능테스트 결과**
 
-![solution01](https://user-images.githubusercontent.com/102575747/> 07043581-dbde679e-b047-4f7e-b27b-4a6250f859d9.png)
+![solution01](https://user-images.githubusercontent.com/102575747/207055071-9d3717f0-3179-4b80-8591-55923de26ec6.png)
+  
+  </br>
 
-![solution02](https://user-images.githubusercontent.com/102575747/> 07043621-354b521c-bb14-4100-926e-5f6dae4eb601.png)
+![solution02](https://user-images.githubusercontent.com/102575747/207055129-9bf1ef34-c4a6-473d-b87c-6157650986e4.png)
 
  </div>
  </details>

@@ -103,7 +103,8 @@
 <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/React Query-FF4154?style=flat-square&logo=React Query&logoColor=white"/>&nbsp;
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>&nbsp;
-<img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=white"/>
+<img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=Amazon S3&logoColor=white"/>&nbsp;
+<img src="https://img.shields.io/badge/CloudFront-DA1F26?style=flat-square&logo=CloudFront&logoColor=white"/>
 
 <br/>
 
@@ -174,10 +175,10 @@ CI/CD <br>
 
 ## ✨**트러블슈팅**
 
-> ### 🔑 FE
+> ### 🔑 **FE**
 
  <details>
- <summary> (FE) 웹 성능 개선 및 캐싱
+ <summary><span style="font-size:16px">웹 성능 개선 및 캐싱</span>
  </summary>
  <div markdown="1">
 
@@ -212,7 +213,7 @@ CI/CD <br>
  </details>
 
  <details>
- <summary>(FE) UX측면에서 GeoLocation API 사용하기
+ <summary><span style="font-size:16px">UX측면에서 GeoLocation API 사용하기</span>
  </summary>
  <div markdown="1">
 
@@ -263,7 +264,7 @@ CI/CD <br>
 > ### 🔒 BE
 
  <details>
-<summary>(BE) 필터 검색시 데이터 동적처리 하기
+<summary><span style="font-size:16px">필터 검색시 데이터 동적처리 하기</span>
 </summary>
 <div markdown="1">
 
@@ -287,7 +288,7 @@ CI/CD <br>
 </details>
 
 <details>
-<summary>(BE) 태그 조회시 데이터 처리 성능 개선
+<summary><span style="font-size:16px">태그 조회시 데이터 처리 성능 개선</span>
 </summary>
 <div markdown="1">
 
@@ -315,7 +316,7 @@ CI/CD <br>
 </details>
 
 <details>
-<summary>(BE) CI/CD 설정 오류 해결
+<summary><span style="font-size:16px">CI/CD 설정 오류 해결</span>
 </summary>
 <div markdown="1">
 
@@ -356,8 +357,10 @@ CI/CD <br>
 
 ## 🏅**MTZ 대장님들**<br/>
 
-|        |                                                              조평연                                                              |                                                              이동재                                                              |                                                              오경민                                                              |                                                              김민석                                                              |                                                              이현진                                                              |
-| :----: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
-|  역할  |                                                            BE (리더)                                                             |                                                                BE                                                                |                                                           FE (부리더)                                                            |                                                                FE                                                                |                                                                FE                                                                |
-|  🙋🏻‍♂️🙋🏻‍♀️  | <img src="https://user-images.githubusercontent.com/102575747/207052487-11c12922-ecb5-460c-b695-a2529e3bd7b0.png" width="70%" /> | <img src="https://user-images.githubusercontent.com/102575747/207052297-7ae4301c-d196-490d-b617-017ed8b07db2.png" width="70%" /> | <img src="https://user-images.githubusercontent.com/102575747/207052021-7a27ad9e-b959-456d-ac78-f1b0eab20c15.png" width="70%" /> | <img src="https://user-images.githubusercontent.com/102575747/207027594-40834306-7d11-4ed8-8d36-9ec00a4a1588.png" width="70%" /> | <img src="https://user-images.githubusercontent.com/102575747/207053599-5233e49c-8fc0-4023-994b-22911b9efbd0.png" width="70%" /> |
-| GITHUB |                                                   https://github.com/vuddus526                                                   |                                                  https://github.com/Pdongjaelee                                                  |                                                    https://github.com/ogaeng1                                                    |                                                    https://github.com/kms8381                                                    |                                                    https://github.com/zinnli                                                     |
+|    역할     |  이름  |                                                               🙋🏻‍♂️🙋🏻‍♀️                                                               | GITHUB                         |
+| :---------: | :----: | :------------------------------------------------------------------------------------------------------------------------------: | :----------------------------- |
+|  BE (리더)  | 조평연 | <img src="https://user-images.githubusercontent.com/102575747/207052487-11c12922-ecb5-460c-b695-a2529e3bd7b0.png" width="30%" /> | https://github.com/vuddus526   |
+|     BE      | 이동재 | <img src="https://user-images.githubusercontent.com/102575747/207052297-7ae4301c-d196-490d-b617-017ed8b07db2.png" width="30%" /> | https://github.com/Pdongjaelee |
+| FE (부리더) | 오경민 | <img src="https://user-images.githubusercontent.com/102575747/207052021-7a27ad9e-b959-456d-ac78-f1b0eab20c15.png" width="30%" /> | https://github.com/ogaeng1     |
+|     FE      | 김민석 | <img src="https://user-images.githubusercontent.com/102575747/207027594-40834306-7d11-4ed8-8d36-9ec00a4a1588.png" width="30%" /> | https://github.com/kms8381     |
+|     FE      | 이현진 | <img src="https://user-images.githubusercontent.com/102575747/207053599-5233e49c-8fc0-4023-994b-22911b9efbd0.png" width="30%" /> | https://github.com/zinnli      |

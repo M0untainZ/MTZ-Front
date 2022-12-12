@@ -11,6 +11,10 @@ MTZ 사진넣는 공간
 
 ### 🌎 웹사이트 | Website [MTZ 바로가기](https://www.mountainz.net/)
 
+MTZ 사진넣는 공간
+
+### 🌎 웹사이트 | Website [MTZ 바로가기](https://www.mountainz.net/)
+
 </br>
 
 ## 🔖**목차**</br>
@@ -81,12 +85,16 @@ MTZ 사진넣는 공간
 
 - JWT를 이용한 로그인 기능
 - OAuth2 소셜 로그인 카카오톡 지원
+- OAuth2 소셜 로그인 카카오톡 지원
 - QueryDSL를 이용한 다양한 경우의 검색 요청 일괄 처리
 - Redis를 이용한 자주 조회하는 데이터 캐싱 처리
 - Slack Webhook, Logback를 이용한 배포된 서버의 에러 로그를 쉽게 확인 가능
 - Route53, ELB를 활용한 HTTPS 처리
+- Route53, ELB를 활용한 HTTPS 처리
 - Githib Action, S3, CodeDeploy를 이용한 CI/CD 자동 배포
 - Nginx를 이용한 무중단 배포
+- S3, CloudFront 캐싱 정책
+- react-query 캐싱
 - S3, CloudFront 캐싱 정책
 - react-query 캐싱
 
@@ -169,7 +177,32 @@ CI/CD <br>
 - sweetalert2-react-content
 - swiper
 - web-vitals
+- @reduxjs/toolkit
+- @testing-library/jest-dom
+- @testing-library/react
+- @testing-library/user-event
+- axios
+- browser-image-compression
+- react
+- react-dom
+- react-icons
+- react-images-uploading
+- react-intersection-observer
+- react-kakao-maps-sdk
+- react-query
+- react-redux
+- react-router-dom
+- react-scripts
+- react-toastify
+- redux
+- redux-thunk
+- styled-components
+- sweetalert2
+- sweetalert2-react-content
+- swiper
+- web-vitals
 
+<br/>
 <br/>
 
 ## ✨**트러블슈팅**

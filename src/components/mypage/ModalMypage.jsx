@@ -53,13 +53,24 @@ const ModalMypage = () => {
 
   //닉네임 중복확인
   const NameCk = () => {
-    dispatch(__mynameCheck({ nickName: profile.nickName }));
+    if (mynameChk || data.data.nickName === profile.nickName) {
+      dispatch(__mynameCheck({ nickName: profile.nickName }));
+      return toast.success("사용가능한 닉네임 입니다.", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      return toast.warning("이미 사용중인 닉네임 입니다.", {
+        autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   //정보 변경 사항 보내기
   const onSubmitInfo = () => {
     if (profile.nickName !== data.data.nickName && !mynameChk) {
-      return toast.success("중복된 닉네임 입니다.", {
+      return toast.warning("중복된 닉네임 입니다.", {
         autoClose: 1500,
         position: toast.POSITION.TOP_CENTER,
       });
@@ -120,26 +131,27 @@ const ModalMypage = () => {
           <StMypageInfo>
             <div className="pick modal-setting-nickname">
               <p>닉네임</p>
-              <input
-                onBlur={NameCk}
-                onChange={onChangeInfo}
-                type="text"
-                name="nickName"
-                defaultValue={data?.data?.nickName}
-              />
-              {mynameChk || data.data.nickName === profile.nickName ? (
-                <div className="use-name" style={{ color: "blue" }}>
-                  사용 할 수 있는 닉네임입니다.
-                </div>
-              ) : (
-                <StErrorMassage>
-                  <img
-                    src="https://member.op.gg/icon_alert.953d9b77.svg"
-                    alt="warning"
-                  />
-                  이미 사용중인 닉네임입니다.
-                </StErrorMassage>
-              )}
+              <div className="nickname-input">
+                <input
+                  onChange={onChangeInfo}
+                  type="text"
+                  name="nickName"
+                  defaultValue={data?.data?.nickName}
+                />
+                {mynameChk || data.data.nickName === profile.nickName ? (
+                  <Button
+                    borderColor
+                    className="name-check-btn"
+                    onClick={NameCk}
+                  >
+                    사용 가능
+                  </Button>
+                ) : (
+                  <Button className="name-check-btn" onClick={NameCk}>
+                    중복 확인
+                  </Button>
+                )}
+              </div>
             </div>
             <div className="pick modal-setting-region">
               <p>지역선택</p>
@@ -210,7 +222,7 @@ const StMypageInfo = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
-  padding: 20px 35px;
+  padding: 20px 35px 40px 35px;
   font-size: 18px;
   img {
     width: 50px;
@@ -222,6 +234,19 @@ const StMypageInfo = styled.div`
     flex-direction: column;
     padding: 7px 0;
     position: relative;
+    .nickname-input {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+      .name-check-btn {
+        width: 20%;
+        height: 48px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: transparent;
+      }
+    }
     p {
       padding: 5px 2px;
       color: var(--color-mypage);
@@ -232,12 +257,11 @@ const StMypageInfo = styled.div`
     }
     input {
       height: 48px;
-      width: 100%;
+      width: 78%;
       padding: 0 10px;
       box-sizing: border-box;
       font-size: 16px;
       border: 2px solid #ccc;
-      margin-bottom: 14px;
     }
     .use-name {
       width: fit-content;
@@ -266,6 +290,7 @@ const StMypageInfo = styled.div`
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       justify-content: space-between;
       .badge-element-img {
         border: none;
@@ -311,19 +336,4 @@ const Button = styled.button`
     props.borderColor ? "2px solid var(--color-button)" : "2px solid #777"};
   color: ${(props) => (props.borderColor ? "var(--color-button);" : "#777")};
   cursor: pointer;
-`;
-
-const StErrorMassage = styled.div`
-  width: fit-content;
-  color: red;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: -5px;
-  img {
-    margin-right: 5px;
-    width: 15px;
-    height: 100%;
-  }
 `;

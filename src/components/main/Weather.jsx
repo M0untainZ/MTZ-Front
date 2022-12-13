@@ -18,7 +18,6 @@ const Weather = () => {
   const [modal, setModal] = useState(false);
   const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
   const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
-  const status = sessionStorage.getItem("status");
 
   const onModalOpen = () => {
     setModal(!modal);
@@ -33,8 +32,6 @@ const Weather = () => {
       }, () => {sessionStorage.setItem("status", 3)})
     }
   };
-
-  // console.log(!navigator.geolocation)
 
   useEffect(() => {
     if (latitude && longitude) {
@@ -65,7 +62,7 @@ const Weather = () => {
               position: toast.POSITION.TOP_CENTER
             })
           });
-      };
+      }
       weatherData();
     }
   }, [latitude && longitude])
@@ -174,7 +171,7 @@ const Weather = () => {
               <button onClick={onGetLocation}>날씨보기</button>
             </div>
           }
-          {status === "3" &&
+          {sessionStorage.getItem("status") === "3" &&
             <div className="not">
               <span>날씨 정보를 이용하시려면 권한을 허용해 주세요 😭</span>
             </div>

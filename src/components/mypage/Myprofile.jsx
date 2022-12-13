@@ -15,7 +15,11 @@ const Myprofile = () => {
   const navigate = useNavigate();
   const mySwal = withReactContent(Swal);
 
-  const { data } = useQuery(["mypage"], getMypage);
+  const { data } = useQuery(["mypage"], getMypage, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity,
+  });
 
   //로그아웃
   const onLogout = () => {

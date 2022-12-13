@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Proof from "./Proof";
 import FilterList from "./FilterList";
-import { BiArrowToTop } from "react-icons/bi";
+import { HiChevronUp } from "react-icons/hi";
 
 const ProofList = () => {
     const onTopHandler = () => {
@@ -16,7 +16,7 @@ const ProofList = () => {
             <FilterList />
             <Proof />
             <StTopBtn className="go-top" onClick={onTopHandler}>
-                <BiArrowToTop />
+                <HiChevronUp />
             </StTopBtn>
         </StProof>
     );

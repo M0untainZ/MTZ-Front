@@ -109,7 +109,7 @@ const Login = () => {
             <OAuth />
           </StButtonBox>
           <div className="sign-up">
-            <span>아직 계정이 없으신가요?</span>
+            <span>아직 계정이 없으신가요?</span>&nbsp;&nbsp;
             <span onClick={() => navigate("/SignUp")} className="signUpTag">
               회원가입하기
             </span>
@@ -130,7 +130,7 @@ const StLoginContainer = styled.div`
   margin-top: 8vh;
   .imgBox {
     height: 100%;
-    width: 30%;
+    width: 61.5vh;
   }
   .loginImg {
     width: 100%;

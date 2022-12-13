@@ -11,9 +11,9 @@ const Header = () => {
   const [myPageData, setMyPageData] = useState([]);
   const { data } = useQuery(["mypage"], getMypage, {
     onSuccess: (config) => {
-      setMyPageData(config.data)
+      setMyPageData(config.data);
     },
-    enabled: false
+    enabled: false,
   });
   const userinfos = JSON.parse(sessionStorage.getItem("userinfos"));
   const kakaoinfos = sessionStorage.getItem("nickName");
@@ -130,7 +130,7 @@ export default Header;
 const StHeader = styled.div`
   box-sizing: border-box;
   width: 100%;
-  height: 9vh;
+  height: 8vh;
   background-color: transparent;
   font-size: 1.6vh;
   display: flex;
@@ -138,9 +138,17 @@ const StHeader = styled.div`
   align-items: center;
   gap: 10%;
   padding: 0 14%;
+  margin-bottom: 1vh;
   z-index: 10;
   position: absolute;
   color: #000;
+  background-color: rgba(231, 232, 224, 0.3);
+  .img-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
   div {
     height: 100%;
     display: flex;

@@ -1,9 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProofList from "../components/certification/ProofList";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const Certification = () => {
      const token = sessionStorage.getItem("Access_Token");
+     const navigate = useNavigate();
+     const MySwal = withReactContent(Swal)
+     const onRedirectLogin = () => {
+          MySwal.fire({
+               text: "인증게시판은 회원만 이용할 수 있습니다.",
+               icon: "error",
+               confirmButtonText: "확인",
+               background: "#ffffff",
+               confirmButtonColor: "#185B6E",
+          }).then((result) => {
+               if (result.isConfirmed || result.isDismissed) {
+                   navigate("/login")
+               } 
+          })
+     }
 
      return (
           <>
@@ -12,7 +30,7 @@ const Certification = () => {
                     <ProofList />
                </StCertification> :
                <StNotCertification>
-                    <div>인증사진은 회원만 이용할 수 있습니다.</div>
+                    <div onClick={onRedirectLogin()}></div>
                </StNotCertification>
           }
           </>

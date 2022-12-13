@@ -49,14 +49,21 @@ export const putMypage = async (payload) => {
   });
   return data;
 };
+//닉네임 중복확인
+export const chkName = async (payload) => {
+  const { data } = await axiosIns.post("/api/nickNameConfirm", payload);
+  return data;
+};
 
 export const kakaoLogin = async (code) => {
   const data = await axiosIns.get(`/kakao/callback?code=${code}`);
   return data;
 };
 
-export const proofFilter = async (payload) => {
-  const { data } = await axiosIns.post("/api/photos/filter", payload);
+export const proofFilter = async (nickName) => {
+  const { data } = await axiosIns.post("/api/photos/filter", {
+    nickName: nickName,
+  });
   return data;
 };
 

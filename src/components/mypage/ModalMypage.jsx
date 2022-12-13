@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __mynameCheck } from "../../redux/modules/mypageSlice";
 import Modal from "./modal/MyModal";
-import { getMypage, putMypage } from "../../shared/api";
+import { chkName, getMypage, putMypage } from "../../shared/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ModalMypage = () => {
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
+
+  const [profile, setProfile] = useState();
+  const [nameChk, setNameChk] = useState(false);
+
+  const [modal, setModal] = useState(false);
+  const { badgeModal, setBadgeModal } = useState([]);
 
   //마이페이지 개인정보 기본값 불러오기
   const { data } = useQuery(["mypage"], getMypage, {
@@ -27,8 +30,6 @@ const ModalMypage = () => {
     },
   });
 
-  const [profile, setProfile] = useState();
-
   //프로필 수정 쿼리
   const { mutate: putMypages } = useMutation(putMypage, {
     onSuccess: () => {
@@ -36,8 +37,24 @@ const ModalMypage = () => {
     },
   });
 
-  const [modal, setModal] = useState(false);
-  const { badgeModal, setBadgeModal } = useState([]);
+  //닉네임 중복확인
+  const { mutate: MyNameChk } = useMutation(chkName, {
+    onSuccess: (res) => {
+      if (res.success === true || profile.nickName === data.data.nickName) {
+        toast.success("사용가능한 닉네임 입니다.", {
+          autoClose: 1000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setNameChk(true);
+      } else {
+        toast.warning("이미 사용중인 닉네임 입니다.", {
+          autoClose: 1000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setNameChk(false);
+      }
+    },
+  });
 
   const regionList = ["서울", "경상", "경기", "충청", "전라", "강원", "제주"];
 
@@ -52,38 +69,29 @@ const ModalMypage = () => {
     const { src, alt } = e.target;
     setProfile({ ...profile, badgeName: alt, profilePhoto: src });
   };
-  const { mynameChk } = useSelector((state) => state.mypage);
 
   //닉네임 중복확인
   const NameCk = () => {
-    if (mynameChk || data.data.nickName === profile.nickName) {
-      dispatch(__mynameCheck({ nickName: profile.nickName }));
-      return toast.success("사용가능한 닉네임 입니다.", {
-        autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
-      });
-    } else {
-      return toast.warning("이미 사용중인 닉네임 입니다.", {
-        autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
+    MyNameChk({ nickName: profile.nickName });
   };
 
   //정보 변경 사항 보내기
   const onSubmitInfo = () => {
-    if (profile.nickName !== data.data.nickName && !mynameChk) {
-      return toast.warning("중복된 닉네임 입니다.", {
-        autoClose: 1500,
-        position: toast.POSITION.TOP_CENTER,
-      });
-    } else {
+    if (
+      (nameChk && profile.nickName !== data.data.nickName) ||
+      profile.nickName === data.data.nickName
+    ) {
       putMypages(profile);
       sessionStorage.removeItem("userinfos");
       sessionStorage.setItem("userinfos", JSON.stringify(profile));
       setModal(!modal);
       toast.success("수정이 완료되었습니다.", {
         autoClose: 1500,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      toast.warning("내용을 확인해주세요.", {
+        autoClose: 1000,
         position: toast.POSITION.TOP_CENTER,
       });
     }
@@ -141,19 +149,10 @@ const ModalMypage = () => {
                   name="nickName"
                   defaultValue={data?.data?.nickName}
                 />
-                {mynameChk || data.data.nickName === profile.nickName ? (
-                  <Button
-                    borderColor
-                    className="name-check-btn"
-                    onClick={NameCk}
-                  >
-                    사용 가능
-                  </Button>
-                ) : (
-                  <Button className="name-check-btn" onClick={NameCk}>
-                    중복 확인
-                  </Button>
-                )}
+
+                <Button borderColor className="name-check-btn" onClick={NameCk}>
+                  중복 확인
+                </Button>
               </div>
             </div>
             <div className="pick modal-setting-region">
@@ -170,7 +169,7 @@ const ModalMypage = () => {
               </select>
             </div>
             <div className="pick pick-setting-badges">
-              <p>대표 뱃지 설정 : {profile.badgeName}</p>
+              <p>대표 뱃지 설정 : {profile?.badgeName}</p>
               <div className="pick-badge-list">
                 {data?.data?.badgeList.map((badges, idx) => {
                   return (

@@ -126,5 +126,6 @@ const StContent = styled.div`
     width: 100%;
     height: 6%;
     margin-top: 30px;
+    font-weight: bold;
   }
 `;

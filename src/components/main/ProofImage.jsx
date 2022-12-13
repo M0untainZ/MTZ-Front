@@ -7,6 +7,7 @@ import "swiper/css";
 import SwiperCore, { Navigation } from "swiper/core";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import NoticeModal from "./noticeModal/NoticeModal";
 
 const ProofImage = () => {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ const ProofImage = () => {
   const nextRef = useRef(null);
 
   const [swiperOptions, setSwiperOptions] = useState(null);
+
+  const [modal, setModal] = useState(true);
 
   useEffect(() => {
     if (!swiperOptions) {
@@ -56,7 +59,7 @@ const ProofImage = () => {
           {swiperOptions && (
             <Swiper {...swiperOptions} className="swiper">
               {mainProof.map((el, idx) => {
-                if(idx === 9) {
+                if (idx === 9) {
                   return (
                        <SwiperSlide className="swiper-slide" key={idx}>
                             <div className="see-more" onClick={() => navigate("/certification")}>
@@ -67,13 +70,13 @@ const ProofImage = () => {
                        </SwiperSlide>
                       )
                 } else {
-                      return (
-                          <SwiperSlide className="swiper-slide" key={idx}>
-                                <img src={`${el.photo}`} alt="" />
-                          </SwiperSlide>
-                      )
-                  }
-        })}
+                  return (
+                    <SwiperSlide className="swiper-slide" key={idx}>
+                      <img src={`${el.photo}`} alt="" />
+                    </SwiperSlide>
+                  );
+                }
+              })}
             </Swiper>
           )}
           <NextBtn ref={nextRef} className="disabled" title="오른쪽 버튼">
@@ -81,6 +84,14 @@ const ProofImage = () => {
           </NextBtn>
         </StImageList>
       </StProofWrap>
+      {modal && (
+        <NoticeModal
+          open={modal}
+          onClose={() => {
+            setModal(false);
+          }}
+        ></NoticeModal>
+      )}
     </>
   );
 };

@@ -27,6 +27,7 @@ const MountModal = () => {
     setImgSave(URL.createObjectURL(e.target.files[0]));
     setPost_Img(e.target.files[0]);
     setSelectImg(!selectImg);
+    console.log("압축 전", e.target.files[0]);
   };
   //이미지 파일 삭제
   const deleteFileImage = () => {
@@ -42,6 +43,7 @@ const MountModal = () => {
     try {
       const reader = new FileReader();
       const imgFile = await imageCompression(post_Img, options);
+      console.log("압축 후", imgFile);
       reader.readAsDataURL(imgFile);
       reader.onloadend = () => {
         const base64data = reader.result;

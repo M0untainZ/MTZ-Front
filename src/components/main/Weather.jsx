@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Weather = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState();
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const [weather, setWeather] = useState("");
@@ -29,9 +30,15 @@ const Weather = () => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
         sessionStorage.setItem("status", 1)
-      }, () => {sessionStorage.setItem("status", 3)})
+      }, () => {setError(3); sessionStorage.setItem("status", 3)})
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      return;
+    }
+  }, [error])
 
   useEffect(() => {
     if (latitude && longitude) {

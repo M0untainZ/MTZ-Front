@@ -1,24 +1,46 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import useSideClick from "../../../hooks/useSideClick";
 import NoticePortal from "./NoticePortal";
 
-const NoticeModal = ({ onClose, children }) => {
-  const modalRef = useRef(null);
-  const onCloseHandler = () => {
-    onClose?.();
-  };
+const NoticeModal = ({ onClose }) => {
 
-  useSideClick(modalRef, onCloseHandler);
+  const BEFORE_DATE = localStorage.getItem("visite")
+  const NOW_DATE = Math.floor(new Date().getDate())
+
+  useEffect(() => {
+    if (BEFORE_DATE !== null) {
+      if (BEFORE_DATE === NOW_DATE) {
+        localStorage.removeItem("visite")
+        onClose(true)
+      }
+
+      if (BEFORE_DATE !== NOW_DATE) {
+        onClose(false)
+      }
+    }
+  }, [BEFORE_DATE])
+
+  const onNotSeeToday = (e) => {
+    if (onClose) {
+      onClose(e)
+      const expires = new Date();
+      const expiresDate = expires.getDate() + 1
+      localStorage.setItem("visite", expiresDate)
+    }
+  }
+
+  const onCloseHanlder = (e) => {
+    if (onClose) {
+      onClose(e)
+    }
+  }
+
   return (
     <NoticePortal>
       <StOverlay>
-        <StModalWrap ref={modalRef}>
+        <StModalWrap>
           <StModalHeader>
-            <button onClick={onCloseHandler}>
-              <img alt="" src="/icons/icon_cancel.png" />
-            </button>
-            <span>공지사항</span>
+            <span>📢 공지사항</span>
           </StModalHeader>
           <StContent>
             <div>
@@ -50,7 +72,12 @@ const NoticeModal = ({ onClose, children }) => {
               오늘도 즐겁고 안전한 등산이 되기를 바랍니다. <br></br> <br></br>{" "}
               감사합니다!
             </div>
-            <button onClick={onCloseHandler}>확인했습니다!</button>
+            { onClose && (
+              <footer>
+                <button onClick={onNotSeeToday}>오늘 하루 보지 않기</button>
+                <button onClick={onCloseHanlder}>닫기</button>
+              </footer>
+            )}
           </StContent>
         </StModalWrap>
       </StOverlay>
@@ -98,10 +125,10 @@ const StModalHeader = styled.div`
   margin-top: 2px;
   height: 7vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 32%;
   padding: 0 15px;
+  text-align: center;
   button {
     border: none;
     background-color: #fff;
@@ -121,11 +148,21 @@ const StContent = styled.div`
   .font {
     font-weight: bolder;
   }
-  button {
-    border: 1px solid #959595;
+  footer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 6%;
-    margin-top: 30px;
-    font-weight: bold;
+    height: 5%;
+    button {
+      border: 1px solid #959595;
+      width: 47%;
+      height: 100%;
+      font-weight: bold;
+      &:hover {
+        background-color: lightgray;
+      }
+    }
   }
 `;

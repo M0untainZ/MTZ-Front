@@ -7,7 +7,6 @@ import "swiper/css";
 import SwiperCore, { Navigation } from "swiper/core";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import NoticeModal from "./noticeModal/NoticeModal";
 
 const ProofImage = () => {
   const navigate = useNavigate();
@@ -25,8 +24,6 @@ const ProofImage = () => {
   const nextRef = useRef(null);
 
   const [swiperOptions, setSwiperOptions] = useState(null);
-
-  const [modal, setModal] = useState(true);
 
   useEffect(() => {
     if (!swiperOptions) {
@@ -84,14 +81,6 @@ const ProofImage = () => {
           </NextBtn>
         </StImageList>
       </StProofWrap>
-      {modal && (
-        <NoticeModal
-          open={modal}
-          onClose={() => {
-            setModal(false);
-          }}
-        ></NoticeModal>
-      )}
     </>
   );
 };

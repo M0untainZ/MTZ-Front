@@ -74,6 +74,8 @@ const initialState = {
     season: "",
     level: "",
   },
+  filterData: {},
+  filterDataState: false,
 };
 
 export const mountainsSlice = createSlice({

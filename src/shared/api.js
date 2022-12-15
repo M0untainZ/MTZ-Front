@@ -60,10 +60,8 @@ export const kakaoLogin = async (code) => {
   return data;
 };
 
-export const proofFilter = async (nickName) => {
-  const { data } = await axiosIns.post("/api/photos/filter", {
-    nickName: nickName,
-  });
+export const proofFilter = async (payload) => {
+  const { data } = await axiosIns.post("/api/photos/filter", payload);
   return data;
 };
 

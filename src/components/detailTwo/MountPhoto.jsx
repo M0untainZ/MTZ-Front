@@ -64,7 +64,7 @@ const MountPhoto = () => {
               ))}
             </Swiper>
           )}
-          <NextBtn className="img-btn next">
+          <NextBtn ref={nextRef} className="img-btn next">
             <IoIosArrowForward />
           </NextBtn>
         </StImageList>

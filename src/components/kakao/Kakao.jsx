@@ -10,11 +10,11 @@ const Kakao = () => {
         kakaoLogin(code).then((res) => {
             sessionStorage.setItem("Access_Token", res.headers.authorization);
             sessionStorage.setItem("Refresh_Token", res.headers.refresh_token);
-            sessionStorage.setItem("nickName", res.data.nickname);
-            navigate("/");
+            sessionStorage.setItem("userinfos", JSON.stringify(res.data.data));
+            navigate("/")
         });
     }, []);
-
+    
     return (
         <div>카카오</div>
     );

@@ -124,7 +124,7 @@ export const mountainsSlice = createSlice({
     },
     [__postFilterMountains.rejected]: (state, action) => {},
     [__postSearchMountains.fulfilled]: (state, action) => {
-      state.mountains = action.payload;
+      state.mountains = action.payload.data;
     },
     [__postSearchMountains.rejected]: (state, action) => {},
   },

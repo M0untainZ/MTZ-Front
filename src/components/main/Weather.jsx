@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useCurrentLocation, positionOptions } from "./Geolocation";
 import Mapmodal from "./modal/Mapmodal";
 import { useDispatch } from "react-redux";
 import { regionData } from "../../redux/modules/mountainsSlice";
 import Snow from "../../elements/Snow";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Weather = () => {
-  const { location, error } = useCurrentLocation(positionOptions);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [city, setCity] = useState("");
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const [weather, setWeather] = useState("");
-  const [temp, setTemp] = useState("");
   const [modal, setModal] = useState(false);
   const GEOCODING_KEY = process.env.REACT_APP_GOOGLE_API;
   const WEATHER_KEY = process.env.REACT_APP_WEATHER_API;
@@ -23,45 +23,54 @@ const Weather = () => {
     setModal(!modal);
   };
 
-  useEffect(() => {
-    if (error) {
-      return error;
+  const onGetLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+        sessionStorage.setItem("status", 1)
+      }, () => {sessionStorage.setItem("status", 3)})
     }
-    
-    if (location) {
+  };
+
+  useEffect(() => {
+    if (latitude && longitude) {
       const geo_key = `${GEOCODING_KEY}`;
       const weather_key = `${WEATHER_KEY}`;
       const weatherData = () => {
         axios
           .all([
             axios.get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${geo_key}`
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${geo_key}`
             ),
             axios.get(
-              `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${weather_key}&units=metric`
+              `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weather_key}&units=metric`
             ),
           ])
           .then(
             axios.spread((res1, res2) => {
               const geo_res = res1.data;
               const weather_res = res2.data;
-              setCity(geo_res.plus_code.compound_code.substring(13));
+              sessionStorage.setItem("city", geo_res.plus_code.compound_code.substring(13))
               setWeather(weather_res.weather[0].icon);
-              setTemp(Math.floor(weather_res.main.temp));
+              sessionStorage.setItem("temp", Math.floor(weather_res.main.temp))
             })
           )
           .catch(() => {
-            alert("요청 에러");
+            toast.error("요청에 실패하였습니다", {
+              autoClose: 1500,
+              position: toast.POSITION.TOP_CENTER
+            })
           });
       };
       weatherData();
     }
-  }, [location]);
+  }, [latitude && longitude])
 
   return (
     <>
       <StMainImageBanner>
-        <img alt="" src="/icons/mainbanner.png" />
+        <img alt="" src="/icons/mainbanner.webp" />
         <StMap onClick={onModalOpen}>
           <img alt="" src="/icons/map_search.png" />
           <span>지도보기</span>
@@ -74,7 +83,7 @@ const Weather = () => {
             }}
           >
             <StMapContainer>
-              <img alt="" src="/icons/main_map.png" />
+              <img alt="" src="/icons/main_map.webp" />
               <div
                 className="region seoul"
                 onClick={() => {
@@ -156,6 +165,18 @@ const Weather = () => {
           </Mapmodal>
         )}
         <StWeatherContainer>
+          {sessionStorage.getItem("status") === null &&
+            <div className="geo-btn">
+              <span>현재 날씨가 궁금하다면</span>
+              <button onClick={onGetLocation}>날씨보기</button>
+            </div>
+          }
+          {sessionStorage.getItem("status") === "3" &&
+            <div className="not">
+              <span>날씨 정보를 이용하시려면 권한을 허용해 주세요 😭</span>
+            </div>
+          }
+          {sessionStorage.getItem("status") === "1" &&
           <StWeatherInfoWrap>
             <StWeatherIcon>
               <img
@@ -174,15 +195,17 @@ const Weather = () => {
               />
             </StWeatherIcon>
             <StWeatherInfo>
-              <span className="temp">{`${temp}˚C`} ㅣ</span>
-              <span className="city-name">{city}</span>
+              <span className="temp">{`${sessionStorage.getItem("temp")}˚C`} ㅣ</span>
+              <span className="city-name">{sessionStorage.getItem("city")}</span>
               <p>오늘은 어디로 떠나볼까요?</p>
             </StWeatherInfo>
-            <span className="shortcut" onClick={() => navigate("/detail")}>
+            <button className="shortcut" onClick={() => navigate("/detail")}>
               바로가기
-            </span>
+            </button>
           </StWeatherInfoWrap>
+          }
         </StWeatherContainer>
+        <ToastContainer />
         <Snow className="snow" />
       </StMainImageBanner>
     </>
@@ -296,24 +319,54 @@ const StMapContainer = styled.div`
 const StWeatherContainer = styled.div`
   width: 20%;
   height: 5vh;
-  border: 1px solid gray;
   position: absolute;
   right: 13%;
   bottom: 10%;
   padding: 10px;
   z-index: 6;
   background-color: #e1e5e4;
+  box-shadow: 0 0 3px black;
+  border-radius: 5px;
+  .geo-btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+    button {
+      border: 2px solid gray;
+      border-radius: 5px;
+      width: 70px;
+      height: 30px;
+      cursor: pointer;
+      &:hover {
+        background-color: lightgray;
+      }
+    }
+  }
+  .not {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StWeatherInfoWrap = styled.div`
   display: flex;
   position: relative;
+  height: 100%;
   .shortcut {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80px;
-    height: 20px;
+    height: 25px;
     border: 1px solid black;
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -321,6 +374,9 @@ const StWeatherInfoWrap = styled.div`
     bottom: 3px;
     right: 10px;
     cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 `;
 

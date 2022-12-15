@@ -68,11 +68,14 @@ const Proof = () => {
     const { data, fetchNextPage, isFetchingNextPage, status, error } = useInfiniteQuery(
         ["proof"], ({ pageParam = 0 }) => infiniteProof(pageParam),
         {
+            refetchOnWindowFocus: false,
+            staleTime: 5000,
+            cacheTime: Infinity,
             getNextPageParam: (lastPage, allPage) => {
                 if (lastPage.data.length === 12) {
                     return allPage.length
                 }
-            }
+            },
         }
     ) 
     useEffect(() => {

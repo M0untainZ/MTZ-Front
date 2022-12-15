@@ -43,4 +43,8 @@ const StBtn = styled.button`
      border-radius: 50%;
      background-color: white;
      z-index: 100;
+     cursor: pointer;
+     &:hover {
+          box-shadow: 0 0 5px black;
+     }
 `;

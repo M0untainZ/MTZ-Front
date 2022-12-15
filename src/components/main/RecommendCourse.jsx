@@ -14,7 +14,11 @@ import {
 const RecommendCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data } = useQuery(["main"], getMain);
+  const { data } = useQuery(["main"], getMain, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity
+  });
   const [recommendList, setRecommendList] = useState(false);
   const onListToggle = () => {
     setRecommendList(!recommendList);

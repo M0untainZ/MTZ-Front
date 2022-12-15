@@ -4,7 +4,11 @@ import { getMain } from "../../shared/api";
 import { useQuery } from "react-query";
 
 const UserRanking = () => {
-  const { data } = useQuery(["main"], getMain);
+  const { data } = useQuery(["main"], getMain, {
+    refetchOnWindowFocus: false,
+    staleTime: 5000,
+    cacheTime: Infinity
+  });
 
   return (
     <>
@@ -14,7 +18,7 @@ const UserRanking = () => {
           <StUserInfo>
             <div className="rank-div">
               <span className="rank">1</span>
-              <img alt="gold" src="/icons/badge/goldRank.png" />
+              <img alt="gold" src="/icons/badge/goldRank.webp" />
             </div>
             {data?.data.topMembers[0] ? (
               <div className="user-info">
@@ -34,7 +38,7 @@ const UserRanking = () => {
           <StUserInfo>
             <div className="rank-div">
               <span className="rank">2</span>
-              <img alt="silver" src="/icons/badge/silverRank.png" />
+              <img alt="silver" src="/icons/badge/silverRank.webp" />
             </div>
             {data?.data.topMembers[1] ? (
               <div className="user-info">
@@ -54,7 +58,7 @@ const UserRanking = () => {
           <StUserInfo>
             <div className="rank-div">
               <span className="rank">3</span>
-              <img alt="copper" src="/icons/badge/copperRank.png" />
+              <img alt="copper" src="/icons/badge/copperRank.webp" />
             </div>
             {data?.data.topMembers[2] ? (
               <div className="user-info">

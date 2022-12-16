@@ -44,33 +44,20 @@ const NoticeModal = ({ onClose }) => {
           </StModalHeader>
           <StContent>
             <div>
-              안녕하세요. ‘MTZ’ 관리자 입니다. <br></br>
-              향후 일정 및 이용에 대해 공지해 드립니다.<br></br>
+              안녕하세요. "MTZ" 관리자 입니다. <br></br>
               <br></br>
-              저희 ‘MTZ’는 <span className="font">12월 23일</span>까지 오픈되어
-              있을 예정이며 <br></br>
+              저희 "MTZ"는 <span className="font">22년 12월 16일</span>부로
+              서비스가 종료되었습니다. <br></br>
               <br></br>
-              12/14(수) 자정까지 <span className="font">인증하기 서비스</span>를
-              통해<br></br>
-              <span className="font">랭킹 TOP 3</span>에 드신 분들께 한하여
-              선물을 드리고자 합니다.<br></br>
+              그동안 "MTZ"를 이용해 주신 분들께 감사의 말씀을 드립니다.
               <br></br>
-              🥇 TOP1 : 치킨 <br></br>
-              🥈 TOP2 : 타워박스 <br></br>
-              🥉 TOP3 : 스타벅스 아메리카노 <br></br> <br></br>
-              추가로 아래 링크를 통해 설문에 참여해주신 <br></br>
-              ‘MTZ’ 회원님들에게 소량의 선물이 지급되오니 <br></br>
-              많은 참여 부탁드립니다.
-              <br></br> <br></br>
-              설문참여 →
-              <span>
-                <a href="https://forms.gle/aYYQqfaJzyB9tFba7">
-                  https://forms.gle/aYYQqfaJzyB9tFba7
-                </a>
-              </span>
               <br></br>
-              오늘도 즐겁고 안전한 등산이 되기를 바랍니다. <br></br> <br></br>{" "}
-              감사합니다!
+              혹시나 지금 이 글을 보고 계신 항해 수강생분들
+              <br></br>
+              모두 파이팅입니다.
+              <br></br>
+              <br></br>
+              항해99 9기 A 반 4조 올림
             </div>
             { onClose && (
               <footer>
@@ -101,7 +88,7 @@ const StOverlay = styled.div`
 
 const StModalWrap = styled.div`
   width: 500px;
-  height: 700px;
+  height: 500px;
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -149,7 +136,7 @@ const StContent = styled.div`
     font-weight: bolder;
   }
   footer {
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -158,7 +145,7 @@ const StContent = styled.div`
     button {
       border: 1px solid #959595;
       width: 47%;
-      height: 100%;
+      height: 30px;
       font-weight: bold;
       &:hover {
         background-color: lightgray;

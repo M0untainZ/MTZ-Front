@@ -116,7 +116,6 @@ export const userSlice = createSlice({
           JSON.stringify(action.payload.data.data)
         );
         sessionStorage.setItem("authority", action.payload.data.data.authority);
-        alert(`${action.payload.data.data.nickName}님 환영합니다.`);
       } else {
         state.loginFalse = true;
       }

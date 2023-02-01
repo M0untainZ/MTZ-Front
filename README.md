@@ -1,11 +1,13 @@
 # ⛺ **MTZ(마운틴즈)**
+### 🎉 마운틴즈 소개 | About Us
+![image](https://user-images.githubusercontent.com/97796338/209322455-f4ea6eb7-b11b-4707-8ef7-a34218413c93.png)
 
 등산에 관심이 생긴, 취미가 등산인, 산을 정복하고 싶은 여러분 주목!<br/>
 남녀노소 누구나 '등산왕'이 될 수 있는 등산 필수앱 "MTZ"를 소개합니다!
 
 ![title](https://user-images.githubusercontent.com/102575747/207062833-e189d6b6-cb27-4498-8579-639ad6a7651c.png)
 
-### 🌎 웹사이트 | Website [MTZ 바로가기](https://www.mountainz.net/)
+### :evergreen_tree: 웹사이트 | Website [MTZ 바로가기](https://www.mountainz.net/)
 
 <br/>
 
@@ -17,6 +19,10 @@
 #### 🌎 프로젝트 문서 | [Project Docs](https://docs.google.com/spreadsheets/d/1HtE2SUzSS5GC-LgEqoSsjKZNVe2-Jc1JQHZ8GDhCGHs/edit#gid=0)
 
 #### 🌎 Notion Link | [Notion Link](https://www.notion.so/MTZ-251008683c60489c909a51ee189279e4)
+
+#### 🌎 PostMan API Link | [PostMan API로 Click!](https://documenter.getpostman.com/view/23686396/2s8YzUvg4o)
+
+#### 🌎 Swagger API Link | [Swagger API로 Click!](https://www.dongjae-bk.shop/swagger-ui.html)
 
 #### 🔑 FE Github URL | [FE GITHUB로 Click!](https://github.com/M0untainZ/MTZ-Front.git)
 
